@@ -9,7 +9,7 @@ ingredients:
 - 2 8 oz packages cream cheese softened
 - 1 14 oz jar caramel sauce
 - 2-3 Heath candy bars crushed (or use Heath toffee chips)
-- Serve With: Granny Smith apples sliced
+- Serve With Granny Smith apples sliced
 
 
 directions:
