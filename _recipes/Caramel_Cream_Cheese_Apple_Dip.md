@@ -2,7 +2,7 @@
 layout: recipe
 title: "Caramel Cream Cheese Apple Dip"
 tags: Appetizer
-image: Caramel Cream_Cheese_Apple_Dip.jpg
+image: Caramel-Cream-Cheese-Apple-Dip.jpg
 imagecredit: https://www.livingwellspendingless.com/caramel-cream-cheese-apple-dip-2/
 
 ingredients:
