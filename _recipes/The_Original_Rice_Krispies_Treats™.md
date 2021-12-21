@@ -1,6 +1,6 @@
 ---
 layout: recipe
-title: "The Original Rice Krispies Treats™"
+title: "Original Rice Krispies Treats"
 image: Original_Rice_Krispies_Treats.jpg
 imagecredit: https://www.kelloggs.com/en_US/recipes/the-original-treats-recipe.html
 
