@@ -25,8 +25,3 @@ A component recipe is a special recipe made up of other recipes. To make a new c
 - place your smaller, single recipes into the /_components folder
 - make a new recipe like normal in the /_recipes folders
 - in the frontmatter of this new recipe, include your recipes from the /_components folder (instead of the usual Ingredeints list)
-
-You can an example on the Red Berry Tart recipe. 
-
-- [example Markdown](https://raw.githubusercontent.com/cjthedj97/chowdown/gh-pages/_recipes/red-berry-tart.md)
-- [example recipe page](http://recipes.saathoff.us/recipes/red-berry-tart.html)
