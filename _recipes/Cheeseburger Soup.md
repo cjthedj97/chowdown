@@ -17,8 +17,8 @@ ingredients:
 - 1-1/2 cups whole milk
 - 3/4 teaspoon salt
 - 1/4 to 1/2 teaspoon pepper
-- Optional: 1/4 cup sour cream
-- Optional: Onion rings and thinly sliced green onions/chives
+- If desired add 1/4 cup sour cream
+- If desired onion rings and thinly sliced green onions/chives
 
 directions:
 - In a large saucepan over medium heat, cook and crumble beef until no longer pink, 6-8 minutes; drain and set aside. 
@@ -33,7 +33,7 @@ directions:
 - Stir in cheese, milk, salt and pepper till cook until cheese melts. 
 - Remove from heat.
 - If desired blend in sour cream.
-- Optional Serve with onion rings and green onions/chives.
+- If desired can serve with onion rings and green onions/chives.
 
 ---
 Yield: 8 servings (2 quarts).
