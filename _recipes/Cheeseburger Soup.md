@@ -32,8 +32,8 @@ directions:
 - Cook and stir 2 minutes and the reduce heat to low.
 - Stir in cheese, milk, salt and pepper till cook until cheese melts. 
 - Remove from heat.
-- Optional: then blend in sour cream If desired.
-- Optional: Serve with onion rings and green onions/chives.
+- If desired blend in sour cream.
+- Optional Serve with onion rings and green onions/chives.
 
 ---
 Yield: 8 servings (2 quarts).
