@@ -17,4 +17,3 @@ directions:
 - Put toothpicks in balls and dip in choclat and dry on wax paper.
 - Rub finger lightly on top to cover hole from toothpick. 
 ---
-Yield: 8 servings (2 quarts).
