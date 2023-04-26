@@ -2,6 +2,7 @@
 layout: recipe
 title: "3-Cheese Macaroni and Cheese"
 imagecredit: https://www.foodnetwork.com/recipes/3-cheese-macaroni-and-cheese-recipe-1948199
+tag: Diners, Drive-Ins and Dives
 
 ingredients:
 - tablespoon salt plus more for pasta water
