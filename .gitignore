@@ -2,3 +2,6 @@
 /_site/
 /.jekyll-cache/
 Gemfile.lock
+/.vscode/
+/vendor/
+/.bundle/
