@@ -1,8 +1,6 @@
-
 ---
 layout: recipe
 title: Disney Parks Churro Bites
-
 imagecredit: https://www.wdwinfo.com/wp-content/uploads/2020/04/wghevtr36y2133.jpg
 tag: Disney Parks
 
