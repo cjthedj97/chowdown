@@ -156,28 +156,30 @@ form.addEventListener('submit', (event) => {
     .filter(instruction => !/^-[\s]*$/.test(instruction))
     .join('\n');
 
-  let markdown = `
+let markdown = `
 ---
 layout: recipe
-title: ${name}`
+title: ${name}
 
-  if (tags !== '') {
-    markdown += `
+` // Add a line break after title
+
+if (tags !== '') {
+  markdown += `
 tags:${tags.split(' ').map(tag => tag.trim()).join(', ')}
 `;
-  }
+}
 
-  if (imgCredit !== '') {
-    markdown += `imagecredit: ${imgCredit}
+if (imgCredit !== '') {
+  markdown += `imagecredit: ${imgCredit}
 `;
-  }
+}
 
-  if (tag !== '') {
-    markdown += `tag: ${tag}
+if (tag !== '') {
+  markdown += `tag: ${tag}
 `;
-  }
+}
 
-  markdown += `
+markdown += `
 ingredients:
 
 ${ingredientsMarkdown}
@@ -186,18 +188,19 @@ directions:
 
 ${directionsMarkdown}`
 
-  if (notes !== '') {
-    markdown += `
+if (notes !== '') {
+  markdown += `
 ---
 
 ${notes}`;
-  }
+}
 
-  markdown += `
+markdown += `
 
 `;
 
-  output.innerHTML = `<pre><code>${markdown}</code></pre>`;
+output.innerHTML = `<pre><code>${markdown}</code></pre>`;
+
 });
 
 copyButton.addEventListener('click', () => {
