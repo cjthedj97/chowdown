@@ -36,6 +36,9 @@ directions:
 ---
 
 Ground meat: You can opt to use a combination of ground beef and pork. Keep the ground beef to at least 60% for the best flavor. Otherwise, if you prefer a beefier flavor, use 100% ground beef. I used 85% lean. 
+
 Panko bread crumbs: Substitute with regular unseasoned bread crumbs. If you opt to use seasoned bread crumbs, leave out salt as it may be too salty.
+
 Forming hambagu steaks: Remove air pockets from the patty by tossing them back and forth between your hands. This helps keep its shape during cooking.
+
 Sauce: If preferred, wipe off excess grease from the pan first. For a thinner sauce, increase the amount of water a Tablespoon at a time and add more salt and sugar to your liking.
