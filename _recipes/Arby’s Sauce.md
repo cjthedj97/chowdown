@@ -10,7 +10,7 @@ ingredients:
 - ¼ cup white vinegar
 - ¾ teaspoon onion powder
 - ¾ teaspoon garlic powder
-- teaspoon paprika
+- ½ teaspoon paprika
 - 3 tablespoons Worcestershire sauce
 - ⅛ teaspoon salt
 - ⅛ teaspoon cayenne pepper
@@ -22,4 +22,4 @@ directions:
 - Mix the cornstarch with 2 tablespoons of water. Add the cornstarch slurry to the sauce and mix well.
 - When sauce begins to thicken, let it simmer on a very low temperature for 10 minutes. Remove from the heat and let cool. The sauce should be similar in thickness to steak sauce.
 - Store in a covered container in the refrigerator and serve with hamburgers, pastrami, or hot wings
-
+---
