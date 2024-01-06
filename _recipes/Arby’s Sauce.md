@@ -22,3 +22,5 @@ directions:
 - When sauce begins to thicken, let it simmer on a very low temperature for 10 minutes. Remove from the heat and let cool. The sauce should be similar in thickness to steak sauce.
 - Store in a covered container in the refrigerator and serve with hamburgers, pastrami, or hot wings
 ---
+
+[Source](https://copykat.com/arbys-sauce/)
