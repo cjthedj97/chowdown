@@ -1,8 +1,6 @@
-
 ---
 layout: recipe
 title: CopyKat Recipe - Arby’s Sauce
-
 imagecredit: https://copykat.com/wp-content/uploads/2023/08/Arbys-Sauce-Pin-2.jpg
 
 ingredients:
