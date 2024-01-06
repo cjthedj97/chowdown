@@ -21,3 +21,4 @@ directions:
 
 Sifting the flour and cornmeal once in a while keeps lumps out and makes it easier to coat the rings When placing on cookie sheets to save room, lean on top of each other to allow the entire ring to dry.
 
+[Source](https://copykat.com/original-sonic-onion-ring-recipe/)
