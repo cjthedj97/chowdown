@@ -30,3 +30,4 @@ directions:
 - If using a slow cooker, cook on low for 4 hours.
 ---
 
+[Source](https://copykat.com/wendys-chili-2/)
