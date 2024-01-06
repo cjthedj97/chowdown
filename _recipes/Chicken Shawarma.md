@@ -24,7 +24,7 @@ ingredients:
 - 1 tablespoon lemon salt
 - Kosher salt
 
-## Instructions
+directions:
 - Combine the tomato paste, vinegar, garlic, paprika, red pepper, coriander, cumin, oregano, sumac, 2 tablespoons salt, 1 teaspoon black pepper and 1 cup water in a large mixing bowl. Whisk until thoroughly mixed.
 - Put the chicken in a large bowl and pour the marinade over the chicken; mix thoroughly. Cover and refrigerate overnight.
 - Place a rack in the center of the oven and preheat the oven to 350 degrees F.
@@ -32,6 +32,7 @@ ingredients:
 - Place the chicken on a baking sheet and bake until golden brown, about 10 minutes per side. Slice the chicken into thin pieces and serve with Zaytoon Garlic Sauce.
 - Add the potatoes, mayonnaise, garlic, lemon salt, 1 tablespoon kosher salt and 1 cup ice to a 20-cup food processor. Process until smooth and creamy.
 
+---
 
 Yields: 10 serving(s)
 
