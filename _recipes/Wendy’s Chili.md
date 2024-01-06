@@ -11,15 +11,15 @@ ingredients:
 - 15 ozs of canned red kidney beans drained
 - 15 ozs canned pinto beans drained
 - 1 large onion chopped (about 1  cups)
-- cup diced celery
+- ½ cup diced celery
 - ¼ cup diced green bell pepper
 - ¼ cup chili powder you may want to use less, as some people find this is too much
 - 1 teaspoon cumin
 - 1  teaspoons garlic powder
 - 1 teaspoon salt
-- teaspoon ground black pepper
-- teaspoon oregano
-- teaspoon sugar
+- ½ teaspoon ground black pepper
+- ½ teaspoon oregano
+- ½ teaspoon sugar
 - ⅛ teaspoon cayenne pepper
 
 directions:
