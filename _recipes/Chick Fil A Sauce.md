@@ -19,3 +19,5 @@ directions:
 ---
 
 This will stay fresh in the refrigerator for up to 10 days.
+
+[Source](https://copykat.com/chick-fil-a-sauce/)
