@@ -1,4 +1,3 @@
-
 ---
 layout: recipe
 title: CopyKat Recipe - Better Than KFC Coleslaw
