@@ -155,13 +155,10 @@ form.addEventListener('submit', (event) => {
     .map(instruction => `- ${instruction.trim()}`)
     .filter(instruction => !/^-[\s]*$/.test(instruction))
     .join('\n');
-
-let markdown = `
----
+	
+let markdown = `---
 layout: recipe
-title: ${name}
-
-` // Add a line break after title
+title: "${name}"`
 
 if (tags !== '') {
   markdown += `
@@ -180,12 +177,14 @@ if (tag !== '') {
 }
 
 markdown += `
+	
+`
+	
+markdown += `
 ingredients:
-
 ${ingredientsMarkdown}
 
 directions:
-
 ${directionsMarkdown}`
 
 if (notes !== '') {
