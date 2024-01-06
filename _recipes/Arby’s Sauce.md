@@ -1,4 +1,3 @@
-
 ---
 layout: recipe
 title: "CopyKat Recipe - Arby’s Sauce"
