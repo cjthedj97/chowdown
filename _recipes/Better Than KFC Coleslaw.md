@@ -8,10 +8,10 @@ ingredients:
 
 - 13 cups chopped cabbage This is about 1 large head of cabbage or 2 medium heads of cabbage
 - 1 green bell pepper (optional, there is no bell pepper in the KFC recipe)
-- cup chopped onion
-- cup chopped carrot 1 medium size carrot
+- ½ cup chopped onion
+- ½ cup chopped carrot 1 medium size carrot
 - 2 cups Miracle Whip Light
-- cup sugar
+- ½ cup sugar
 - ¼ cup vinegar
 - ¼ cup vegetable oil
 
