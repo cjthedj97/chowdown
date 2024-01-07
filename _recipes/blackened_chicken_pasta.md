@@ -1,8 +1,11 @@
 ---
 layout: recipe
 title:  "Blackened Chicken Pasta"
-image: blackened_chicken_pasta.jpeg
+image: Blackened Chicken Pasta.jpeg
 imagecredit: https://www.foodnetwork.com/recipes/blackened-chicken-pasta-8556476
+yield: 4 to 6 servings
+cooktime: PT40m
+
 
 ingredients:
 - 1 pound penne
@@ -28,7 +31,3 @@ directions:
 ---
 
 Featured in: Dinners Dinners Dives
-
-Yields: 6 serving(s)
-
-Total Time: 40
