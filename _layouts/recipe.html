@@ -157,42 +157,43 @@ layout: recipe_default
 </div>
 
 <script>
-  document.addEventListener("DOMContentLoaded", function () {
-    console.log("Document is ready!");
+document.addEventListener("DOMContentLoaded", function () {
+  console.log("Document is ready!");
 
-    function clickToggle() {
-      var ab = [uncheck, check];
-      function cb() {
-        ab[this._tog ^= 1].call(this);
-      }
-      return cb;
+  function clickToggle() {
+    var ab = [uncheck, check];
+    function cb() {
+      ab[this._tog ^= 1].call(this);
     }
+    return cb;
+  }
 
-    function check() {
-      console.log("Checkbox checked!");
-      this.querySelector("input").checked = true;
-      var height = this.clientHeight;
-      var y = window.scrollY;
-      window.scrollTo(0, y + height + 16);
-    }
+  function check() {
+    console.log("Checkbox checked!");
+    this.querySelector("input").checked = true;
+    var height = this.clientHeight;
+    var y = window.scrollY;
+    window.scrollTo(0, y + height + 16);
+  }
 
-    function uncheck() {
-      console.log("Checkbox unchecked!");
-      this.querySelector("input").checked = false;
-      var height = this.clientHeight;
-      var y = window.scrollY;
-      window.scrollTo(0, y - height - 16);
-    }
+  function uncheck() {
+    console.log("Checkbox unchecked!");
+    this.querySelector("input").checked = false;
+    var height = this.clientHeight;
+    var y = window.scrollY;
+    window.scrollTo(0, y - height - 16);
+  }
 
-    // Target only the <li> elements within the recipe section
-    var recipeItems = document.querySelectorAll(".recipe-section ul li");
+  // Target only the <li> elements within the recipe section
+  var recipeItems = document.querySelectorAll(".recipe-section ul li");
 
-    recipeItems.forEach(function (item) {
-      var checkbox = document.createElement("input");
-      checkbox.type = "checkbox";
-      item.appendChild(checkbox);
+  recipeItems.forEach(function (item) {
+    var checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    item.appendChild(checkbox);
 
-      item.addEventListener("click", clickToggle());
-    });
+    item.addEventListener("click", clickToggle);
   });
+});
+
 </script>
