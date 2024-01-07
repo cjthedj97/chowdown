@@ -121,7 +121,7 @@ layout: recipe_default
         <ul class="ingredients" itemprop="ingredients">
           {% for ingredient in recipe.ingredients %}
             {% if ingredient.first %}
-            <h5>{{ ingredient.first[0] }}</h5>
+            <h6>{{ ingredient.first[0] }}</h6>
             <ul itemprop="recipeIngredientGroup">
               {% for i in ingredient.first[1] %}
               <li itemprop="recipeIngredient">{{ i | markdownify }}<input type="checkbox"></li>
@@ -133,11 +133,11 @@ layout: recipe_default
           {% endfor %}
       </ul>
 
-      <h3 class="blue regular xs-center">{{ site.translation[site.language].directions }}</h3>
+      <h5 class="blue regular xs-center">{{ site.translation[site.language].directions }}</h5>
         <ul itemprop="instructions">
         {% for direction in recipe.directions %}
           {% if direction.first %}
-          <h5>{{ direction.first[0] }}</h5>
+          <h6>{{ direction.first[0] }}</h6>
           <ul itemprop="instructionGroup">
             {% for d in direction.first[1] %}
             <li itemprop="instruction">{{ d | markdownify }}<input type="checkbox"></li>
