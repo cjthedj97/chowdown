@@ -8,7 +8,7 @@ cooktime: PT35m
 
 ingredients:
 - corn shucked
-- 2 to 4 tablespoons cold butter, depending on your preference.
+- cold butter, depending on your preference.
 - Pinch of salt
 
 directions:
