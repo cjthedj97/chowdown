@@ -3,6 +3,7 @@ layout: recipe
 title: "Sous Vide Self-Buttering Corn on the Cob"
 image: sous-vide-self-buttering-corn.jpg
 imagecredit: https://images.anovaculinary.com/sous-vide-self-buttering-corn-on-the-cob/header/sous-vide-self-buttering-corn-on-the-cob-header-og.jpg
+preptime: PT5m
 cooktime: PT35m
 
 ingredients:
