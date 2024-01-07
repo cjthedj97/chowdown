@@ -22,6 +22,7 @@ layout: recipe_default
 <!-- call up the main recipe title and content -->
   <header class="post-header">
     <h1 class="post-title center m1 sm-mt3" itemprop="name">{{ page.title }}</h1>
+    {% include timings.html recipe=page %}
   </header>
 
   <div class="px2 mt3 clearfix">
@@ -54,18 +55,35 @@ layout: recipe_default
       <ul itemprop="ingredients">
         <!-- list ingredients that make up recipe -->
         {% for ingredient in page.ingredients %}
-        <li itemprop="recipeIngredient">{{ ingredient | markdownify }}<input type="checkbox"></li>
+          {% if ingredient.first %}
+          <h4>{{ ingredient.first[0] }}</h4>
+          <ul itemprop="recipeIngredientGroup">
+            {% for i in ingredient.first[1] %}
+            <li itemprop="recipeIngredient">{{ i | markdownify }}<input type="checkbox"></li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <li itemprop="recipeIngredient">{{ ingredient | markdownify }}<input type="checkbox"></li>
+          {% endif %}
         {% endfor %}
       </ul>
       {% endif %}
-
     </div>
 
     <div class="sm-col sm-col-6 lg-col-6">
       <h4 class="blue mt0 mb2 xs-center">{{ site.translation[site.language].directions }}</h4>
       <ul itemprop="recipeInstructions">
         {% for direction in page.directions %}
-        <li>{{ direction | markdownify }}<input type="checkbox"></li>
+          {% if direction.first %}
+          <h4>{{ direction.first[0] }}</h4>
+          <ul itemprop="instructionGroup">
+            {% for d in direction.first[1] %}
+            <li itemprop="instruction">{{ d | markdownify }}<input type="checkbox"></li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <li itemprop="instruction">{{ direction | markdownify }}<input type="checkbox"></li>
+          {% endif %}
         {% endfor %}
       </ul>
     </div>
@@ -100,17 +118,37 @@ layout: recipe_default
         {% endif %}
       {% endfor %}
 
+      {% include timings.html recipe=recipe %}
+
       <h4 class="blue regular xs-center">{{ site.translation[site.language].ingredients }}</h4>
         <ul class="ingredients" itemprop="ingredients">
-        {% for item in recipe.ingredients %}
-        <li itemprop="ingredient">{{ item | markdownify }}<input type="checkbox"></li>
-        {% endfor %}
+          {% for ingredient in recipe.ingredients %}
+            {% if ingredient.first %}
+            <h4>{{ ingredient.first[0] }}</h4>
+            <ul itemprop="recipeIngredientGroup">
+              {% for i in ingredient.first[1] %}
+              <li itemprop="recipeIngredient">{{ i | markdownify }}<input type="checkbox"></li>
+              {% endfor %}
+            </ul>
+            {% else %}
+            <li itemprop="recipeIngredient">{{ ingredient | markdownify }}<input type="checkbox"></li>
+            {% endif %}
+          {% endfor %}
       </ul>
 
       <h4 class="blue regular xs-center">{{ site.translation[site.language].directions }}</h4>
         <ul itemprop="instructions">
-        {% for item in recipe.directions %}
-        <li>{{ item | markdownify }}<input type="checkbox"></li>
+        {% for direction in recipe.directions %}
+          {% if direction.first %}
+          <h4>{{ direction.first[0] }}</h4>
+          <ul itemprop="instructionGroup">
+            {% for d in direction.first[1] %}
+            <li itemprop="instruction">{{ d | markdownify }}<input type="checkbox"></li>
+            {% endfor %}
+          </ul>
+          {% else %}
+          <li itemprop="instruction">{{ direction | markdownify }}<input type="checkbox"></li>
+          {% endif %}
         {% endfor %}
       </ul>
 
@@ -130,3 +168,4 @@ layout: recipe_default
   </article>
 
 </div>
+<script src="/js/duration.js" charset="utf-8"></script>
