@@ -100,32 +100,32 @@ layout: recipe_default
         {% endif %}
       {% endfor %}
 
-      <!-- call up recipe and directions -->
-      <div class="clearfix mt3 recipe-section">
+<!-- call up recipe and directions -->
+<div class="clearfix mt3 recipe-section">
 
-        <div class="sm-col sm-col-6 lg-col-6">
-          <!-- check if it's a component-based recipe -->
-          {% if page.components %}
-          <h4 class="blue mt0 mb2 xs-center">{{ site.translation[site.language].components }}</h4>
-          <ul>
-            <!-- list components that make up recipe -->
-            {% for component in page.components %}
-            <li>{{ component | markdownify }}</li>
-            {% endfor %}
-          </ul>
-          {% endif %}
+  <div class="sm-col sm-col-6 lg-col-6">
+    <!-- check if it's a component-based recipe -->
+    {% if page.components %}
+    <h4 class="blue mt0 mb2 xs-center">{{ site.translation[site.language].components }}</h4>
+    <ul>
+      <!-- list components that make up recipe -->
+      {% for component in page.components %}
+      <li>{{ component | markdownify }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
 
-          {% if page.ingredients %}
-          <h4 class="blue mt0 mb2 xs-center">{{ site.translation[site.language].ingredients }}</h4>
-          <ul itemprop="ingredients">
-            <!-- list ingredients that make up recipe -->
-            {% for ingredient in page.ingredients %}
-            <li itemprop="recipeIngredient">{{ ingredient | markdownify }}</li>
-            {% endfor %}
-          </ul>
-          {% endif %}
+    {% if page.ingredients %}
+    <h4 class="blue mt0 mb2 xs-center">{{ site.translation[site.language].ingredients }}</h4>
+    <ul itemprop="ingredients">
+      <!-- list ingredients that make up recipe -->
+      {% for ingredient in page.ingredients %}
+      <li itemprop="recipeIngredient">{{ ingredient | markdownify }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
 
-        </div>
+  </div>
 
   <div class="sm-col sm-col-6 lg-col-6">
     <h4 class="blue mt0 mb2 xs-center">{{ site.translation[site.language].directions }}</h4>
@@ -168,6 +168,7 @@ layout: recipe_default
     );
   });
 </script>
+
 
 
     {% endif %}
