@@ -158,31 +158,28 @@ layout: recipe_default
 
 <script type="text/javascript">
 
-$(document).ready(function() {
+$( document ).ready(function() {
 
-jQuery.fn.clickToggle = function(a, b) {
-  var ab = [b, a];
-  function
-
-cb() {
-    ab[this._tog ^= 1].call(this);
-  }
-  return
-
-this.on("click", cb);
+jQuery.fn.clickToggle = function(a,b) {
+var ab=[b,a];
+function cb(){ ab[this._tog^=1].call(this); }
+return this.on("click", cb);
 };
 
-// Target recipe sections specifically
-$(".clearfix.mt3.recipe-section ul li").append('<input type="checkbox">');
-
-$(".clearfix.mt3.recipe-section ul li").clickToggle(function() {
+$(".recipe-section ul li").append('<input type="checkbox">');
+$(".recipe-section ul li").clickToggle(function(){
   $(this).children("input").prop('checked', true);
-  $(this).toggle(); // Toggle visibility of the recipe element itself
-}, function() {
+  var height = $(this).height();
+  var y = $(window).scrollTop();
+  $('html, body').animate({scrollTop: y+height+16}, 200);
+}, function(){
   $(this).children("input").prop('checked', false);
-  $(this).toggle(); // Toggle visibility again
+  var height = $(this).height();
+  var y = $(window).scrollTop();
+  $('html, body').animate({scrollTop: y-height-16}, 200);
 });
 
 });
+
 
 </script>
