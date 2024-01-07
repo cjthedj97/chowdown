@@ -120,7 +120,7 @@ layout: recipe_default
 
       {% include timings.html recipe=recipe %}
 
-      <h5 class="blue regular xs-center">{{ site.translation[site.language].ingredients }}</h5>
+      <h5 class="blue regular xs-center" style="margin-top: 10px;">{{ site.translation[site.language].ingredients }}</h5>
         <ul class="ingredients" itemprop="ingredients">
           {% for ingredient in recipe.ingredients %}
             {% if ingredient.first %}
