@@ -139,6 +139,23 @@ layout: recipe_default
 </div>
 <!-- end recipe and directions -->
 
+    {% endif %}
+    {% endfor %}
+    </div>
+  {% endfor %}
+  </div>
+
+  {% endif %}
+<!-- end components -->
+
+  {% for category in page.categories %}
+    <p class="clearfix">{{ site.translation[site.language].category }}: <span itemprop="recipeCategory">{{ category }}</span></p>
+  {% endfor %}
+
+  </article>
+
+</div>
+
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     console.log("Document is ready!");
@@ -179,20 +196,3 @@ layout: recipe_default
     });
   });
 </script>
-
-    {% endif %}
-    {% endfor %}
-    </div>
-  {% endfor %}
-  </div>
-
-  {% endif %}
-<!-- end components -->
-
-  {% for category in page.categories %}
-    <p class="clearfix">{{ site.translation[site.language].category }}: <span itemprop="recipeCategory">{{ category }}</span></p>
-  {% endfor %}
-
-  </article>
-
-</div>
