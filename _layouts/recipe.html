@@ -1,5 +1,5 @@
 ---
-layout: recipe_default
+layout: default
 ---
 <div class="container" itemscope itemtype="http://schema.org/Recipe">
 
@@ -54,7 +54,7 @@ layout: recipe_default
       <ul itemprop="ingredients">
         <!-- list ingredients that make up recipe -->
         {% for ingredient in page.ingredients %}
-        <li itemprop="recipeIngredient">{{ ingredient | markdownify }}</li>
+        <li itemprop="recipeIngredient">{{ ingredient | markdownify }}<input type="checkbox"></li>
         {% endfor %}
       </ul>
       {% endif %}
@@ -65,7 +65,7 @@ layout: recipe_default
       <h4 class="blue mt0 mb2 xs-center">{{ site.translation[site.language].directions }}</h4>
       <ul itemprop="recipeInstructions">
         {% for direction in page.directions %}
-        <li>{{ direction | markdownify }}</li>
+        <li>{{ direction | markdownify }}<input type="checkbox"></li>
         {% endfor %}
       </ul>
     </div>
@@ -100,46 +100,19 @@ layout: recipe_default
         {% endif %}
       {% endfor %}
 
-<!-- call up recipe and directions -->
-<div class="clearfix mt3">
+      <h4 class="blue regular xs-center">{{ site.translation[site.language].ingredients }}</h4>
+        <ul class="ingredients" itemprop="ingredients">
+        {% for item in recipe.ingredients %}
+        <li itemprop="ingredient">{{ item | markdownify }}</li>
+        {% endfor %}
+      </ul>
 
-  <div class="sm-col sm-col-6 lg-col-6">
-    <!-- check if it's a component-based recipe -->
-    {% if page.components %}
-    <h4 class="blue mt0 mb2 xs-center">{{ site.translation[site.language].components }}</h4>
-    <ul>
-      <!-- list components that make up recipe -->
-      {% for component in page.components %}
-      <li>{{ component | markdownify }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-
-  <!-- Ingredients section -->
-  <div class="sm-col sm-col-6 lg-col-6">
-    <input type="checkbox" id="ingredients-checkbox" />
-    <label class="blue mt0 mb2 xs-center" for="ingredients-checkbox">{{ site.translation[site.language].ingredients }}</label>
-    <ul itemprop="ingredients">
-      {% for ingredient in page.ingredients %}
-        <li class="recipe-section" itemprop="recipeIngredient">{{ ingredient | markdownify }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-
-  <!-- Directions section -->
-  <div class="sm-col sm-col-6 lg-col-6">
-    <input type="checkbox" id="directions-checkbox" />
-    <label class="blue mt0 mb2 xs-center" for="directions-checkbox">{{ site.translation[site.language].directions }}</label>
-    <ul itemprop="recipeInstructions">
-      {% for direction in page.directions %}
-        <li class="recipe-section">{{ direction | markdownify }}</li>
-      {% endfor %}
-    </ul>
-  </div>
-
-</div>
-
-<!-- end recipe and directions -->
+      <h4 class="blue regular xs-center">{{ site.translation[site.language].directions }}</h4>
+        <ul itemprop="instructions">
+        {% for item in recipe.directions %}
+        <li>{{ item | markdownify }}</li>
+        {% endfor %}
+      </ul>
 
     {% endif %}
     {% endfor %}
@@ -157,31 +130,3 @@ layout: recipe_default
   </article>
 
 </div>
-
-<script type="text/javascript">
-
-$( document ).ready(function() {
-
-jQuery.fn.clickToggle = function(a,b) {
-var ab=[b,a];
-function cb(){ ab[this._tog^=1].call(this); }
-return this.on("click", cb);
-};
-
-$(".recipe-section").append('<input type="checkbox">');
-$(".recipe-section").clickToggle(function(){
-  $(this).children("input").prop('checked', true);
-  var height = $(this).height();
-  var y = $(window).scrollTop();
-  $('html, body').animate({scrollTop: y+height+16}, 200);
-}, function(){
-  $(this).children("input").prop('checked', false);
-  var height = $(this).height();
-  var y = $(window).scrollTop();
-  $('html, body').animate({scrollTop: y-height-16}, 200);
-});
-
-});
-
-
-</script>
