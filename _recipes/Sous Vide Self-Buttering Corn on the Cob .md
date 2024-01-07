@@ -4,7 +4,7 @@ title: "Sous Vide Self-Buttering Corn on the Cob"
 image: sous-vide-self-buttering-corn.jpg
 imagecredit: https://images.anovaculinary.com/sous-vide-self-buttering-corn-on-the-cob/header/sous-vide-self-buttering-corn-on-the-cob-header-og.jpg
 
-	
+
 ingredients:
 - corn shucked
 - 2 to 4 tablespoons cold butter, depending on your preference.
