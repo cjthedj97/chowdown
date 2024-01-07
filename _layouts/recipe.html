@@ -139,24 +139,7 @@ layout: recipe_default
 </div>
 <!-- end recipe and directions -->
 
-
-    {% endif %}
-    {% endfor %}
-    </div>
-  {% endfor %}
-  </div>
-
-  {% endif %}
-<!-- end components -->
-
-  {% for category in page.categories %}
-    <p class="clearfix">{{ site.translation[site.language].category }}: <span itemprop="recipeCategory">{{ category }}</span></p>
-  {% endfor %}
-
-  </article>
-
-</div>
-
+<!-- Script for checkbox functionality -->
 <script type="text/javascript">
   $(document).ready(function () {
     jQuery.fn.clickToggle = function (a, b) {
@@ -186,3 +169,20 @@ layout: recipe_default
   });
 </script>
 
+
+    {% endif %}
+    {% endfor %}
+    </div>
+  {% endfor %}
+  </div>
+
+  {% endif %}
+<!-- end components -->
+
+  {% for category in page.categories %}
+    <p class="clearfix">{{ site.translation[site.language].category }}: <span itemprop="recipeCategory">{{ category }}</span></p>
+  {% endfor %}
+
+  </article>
+
+</div>
