@@ -1,7 +1,7 @@
 # Site settings
 title: Recipes
 email: admin@saathoff.us
-description: The plain text recipe database
+description: The Saathoff Family Recipe Database
 baseurl: ""
 language: "en"
 lang_direction: "ltr"
