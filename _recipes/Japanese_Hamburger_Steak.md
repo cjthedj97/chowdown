@@ -8,23 +8,25 @@ image: japanese-hamburger-steak.jpg
 imagecredit: https://drivemehungry.com/wp-content/uploads/2021/07/japanese-hamburger-steak-hambagu-6-150x150.jpg
 
 ingredients:
-- 1 ⅓ lb ground beef See Note 1
-- ⅓ medium onion finely diced
-- 1 teaspoon vegetable oil
-- 1 egg
-- ⅓ cup panko bread crumbs See Note 2
-- 2 ½ Tablespoons milk
-- 2 teaspoons ketchup
-- 1 teaspoon Worcestershire sauce
-- ¾ teaspoon sea salt
-- ½ teaspoon pepper
-- 2 cloves garlic (optional) minced
-- ¼ cup red wine to steam patty
-- ⅓ cup ketchup
-- 3 Tablespoons Worcestershire sauce
-- 3 Tablespoons water or stock
-- 2 Tablespoons butter
-- 2 teaspoons sugar
+- Hamburger Steak:
+  - 1 ⅓ lb ground beef See Note 1
+  - ⅓ medium onion finely diced
+  - 1 teaspoon vegetable oil
+  - 1 egg
+  - ⅓ cup panko bread crumbs See Note 2
+  - 2 ½ Tablespoons milk
+  - 2 teaspoons ketchup
+  - 1 teaspoon Worcestershire sauce
+  - ¾ teaspoon sea salt
+  - ½ teaspoon pepper
+  - 2 cloves garlic (optional) minced
+  - ¼ cup red wine to steam patty
+- Sauce:
+  - ⅓ cup ketchup
+  - 3 Tablespoons Worcestershire sauce
+  - 3 Tablespoons water or stock
+  - 2 Tablespoons butter
+  - 2 teaspoons sugar
 
 directions:
 
