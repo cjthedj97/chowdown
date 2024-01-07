@@ -141,14 +141,19 @@ layout: recipe_default
 
 <!-- Script for checkbox functionality -->
 <script type="text/javascript">
-  $(document).ready(function () {
+  jQuery(document).ready(function () {
     jQuery.fn.clickToggle = function (a, b) {
+      console.log("clickToggle function is executed!");
+
       var ab = [b, a];
       function cb() {
         ab[this._tog ^= 1].call(this);
       }
       return this.on("click", cb);
     };
+
+    // Console log to check if the document is ready
+    console.log("Document is ready!");
 
     // Target only the <li> elements within the recipe section
     $(".recipe-section ul li").append('<input type="checkbox">');
