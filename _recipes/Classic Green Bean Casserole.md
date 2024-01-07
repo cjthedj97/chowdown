@@ -18,8 +18,8 @@ ingredients:
 
 directions:
 - reheat oven to 350°F.
-- If using fresh or frozen green beans, boil just until tender crisp. (see note)
-- Combine green beans with soup, milk, soy sauce, pepper, salt, 1 cup of crispy onions, and cheese (if using, see note) in a casserole dish.
+- If using fresh or frozen green beans, boil just until tender crisp.
+- Combine green beans with soup, milk, soy sauce, pepper, salt, and 1 cup of crispy onions in a casserole dish.
 - Bake uncovered for 30-35 minutes or bubbly.
 - Remove from oven and stir. Top with remaining onions and return to oven for an additional 10 minutes or until golden.
 ---
