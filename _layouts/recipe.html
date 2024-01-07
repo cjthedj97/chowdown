@@ -132,28 +132,31 @@ layout: recipe_default
 </div>
 
 <script type="text/javascript">
+  $(document).ready(function () {
+    jQuery.fn.clickToggle = function (a, b) {
+      var ab = [b, a];
+      function cb() {
+        ab[this._tog ^= 1].call(this);
+      }
+      return this.on("click", cb);
+    };
 
-  $( document ).ready(function() {
-
-  jQuery.fn.clickToggle = function(a,b) {
-  var ab=[b,a];
-  function cb(){ ab[this._tog^=1].call(this); }
-  return this.on("click", cb);
-  };
-
-  $("ul li").append('<input type="checkbox">');
-  $("ul li").clickToggle(function(){
-    $(this).children("input").prop('checked', true);
-    var height = $(this).height();
-    var y = $(window).scrollTop();
-    $('html, body').animate({scrollTop: y+height+16}, 200);
-  }, function(){
-    $(this).children("input").prop('checked', false);
-    var height = $(this).height();
-    var y = $(window).scrollTop();
-    $('html, body').animate({scrollTop: y-height-16}, 200);
+    // Target only the <li> elements within the recipe section
+    $(".recipe-section ul li").append('<input type="checkbox">');
+    $(".recipe-section ul li").clickToggle(
+      function () {
+        $(this).children("input").prop('checked', true);
+        var height = $(this).height();
+        var y = $(window).scrollTop();
+        $('html, body').animate({ scrollTop: y + height + 16 }, 200);
+      },
+      function () {
+        $(this).children("input").prop('checked', false);
+        var height = $(this).height();
+        var y = $(window).scrollTop();
+        $('html, body').animate({ scrollTop: y - height - 16 }, 200);
+      }
+    );
   });
-
-  });
-
 </script>
+
