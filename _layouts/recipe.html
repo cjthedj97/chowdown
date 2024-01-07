@@ -115,23 +115,24 @@ layout: recipe_default
     </ul>
     {% endif %}
 
-    {% if page.ingredients %}
-    <h4 class="blue mt0 mb2 xs-center">{{ site.translation[site.language].ingredients }}</h4>
+  <!-- Ingredients section -->
+  <div class="sm-col sm-col-6 lg-col-6">
+    <input type="checkbox" id="ingredients-checkbox" />
+    <label class="blue mt0 mb2 xs-center" for="ingredients-checkbox">{{ site.translation[site.language].ingredients }}</label>
     <ul itemprop="ingredients">
-      <!-- list ingredients that make up recipe -->
       {% for ingredient in page.ingredients %}
-      <li class="recipe-section" itemprop="recipeIngredient">{{ ingredient | markdownify }}</li>
+        <li class="recipe-section" itemprop="recipeIngredient">{{ ingredient | markdownify }}</li>
       {% endfor %}
     </ul>
-    {% endif %}
-
   </div>
 
+  <!-- Directions section -->
   <div class="sm-col sm-col-6 lg-col-6">
-    <h4 class="blue mt0 mb2 xs-center">{{ site.translation[site.language].directions }}</h4>
+    <input type="checkbox" id="directions-checkbox" />
+    <label class="blue mt0 mb2 xs-center" for="directions-checkbox">{{ site.translation[site.language].directions }}</label>
     <ul itemprop="recipeInstructions">
       {% for direction in page.directions %}
-      <li class="recipe-section">{{ direction | markdownify }}</li>
+        <li class="recipe-section">{{ direction | markdownify }}</li>
       {% endfor %}
     </ul>
   </div>
