@@ -139,46 +139,46 @@ layout: recipe_default
 </div>
 <!-- end recipe and directions -->
 
-<!-- Script for checkbox functionality -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
 <script>
-  // Add your custom jQuery code here
-  $(document).ready(function () {
+  document.addEventListener("DOMContentLoaded", function () {
     console.log("Document is ready!");
 
-    jQuery.fn.clickToggle = function (a, b) {
-      console.log("clickToggle function is executed!");
-
-      var ab = [b, a];
+    function clickToggle() {
+      var ab = [uncheck, check];
       function cb() {
         ab[this._tog ^= 1].call(this);
       }
-      return this.on("click", cb);
-    };
+      return cb;
+    }
+
+    function check() {
+      console.log("Checkbox checked!");
+      this.querySelector("input").checked = true;
+      var height = this.clientHeight;
+      var y = window.scrollY;
+      window.scrollTo(0, y + height + 16);
+    }
+
+    function uncheck() {
+      console.log("Checkbox unchecked!");
+      this.querySelector("input").checked = false;
+      var height = this.clientHeight;
+      var y = window.scrollY;
+      window.scrollTo(0, y - height - 16);
+    }
 
     // Target only the <li> elements within the recipe section
-    $(".recipe-section ul li").append('<input type="checkbox">');
-    $(".recipe-section ul li").clickToggle(
-      function () {
-        console.log("Checkbox checked!");
-        $(this).children("input").prop('checked', true);
-        var height = $(this).height();
-        var y = $(window).scrollTop();
-        $('html, body').animate({ scrollTop: y + height + 16 }, 200);
-      },
-      function () {
-        console.log("Checkbox unchecked!");
-        $(this).children("input").prop('checked', false);
-        var height = $(this).height();
-        var y = $(window).scrollTop();
-        $('html, body').animate({ scrollTop: y - height - 16 }, 200);
-      }
-    );
+    var recipeItems = document.querySelectorAll(".recipe-section ul li");
+
+    recipeItems.forEach(function (item) {
+      var checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      item.appendChild(checkbox);
+
+      item.addEventListener("click", clickToggle());
+    });
   });
 </script>
-
-
 
     {% endif %}
     {% endfor %}
