@@ -103,8 +103,6 @@ layout: recipe_default
 <!-- call up recipe and directions -->
 <div class="clearfix mt3">
 
-<div class="recipe-section">
-
   <div class="sm-col sm-col-6 lg-col-6">
     <!-- check if it's a component-based recipe -->
     {% if page.components %}
@@ -122,7 +120,7 @@ layout: recipe_default
     <ul itemprop="ingredients">
       <!-- list ingredients that make up recipe -->
       {% for ingredient in page.ingredients %}
-      <li itemprop="recipeIngredient">{{ ingredient | markdownify }}</li>
+      <li class="recipe-section" itemprop="recipeIngredient">{{ ingredient | markdownify }}</li>
       {% endfor %}
     </ul>
     {% endif %}
@@ -133,12 +131,11 @@ layout: recipe_default
     <h4 class="blue mt0 mb2 xs-center">{{ site.translation[site.language].directions }}</h4>
     <ul itemprop="recipeInstructions">
       {% for direction in page.directions %}
-      <li>{{ direction | markdownify }}</li>
+      <li class="recipe-section">{{ direction | markdownify }}</li>
       {% endfor %}
     </ul>
   </div>
 
-</div>
 </div>
 
 <!-- end recipe and directions -->
@@ -170,8 +167,8 @@ function cb(){ ab[this._tog^=1].call(this); }
 return this.on("click", cb);
 };
 
-$(".recipe-section ul li").append('<input type="checkbox">');
-$(".recipe-section ul li").clickToggle(function(){
+$(".recipe-section").append('<input type="checkbox">');
+$(".recipe-section").clickToggle(function(){
   $(this).children("input").prop('checked', true);
   var height = $(this).height();
   var y = $(window).scrollTop();
