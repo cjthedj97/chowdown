@@ -6,7 +6,7 @@ imagecredit: https://copykat.com/cracker-barrel-meatloaf/
 preptime: PT10m
 cooktime: PT1h
 yield: 10 Servings
-	
+
 
 ingredients:
 - Meatloaf Ingredients:
