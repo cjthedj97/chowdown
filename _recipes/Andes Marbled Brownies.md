@@ -1,6 +1,8 @@
 ---
 layout: recipe
 title: "Andes Marbled Brownies"
+images: Andes Marbled Brownies.jpg
+imagecredit: https://tootsie.com/recipes/
 
 ingredients:
 - 1 package (19.8 to 23.7 oz.) brownie mix
@@ -17,5 +19,3 @@ directions:
 - Cut into bars.
 
 ---
-
-[Source](https://tootsie.com/recipes/)

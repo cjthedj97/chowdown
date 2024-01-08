@@ -1,6 +1,9 @@
 ---
 layout: recipe
 title: "Andes Creme de Menthe Cookies"
+image: Andes Creme de Menthe Cookies
+imagecredit: https://tootsie.com/recipes/
+yield: 4 dozen cookies
 
 ingredients:
 - ½ cup salted butter - softened
@@ -22,8 +25,4 @@ directions:
 - Form a ball and slightly flatten. Raise oven rack one level above the middle and bake on non-stick baking pans.
 - Bake at 350° F for approximately 8 - 10 minutes.
 - Cool on pans for two minutes before removing.
-
 ---
-Yield: 4 dozen cookies.
-
-[Source](https://tootsie.com/recipes/)
