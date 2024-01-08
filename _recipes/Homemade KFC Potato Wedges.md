@@ -1,6 +1,7 @@
 ---
 layout: recipe
 title: "CopyKat Recipes - Homemade KFC Potato Wedges"
+image: kfc-potato-wedges.jpg
 imagecredit: https://copykat.com/wp-content/uploads/2018/03/kfc-potato-wedges-copycat-recipe.jpg
 
 ingredients:

@@ -1,6 +1,11 @@
 ---
 layout: recipe
 title: "Cheeseburger Soup"
+image: cheeseburger soup.webp
+imagecredit: https://www.tasteofhome.com/recipes/cheeseburger-soup/
+preptime: PT30m
+cooktime: PT25m
+yield: 8 servings (2 quarts)
 
 ingredients:
 - 1/2 pound ground beef
@@ -36,6 +41,3 @@ directions:
 - If desired can serve with onion rings and green onions/chives.
 
 ---
-Yield: 8 servings (2 quarts).
-
-[Source](https://www.tasteofhome.com/recipes/cheeseburger-soup/)
