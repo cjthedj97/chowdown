@@ -2,7 +2,11 @@
 
 layout: recipe
 title:  "Frito Pie Dip"
+image: Frito-Pie-Dip.webp
 imagecredit: https://www.taketwotapas.com/frito-pie-dip/
+yield: 8 Servings
+preptime: PT5m
+cooktime: PT25m
 
 ingredients:
 - 8 ounces of cream cheese
@@ -21,12 +25,3 @@ directions:
 - Serve hot with corn chips
 
 ---
-
-
-
-| Prep Time | Cook Time | Yields |
-| -------- | -------- | -------- |
-| 5 minutes | 25 minutes | 8 Servings |
-
-
-[Source](https://www.taketwotapas.com/frito-pie-dip/)
