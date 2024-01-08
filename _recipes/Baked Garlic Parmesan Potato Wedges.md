@@ -1,6 +1,11 @@
 ---
 layout: recipe
 title: "Baked Garlic Parmesan Potato Wedges"
+image: baked-garlic-parmesan-potato-wedges.jpg
+imagecredit: https://www.lecremedelacrumb.com/baked-garlic-parmesan-potato-wedges
+preptime: PT15m
+cooktime: PT30m
+yield: 4 Servings
 
 ingredients:
 - 3-4 large russet potatoes sliced into wedges
@@ -21,5 +26,3 @@ directions:
 
 ---
 Serve with your favorite dipping sauce.
-
-[Source](https://www.lecremedelacrumb.com/baked-garlic-parmesan-potato-wedges/)
