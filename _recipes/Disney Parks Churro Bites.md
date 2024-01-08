@@ -1,7 +1,8 @@
 ---
 layout: recipe
 title: Disney Parks Churro Bites
-imagecredit: https://www.wdwinfo.com/wp-content/uploads/2020/04/wghevtr36y2133.jpg
+image: Disney Churro Bites.jpg
+imagecredit: https://www.wdwinfo.com/disneylandcalifornia/disney-shares-recipe-for-disney-parks-churro-bites/
 tag: Disney Parks
 
 ingredients:
@@ -27,6 +28,4 @@ directions:
 - Drain churro bites on paper towel.
 - Mix sugar and ½ teaspoon cinnamon in medium bowl. Toss in churro bites until coated. Place on serving plate and serve with favorite dipping sauce.
 ---
-
-Source: https://www.wdwinfo.com/disneylandcalifornia/disney-shares-recipe-for-disney-parks-churro-bites/
 
