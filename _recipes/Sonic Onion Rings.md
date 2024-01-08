@@ -1,7 +1,11 @@
 ---
 layout: recipe
 title: "CopyKat Recipe - Sonic Onion Rings"
-imagecredit: https://copykat.com/wp-content/uploads/2009/05/fb-copycat-recipe-sonic-onion-ring.jpg
+image: sonic-onion-ring.jpg
+imagecredit: https://copykat.com/original-sonic-onion-ring-recipe/
+yield: 4 Servings
+preptime: PT10m
+cooktime: PT15m
 
 ingredients:
 - 2 lbs Spanish onions sliced, and rings separated
@@ -20,5 +24,3 @@ directions:
 ---
 
 Sifting the flour and cornmeal once in a while keeps lumps out and makes it easier to coat the rings When placing on cookie sheets to save room, lean on top of each other to allow the entire ring to dry.
-
-[Source](https://copykat.com/original-sonic-onion-ring-recipe/)

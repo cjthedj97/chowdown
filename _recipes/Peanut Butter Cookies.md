@@ -1,6 +1,7 @@
 ---
 layout: recipe
 title: "Peanut Butter Cookies"
+yield: 3 dozen cookies
 
 ingredients:
 - ½ cup shortening (half butter or margarine, softened)
@@ -21,5 +22,3 @@ directions:
 
 
 ---
-
-Makes 3 dozen cookies.

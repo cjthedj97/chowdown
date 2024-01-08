@@ -1,11 +1,9 @@
 ---
 layout: recipe
 title: Japanese Hamburger Steak
-
-
 tags: dinner, lunch, Japanese, Korean
 image: japanese-hamburger-steak.jpg
-imagecredit: https://drivemehungry.com/wp-content/uploads/2021/07/japanese-hamburger-steak-hambagu-6-150x150.jpg
+imagecredit: https://drivemehungry.com/japanese-hamburger-steak-hambagu/
 
 ingredients:
 - Hamburger Steak:

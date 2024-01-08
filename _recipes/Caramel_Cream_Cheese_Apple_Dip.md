@@ -4,6 +4,8 @@ title: "Caramel Cream Cheese Apple Dip"
 tags: Appetizer
 image: Caramel-Cream-Cheese-Apple-Dip.jpg
 imagecredit: https://www.livingwellspendingless.com/caramel-cream-cheese-apple-dip-2/
+yield: 12 Servings
+preptime: PT7m
 
 ingredients:
 - 2 8 oz packages cream cheese softened
@@ -20,6 +22,3 @@ directions:
 - Serve immediately with sliced granny smith apples.
 
 ---
-Prep Time 7 minutes
-
-Servings 12 people

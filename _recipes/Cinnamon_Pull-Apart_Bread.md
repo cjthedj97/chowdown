@@ -3,6 +3,8 @@ layout: recipe
 title: "Cinnamon Pull-Apart Bread"
 image: Cinnamon_Pull-Apart_Bread.jpg
 imagecredit: https://www.pillsbury.com/recipes/grands-cinnamon-pull-apart-bread/
+yield: 12 Servings
+preptime: PT25m
 
 ingredients:
 - ½ cup granulated sugar

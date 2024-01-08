@@ -2,7 +2,11 @@
 layout: recipe
 title: "CopyKat Recipes - Little Caesars Crazy Bread"
 image: Little-Caesars-Crazy-Bread.jpg
-imagecredit: https://copykat.com/wp-content/uploads/2023/06/Little-Caesars-Crazy-Bread-Pin-16.jpg
+imagecredit: https://copykat.com/little-caesars-crazy-bread/
+yield: 6 Servings
+preptime: PT1h50m
+cooktime: PT20m
+
 
 ingredients:
 - ½ cup warm water ~100° to 110°F
@@ -30,6 +34,4 @@ directions:
 - Mix the melted butter and the garlic salt.
 - Brush the garlic sauce over the breadsticks and sprinkle Parmesan cheese on top.
 ---
-
-[Source](https://copykat.com/little-caesars-crazy-bread/)
 

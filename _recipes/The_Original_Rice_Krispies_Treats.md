@@ -2,7 +2,10 @@
 layout: recipe
 title: "The Original Rice Krispies Treats™"
 image: Original_Rice_Krispies_Treats.jpg
-imagecredit: https://www.kelloggs.com/en_US/recipes/the-original-treats-recipe.html
+imagecredit: https://www.ricekrispies.com/en_US/recipes/the-original-treats-recipe.html
+yield: 12 Servings
+preptime: PT10m
+cooktime: PT20m
 
 ingredients:
 - 3 tablespoons butter
@@ -17,9 +20,6 @@ directions:
 
 
 ---
-Prep Time 10 Minutes
-Total Time 30 Minutes
-12 Servings
 
 For best results, use fresh marshmallows.
 
