@@ -1,7 +1,7 @@
 ---
 layout: recipe
 title: Disney Parks Churro Bites
-image: Disney Churro Bites.jpg
+image: Disney-Churro-Bites.jpg
 imagecredit: https://www.wdwinfo.com/disneylandcalifornia/disney-shares-recipe-for-disney-parks-churro-bites/
 tag: Disney Parks
 

@@ -1,7 +1,7 @@
 ---
 layout: recipe
 title: "Cheeseburger Soup"
-image: cheeseburger soup.jpg
+image: cheeseburger-soup.jpg
 imagecredit: https://www.tasteofhome.com/recipes/cheeseburger-soup/
 preptime: PT30m
 cooktime: PT25m

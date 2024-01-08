@@ -1,7 +1,7 @@
 ---
 layout: recipe
 title:  "Blackened Chicken Pasta"
-image: Blackened Chicken Pasta.jpeg
+image: Blackened-Chicken-Pasta.jpeg
 imagecredit: https://www.foodnetwork.com/recipes/blackened-chicken-pasta-8556476
 yield: 4 to 6 servings
 cooktime: PT40m

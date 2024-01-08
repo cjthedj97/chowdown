@@ -1,7 +1,7 @@
 ---
 layout: recipe
 title: "Andes Marbled Brownies"
-image: Andes Marbled Brownies.jpg
+image: Andes-Marbled-Brownies.jpg
 imagecredit: https://tootsie.com/recipes/
 
 ingredients:
