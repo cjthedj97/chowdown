@@ -1,7 +1,7 @@
 ---
 layout: recipe
 title: "Andes Creme de Menthe Cookies"
-image: Andes Creme de Menthe Cookies
+image: Andes Creme de Menthe Cookies.jpg
 imagecredit: https://tootsie.com/recipes/
 yield: 4 dozen cookies
 

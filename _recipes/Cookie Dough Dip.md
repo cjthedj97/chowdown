@@ -1,6 +1,8 @@
 ---
 layout: recipe
 title: "Cookie Dough Dip"
+image: Cookie-Dough-Dip.jpg
+imagecredit: https://www.thatskinnychickcanbake.com/cookie-dough-dip/
 
 ingredients:
 - 8 ounces cream cheese, at room temperature
@@ -17,6 +19,4 @@ directions:
 - Serve with sliced apples, Biscoff cookies, or favorite cookies.
 
 ---
-Adapted from Add a Pinch. [Source](https://www.thatskinnychickcanbake.com/cookie-dough-dip/)
-
 Don't leave out at room temperature for longer than 2 hours.
