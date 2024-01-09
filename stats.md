@@ -2,24 +2,6 @@
 layout: post
 ---
 
-<style>
-  #stats-container {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-
-  h2, h3 {
-    margin-top: 15px;
-  }
-
-  p {
-    margin: 5px 0;
-  }
-</style>
-
 <div id="stats-container">
   <h2>Recipe Statistics</h2>
   <p>Welcome to our recipe statistics page. Here, you'll find valuable insights into our collection of delicious recipes.</p>
