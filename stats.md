@@ -11,7 +11,7 @@ layout: post
     border-radius: 5px;
   }
 
-  h2 {
+  h2, h3 {
     margin-top: 15px;
   }
 
@@ -20,7 +20,20 @@ layout: post
   }
 </style>
 
-<div id="stats-container"></div>
+<div id="stats-container">
+  <h2>Recipe Statistics</h2>
+  <p>Welcome to our recipe statistics page. Here, you'll find valuable insights into our collection of delicious recipes.</p>
+
+  <h3>Build Information</h3>
+  <p>This page was last updated on: <span id="build-time"></span></p>
+
+  <h2>Total Recipes</h2>
+  <p id="total-recipes"></p>
+
+  <h3>Tag Counts</h3>
+  <p>Explore the popularity of various tags among our recipes:</p>
+  <div id="tag-counts"></div>
+</div>
 
 <script>
   // Fetch data from your JSON endpoint
@@ -34,10 +47,15 @@ layout: post
 
   // Function to display stats on the page
   function displayStats(data) {
-    const statsContainer = document.getElementById('stats-container');
+    const buildTimeElement = document.getElementById('build-time');
+    const totalRecipesElement = document.getElementById('total-recipes');
+    const tagCountsElement = document.getElementById('tag-counts');
+
+    // Display build date and time
+    buildTimeElement.textContent = data.buildDateTime;
 
     // Display total recipe count
-    statsContainer.innerHTML += `<p>Total Recipes: ${data.recipeCount}</p>`;
+    totalRecipesElement.textContent = data.recipeCount;
 
     // Generate tag count per tag
     const tagCounts = {};
@@ -58,9 +76,8 @@ layout: post
     }
 
     // Display tag counts
-    statsContainer.innerHTML += '<h2>Tag Counts</h2>';
     for (const [tag, count] of Object.entries(tagCounts)) {
-      statsContainer.innerHTML += `<p>${tag}: ${count}</p>`;
+      tagCountsElement.innerHTML += `<p>${tag}: ${count}</p>`;
     }
   }
 </script>
