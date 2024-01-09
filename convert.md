@@ -219,10 +219,6 @@ if (cookTime !== '') {
 }
 
 markdown += `
-	
-`;
-	
-markdown += `
 ingredients:
 ${ingredientsMarkdown}
 
