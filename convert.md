@@ -76,13 +76,25 @@ title: Recipe Converter
             </div>
       
             <div>
-              <input type="url" id="recipe-img-credit" placeholder="https://www.example.com/image.jpg">
+              <input type="url" id="recipe-img-credit" placeholder="URL of souce if found online">
             </div>
       
             <div>
               <input type="text" id="recipe-tag" placeholder="One Really long tag">
             </div>
       
+            <div>
+              <input type="text" id="recipe-yield" placeholder="Recipe Yield/Servings">
+            </div>
+
+            <div>
+              <input type="text" id="recipe-prep-time" placeholder="Prep Time">
+            </div>
+
+            <div>
+              <input type="text" id="recipe-cook-time" placeholder="Cook Time">
+            </div>
+
             <div>
               <textarea placeholder="Ingredients one on each line" id="recipe-ingredients"></textarea>
             </div>
@@ -121,6 +133,10 @@ form.addEventListener('submit', (event) => {
   const tag = document.querySelector('#recipe-tag').value.trim();
   const ingredients = document.querySelector('#recipe-ingredients').value.trim();
   const directions = document.querySelector('#recipe-directions').value.trim();
+  const yieldValue = document.querySelector('#recipe-yield').value.trim();
+  const prepTime = document.querySelector('#recipe-prep-time').value.trim();
+  const cookTime = document.querySelector('#recipe-cook-time').value.trim();
+
 
 // ingredients Formatting Find and Replace
   const ingredientsWithLB = ingredients.replace(/ounce/gi, 'oz');
@@ -176,20 +192,39 @@ if (tag !== '') {
 `;
 }
 
+if (yieldValue !== '') {
+  markdown += `
+yield: ${yieldValue}
+`;
+}
+
+if (prepTime !== '') {
+  markdown += `
+preptime: ${prepTime}
+`;
+}
+
+if (cookTime !== '') {
+  markdown += `
+cooktime: ${cookTime}
+`;
+}
+
 markdown += `
 	
-`
+`;
 	
 markdown += `
 ingredients:
 ${ingredientsMarkdown}
 
 directions:
-${directionsMarkdown}`
+${directionsMarkdown}
+
+---`
 
 if (notes !== '') {
   markdown += `
----
 
 ${notes}`;
 }
