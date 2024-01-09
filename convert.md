@@ -74,13 +74,13 @@ title: Recipe Converter
             <div>
               <input type="text" id="recipe-tags" placeholder="Tag Tag1 Tag2">
             </div>
-      
-            <div>
-              <input type="url" id="recipe-img-credit" placeholder="URL of souce if found online">
-            </div>
-      
+            
             <div>
               <input type="text" id="recipe-tag" placeholder="One Really long tag">
+            </div>
+
+            <div>
+              <input type="url" id="recipe-img-credit" placeholder="URL of souce if found online">
             </div>
       
             <div>
