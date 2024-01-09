@@ -2,7 +2,7 @@
 layout: recipe
 title:  "Mushroom Risotto"
 image: mushroom-risotto.jpg
-tags: mains, veg
+tags: mains veg
 
 ingredients:
 - 10oz shitake mushrooms (we usually buy two 5oz grocery packages)

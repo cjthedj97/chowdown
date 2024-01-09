@@ -2,7 +2,7 @@
 layout: recipe
 title:  "Downtown Marinade"
 image: downtown-marinade.jpg
-tags: party, meat
+tags: party meat
 
 ingredients:
 - 1 cup Italian dressing

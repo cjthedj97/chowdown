@@ -2,7 +2,7 @@
 layout: recipe
 title:  "New York Strip"
 image: new-york-strip.jpg
-tags: mains, meat
+tags: mains meat
 
 ingredients:
 - NY Strip Steak(s)
