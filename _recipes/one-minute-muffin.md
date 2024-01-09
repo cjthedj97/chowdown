@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title:  "One Minute Muffin"
 image: one-minute-muffin.jpg
@@ -17,7 +16,6 @@ ingredients:
 directions:
 - Mix all ingredients in a coffee mug.
 - Micorowave for one minute on high.
-
 ---
 
 This flax muffin is quick, vertsatile (just mix in other goodies), and only makes one at a time, so you've got no huge tray to tempt you. Custom muffins every morning!

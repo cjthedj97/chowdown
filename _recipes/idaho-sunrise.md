@@ -21,5 +21,4 @@ directions:
 - Crack an egg into your hollowed potato.
 - Sprinkle with additional salt, pepper, cheese and chives on top.
 - Place on a baking sheet and bake for 20-30 minutes depending how runny you want your egg. (I baked ours for 28 minutes because I didn't want any gooey white and the yellow was almost completely solid.)
-
 ---

@@ -15,5 +15,4 @@ ingredients:
 
 directions:
 - Mix in a blender
-
 ---

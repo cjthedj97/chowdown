@@ -27,7 +27,6 @@ ingredients:
   - 2 teaspoons sugar
 
 directions:
-
 - Heat a pan over medium-high heat and add the vegetable oil and diced onions. Saute until softened. Remove and set aside.
 - In a large bowl, mix the ground beef, sauteed onions, egg, panko bread crumbs, milk, ketchup, Worcestershire, sea salt, pepper, and garlic. Mix well until it becomes a smooth texture.
 - Divide the patties into four sections and form into tight oval patties. Lightly oil hands for easier shaping. See Note 3.

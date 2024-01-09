@@ -22,7 +22,6 @@ directions:
 - Place potato wedges in a large bowl. Drizzle with olive oil and toss to coat. In a small bowl whisk together salt, garlic powder, and Italian seasoning. Sprinkle potato wedges with the shredded cheese, tossing to coat, then sprinkle with the seasoning mixture.
     
 - Place potato wedges on prepared baking sheet in a single layer with skin-sides-down. Bake for 25-35 minutes until potatoes are fork-tender and golden. Sprinkle with freshly chopped parsley and dressing for dipping.
-    
-
 ---
+
 Serve with your favorite dipping sauce.

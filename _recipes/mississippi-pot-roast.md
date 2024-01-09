@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title:  "Mississippi Pot Roast"
 image: mississippi-pot-roast.jpg
@@ -17,7 +16,6 @@ directions:
 - In your slow cooker, add the roast and top with both packet mixes, a stick of butter (sliced into a few chunks), and a jar of pepperoncini peppers (the more the better, drained)
 - Cook for 8 hours on low
 - Serve with salt & vinegar potatoes 
-
 ---
 
 This is the recipe that rocked reddit, coming our way via [Today](https://www.today.com/today/amp/tdna199419) (believe it or not). It takes just minutes with almost no prep (use a slow cooker liner for no cleanup), and the leftovers can be used for sandwiches or nachos or eggs. If you like a thicker gravy, combine the dripping with flour/starch, or just enjoy the thinner jus.

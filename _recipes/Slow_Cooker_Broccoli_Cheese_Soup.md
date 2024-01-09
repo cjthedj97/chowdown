@@ -23,8 +23,8 @@ directions:
 - Cook mixture, stirring constantly until it begins to thicken then pour into a slow cooker along with chicken broth, diced broccoli and thyme. Cover with lid and cook on low heat for 5 - 6 hours.
 - Turn heat to warm (or off) and stir in heavy cream, then add in shredded cheddar cheese and parmesan cheese and stir to blend. Season with salt and pepper to taste and serve warm.
 - From about 20 oz broccoli crowns, large stems cut off and discarded (or reserved for another use), florets diced into small pieces.
-
 ---
+
 Prep Time 15 minutes
 Cook Time 5 hours
 

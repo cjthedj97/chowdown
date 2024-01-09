@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title:  "Copy Cat Recipe - Applebee's Garlic Mashed Potatoes"
 imagecredit: https://www.budgetsavvydiva.com/2012/05/copy-cat-recipe-applebees-garlic-mashed-potatoes/

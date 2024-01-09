@@ -14,6 +14,6 @@ ingredients:
 
 directions:
 - Mix spices, herbs, salt and corn starch in small bowl until well blended. Set seasoning blend aside.
-
 ---
+
 [Source](https://www.mccormick.com/recipes/other/homemade-taco-seasoning)

@@ -27,7 +27,6 @@ directions:
 - Nestle bratwurst in the vegetables.
 - Roast in preheated oven for 35-40 minutes.
 - Serve bratwurst in the buns and top with the peppers and onions, if desired..
-
 ---
 
 Total Time: 55 min

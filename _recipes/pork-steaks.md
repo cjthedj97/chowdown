@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title:  "Pork Steaks"
 image: pork-steaks.jpg
@@ -15,7 +14,6 @@ directions:
 - Cut and portion the cold roast into individual steaks
 - Seal and save (fridge for 3 days, freezer for longer)
 - To serve, reheat in bag, sear in sourching hot pan
-
 ---
 
 Pork is called "the other white meat", but this sous vide technique is so dang good I'm gonna graduate it up to "THE white meat".

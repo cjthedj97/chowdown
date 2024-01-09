@@ -16,7 +16,6 @@ directions:
 - Add a full can or corn (a regular sized can) and the sour cream (1 cup).
 - Pour into a large glass baking dish and top with jalapeños.
 - Bake a few mins longer than the box says (we've added a lot of liquid).
-
 ---
 
 This corny cornbread pairs perfectly with chili or a bowl of stew. Add corn to the batter and you'll never go back.

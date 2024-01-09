@@ -6,7 +6,6 @@ imagecredit: https://www.foodnetwork.com/recipes/blackened-chicken-pasta-8556476
 yield: 4 to 6 servings
 cooktime: PT40m
 
-
 ingredients:
 - 1 pound penne
 - 1 tablespoon olive oil
@@ -27,7 +26,6 @@ directions:
 - Saute together while tossing occasionally for 2 minutes. 
 - Add heavy cream, Parmesan, Creole seasoning and noodles to chicken and vegetables and cook, stirring frequently to heat noodles and melt cheese. 
 - Taste and add more Creole seasoning until it's just right. If you are brave enough to toss all the ingredients in the pan, do it! 
-
 ---
 
 Featured in: Dinners Dinners Dives

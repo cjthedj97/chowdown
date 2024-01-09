@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title:  "Frito Pie Dip"
 image: Frito-Pie-Dip.webp

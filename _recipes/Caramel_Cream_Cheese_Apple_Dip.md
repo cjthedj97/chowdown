@@ -13,12 +13,10 @@ ingredients:
 - 2-3 Heath candy bars crushed (or use Heath toffee chips)
 - Serve With Granny Smith apples sliced
 
-
 directions:
 - Combine cream cheese and 1/2 of the caramel sauce in mixing bowl; beat until well-blended. Then mix in 1/2 cup of toffee chips to mixture.
 - Spoon cream cheese mixture into pretty serving dish.
 - Cover cream cheese with remaining caramel.
 - Sprinkle caramel with toffee chips.
 - Serve immediately with sliced granny smith apples.
-
 ---

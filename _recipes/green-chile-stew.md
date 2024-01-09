@@ -1,10 +1,9 @@
 ---
-
 layout: recipe
 title:  "Green Chile Stew"
 image: green-chile-stew.jpg
 imagecredit: https://flic.kr/p/4CJb65
-tags: sides, soups
+tags: sides soups
 
 ingredients:
 - 1 jar of [green chile stew mix](http://amzn.to/1KYXSjo)

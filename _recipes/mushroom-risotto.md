@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title:  "Mushroom Risotto"
 image: mushroom-risotto.jpg
@@ -29,8 +28,6 @@ directions:
 - Continue to add a ladle at a time, letting it fully absord while stirring, until the stock is gone or the rice is tender. Fair game to taste the rice a few times in search of the perfect tenderness.
 - Meanwhile, let's roast our other pack of fresh mushrooms. Get the remaining half on a sheet pan and under a 450° broiler. Keep an eye on them but cook til crispy and brown on the edges.
 - When the rice is tender and the mushrooms in the oven are crisp, stir your parmesan and remaining 2tbps butter into the rice. Plate your risotto and top with our roasted mushrooms, our herb, more parmesan, and a crack of black pepper.
-
-
 ---
 
 Risotto is one of those recipes that sound tough but really isn't that tricky (but is totally tasty). This recipe is a mash between a [Jamie Oliver](https://www.jamieoliver.com/recipes/rice-recipes/grilled-mushroom-risotto/) method and a [Tasty 101 video](https://tasty.co/recipe/mushroom-risotto). Jamie asked for dried mushrooms (proved to be hard to find and expensive here) and Tasty didn't have enough mushroom punch (so we added back the roasted topper). The best of both worlds, and easier than I've previously imagined! 

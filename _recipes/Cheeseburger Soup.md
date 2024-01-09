@@ -39,5 +39,4 @@ directions:
 - Remove from heat.
 - If desired blend in sour cream.
 - If desired can serve with onion rings and green onions/chives.
-
 ---

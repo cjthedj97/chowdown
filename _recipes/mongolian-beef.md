@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title:  "Mongolian Beef"
 image: mongolian-beef.jpg
@@ -24,7 +23,6 @@ directions:
 - Dissolve the brown sugar in the sauce, then raise the heat to medium and boil the sauce for 2-3 minutes or until the sauce thickens.
 - Remove from the heat, add beef back in. Toss
 - Serve with rice, top with green onions
-
 ---
 
 A quick go-to dinner. Can be made with almost any meat. I often used ground. Works perfect for lettuce wraps. Try replacing the onion with thinly sliced fennel.

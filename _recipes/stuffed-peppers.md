@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title:  "Stuffed Peppers"
 image: stuffed-peppers.jpg
@@ -19,7 +18,6 @@ directions:
 - if you are feeling spry, beat the mixture to make it fluffy
 - put filling in a plastic bag, snip of the tip with scissors to make a piping bag
 - fill peppers, place in bowl, top with chives and hot sauce
-
 ---
 
 We found these during Happy Hour at Chiso's Grill in Bee Cave, Tx. We've since tweaked the recipe a bit. This recipe is just a starting point, add/remove anything you want (like more hot sauce if you're into that).

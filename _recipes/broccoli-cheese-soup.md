@@ -1,9 +1,8 @@
 ---
-
 layout: recipe
 title:  "Broccoli Beer Cheese Soup"
 image: broccoli-beer-cheese-soup.jpg
-tags: sides, soups
+tags: sides soups
 
 ingredients:
 - 4 tablespoons butter
@@ -27,7 +26,6 @@ directions:
 - Add wine and reduce to a simmer
 - Add cream, cheese, Worcestershire, and hot sauce
 - Serve with croutons
-
 ---
 
 This recipe is inspired by one of my favorites, Gourmand's Beer Cheese Soup, which uses Shiner Bock. Feel free to use whatever you want, then go to [Gourmand's](http://lovethysandwich.com) to have the real thing.

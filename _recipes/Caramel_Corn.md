@@ -20,5 +20,4 @@ directions:
 - Pour over popped corn, stir to coat well.
 - Pour into shall pan & bake 1 hour at 200 degrees, stirring every 15 minutes.
 - Remove from the oven & spread out on foil to cool. Store in an airtight container or gallon baggies.
-
 ---

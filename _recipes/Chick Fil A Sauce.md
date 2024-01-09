@@ -15,7 +15,6 @@ directions:
 - Place all ingredients in a small bowl.
 - Stir to combine.
 - Refrigerate the sauce when not serving.
-
 ---
 
 This will stay fresh in the refrigerator for up to 10 days.

@@ -20,6 +20,5 @@ directions:
 - Cover and refrigerate for at least thirty minutes.
 - For cut-outs style roll chilled dough onto a lightly floured surface to about 1/4 inch thick. Cut out desired shapes and place 2" apart on an ungreased cookie sheet. Bake in a preheated 375 degree oven for 7-8 minutes. Allow to cool a couple of minutes before transferring to a wire rack to cool completely.
 - For drop cookie style using your hands or a cookie scoop, roll dough into two inch balls. Roll in granulated sugar or dip in sprinkles (optional) and place on a cookie sheet about 2-inches apart. Press down lightly with the palm of your hand. Bake in a preheated 375 degree oven for 7-8 minutes. Allow to cool a couple of minutes before transferring to a wire rack to cool completely. Frost with your favorite icing recipe.
-
 ---
 If you don't have cream of tartar on hand you can replace the last three ingredients (flour, baking soda, cream of tartar) with self rising flour.

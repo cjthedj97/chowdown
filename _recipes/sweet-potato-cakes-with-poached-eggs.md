@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title: "Sweet potato cakes with poached eggs"
 image: sweet-potato-cakes-with-poached-eggs.jpg
@@ -23,7 +22,6 @@ directions:
 - poach the eggs for 2-3 mins, the yolks should be runny. Drain on kitchen paper.
 - spread some harissa in the middle of four serving plates and top with a dollop of yogurt. Add one potato cake on top with more yogurt. Top each stack with the remaining yogurt and an egg.
 - Season and drizzle with more harissa and scatter over the herbs.
-
 ---
 
 Source: [BBC Good Food](https://www.bbcgoodfood.com/recipes/sweet-potato-harissa-cakes-poached-eggs)

@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title:  "Green Spaghetti"
 image: green-spaghetti.jpg

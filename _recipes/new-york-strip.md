@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title:  "New York Strip"
 image: new-york-strip.jpg
@@ -14,7 +13,6 @@ directions:
 - Pull from the bag, pat dry
 - Sear in a scorching hot pan (butter + herb optional)
 - Slice on a bias and sprinkle with sea salt
-
 ---
 
 Cooking a steak in a water bath is the ultimate, both in terms of flavor and laziness. Dial in a precise temperature, then go take a nap.

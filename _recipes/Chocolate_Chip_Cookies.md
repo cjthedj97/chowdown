@@ -19,6 +19,5 @@ directions:
 - Then add eggs
 - Add salt, backing soda, and flour.
 - Mix them and add choc chips.
-
 ---
 Flour Is key to fluffy cookies

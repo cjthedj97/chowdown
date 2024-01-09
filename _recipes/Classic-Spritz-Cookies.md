@@ -13,7 +13,6 @@ ingredients:
 - 3½ cups (875 mL) all-purpose flour
 - Colored sugar or sprinkles (optional)
 
-
 directions:
 - Preheat the oven to 375°F/190°C. In a large mixing bowl, beat the butter and sugar on medium speed of the electric mixer about 3 minutes or until creamy, scraping down the sides as necessary. Add the egg and vanilla; beat well. Add the flour; mix on low speed just until blended, scraping down the sides as necessary. (The dough will be soft; do not refrigerate.)
 - Fit the Cookie Press with the desired disk (see Cook's Tip) and fill it with the dough. Press the dough onto the Cookie Sheet 1" (2.5 cm) apart. Decorate the cookies with colored sugar or sprinkles, if desired. Bake 10-12 minutes or until the edges are light golden brown. Cool the cookies 2 minutes on the Cookie Sheet, then remove to the Stackable Cooling Rack. Repeat with the remaining dough.

@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title:  "Brownie Frosting"
 
@@ -17,6 +16,5 @@ directions:
 - Gradually add the chocolate and butter mixture.
 - Add water a little at a time and beat until smooth and creamy.
 - Stir in Vanilla
-
 ---
 Yeilds 1 cup of frosting

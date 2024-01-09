@@ -31,7 +31,6 @@ directions:
 - Fillet open the chicken thighs, making them as thin as possible. Stack the chicken vertically on a skewer, pushing it down as you go to make it as tight as possible.
 - Place the chicken on a baking sheet and bake until golden brown, about 10 minutes per side. Slice the chicken into thin pieces and serve with Zaytoon Garlic Sauce.
 - Add the potatoes, mayonnaise, garlic, lemon salt, 1 tablespoon kosher salt and 1 cup ice to a 20-cup food processor. Process until smooth and creamy.
-
 ---
 
 Yields: 10 serving(s)

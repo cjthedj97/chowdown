@@ -1,10 +1,9 @@
 ---
-
 layout: recipe
 title:  "Banana Bread"
 image: banana-bread.jpg
 imagecredit: https://flic.kr/p/7HZmzn
-tags: breakfast, baking
+tags: breakfast baking
 
 ingredients:
 - 4 bananas
@@ -22,7 +21,6 @@ directions:
 - Mix in bananas, then flour, baking soda/powder, salt, and nuts
 - Add to greased and floured pan
 - Bake until brown/cracked, toothpick comes out clean
-
 ---
 
 From Angie's mom

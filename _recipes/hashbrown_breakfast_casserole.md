@@ -25,7 +25,6 @@ directions:
 - Place remaining ingredients in a 9x13 baking pan. Pour egg mixture over the mixture and top with remaining cheese.
 - Cover and refrigerate overnight if desired.
 - Bake 55-65 minutes or until cooked through.
-
 ---
 
 If casserole is refrigerated overnight, remove from fridge 30 minutes before baking. It may require an extra 10-15 minutes cook time.

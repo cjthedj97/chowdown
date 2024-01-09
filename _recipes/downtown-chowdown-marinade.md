@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title:  "Downtown Marinade"
 image: downtown-marinade.jpg

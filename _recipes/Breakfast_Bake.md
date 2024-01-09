@@ -14,7 +14,7 @@ directions:
 - Brown sausage & sprinkle over crescent rolls.
 - Mix eggs & pour over sausage. 
 - Put cheese on top. Bake at 350 for 15-25 minutes or until eggs are set. 
-
 ---
+
 This can be made the night before & baked the next morning. 
 Can be cut in half for my family of 4.

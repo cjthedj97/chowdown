@@ -17,6 +17,5 @@ directions:
 - With a hand mixer, cream cheese, and butter. Add vanilla and mix to combine. Add sugars and mix until incorporated.
 - Stir in chocolate chips and Heath chunks.
 - Serve with sliced apples, Biscoff cookies, or favorite cookies.
-
 ---
 Don't leave out at room temperature for longer than 2 hours.

@@ -17,5 +17,4 @@ directions:
 - Using knife or metal spatula, gently swirl together melted candies to cover the entire surface of brownies. 
 - Cool 2 hours or until slightly set. 
 - Cut into bars.
-
 ---

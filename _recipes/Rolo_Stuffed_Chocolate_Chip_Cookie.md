@@ -24,7 +24,6 @@ directions:
 - Place Rolo stuffed dough balls into the freezer for 15-20 minutes before baking.
 - On cookie sheet lined with parchment paper or a silicone baking mat, place dough balls 2 inches apart.
 - Bake 11 to 13 minutes or until light brown (centers will be soft). Cool 2 minutes; remove from cookie sheet to cooling rack.
-
 ---
 
 [Source](https://www.keyingredient.com/recipes/853675047/rolo-stuffed-chocolate-chip-cookie/)
