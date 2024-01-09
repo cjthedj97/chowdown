@@ -4,15 +4,14 @@ layout: post
 
   <h1>Recipe Statistics</h1>
   <p>Welcome to our recipe statistics page. Here, you'll find valuable insights into our collection of delicious recipes.</p>
+ 
+  <hr> 
 
-  <h2>Total Recipes</h2>
-  <p id="total-recipes"></p>
+  <h2>Total Recipes: <span id="total-recipe"></span></h2>
 
-  <h3>Build Information</h3>
-  <p>This page was last updated on: <span id="build-time"></span></p>
+  <p class="right">This page was last updated on: <span id="build-time"></span></p>
 
-  <h3>Tag Counts</h3>
-  <p>Explore the popularity of various tags among our recipes:</p>
+  <h3>Explore the popularity of various tags among our recipes:</h3>
   <div id="tag-counts"></div>
 
 <script>
