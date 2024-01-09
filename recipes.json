@@ -4,7 +4,7 @@ layout: null
 {% assign recipeCounter = 1 %}
 {% assign tagCounter = 1 %}
 {% assign totalRecipes = site.recipes | size %}
-{% assign totalTags = site.tags | size %}
+{% assign totalTags = site.recipes.tags | size %}
 
 {
   "recipeCount": {{ totalRecipes }},
@@ -13,7 +13,7 @@ layout: null
     {% for post in site.recipes %}
         {
             "title": "{{ post.title }}",
-            "image": "{{ site.baseurl }}/images/{{ post.image }}"
+            "tags": [{% for tag in recipes.tags %}"{{ tag }}"{% if forloop.last %}{% else %},{% endif %}{% endfor %}]
         }{% if recipeCounter == totalRecipes %}{% else %},{% endif %}
     {% assign recipeCounter = recipeCounter | plus: 1 %}
     {% endfor %}
