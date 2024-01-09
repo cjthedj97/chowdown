@@ -2,7 +2,7 @@
 layout: null
 ---
 {% assign recipeCounter = 1 %}
-{% assign tagCounter = 1 %}
+{% assign tagCounter = 0 %}
 {% assign totalRecipes = site.recipes | size %}
 {% assign totalTags = site.tags | size %}
 
@@ -15,8 +15,8 @@ layout: null
             "title": "{{ post.title }}",
             "tags": [{% for tag in post.tags %}"{{ tag }}"{% if forloop.last %}{% else %},{% endif %}{% endfor %}]
         }{% if recipeCounter == totalRecipes %}{% else %},{% endif %}
-    {% assign recipeCounter = recipeCounter | plus: 1 %}
-    {% assign tagCounter = tagCounter | plus: post.tags | size %}
+        {% assign recipeCounter = recipeCounter | plus: 1 %}
+        {% assign tagCounter = tagCounter | plus: post.tags | uniq | size %}
     {% endfor %}
   ]
 }
