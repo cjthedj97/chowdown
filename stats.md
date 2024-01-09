@@ -7,9 +7,9 @@ layout: post
  
   <hr> 
 
-  <h2>Total Recipes: <span id="total-recipe"></span></h2>
+  <h2>Total Recipes: <span id="total-recipes"></span></h2>
 
-  <p class="right">This page was last updated on: <span id="build-time"></span></p>
+  <p>This page was last updated on: <span id="build-time"></span></p>
 
   <h3>Explore the popularity of various tags among our recipes:</h3>
   <div id="tag-counts"></div>
