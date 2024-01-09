@@ -88,15 +88,13 @@ title: Recipe Converter
             </div>
 
             <div>
-              <label for="recipe-prep-hours">Prep Time:</label>
-              <input type="number" id="recipe-prep-hours" placeholder="Hours" min="1" max="24">
-              <input type="number" id="recipe-prep-minutes" placeholder="Minutes" min="1" max="60">
+              <input type="number" id="recipe-prep-hours" placeholder="Prep Time: Hours" min="1" max="24">
+              <input type="number" id="recipe-prep-minutes" placeholder="Prep Time: Minutes" min="1" max="60">
             </div>
 
             <div>
-              <label for="recipe-cook-hours">Cook Time:</label>
-              <input type="number" id="recipe-cook-hours" placeholder="Hours" min="1" max="24">
-              <input type="number" id="recipe-cook-minutes" placeholder="Minutes" min="1" max="60">
+              <input type="number" id="recipe-cook-hours" placeholder="Cook Time: Hours" min="1" max="24">
+              <input type="number" id="recipe-cook-minutes" placeholder="Cook Time: Minutes" min="1" max="60">
             </div>
 
             <div>
