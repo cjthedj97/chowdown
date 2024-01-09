@@ -88,11 +88,15 @@ title: Recipe Converter
             </div>
 
             <div>
-              <input type="text" id="recipe-prep-time" placeholder="Prep Time">
+              <label for="recipe-prep-hours">Prep Time:</label>
+              <input type="number" id="recipe-prep-hours" placeholder="Hours" min="1" max="24">
+              <input type="number" id="recipe-prep-minutes" placeholder="Minutes" min="1" max="60">
             </div>
 
             <div>
-              <input type="text" id="recipe-cook-time" placeholder="Cook Time">
+              <label for="recipe-cook-hours">Cook Time:</label>
+              <input type="number" id="recipe-cook-hours" placeholder="Hours" min="1" max="24">
+              <input type="number" id="recipe-cook-minutes" placeholder="Minutes" min="1" max="60">
             </div>
 
             <div>
@@ -134,8 +138,10 @@ form.addEventListener('submit', (event) => {
   const ingredients = document.querySelector('#recipe-ingredients').value.trim();
   const directions = document.querySelector('#recipe-directions').value.trim();
   const yieldValue = document.querySelector('#recipe-yield').value.trim();
-  const prepTime = document.querySelector('#recipe-prep-time').value.trim();
-  const cookTime = document.querySelector('#recipe-cook-time').value.trim();
+  const prepHours = document.querySelector('#recipe-prep-hours').value.trim();
+  const prepMinutes = document.querySelector('#recipe-prep-minutes').value.trim();
+  const cookHours = document.querySelector('#recipe-cook-hours').value.trim();
+  const cookMinutes = document.querySelector('#recipe-cook-minutes').value.trim();
 
 
 // ingredients Formatting Find and Replace
@@ -192,13 +198,18 @@ if (tag !== '') {
 `;
 }
 
-if (yieldValue !== '') {
-  markdown += `yield: ${yieldValue}
+
+if (prepHours !== '' || prepMinutes !== '') {
+  const prepTimeFormatted = `PT${prepHours !== '' ? prepHours + 'h' : ''}${prepMinutes !== '' ? prepMinutes + 'm' : ''}`;
+  markdown += `
+preptime: ${prepTimeFormatted}
 `;
 }
 
-if (prepTime !== '') {
-  markdown += `preptime: ${prepTime}
+if (cookHours !== '' || cookMinutes !== '') {
+  const cookTimeFormatted = `PT${cookHours !== '' ? cookHours + 'h' : ''}${cookMinutes !== '' ? cookMinutes + 'm' : ''}`;
+  markdown += `
+cooktime: ${cookTimeFormatted}
 `;
 }
 
