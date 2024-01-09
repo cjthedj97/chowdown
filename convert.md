@@ -193,20 +193,17 @@ if (tag !== '') {
 }
 
 if (yieldValue !== '') {
-  markdown += `
-yield: ${yieldValue}
+  markdown += `yield: ${yieldValue}
 `;
 }
 
 if (prepTime !== '') {
-  markdown += `
-preptime: ${prepTime}
+  markdown += `preptime: ${prepTime}
 `;
 }
 
 if (cookTime !== '') {
-  markdown += `
-cooktime: ${cookTime}
+  markdown += `cooktime: ${cookTime}
 `;
 }
 
