@@ -112,6 +112,7 @@ title: Recipe Converter
             <button type="submit">Convert</button>
             <button onclick="location.href='mailto:recipes@saathoff.us?subject=Recipe Submission&body=' + encodeURIComponent(document.getElementById('bottom-column').innerHTML)">Send Email</button>
             <button id="copy-button">Copy to clipboard</button>
+            <button type="button" onclick="clearForm()">Clear</button>
 
           </form>
 
@@ -120,6 +121,29 @@ title: Recipe Converter
 </div>
 	
 <div class="bottom-column" id="bottom-column"></div>
+
+<script>
+  // ... (existing code)
+
+  function clearForm() {
+    // Reset all input fields
+    document.querySelector('#recipe-name').value = '';
+    document.querySelector('#recipe-tags').value = '';
+    document.querySelector('#recipe-img-credit').value = '';
+    document.querySelector('#recipe-tag').value = '';
+    document.querySelector('#recipe-ingredients').value = '';
+    document.querySelector('#recipe-directions').value = '';
+    document.querySelector('#recipe-notes').value = '';
+    document.querySelector('#recipe-prep-hours').value = '';
+    document.querySelector('#recipe-prep-minutes').value = '';
+    document.querySelector('#recipe-cook-hours').value = '';
+    document.querySelector('#recipe-cook-minutes').value = '';
+    document.querySelector('#recipe-yield').value = '';
+
+    // Clear the output
+    document.querySelector('.bottom-column').innerHTML = '';
+  }
+</script>
 
 <script>
 const form = document.querySelector('#recipe-form');
