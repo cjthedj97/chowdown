@@ -23,20 +23,26 @@ function displayStats(data) {
 
     // Generate tag count per tag
     const tagCounts = {};
-    data.recipesWithTags.forEach(recipe => {
-        recipe.tags.forEach(tag => {
-            tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+    
+    // Check if the 'recipes' property exists
+    if (data.recipes) {
+        data.recipes.forEach(recipe => {
+            // Check if the 'tags' property exists
+            if (recipe.tags && recipe.tags.length > 0) {
+                recipe.tags.forEach(tag => {
+                    tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+                });
+            } else {
+                // Increment count for untagged recipes
+                tagCounts['Untagged'] = (tagCounts['Untagged'] || 0) + 1;
+            }
         });
-    });
+    }
 
     // Display tag counts
     statsContainer.innerHTML += '<h2>Tag Counts</h2>';
     for (const [tag, count] of Object.entries(tagCounts)) {
         statsContainer.innerHTML += `<p>${tag}: ${count}</p>`;
     }
-
-    // Display count for untagged recipes
-    const untaggedCount = data.totalRecipesWithTags - data.tagCount;
-    statsContainer.innerHTML += `<p>Untagged: ${untaggedCount}</p>`;
 }
 </script>
