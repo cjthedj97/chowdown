@@ -178,7 +178,8 @@ form.addEventListener('submit', (event) => {
 	
 let markdown = `---
 layout: recipe
-title: "${name}"`
+title: "${name}"
+`
 
 if (tags !== '') {
   markdown += `
@@ -199,15 +200,13 @@ if (tag !== '') {
 
 if (prepHours !== '' || prepMinutes !== '') {
   const prepTimeFormatted = `PT${prepHours !== '' ? prepHours + 'h' : ''}${prepMinutes !== '' ? prepMinutes + 'm' : ''}`;
-  markdown += `
-preptime: ${prepTimeFormatted}
+  markdown += `preptime: ${prepTimeFormatted}
 `;
 }
 
 if (cookHours !== '' || cookMinutes !== '') {
   const cookTimeFormatted = `PT${cookHours !== '' ? cookHours + 'h' : ''}${cookMinutes !== '' ? cookMinutes + 'm' : ''}`;
-  markdown += `
-cooktime: ${cookTimeFormatted}
+  markdown += `cooktime: ${cookTimeFormatted}
 `;
 }
 
@@ -217,7 +216,6 @@ ${ingredientsMarkdown}
 
 directions:
 ${directionsMarkdown}
-
 ---`
 
 if (notes !== '') {
