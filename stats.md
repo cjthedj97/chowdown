@@ -2,20 +2,18 @@
 layout: post
 ---
 
-<div id="stats-container">
-  <h2>Recipe Statistics</h2>
+  <h1>Recipe Statistics</h1>
   <p>Welcome to our recipe statistics page. Here, you'll find valuable insights into our collection of delicious recipes.</p>
-
-  <h3>Build Information</h3>
-  <p>This page was last updated on: <span id="build-time"></span></p>
 
   <h2>Total Recipes</h2>
   <p id="total-recipes"></p>
 
+  <h3>Build Information</h3>
+  <p>This page was last updated on: <span id="build-time"></span></p>
+
   <h3>Tag Counts</h3>
   <p>Explore the popularity of various tags among our recipes:</p>
   <div id="tag-counts"></div>
-</div>
 
 <script>
   // Fetch data from your JSON endpoint
