@@ -211,11 +211,6 @@ cooktime: ${cookTimeFormatted}
 `;
 }
 
-if (cookTime !== '') {
-  markdown += `cooktime: ${cookTime}
-`;
-}
-
 markdown += `
 ingredients:
 ${ingredientsMarkdown}
