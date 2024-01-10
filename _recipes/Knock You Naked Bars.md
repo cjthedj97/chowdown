@@ -2,7 +2,7 @@
 layout: recipe
 title: "Knock You Naked Bars"
 image: Knock-You-Naked-Bars.jpg
-tags:dessert
+tags: dessert
 imagecredit: https://www.julieseatsandtreats.com/knock-you-naked-bars/
 preptime: PT20m
 cooktime: PT30m
