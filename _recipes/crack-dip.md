@@ -2,7 +2,7 @@
 layout: recipe
 title: "Crack Dip"
 image: crack-dip.jpg
-tags:party
+tags: party
 imagecredit: https://www.julieseatsandtreats.com/crack-dip/
 preptime: PT10m
 cooktime: PT10m
