@@ -1,6 +1,6 @@
 ---
 layout: recipe
-title: "CopyKat Recipe - Sonic Onion Rings"
+title: "CopyKat Sonic Onion Rings"
 image: sonic-onion-ring.jpg
 imagecredit: https://copykat.com/original-sonic-onion-ring-recipe/
 yield: 4 Servings

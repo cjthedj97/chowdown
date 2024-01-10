@@ -1,6 +1,6 @@
 ---
 layout: recipe
-title: "CopyKat Recipe - Cracker Barrel Meatloaf"
+title: "CopyKat Cracker Barrel Meatloaf"
 image: Cracker-Barrel-meatloaf.jpg
 imagecredit: https://copykat.com/cracker-barrel-meatloaf/
 preptime: PT10m

@@ -1,6 +1,6 @@
 ---
 layout: recipe
-title: "CopyKat Recipe - Wendy’s Chili"
+title: "CopyKat Wendy’s Chili"
 image: Wendys-Chili.jpg
 imagecredit: https://copykat.com/wendys-chili-2/
 yield: 10 servings

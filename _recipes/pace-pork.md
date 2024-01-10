@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title:  "Pace Pork"
 image: pace-pork.jpg

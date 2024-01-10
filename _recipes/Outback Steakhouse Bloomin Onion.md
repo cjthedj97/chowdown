@@ -1,6 +1,6 @@
 ---
 layout: recipe
-title: "CopyKat Recipe - Outback Steakhouse Bloomin Onion"
+title: "CopyKat Outback Steakhouse Bloomin Onion"
 image: Outback-Bloomin-Onion.jpg
 imagecredit: https://copykat.com/outback-steakhouse-bloomin-onion/
 preptime: PT30m

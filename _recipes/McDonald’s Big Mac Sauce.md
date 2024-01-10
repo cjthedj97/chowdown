@@ -1,6 +1,6 @@
 ---
 layout: recipe
-title: "CopyKat Recipe - McDonald’s Big Mac Sauce"
+title: "CopyKat McDonald’s Big Mac Sauce"
 
 ingredients:
 - 1 cup Mayonnaise

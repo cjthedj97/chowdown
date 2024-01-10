@@ -1,6 +1,6 @@
 ---
 layout: recipe
-title: "CopyKat Recipes - Chili’s Baked Potato Soup"
+title: "CopyKat Chili’s Baked Potato Soup"
 tags: American Soup
 image: Chilis-Baked-Potato-Soup.jpg
 imagecredit: https://copykat.com/chilis-baked-potato-soup/

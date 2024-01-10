@@ -1,6 +1,6 @@
 ---
 layout: recipe
-title: CopyKat Recipe - Better Than KFC Coleslaw
+title: CopyKat Better Than KFC Coleslaw
 image: KFC-Cole-Slaw.jpg
 imagecredit: https://copykat.com/better-than-kfc-cole-slaw/
 yield: 10 Servings

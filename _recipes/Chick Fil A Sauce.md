@@ -1,6 +1,6 @@
 ---
 layout: recipe
-title: "CopyKat Recipe - Chick Fil A Sauce"
+title: "CopyKat Chick Fil A Sauce"
 imagecredit: https://copykat.com/wp-content/uploads/2021/03/Chick-Fil-A-Sauce-Photo-2.jpg
 
 ingredients:

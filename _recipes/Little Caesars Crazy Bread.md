@@ -1,6 +1,6 @@
 ---
 layout: recipe
-title: "CopyKat Recipes - Little Caesars Crazy Bread"
+title: "CopyKat Little Caesars Crazy Bread"
 image: Little-Caesars-Crazy-Bread.jpg
 imagecredit: https://copykat.com/little-caesars-crazy-bread/
 yield: 6 Servings

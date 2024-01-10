@@ -1,7 +1,11 @@
 ---
 layout: recipe
-title: "CopyKat Recipe - Arby’s Sauce"
-imagecredit: https://copykat.com/wp-content/uploads/2023/08/Arbys-Sauce-Pin-2.jpg
+title: "CopyKat Arby’s Sauce"
+image: Arbys-Sauce.jpg
+imagecredit: https://copykat.com/arbys-sauce/
+yield: 10 Servings
+preptime: PT10m
+cooktime: PT10m
 
 ingredients:
 - cup ketchup
@@ -22,5 +26,3 @@ directions:
 - When sauce begins to thicken, let it simmer on a very low temperature for 10 minutes. Remove from the heat and let cool. The sauce should be similar in thickness to steak sauce.
 - Store in a covered container in the refrigerator and serve with hamburgers, pastrami, or hot wings
 ---
-
-[Source](https://copykat.com/arbys-sauce/)

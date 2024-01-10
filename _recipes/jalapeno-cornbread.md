@@ -1,5 +1,4 @@
 ---
-
 layout: recipe
 title:  "Jalapeno Cornbread"
 image: jalapeno-cornbread.jpg
