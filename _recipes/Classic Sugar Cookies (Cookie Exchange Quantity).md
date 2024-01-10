@@ -1,7 +1,7 @@
 ---
 layout: recipe
 title: "Classic Sugar Cookies (Cookie Exchange Quantity)"
-image: Classic-Sugar-Cookies-(Cookie-Exchange-Quantity).jpeg
+image: Classic-Sugar-Cookies-Cookie-Exchange-Quantity.jpeg
 imagecredit: https://www.bettycrocker.com/recipes/classic-sugar-cookies-cookie-exchange-quantity/959da0a0-0190-455f-b1e3-fa05032848c0
 preptime: PT2h
 
