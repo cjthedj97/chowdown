@@ -2,7 +2,7 @@
 layout: recipe
 title:  "Nilla Wafer French Toast"
 image: nilla-wafer.jpg
-tags: breakfast, baking
+tags: breakfast baking
 
 ingredients:
 - 4 eggs
