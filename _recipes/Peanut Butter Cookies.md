@@ -2,6 +2,7 @@
 layout: recipe
 title: "Peanut Butter Cookies"
 yield: 3 dozen cookies
+tags: dessert
 
 ingredients:
 - ½ cup shortening (half butter or margarine, softened)
@@ -19,6 +20,4 @@ directions:
 - Cover and chill. Heat oven to 375°.
 - Shape dough into 1" balls. Place 3" apart on lightly greased baking sheet. 
 - With fork dipped in flour, flatten in crisscross pattern to 2". Bake 10-12 min. or until set but not hard.
-
-
 ---
