@@ -2,7 +2,7 @@
 layout: recipe
 title: "Cherry Chocolate Kisses (revised version)"
 yield: 36 cookies
-tags:dessert
+tags: dessert
 
 ingredients:
 - 1 cup unsalted butter, softened, but still cool***** very important!
