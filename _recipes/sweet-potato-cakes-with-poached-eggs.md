@@ -2,7 +2,7 @@
 layout: recipe
 title: "Sweet potato cakes with poached eggs"
 image: sweet-potato-cakes-with-poached-eggs.jpg
-tags: fancy, vegetarian
+tags: fancy vegetarian
 
 ingredients:
 - 4 eggs + 4 egg whites

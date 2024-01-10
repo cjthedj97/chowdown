@@ -3,7 +3,7 @@ layout: recipe
 title: "Hashbrown Breakfast Casserole"
 image: Hashbrown-Breakfast-Casserole.jpg
 imagecredit: https://www.spendwithpennies.com/hashbrown-breakfast-casserole/
-tags: potato, eggs, cheese, breakfast
+tags: potato eggs cheese breakfast
 
 ingredients:
 - 20 ounces shredded hash browns thawed
