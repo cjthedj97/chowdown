@@ -1,7 +1,8 @@
 ---
 layout: recipe
 title: "CopyKat Chick Fil A Sauce"
-imagecredit: https://copykat.com/wp-content/uploads/2021/03/Chick-Fil-A-Sauce-Photo-2.jpg
+image: Chick-Fil-A-Sauce.jpg
+imagecredit: https://copykat.com/chick-fil-a-sauce/
 
 ingredients:
 - 2 tablespoons honey
@@ -18,5 +19,3 @@ directions:
 ---
 
 This will stay fresh in the refrigerator for up to 10 days.
-
-[Source](https://copykat.com/chick-fil-a-sauce/)
