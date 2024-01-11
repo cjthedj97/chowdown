@@ -1,7 +1,6 @@
 ---
 layout: null
 ---
-
 {% assign recipeCounter = 1 %}
 {% assign totalRecipes = site.recipes | size %}
 {% assign buildDateTime = site.time | date_to_xmlschema %}
