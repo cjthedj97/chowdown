@@ -4,8 +4,6 @@ title:  "Frequently Asked Questions"
 permalink: /FAQ
 ---
 
-<!DOCTYPE html>
-
 <head>
 <style>
 .collapsible {
