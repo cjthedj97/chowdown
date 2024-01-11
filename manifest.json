@@ -5,6 +5,7 @@ layout: none
 {
     "name": "Saathoff Recipes",
     "short_name": "Recipes",
+    "icons": [
     {
       "src": "icons/SmallTile.scale-100.png",
       "sizes": "71x71"
