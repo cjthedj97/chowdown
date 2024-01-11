@@ -3,7 +3,7 @@ layout: recipe
 title: "Mixed Vegetable Casserole"
 
 ingredients:
-- 1 large mixed vegetables, cooked and drained
+- 1 large 16 Oz pkg mixed vegetables, cooked and drained
 - 1 can cream of mushroom soup
 - ½ 8oz package processed loaf cheese, cut cubed
 - ¾ cup margarine, melted
