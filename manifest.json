@@ -458,7 +458,7 @@ layout: none
     "theme_color": "{{ site.color }}",
     "background_color": "#FFFFFF",
     "start_url": "https://recipes.saathoff.us",
-    "display": "fullscreen",
+    "display": "standalone",
     "description": "The Saathoff Family Recipe Database",
     "dir": "auto",
     "scope": "https://recipes.saathoff.us",
