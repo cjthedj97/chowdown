@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Recipe Converter
+permalink: /convert
 ---
 
 <head>

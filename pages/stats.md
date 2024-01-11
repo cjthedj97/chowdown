@@ -1,5 +1,6 @@
 ---
 layout: post
+permalink: /stats
 ---
 
   <h1>Recipe Statistics</h1>

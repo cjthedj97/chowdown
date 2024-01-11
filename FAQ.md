@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Frequently Asked Questions"
+permalink: /FAQ
 ---
 
 ### What is this site for?
