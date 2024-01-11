@@ -1,40 +1,31 @@
 const CACHE_NAME = 'pwabuilder-offline';
-const offlineFallbackPage = "offline";
+const offlineFallbackPage = 'offline.html';
 
 // Install stage sets up the index page (home page) in the cache and opens a new cache
-self.addEventListener("install", function (event) {
-  console.log("Install Event processing");
+self.addEventListener('install', function (event) {
+  console.log('Install Event processing');
 
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
-      console.log("Cached offline page during install");
-
-      if (offlineFallbackPage === "ToDo-replace-this-name.html") {
-        return cache.add(new Response("Update the value of the offlineFallbackPage constant in the serviceworker."));
-      }
-
-      return cache.add(offlineFallbackPage);
+      console.log('Cached offline page during install');
+      return cache.addAll([offlineFallbackPage]); // Ensure offline page is added to cache
     })
   );
 });
 
 // If any fetch fails, it will look for the request in the cache and serve it from there first
-self.addEventListener("fetch", function (event) {
-  if (event.request.method !== "GET") return;
+self.addEventListener('fetch', function (event) {
+  if (event.request.method !== 'GET') return;
 
   event.respondWith(
     fetch(event.request)
       .then(function (response) {
-        console.log("Add page to offline cache: " + response.url);
-
         // If request was success, add or update it in the cache
         event.waitUntil(updateCache(event.request, response.clone()));
-
         return response;
       })
-      .catch(function (error) {        
-        console.log("Network request Failed. Serving content from cache: " + error);
-        return fromCache(event.request);
+      .catch(function () { // Network request Failed. Serve content from cache or offline page
+        return fromCache(event.request).catch(() => caches.match(offlineFallbackPage));
       })
   );
 });
@@ -48,7 +39,6 @@ function fromCache(request) {
       if (!matching || matching.status === 404) {
         return Promise.reject("no-match");
       }
-
       return matching;
     });
   });
