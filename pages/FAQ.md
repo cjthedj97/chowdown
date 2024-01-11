@@ -18,7 +18,7 @@ permalink: /FAQ
   font-size: 1.75rem;
 }
 
-.active, .collapsible:hover {
+.collapsible:hover {
   background-color: #007bffcc;
 }
 
