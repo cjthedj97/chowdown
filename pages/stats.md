@@ -17,7 +17,7 @@ permalink: /stats
 
 <script>
   // Fetch data from your JSON endpoint
-  fetch('{{ "/recipes.json" | relative_url }}')
+  fetch('{{ "/recipes.json" }}')
     .then(response => response.json())
     .then(data => {
       // Process and display the data on the stats page
