@@ -1,4 +1,9 @@
-<!-- offline.html -->
+---
+layout: null
+title: Offline Page
+permalink: /offline
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

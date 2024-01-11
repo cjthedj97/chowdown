@@ -22,7 +22,7 @@
   <meta name="msapplication-TileColor" content="#007fff">
   <meta name="msapplication-config" content="{{ site.baseurl }}/icons/browserconfig.xml">
   <meta name="theme-color" content="#007fff">
-  
+
 <script>
     if ("serviceWorker" in navigator) {
     if (navigator.serviceWorker.controller) {
@@ -30,7 +30,7 @@
     } else {
       // Register the service worker
       navigator.serviceWorker
-        .register("{{ site.baseurl }}/serviceworker.js", {
+        .register("{{ site.baseurl }}/js/serviceworker.js", {
           scope: "./"
         })
         .then(function (reg) {

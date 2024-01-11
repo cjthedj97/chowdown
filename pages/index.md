@@ -1,5 +1,7 @@
 ---
 layout: default
+permalink: /
+
 ---
 
   <div class="search container max-width-2">
@@ -16,7 +18,7 @@ layout: default
 </div>
 
 <!-- Script pointing to search-script.js -->
-<script src="{{site.baseurl}}/plugins/simple-jekyll-search.min.js" type="text/javascript"></script>
+<script src="{{site.baseurl}}/js/simple-jekyll-search.min.js" type="text/javascript"></script>
 
 <!-- Configuration -->
 <script>
@@ -37,4 +39,3 @@ SimpleJekyllSearch({
 	});
 	
 </script>
-
