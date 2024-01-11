@@ -1,5 +1,4 @@
-const CACHE_VERSION = 'v1';
-const CACHE_NAME = 'pwabuilder-offline-' + CACHE_VERSION;
+const CACHE_NAME = 'pwabuilder-offline';
 
 const offlineFallbackPage = "offline.html";
 
@@ -8,7 +7,7 @@ self.addEventListener("install", function (event) {
   console.log("Install Event processing");
 
   event.waitUntil(
-    caches.open(CACHE).then(function (cache) {
+    caches.open(CACHE_NAME).then(function (cache) {
       console.log("Cached offline page during install");
 
       if (offlineFallbackPage === "ToDo-replace-this-name.html") {
