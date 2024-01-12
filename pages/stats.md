@@ -49,7 +49,7 @@ permalink: /stats
     if (data.recipes) {
       data.recipes.forEach(recipe => {
         // Assuming each recipe has an 'imageUrl' property
-        if (recipe.imageUrl && recipe.imageUrl.trim() !== '') {
+        if (recipe.image && recipe.image.trim() !== '') {
           imageRecipeCount++; // Added line
         }
 
