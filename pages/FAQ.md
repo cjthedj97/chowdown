@@ -15,7 +15,8 @@ permalink: /FAQ
   border: none;
   text-align: left;
   outline: none;
-  font-size: 1.75rem;
+  font-size: 1.5rem;
+  border-radius: 10px;
 }
 
 .collapsible:hover {
@@ -28,6 +29,9 @@ permalink: /FAQ
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   background-color: #f8f9fa;
+  border-radius: 10px;
+  border-style: solid;
+  border-width: 1px;
 }
 </style>
 </head>
