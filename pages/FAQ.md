@@ -10,17 +10,19 @@ permalink: /FAQ
   background-color: #fff;
   color: black;
   cursor: pointer;
-  padding: 18px;
   width: 100%;
+  padding: 18px;
   border: none;
   text-align: left;
-  outline: none;
   font-size: 1.5rem;
-  border-radius: 10px;
 }
 
 .collapsible:hover {
   background-color: #007bffcc;
+}
+
+.collapsible:focus {
+  outline: none;
 }
 
 .content {
@@ -29,9 +31,10 @@ permalink: /FAQ
   overflow: hidden;
   transition: max-height 0.2s ease-out;
   background-color: #f8f9fa;
-  border-radius: 10px;
-  border-style: solid;
-  border-width: 1px;
+  border-color: #007bff;
+  border-left-style: solid;
+  border-width: 3px;
+}
 }
 </style>
 </head>
