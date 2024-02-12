@@ -31,7 +31,7 @@ directions:
 - Place Dry ingredients in a bowl, and mix to combine with a rubber spatula. Add water and olive oil, and mix until flour is incorporated as best you can.
 - Sprinkle the work surface with half the Extra Flour, and dump the dough out. Sprinkle with remaining Extra Flour then knead for 3 to 4 minutes until it's pretty smooth (video 38 sec), using more flour only if needed.
 - Rolling out dough:
-The dough should be soft and elastic, not stick to your hands. It will not be completely smooth like yeast dough (video 38 sec)(Note 6).
+- The dough should be soft and elastic, not stick to your hands. It will not be completely smooth like yeast dough (video 38 sec)(Note 6).
 - Shape dough into a ball. Roll out into a 30cm/12" round.
 - Transfer to a pizza pan, preferably with holes (for a crispier base), or a baking tray (Note 7 pizza stone). Use your fingers to pull from the center to fill the pan to the edge - avoid pinching the edges (to ensure a puffy crust!).
 - Top & bake:
