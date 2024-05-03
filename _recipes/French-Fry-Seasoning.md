@@ -20,4 +20,4 @@ directions:
 - Mix together and sprinkle on top of fries.
 ---
 
-If using spices that are not fine run everything though a spice grinder.
+If using spices that are not fine, run everything though a spice grinder.
