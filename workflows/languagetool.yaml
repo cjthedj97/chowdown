@@ -1,0 +1,33 @@
+name: Language Check
+
+on:
+  push:
+    paths:
+      - '**/*.md'
+      - '**/*.txt'
+
+jobs:
+  language-check:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup LanguageTool
+      run: |
+        sudo apt update
+        sudo apt install default-jre
+        wget https://languagetool.org/download/LanguageTool-stable.zip
+        unzip LanguageTool-stable.zip
+
+    - name: Run LanguageTool
+      run: |
+        java -cp LanguageTool-*/languagetool-commandline.jar org.languagetool.commandline.Main --language en-US --autoDetect --line-by-line ${{ github.workspace }}
+
+    - name: Create Issue
+      uses: peter-evans/create-issue-action@v3
+      with:
+        title: Language Check Issues
+        body: |
+          LanguageTool found some issues in the files. Please review and make necessary corrections.
