@@ -1,7 +1,8 @@
 ---
 layout: recipe
 title: "Crock Pot Rice"
-imagecredit: "https://www.eatingonadime.com/wp-content/uploads/2020/10/200KB-Crock-Pot-Rice-16.jpg"
+image: "https://www.eatingonadime.com/wp-content/uploads/2020/10/200KB-Crock-Pot-Rice-16.jpg"
+imagecredit: "https://www.eatingonadime.com/crock-pot-rice/"
 tag: "Side Dish"
 preptime: PT5m
 cooktime: PT3h
