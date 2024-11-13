@@ -16,6 +16,7 @@ permalink: /inventory
 <div class="controls">
     <button onclick="shareList()">Share List</button>
     <button onclick="clearData()">Clear Data</button>
+    <button onclick="clearUsedProducts()">Clear Used Products</button>
 </div>
 <div id="result"></div>
 <div id="lists"></div>
@@ -53,6 +54,9 @@ permalink: /inventory
             .catch(error => {
                 console.error('Error fetching product:', error);
                 displayError('Error fetching product information.');
+            })
+            .finally(() => {
+                document.getElementById('upc').value = ''; // Clear the add UPC text box
             });
     }
 
@@ -98,10 +102,8 @@ permalink: /inventory
             .then(response => response.json())
             .then(data => {
                 if (data.status === 1) {
-                    // Product exists in API, inform user
                     displayError(`Product found in the database: ${data.product.product_name}. Please check your local list.`);
                 } else {
-                    // Product does not exist in API
                     displaySuccess('Product not found in the global database, safe to assume it is not present.');
                 }
             })
@@ -139,6 +141,13 @@ permalink: /inventory
         localStorage.removeItem(storageKey);
         document.getElementById('lists').innerHTML = '';
         displaySuccess('All data cleared.');
+    }
+
+    function clearUsedProducts() {
+        products.forEach(product => product.used = 0);
+        localStorage.setItem(storageKey, JSON.stringify(products));
+        generateLists();
+        displaySuccess('Used products cleared.');
     }
 
     function shareList() {
