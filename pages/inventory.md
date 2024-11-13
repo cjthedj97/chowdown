@@ -100,7 +100,7 @@ permalink: /inventory
         const existingIndex = products.findIndex(p => p.code === product.code);
         if (existingIndex === -1) {
             products.push({
-                code: product.code,
+                code: ${upc},
                 product_name: fullName,
                 count: 1,
                 used: 0
