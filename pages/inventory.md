@@ -112,17 +112,30 @@ permalink: /inventory
     }
 
     function markUPCAsUsed(upc) {
+        upc = upc.trim(); // Ensure no leading or trailing spaces
+        console.log("Attempting to mark UPC as used:", upc);
+    
+        // Find the product by its UPC code
         const index = products.findIndex(p => p.code === upc);
-        if (index !== -1 && products[index].count > products[index].used) {
-            products[index].used += 1; // Increment the used count
-            localStorage.setItem(storageKey, JSON.stringify(products));
-            displaySuccess(`Marked one of "${products[index].product_name}" as used.`);
-            generateLists();
+        console.log("Index found:", index, "for UPC:", upc);
+    
+        if (index !== -1) {
+            if (products[index].count > products[index].used) {
+                products[index].used += 1; // Increment the used count
+                localStorage.setItem(storageKey, JSON.stringify(products));
+                displaySuccess(`Marked one of "${products[index].product_name}" as used.`);
+            } else {
+                displayError(`All units of "${products[index].product_name}" are already marked as used.`);
+            }
         } else {
+            // If not found, verify against the external database
             verifyProductWithAPI(upc);
         }
-        document.getElementById('remove-upc').value = ''; // Clear the remove UPC text box
+    
+        // Clear the remove UPC text box
+        document.getElementById('remove-upc').value = '';
     }
+
 
     function verifyProductWithAPI(upc) {
         const url = `https://world.openfoodfacts.org/api/v0/product/${upc}.json`;
