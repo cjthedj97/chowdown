@@ -77,7 +77,7 @@ permalink: /inventory
                 if (data.status === 1) {
                     addProduct(data.product);
                 } else {
-                    displayError('Product not found.');
+                    displayError('Product not found. To add unknown product visit https://world.openfoodfacts.org/');
                 }
             })
             .catch(error => {
