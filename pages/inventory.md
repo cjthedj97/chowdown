@@ -89,27 +89,41 @@ permalink: /inventory
             });
     }
 
-    function addProduct(product) {
-        const productName = product.product_name || 'Unknown Product';
-        const productQuantity = product.quantity ? " - " + product.quantity : '';
-        const fullName = productName + productQuantity;
-
-        const existingIndex = products.findIndex(p => p.code === product.code);
-        if (existingIndex === -1) {
-            products.push({
-                code: product.code,
-                product_name: fullName,
+    function addProduct(upc, name, size) {
+        upc = upc.trim(); // Ensure no leading or trailing spaces
+    
+        // Check if the product already exists in the list
+        const existingProductIndex = products.findIndex(p => p.code === upc);
+    
+        if (existingProductIndex !== -1) {
+            // If the product exists, update its details or count
+            products[existingProductIndex].count += 1;
+            displaySuccess(`Updated quantity for "${products[existingProductIndex].product_name}".`);
+        } else {
+            // Add new product to the list
+            const newProduct = {
+                code: upc,
+                product_name: name,
+                size: size,
                 count: 1,
                 used: 0
-            });
-        } else {
-            products[existingIndex].count += 1;
+            };
+            products.push(newProduct);
+            displaySuccess(`Added new product: "${name} - ${size}".`);
         }
+    
+        // Save the updated list to local storage
         localStorage.setItem(storageKey, JSON.stringify(products));
-        displaySuccess(`Product "${fullName}" added.`);
+    
+        // Clear the input fields (assuming you have input fields for adding products)
+        document.getElementById('upc').value = '';
+        document.getElementById('product-name').value = '';
+        document.getElementById('product-size').value = '';
+    
+        // Regenerate the product list display
         generateLists();
-        document.getElementById('upc').value = ''; // Clear the add UPC text box
     }
+
 
     function markUPCAsUsed(upc) {
         upc = upc.trim(); // Ensure no leading or trailing spaces
