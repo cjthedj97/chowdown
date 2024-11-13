@@ -4,7 +4,7 @@ title: Food Inventory Scanner
 permalink: /inventory
 ---
 
-> Please be aware that the Inventory is stored locally which means if you use another web broswer or device you won't see the same inventory.
+> Please note that the inventory is stored locally on your device. This means that if you access the application from a different browser or device, the inventory will not be the same.
 
 <style>
     .button-container,
