@@ -92,27 +92,46 @@ permalink: /inventory
             });
     }
 
-    function addProduct(product) {
+    function addProduct(upc, product) {
+        // Ensure the UPC is a string and trim any extra spaces
+        if (typeof upc !== 'string') {
+            console.error('Invalid UPC type:', typeof upc);
+            return;
+        }
+        upc = upc.trim();
+    
+        // Extract product details
         const productName = product.product_name || 'Unknown Product';
         const productQuantity = product.quantity ? " - " + product.quantity : '';
         const fullName = productName + productQuantity;
-
-        const existingIndex = products.findIndex(p => p.code === product.code);
+    
+        // Find if the product already exists in the list
+        const existingIndex = products.findIndex(p => p.code === upc);
         if (existingIndex === -1) {
+            // Add new product if it doesn't exist
             products.push({
-                code: ${upc},
+                code: upc,
                 product_name: fullName,
                 count: 1,
                 used: 0
             });
+            displaySuccess(`Product "${fullName}" added.`);
         } else {
+            // Increment the count if the product already exists
             products[existingIndex].count += 1;
+            displaySuccess(`Updated quantity for "${fullName}".`);
         }
+    
+        // Save the updated list to local storage
         localStorage.setItem(storageKey, JSON.stringify(products));
-        displaySuccess(`Product "${fullName}" added.`);
+    
+        // Regenerate the product list display
         generateLists();
-        document.getElementById('upc').value = ''; // Clear the add UPC text box
+    
+        // Clear the UPC input field
+        document.getElementById('upc').value = '';
     }
+
 
     function markUPCAsUsed(upc) {
         const index = products.findIndex(p => p.code === upc);
