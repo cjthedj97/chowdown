@@ -1,9 +1,8 @@
 ---
 layout: post
 title: Food Inventory UPC Scanner
+permalink: /inventory
 ---
-
-<h1>Food Inventory UPC Scanner</h1>
 <form id="upc-form">
     <label for="upc">Enter UPC Code:</label>
     <input type="text" id="upc" name="upc" required>
