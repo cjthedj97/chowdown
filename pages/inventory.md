@@ -3,6 +3,10 @@ layout: post
 title: Food Inventory Scanner
 permalink: /inventory
 ---
+
+> [!IMPORTANT]
+> Please be aware that the Inventory is stored locally which means if you use another web broswer or device you won't see the same inventory.
+
 <style>
     .button-container,
     .controls {
