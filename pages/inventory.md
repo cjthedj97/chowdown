@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Food Inventory UPC Scanner
+title: Food Inventory Scanner
 permalink: /inventory
 ---
 <form id="upc-form">
