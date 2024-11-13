@@ -3,12 +3,41 @@ layout: post
 title: Food Inventory Scanner
 permalink: /inventory
 ---
-<form id="upc-form">
+<style>
+    .button-container,
+    .controls {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px; /* Space between buttons */
+        margin-bottom: 20px; /* Space below the button group */
+        align-items: center; /* Align items vertically center */
+    }
+
+    .button-container label,
+    .button-container input {
+        margin-right: 10px; /* Space between label/input and button */
+    }
+
+    button {
+        padding: 10px 15px;
+        font-size: 16px;
+        cursor: pointer;
+        border: 1px solid #ccc;
+        background-color: #f8f8f8;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #e0e0e0;
+    }
+</style>
+<form id="upc-form" class="button-container">
     <label for="upc">Enter UPC Code:</label>
     <input type="text" id="upc" name="upc" required>
     <button type="submit">Add Single UPC</button>
 </form>
-<form id="remove-upc-form">
+<form id="remove-upc-form" class="button-container">
     <label for="remove-upc">Mark UPC as Used:</label>
     <input type="text" id="remove-upc" name="remove-upc" required>
     <button type="submit">Mark as Used</button>
