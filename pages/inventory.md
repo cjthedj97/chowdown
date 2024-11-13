@@ -70,15 +70,18 @@ permalink: /inventory
     });
 
     window.onload = generateLists;
-
+    
     function lookupUPC(upc) {
+        // Ensure the UPC is treated as a string
+        upc = String(upc).trim();
+    
         const url = `https://world.openfoodfacts.org/api/v0/product/${upc}.json`;
-
+    
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 if (data.status === 1) {
-                    addProduct(data.product);
+                    addProduct(upc, data.product);
                 } else {
                     displayError('Product not found. To add unknown product visit https://world.openfoodfacts.org/');
                 }
@@ -98,7 +101,7 @@ permalink: /inventory
             console.error('Invalid UPC type:', typeof upc);
             return;
         }
-        upc = upc.trim();
+        upc = String(upc).trim();
     
         // Extract product details
         const productName = product.product_name || 'Unknown Product';
