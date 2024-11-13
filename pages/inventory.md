@@ -4,7 +4,6 @@ title: Food Inventory Scanner
 permalink: /inventory
 ---
 
-> [!IMPORTANT]
 > Please be aware that the Inventory is stored locally which means if you use another web broswer or device you won't see the same inventory.
 
 <style>
@@ -35,51 +34,47 @@ permalink: /inventory
     button:hover {
         background-color: #e0e0e0;
     }
-</style>
-<form id="upc-form" class="button-container">
-    <label for="upc">Enter UPC Code:</label>
-    <input type="text" id="upc" name="upc" required>
-    <button type="submit">Add Single UPC</button>
-</form>
-<form id="remove-upc-form" class="button-container">
-    <label for="remove-upc">Mark UPC as Used:</label>
-    <input type="text" id="remove-upc" name="remove-upc" required>
-    <button type="submit">Mark as Used</button>
-</form>
-<div class="controls">
-    <button onclick="shareList()">Share List</button>
-    <button onclick="clearData()">Clear Data</button>
-    <button onclick="clearUsedProducts()">Clear Used Products</button>
-</div>
-<div id="result"></div>
-<div id="lists"></div>
-
 <script>
     const storageKey = 'upcProducts';
     let products = JSON.parse(localStorage.getItem(storageKey)) || [];
 
     document.getElementById('upc-form').addEventListener('submit', function(event) {
         event.preventDefault();
-        const upc = document.getElementById('upc').value.trim();
-        lookupUPC(upc);
+        const upc = document.getElementById('upc').value;
+        if (upc) {
+            lookupUPC(upc);
+        } else {
+            displayError('Please enter a UPC code.');
+        }
     });
 
     document.getElementById('remove-upc-form').addEventListener('submit', function(event) {
         event.preventDefault();
-        const upc = document.getElementById('remove-upc').value.trim();
-        markUPCAsUsed(upc);
+        const upc = document.getElementById('remove-upc').value;
+        if (upc) {
+            markUPCAsUsed(upc);
+        } else {
+            displayError('Please enter a UPC code to mark as used.');
+        }
     });
 
     window.onload = generateLists;
 
     function lookupUPC(upc) {
+        if (typeof upc !== 'string') {
+            console.error('Invalid UPC type:', typeof upc);
+            return;
+        }
+        upc = upc.trim();
         const url = `https://world.openfoodfacts.org/api/v0/product/${upc}.json`;
 
         fetch(url)
             .then(response => response.json())
             .then(data => {
                 if (data.status === 1) {
-                    addProduct(data.product);
+                    const name = data.product.product_name || 'Unknown Product';
+                    const size = data.product.quantity || 'Unknown Size';
+                    addProduct(upc, name, size);
                 } else {
                     displayError('Product not found. To add unknown product visit https://world.openfoodfacts.org/');
                 }
@@ -94,6 +89,10 @@ permalink: /inventory
     }
 
     function addProduct(upc, name, size) {
+        if (typeof upc !== 'string') {
+            console.error('Invalid UPC type:', typeof upc);
+            return;
+        }
         upc = upc.trim(); // Ensure no leading or trailing spaces
     
         // Check if the product already exists in the list
@@ -119,17 +118,15 @@ permalink: /inventory
         // Save the updated list to local storage
         localStorage.setItem(storageKey, JSON.stringify(products));
     
-        // Clear the input fields (assuming you have input fields for adding products)
-        document.getElementById('upc').value = '';
-        document.getElementById('product-name').value = '';
-        document.getElementById('product-size').value = '';
-    
         // Regenerate the product list display
         generateLists();
     }
 
-
     function markUPCAsUsed(upc) {
+        if (typeof upc !== 'string') {
+            console.error('Invalid UPC type:', typeof upc);
+            return;
+        }
         upc = upc.trim(); // Ensure no leading or trailing spaces
         console.log("Attempting to mark UPC as used:", upc);
     
@@ -154,8 +151,12 @@ permalink: /inventory
         document.getElementById('remove-upc').value = '';
     }
 
-
     function verifyProductWithAPI(upc) {
+        if (typeof upc !== 'string') {
+            console.error('Invalid UPC type:', typeof upc);
+            return;
+        }
+        upc = upc.trim();
         const url = `https://world.openfoodfacts.org/api/v0/product/${upc}.json`;
 
         fetch(url)
