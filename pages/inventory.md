@@ -135,36 +135,31 @@ permalink: /inventory
         document.getElementById('upc').value = '';
     }
 
-
     function markUPCAsUsed(upc) {
         const index = products.findIndex(p => p.code === upc);
+    
         if (index !== -1 && products[index].count > products[index].used) {
             products[index].used += 1; // Increment the used count
             localStorage.setItem(storageKey, JSON.stringify(products));
             displaySuccess(`Marked one of "${products[index].product_name}" as used.`);
             generateLists();
         } else {
-            verifyProductWithAPI(upc);
+            displayError(`The product with UPC "${upc}" is not available in your local inventory or all have been marked as used.`);
         }
+    
         document.getElementById('remove-upc').value = ''; // Clear the remove UPC text box
     }
-
-    function verifyProductWithAPI(upc) {
-        const url = `https://world.openfoodfacts.org/api/v0/product/${upc}.json`;
-
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 1) {
-                    displayError(`Product found in the database: ${data.product.product_name}. Please check your local list.`);
-                } else {
-                    displaySuccess('Product not found in the global database, safe to assume it is not present.');
-                }
-            })
-            .catch(error => {
-                console.error('Error verifying product:', error);
-                displayError('Error verifying product information.');
-            });
+    
+    // Function to display success messages to the user
+    function displaySuccess(message) {
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = `<p style="color: green;">${message}</p>`;
+    }
+    
+    // Function to display error messages to the user
+    function displayError(message) {
+        const resultDiv = document.getElementById('result');
+        resultDiv.innerHTML = `<p style="color: red;">${message}</p>`;
     }
 
     function displaySuccess(message) {
