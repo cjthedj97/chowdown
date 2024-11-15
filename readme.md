@@ -23,7 +23,7 @@ Below is an example of most of the options you can use
 ---
 layout: recipe
 title: "Recipe Title Here"
-image: image-name.jpg  # Replace with the image filename
+image: image-name.jpg  # Replace with the image file or URL to one
 imagecredit: URL to image credit  # Optional: link to source of the image
 tags: tag1 tag2 tag3  # List of tags or keywords related to the recipe
 servings: 4  # Optional: Number of servings
