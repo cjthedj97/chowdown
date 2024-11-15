@@ -16,6 +16,40 @@ They are written in Markdown and contain a few special sections:
  - Directions (a list of steps for the dish)
 - Body content (for intros, stories, written detail)
 
+
+Below is an example of most of the options you can use
+
+```
+---
+layout: recipe
+title: "Recipe Title Here"
+image: image-name.jpg  # Replace with the image filename
+imagecredit: URL to image credit  # Optional: link to source of the image
+tags: tag1 tag2 tag3  # List of tags or keywords related to the recipe
+servings: 4  # Optional: Number of servings
+prep_time: "10 mins"  # Optional: Preparation time
+cook_time: "30 mins"  # Optional: Cooking time
+total_time: "40 mins"  # Optional: Total time
+
+ingredients:
+- Ingredient 1
+- Ingredient 2, with quantity and preparation details if needed
+- Ingredient 3, etc.
+
+directions:
+- Step 1: Describe the first step here
+- Step 2: Continue with detailed steps
+- Step 3: Additional steps if needed
+- Step 4: Final steps
+
+notes:
+- Optional note about the recipe, such as tips for success or substitutions
+- Another optional note if applicable
+---
+
+Pleace any additional notes here, will be shown at the top of the recipe page 
+```
+
 If you need help with Markdown, here's a [handy cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
 
 # Writing a component recipe
