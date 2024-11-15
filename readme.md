@@ -1,6 +1,8 @@
 # Chowdown
 
-A simple, plaintext recipe database for hackers
+A simple, plaintext recipe database for hackers.
+
+Be aware my version of chowdown has diverged from the orignal name sake by quite a bit as I have changed and modifided things.
 
 [https://recipes.saathoff.us](https://recipes.saathoff.us)
 
