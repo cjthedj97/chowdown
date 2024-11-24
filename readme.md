@@ -43,10 +43,6 @@ directions:
 - Step 2: Continue with detailed steps
 - Step 3: Additional steps if needed
 - Step 4: Final steps
-
-notes:
-- Optional note about the recipe, such as tips for success or substitutions
-- Another optional note if applicable
 ---
 
 Pleace any additional notes here, will be shown at the top of the recipe page 
