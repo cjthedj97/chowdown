@@ -1,7 +1,7 @@
 ---
 layout: recipe
 title: "Applebee's Three Cheese Chicken Penne"
-image: https://insanelygoodrecipes.com/wp-content/uploads/2020/10/Applebees-Three-Cheese-Chicken-Penne-500x500.jpg
+image: https://insanelygoodrecipes.com/wp-content/uploads/2022/03/Applebees-Three-Cheese-Chicken-Penne.jpg
 imagecredit: https://insanelygoodrecipes.com/applebees-three-cheese-chicken-penne/
 tags: pasta chicken Italian copycat
 servings: 4

@@ -13,7 +13,7 @@ ingredients:
 - 1 package “JIFFY” Blueberry Muffin Mix
 - 1/4 cup water
 - 1 egg
-- Optional: fresh or frozen blueberries for extra berry flavor
+- (Optional) fresh or frozen blueberries for extra berry flavor
 
 directions:
 - Preheat your oven to 400°F and grease or line a muffin tin.
