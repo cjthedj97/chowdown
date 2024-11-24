@@ -1,7 +1,7 @@
 ---
 layout: recipe
 title: "Jiffy Blueberry Muffins"
-image: https://www.jiffymix.com/wp-content/uploads/2020/07/Blueberry-Muffins.jpg
+image: https://www.jiffymix.com/wp-content/uploads/2024/09/Blueberry-Muffin-e1726589965529-577x1024.png
 imagecredit: https://www.jiffymix.com/recipe/blueberry-muffins/
 tags: muffins blueberry breakfast baking
 servings: 6 muffins

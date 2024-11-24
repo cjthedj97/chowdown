@@ -1,7 +1,7 @@
 ---
 layout: recipe
 title: "Texas Roadhouse Butter"
-image: https://copykat.com/wp-content/uploads/2022/12/Texas-Roadhouse-Butter-500x500.jpg
+image: https://copykat.com/wp-content/uploads/2022/04/Texas-Roadhouse-Butter-Pin-3.jpg
 imagecredit: https://copykat.com/texas-roadhouse-butter/
 tags: butter spread cinnamon honey
 servings: 16
