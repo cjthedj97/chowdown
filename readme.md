@@ -25,7 +25,7 @@ Below is an example of most of the options you can use
 ---
 layout: recipe
 title: "Recipe Title Here"
-image: image-name.jpg or https://URL.tld/image.jpg  # Replace with the image file or URL to one
+image: image-name.jpg or https://url.tld/image.jpg  # Replace with the image file or URL to one
 imagecredit: URL to image credit  # Optional: link to source of the image
 tags: tag1 tag2 tag3  # List of tags or keywords related to the recipe
 servings: 4  # Optional: Number of servings
@@ -39,13 +39,13 @@ ingredients:
 - Ingredient 3, etc.
 
 directions:
-- Step 1: Describe the first step here
-- Step 2: Continue with detailed steps
-- Step 3: Additional steps if needed
-- Step 4: Final steps
----
+- Describe the first step here
+- Continue with detailed steps
+- Additional steps if needed
+- Final steps
 
-Pleace any additional notes here, will be shown at the top of the recipe page 
+---
+Place any additional notes here, will be shown at the top of the recipe page 
 ```
 
 If you need help with Markdown, here's a [handy cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet).
