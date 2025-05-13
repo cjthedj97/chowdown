@@ -1,0 +1,42 @@
+---
+layout: default
+permalink: /random
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Redirecting to a Random Recipe...</title>
+</head>
+<body>
+  <p>Redirecting to a random recipe...</p>
+  <script>
+    async function redirectToRandomRecipe() {
+      try {
+        const response = await fetch('/feed.xml');
+        if (!response.ok) throw new Error('Failed to fetch feed.');
+        const text = await response.text();
+
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(text, 'application/xml');
+        const items = xmlDoc.querySelectorAll('item');
+        if (!items.length) throw new Error('No recipes found.');
+
+        const randomIndex = Math.floor(Math.random() * items.length);
+        const randomItem = items[randomIndex];
+        let link = randomItem.querySelector('link').textContent.trim();
+        link = link.replace(/\s+/g, '');
+
+        // Redirect the browser to the random recipe page
+        window.location.href = link;
+      } catch (error) {
+        console.error(error);
+        document.body.innerHTML = '<p>Sorry, unable to redirect to a random recipe at this time.</p>';
+      }
+    }
+
+    redirectToRandomRecipe();
+  </script>
+</body>
+</html>
