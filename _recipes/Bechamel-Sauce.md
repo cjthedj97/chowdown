@@ -21,7 +21,7 @@ directions:
 - Slowly add the heated milk, whisking to incorporate. Bring it to a boil, stirring constantly, as the sauce thickens.
 - Add kosher salt and freshly ground black pepper to taste. Reduce to low heat, and cook, stirring, for another 2–3 minutes. Remove from the heat.
 - To cool the sauce for later use, cover it with wax paper, or pour a layer of milk over it to prevent a skin from forming. Refrigerate for up to 3 days.
-- **Variation:** For a Cheese Sauce, stir in ½ cup grated cheddar cheese during the last 2 minutes of cooking, along with a pinch of cayenne pepper.
+- **Variation** For a Cheese Sauce, stir in ½ cup grated cheddar cheese during the last 2 minutes of cooking, along with a pinch of cayenne pepper.
 
 ---
 This classic Béchamel sauce is a versatile base for many dishes, perfect for adding creaminess and flavor. Enjoy this foundational recipe to enhance your meals!
