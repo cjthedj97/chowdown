@@ -2,7 +2,6 @@
 layout: recipe
 title: "Béchamel Sauce"
 image: https://assets.epicurious.com/photos/573dd7172931ccb32b4540c6/1:1/w_2560%2Cc_limit/shutterstock_255028507.jpg
-imagecredit: Shutterstock
 tags: béchamel sauce white sauce cooking basic sauces
 servings: 1 cup
 prep_time: "5 mins"
