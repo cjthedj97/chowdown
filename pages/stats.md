@@ -27,43 +27,50 @@ permalink: /stats
     .catch(error => console.error('Error fetching data:', error));
 
   // Function to display stats on the page
-  function displayStats(data) {
-    const buildTimeElement = document.getElementById('build-time');
-    const totalRecipesElement = document.getElementById('total-recipes');
-    const imageRecipeCountElement = document.getElementById('image-recipe-count'); // Added line
-    const tagCountsElement = document.getElementById('tag-counts');
+function displayStats(data) {
+  const buildTimeElement = document.getElementById('build-time');
+  const totalRecipesElement = document.getElementById('total-recipes');
+  const localImageCountElement = document.getElementById('local-image-recipe-count');
+  const remoteImageCountElement = document.getElementById('remote-image-recipe-count');
+  const tagCountsElement = document.getElementById('tag-counts');
 
-    // Display build date and time
-    buildTimeElement.textContent = data.buildDateTime;
+  buildTimeElement.textContent = data.buildDateTime;
+  totalRecipesElement.textContent = data.recipeCount;
 
-    // Display total recipe count
-    totalRecipesElement.textContent = data.recipeCount;
+  let localImageCount = 0;
+  let remoteImageCount = 0;
 
-    // New variable to count recipes with images
-    let imageRecipeCount = 0; // Added line
+  const tagCounts = {};
 
-    // Generate tag count per tag
-    const tagCounts = {};
-
-    // Check if the 'recipes' property exists
-    if (data.recipes) {
-      data.recipes.forEach(recipe => {
-        // Assuming each recipe has an 'imageUrl' property
-        if (recipe.image && recipe.image.trim() !== '') {
-          imageRecipeCount++; // Added line
-        }
-
-        // Existing code for processing tags
-        if (recipe.tags && recipe.tags.length > 0) {
-          recipe.tags.forEach(tag => {
-            tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-          });
+  if (data.recipes) {
+    data.recipes.forEach(recipe => {
+      if (recipe.image && recipe.image.trim() !== '') {
+        const img = recipe.image.trim().toLowerCase();
+        if (img.startsWith('http://') || img.startsWith('https://')) {
+          remoteImageCount++;
         } else {
-          // Increment count for untagged recipes
-          tagCounts['Untagged'] = (tagCounts['Untagged'] || 0) + 1;
+          localImageCount++;
         }
-      });
-    }
+      }
+      if (recipe.tags && recipe.tags.length > 0) {
+        recipe.tags.forEach(tag => {
+          tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+        });
+      } else {
+        tagCounts['Untagged'] = (tagCounts['Untagged'] || 0) + 1;
+      }
+    });
+  }
+
+  // Display tag counts
+  for (const [tag, count] of Object.entries(tagCounts)) {
+    tagCountsElement.innerHTML += `<p>${tag}: ${count}</p>`;
+  }
+
+  // Display separate image counts
+  localImageCountElement.textContent = localImageCount;
+  remoteImageCountElement.textContent = remoteImageCount;
+}
 
     // Display tag counts
     for (const [tag, count] of Object.entries(tagCounts)) {
