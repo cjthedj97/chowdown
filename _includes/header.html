@@ -32,6 +32,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/FAQ">FAQ</a>
         </li>
+        <li class="nav-item">
+          <button id="theme-toggle" class="theme-toggle nav-link" aria-label="Toggle theme" type="button" onclick="(function(btn){ if(window.chowdownTheme){ window.chowdownTheme.toggle(); update(); } function update(){ if(window.chowdownTheme && window.chowdownTheme.get()==='dark'){ btn.textContent='🌙'; btn.setAttribute('aria-label','Switch to light theme'); } else { btn.textContent='☀️'; btn.setAttribute('aria-label','Switch to dark theme'); } } update(); })(this)">☀️</button>
+        </li>
       </ul>
     </div>
   </nav>

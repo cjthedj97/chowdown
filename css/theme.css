@@ -1,0 +1,74 @@
+:root{
+  /* Light theme (default) */
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #6b7280; /* gray */
+  --tile: #f8fafc;
+  --primary: #007FFF;
+  --border: rgba(0,0,0,0.125);
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+html.dark{
+  --bg: #0b0f13;
+  --text: #e6eef6;
+  --muted: #9aa6b2;
+  --tile: #071018;
+  --primary: #66b4ff;
+  --border: rgba(255,255,255,0.06);
+  --card-shadow: 0 1px 3px rgba(0,0,0,0.6);
+}
+
+/* Utility tokens that map existing class styles to variables */
+body{
+  background-color: var(--bg) !important;
+  color: var(--text) !important;
+}
+
+a{ color: var(--primary); }
+
+.border, .border-top, .border-right, .border-bottom, .border-left{
+  border-color: var(--border) !important;
+}
+
+.bg-white{ background-color: var(--bg) !important; }
+.bg-light-gray{ background-color: var(--tile) !important; }
+
+.post li:before{ color: var(--primary); }
+
+.button{ background-color: var(--primary); }
+
+/* Forms */
+.field-light{ background-color: var(--bg); border-color: var(--border); }
+.field-dark{ background-color: rgba(255,255,255,0.03); border-color: var(--border); }
+
+/* Navbar adjustments for bootstrap classes used */
+.navbar{
+  background-color: var(--bg) !important;
+}
+.navbar .nav-link{ color: var(--text) !important; }
+.navbar .nav-link:hover{ color: var(--primary) !important; }
+
+/* Small helper for a theme toggle button */
+.theme-toggle{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  cursor:pointer;
+  color:var(--text);
+  background:transparent;
+  border:0;
+}
+
+/* Respect system preference initially if no class set */
+@media (prefers-color-scheme: dark){
+  :root:not(.theme-initialized) {
+    /* Only flip the default variable values for UA that respects prefers-color-scheme */
+    --bg: #0b0f13;
+    --text: #e6eef6;
+    --muted: #9aa6b2;
+    --tile: #071018;
+    --primary: #66b4ff;
+    --border: rgba(255,255,255,0.06);
+  }
+}
