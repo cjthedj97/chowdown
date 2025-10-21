@@ -35,7 +35,7 @@ directions:
 This recipe is adapted from "Pumpkin Soup – Classic and Easy" on RecipeTin Eats (Nagi).
 Original/printable recipe: https://www.recipetineats.com/wprm_print/pumpkin-soup-classic-and-easy
 
-Variations & notes:
+Variations & notes
 - Dairy-free: use olive oil for cooking and coconut milk instead of dairy cream.
 - For deeper flavour, roast pumpkin chunks before adding to the soup.
 - Add carrots or celery when sautéing the onion for extra depth.
