@@ -1,8 +1,8 @@
 ---
 layout: recipe
 title: "Pumpkin Pie"
-image: ""
-imagecredit: ""
+image: "https://tastesbetterfromscratch.com/wp-content/uploads/2022/10/PumpkinPie2-2-500x500.jpg"
+imagecredit: "https://tastesbetterfromscratch.com/wprm_print/pumpkin-pie-recipe"
 tags: dessert pumpkin pie holiday baking
 servings: 8
 prep_time: "20 mins"
