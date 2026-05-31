@@ -2,6 +2,8 @@
   --bg: #f6f8fb;
   --surface: #ffffff;
   --surface-soft: #eef3fb;
+  --tile-surface: #ffffff;
+  --tile-surface-soft: #eef3fb;
   --text: #1f2937;
   --muted: #6b7280;
   --border: #d1d5db;
@@ -20,6 +22,8 @@ html[data-theme="dark"] {
   --bg: #0f172a;
   --surface: #111827;
   --surface-soft: #172136;
+  --tile-surface: #0b1220;
+  --tile-surface-soft: #111b30;
   --text: #e5e7eb;
   --muted: #9ca3af;
   --border: #374151;
@@ -171,8 +175,9 @@ html[data-theme="dark"] li {
 }
 
 .recipe-tile {
-  background: var(--surface);
+  background: var(--tile-surface);
   border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--border) 86%, var(--accent) 14%);
   overflow: hidden;
   box-shadow: var(--shadow);
   transition: transform 0.22s ease, box-shadow 0.22s ease;
@@ -186,7 +191,12 @@ html[data-theme="dark"] li {
 }
 
 .recipe-tile.no-image {
-  border: 1px solid var(--border);
+  background: linear-gradient(135deg, color-mix(in srgb, var(--tile-surface-soft) 72%, var(--accent) 28%), color-mix(in srgb, var(--tile-surface) 88%, var(--accent) 12%));
+}
+
+.recipe-tile.has-image .image,
+.recipe-tile.no-image .image {
+  background-color: var(--tile-surface);
 }
 
 .recipe-tile.no-image .image {
