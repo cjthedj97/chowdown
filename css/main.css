@@ -12,6 +12,10 @@
   --shadow: 0 10px 30px rgba(20, 31, 56, 0.08);
 }
 
+html {
+  background: var(--bg);
+}
+
 html[data-theme="dark"] {
   --bg: #0f172a;
   --surface: #111827;
@@ -31,6 +35,7 @@ body {
     radial-gradient(circle at 12% 8%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 28%),
     radial-gradient(circle at 88% 24%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 24%),
     var(--bg);
+  min-height: 100vh;
   color: var(--text);
 }
 
@@ -186,25 +191,6 @@ html[data-theme="dark"] li {
 
 .recipe-tile.no-image .image {
   background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 14%, var(--surface-soft)), var(--surface));
-}
-
-.recipe-tile.no-image .image::before {
-  content: "No image";
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  color: var(--muted);
-  font-size: 0.85rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-html[data-theme="dark"] .recipe-tile.no-image .image::before {
-  color: color-mix(in srgb, var(--muted) 75%, #fff 25%);
 }
 
 .ratio {
