@@ -34,8 +34,8 @@ layout: recipe_default
     <div class="center mt2">
       <button id="favorite-toggle" class="btn btn-sm btn-outline-primary" type="button">Save Favorite</button>
       <button id="print-recipe" class="btn btn-sm btn-outline-secondary" type="button">Print Recipe</button>
-      <button id="share-recipe" class="btn btn-sm btn-outline-secondary" type="button">Share Link</button>
-      <button id="copy-link" class="btn btn-sm btn-outline-secondary" type="button">Copy Link</button>
+      <button id="share-recipe" class="btn btn-sm btn-outline-secondary d-inline-block d-md-none" type="button">Share Link</button>
+      <button id="copy-link" class="btn btn-sm btn-outline-secondary d-none d-md-inline-block" type="button">Copy Link</button>
     </div>
     {% include yield.html recipe=page %}
     {% include timings.html recipe=page %}

@@ -17,6 +17,7 @@ Status key:
 
 ## Notes (Latest)
 
+- Recipe link controls now split by device: share on mobile, copy on desktop.
 - Recipes now include share/copy link controls with native share fallback and clipboard copy.
 - Inventory scanner now keeps older `upcProducts` data, pauses after scans, and supports inline row actions.
 - Converter now outputs `date_added` and `status` fields.
