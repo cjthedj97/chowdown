@@ -11,10 +11,10 @@ title: Meal Prep Collection
   {% assign published_recipes = site.recipes | where_exp: "r", "r.status != 'draft' and r.status != 'planned'" %}
   {% assign prep = published_recipes | where_exp: "r", "r.tags contains 'mains' or r.tags contains 'crock' or r.tags contains 'breakfast' or r.tags contains 'soups' or r.tags contains 'soup'" %}
 
-  <div class="recipes xs-px1 xs-mt2">
-    <div class="clearfix">
+  <div class="recipes xs-px1 xs-mt2 recipe-grid">
+    <div>
       {% for post in prep %}
-      <div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2">
+      <div class="recipe-grid-item">
         <a class="block relative recipe-tile {% if post.image %}has-image{% else %}no-image{% endif %}" href="{{ post.url }}">
           <div class="image ratio bg-cover"
                {% if post.image and post.image contains 'http' %}

@@ -11,10 +11,10 @@ title: Holiday Favorites Collection
   {% assign published_recipes = site.recipes | where_exp: "r", "r.status != 'draft' and r.status != 'planned'" %}
   {% assign holiday = published_recipes | where_exp: "r", "r.tags contains 'holiday' or r.tags contains 'dessert' or r.tags contains 'casserole' or r.tags contains 'side-dish' or r.title contains 'Christmas' or r.title contains 'Thanksgiving'" %}
 
-  <div class="recipes xs-px1 xs-mt2">
-    <div class="clearfix">
+  <div class="recipes xs-px1 xs-mt2 recipe-grid">
+    <div>
       {% for post in holiday %}
-      <div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2">
+      <div class="recipe-grid-item">
         <a class="block relative recipe-tile {% if post.image %}has-image{% else %}no-image{% endif %}" href="{{ post.url }}">
           <div class="image ratio bg-cover"
                {% if post.image and post.image contains 'http' %}
