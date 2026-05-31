@@ -25,22 +25,24 @@ permalink: /inventory
         padding: 10px 15px;
         font-size: 16px;
         cursor: pointer;
-        border: 1px solid #ccc;
-        background-color: #f8f8f8;
+        border: 1px solid var(--border);
+        background-color: var(--surface-soft);
+        color: var(--text);
         border-radius: 5px;
         transition: background-color 0.3s;
     }
 
     button:hover {
-        background-color: #e0e0e0;
+        background-color: color-mix(in srgb, var(--accent) 12%, var(--surface-soft));
     }
 
     #scanner-panel {
-        border: 1px solid #d1d5db;
+        border: 1px solid var(--border);
         border-radius: 8px;
         padding: 12px;
         margin-bottom: 20px;
-        background: #fff;
+        background: var(--surface);
+        color: var(--text);
     }
 
     #scanner-reader {
@@ -54,7 +56,31 @@ permalink: /inventory
 
     #scanner-status {
         margin-top: 8px;
-        color: #374151;
+        color: var(--muted);
+    }
+
+    #scanner-panel .tip {
+        font-size: 0.95rem;
+        color: var(--muted);
+        margin-bottom: 0;
+    }
+
+    .status-ok {
+        color: var(--success);
+    }
+
+    .status-error {
+        color: var(--danger);
+    }
+
+    .missing-warning {
+        margin-top: 4px;
+        color: color-mix(in srgb, var(--accent) 65%, var(--danger));
+    }
+
+    .missing-good {
+        margin-top: 4px;
+        color: var(--success);
     }
 
     @media screen and (max-width: 768px) {
@@ -76,7 +102,7 @@ permalink: /inventory
     </label>
     <div id="scanner-reader"></div>
     <p id="scanner-status">Scanner idle.</p>
-    <p style="font-size: 0.95rem; color: #6b7280; margin-bottom: 0;">Tip: Works best over HTTPS and good lighting. If scan fails, enter UPC manually below.</p>
+    <p class="tip">Tip: Works best over HTTPS and good lighting. If scan fails, enter UPC manually below.</p>
 </div>
 <form id="upc-form" class="button-container">
     <label for="upc">Enter UPC Code:</label>
@@ -161,7 +187,7 @@ permalink: /inventory
         const statusEl = document.getElementById('scanner-status');
         if (!statusEl) return;
         statusEl.textContent = message;
-        statusEl.style.color = isError ? '#b91c1c' : '#374151';
+        statusEl.style.color = isError ? 'var(--danger)' : 'var(--muted)';
     }
 
     function setScannerButtons() {
@@ -297,23 +323,23 @@ permalink: /inventory
     // Function to display success messages to the user
     function displaySuccess(message) {
         const resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = `<p style="color: green;">${message}</p>`;
+        resultDiv.innerHTML = `<p class="status-ok">${message}</p>`;
     }
     
     // Function to display error messages to the user
     function displayError(message) {
         const resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = `<p style="color: red;">${message}</p>`;
+        resultDiv.innerHTML = `<p class="status-error">${message}</p>`;
     }
 
     function displaySuccess(message) {
         const resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = `<p style="color: green;">${message}</p>`;
+        resultDiv.innerHTML = `<p class="status-ok">${message}</p>`;
     }
 
     function displayError(message) {
         const resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = `<p style="color: red;">${message}</p>`;
+        resultDiv.innerHTML = `<p class="status-error">${message}</p>`;
     }
 
     function generateLists() {
@@ -463,7 +489,7 @@ permalink: /inventory
                 <div class="product">
                     <strong>${item.score} match${item.score === 1 ? '' : 'es'}</strong> |
                     <a href="${item.recipe.url}">${item.recipe.title}</a>
-                    ${item.missing.length ? `<div style="margin-top: 4px; color: #b45309;"><em>Likely missing:</em> ${item.missing.join(', ')}</div>` : '<div style="margin-top: 4px; color: #15803d;"><em>Likely have most core ingredients.</em></div>'}
+                    ${item.missing.length ? `<div class="missing-warning"><em>Likely missing:</em> ${item.missing.join(', ')}</div>` : '<div class="missing-good"><em>Likely have most core ingredients.</em></div>'}
                 </div>
             `).join('')}
         `;

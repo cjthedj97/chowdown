@@ -7,6 +7,8 @@
   --border: #d1d5db;
   --accent: #007fff;
   --accent-strong: #005fcc;
+  --success: #15803d;
+  --danger: #b91c1c;
   --shadow: 0 10px 30px rgba(20, 31, 56, 0.08);
 }
 
@@ -19,6 +21,8 @@ html[data-theme="dark"] {
   --border: #374151;
   --accent: #4da3ff;
   --accent-strong: #79b8ff;
+  --success: #4ade80;
+  --danger: #f87171;
   --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 

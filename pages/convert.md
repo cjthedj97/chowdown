@@ -9,6 +9,8 @@ permalink: /convert
     body {
       margin: 0;
       padding: 0;
+      background: var(--bg);
+      color: var(--text);
     }
 
     .top-columns {
@@ -20,24 +22,54 @@ permalink: /convert
 
     .left-column, .right-column {
       width: 50%;
-      background-color: #fff;
+      background-color: var(--surface);
+      color: var(--text);
       padding: 5px;
       box-sizing: border-box;
     }
 
     input, textarea {
       width: 100%;
+      background: var(--surface);
+      color: var(--text);
+      border: 1px solid var(--border);
     }
 
     .bottom-column {
       width: 100%;
-      background-color: #f6f8fa;
+      background-color: var(--surface-soft);
+      color: var(--text);
       padding: 20px;
       box-sizing: border-box;
       white-space: pre;
       line-height: 1.5;
-      border-radius: 4px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
       overflow-x: auto;
+    }
+
+    button {
+      background: var(--surface-soft);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+
+    button:hover {
+      background: color-mix(in srgb, var(--accent) 12%, var(--surface-soft));
+    }
+
+    #convert-status {
+      padding: 10px 20px;
+      color: var(--text);
+    }
+
+    #convert-status .status-ok {
+      color: var(--success);
+    }
+
+    #convert-status .status-error {
+      color: var(--danger);
     }
 
     @media screen and (max-width: 768px) {
@@ -135,7 +167,7 @@ permalink: /convert
 </div>
 
 <div class="bottom-column" id="bottom-column"></div>
-<div id="convert-status" style="padding: 10px 20px;"></div>
+  <div id="convert-status"></div>
 
 <script>
   const form = document.querySelector('#recipe-form');
@@ -145,8 +177,7 @@ permalink: /convert
   document.querySelector('#recipe-date-added').value = new Date().toISOString().slice(0, 10);
 
   function setStatus(message, type = 'ok') {
-    const color = type === 'error' ? '#b91c1c' : '#166534';
-    statusBox.innerHTML = `<p style="color:${color};margin:0;">${message}</p>`;
+    statusBox.innerHTML = `<p class="status-${type}" style="margin:0;">${message}</p>`;
   }
 
   function yamlSafe(value) {
