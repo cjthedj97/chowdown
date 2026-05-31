@@ -146,13 +146,13 @@ html[data-theme="dark"] li {
   margin-top: 1.5rem;
 }
 
-.recipe-grid > div {
+.recipe-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1rem;
 }
 
-.recipe-grid-item {
+.recipe-grid > * {
   min-width: 0;
 }
 

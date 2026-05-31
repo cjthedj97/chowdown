@@ -24,30 +24,26 @@ permalink: /
 
   <div class="clearfix home-results-wrap is-hidden" id="search-results-wrap">
     <h3 class="center mb2 blue section-title">Search Results</h3>
-    <div class="recipes xs-px1 xs-mt2 center" id="results-container"></div>
+    <div class="recipes xs-px1 xs-mt2 center recipe-grid" id="results-container"></div>
   </div>
 
   <section class="home-section" id="recently-added-section">
     <h3 class="center mb2 blue section-title">Recently Added</h3>
-    <div class="recipes xs-px1">
-      <div class="clearfix">
-        {% assign published_recipes = site.recipes | where_exp: "item", "item.status != 'draft' and item.status != 'planned'" %}
-        {% assign dated_recipes = published_recipes | where_exp: "item", "item.date_added" | sort: "date_added" | reverse %}
-        {% for post in dated_recipes limit:6 %}
-          <div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2">
-            <a class="block relative recipe-tile {% if post.image %}has-image{% else %}no-image{% endif %}" href="{{ post.url }}">
-              <div class="image ratio bg-cover"
-                  {% if post.image and post.image contains 'http' %}
-                     style="background-image:url({{ post.image }});"
-                   {% elsif post.image %}
-                      style="background-image:url({{ '/images/' | append: post.image | relative_url }});"
-                   {% endif %}>
-              </div>
-              <h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">{{ post.title }}</h1>
-            </a>
+    <div class="recipes xs-px1 recipe-grid">
+      {% assign published_recipes = site.recipes | where_exp: "item", "item.status != 'draft' and item.status != 'planned'" %}
+      {% assign dated_recipes = published_recipes | where_exp: "item", "item.date_added" | sort: "date_added" | reverse %}
+      {% for post in dated_recipes limit:6 %}
+        <a class="block relative recipe-tile {% if post.image %}has-image{% else %}no-image{% endif %}" href="{{ post.url }}">
+          <div class="image ratio bg-cover"
+              {% if post.image and post.image contains 'http' %}
+                 style="background-image:url({{ post.image }});"
+               {% elsif post.image %}
+                   style="background-image:url({{ '/images/' | append: post.image | relative_url }});"
+               {% endif %}>
           </div>
-        {% endfor %}
-      </div>
+          <h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">{{ post.title }}</h1>
+        </a>
+      {% endfor %}
       {% if dated_recipes.size == 0 %}
         <p class="center">No recipes tagged with <code>date_added</code> yet.</p>
       {% endif %}
@@ -63,7 +59,7 @@ SimpleJekyllSearch({
   searchInput: document.getElementById('search-input'),
   resultsContainer: document.getElementById('results-container'),
   json: '/search.json',
-  searchResultTemplate: '<div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2 left-align result-card" data-tags="{tags}"><a class="block relative recipe-tile {tile_class}" href="{url}"><div class="image ratio bg-cover" style="background-image:url({image});"></div><h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">{title}</h1></a></div>'
+  searchResultTemplate: '<a class="block relative recipe-tile {tile_class} result-card" data-tags="{tags}" href="{url}"><div class="image ratio bg-cover" style="background-image:url({image});"></div><h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">{title}</h1></a>'
 })
 </script>
 

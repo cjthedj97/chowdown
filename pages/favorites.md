@@ -12,7 +12,7 @@ title: My Favorite Recipes
     <button id="clear-favorites" class="btn btn-sm btn-outline-danger">Clear all favorites</button>
   </div>
 
-  <div class="recipes xs-px1 xs-mt2" id="favorite-results"></div>
+  <div class="recipes xs-px1 xs-mt2 recipe-grid" id="favorite-results"></div>
   <p id="favorite-empty" class="center" style="display:none;">No favorites yet. Open a recipe and tap "Save Favorite".</p>
 </div>
 
