@@ -34,6 +34,8 @@ layout: recipe_default
     <div class="center mt2">
       <button id="favorite-toggle" class="btn btn-sm btn-outline-primary" type="button">Save Favorite</button>
       <button id="print-recipe" class="btn btn-sm btn-outline-secondary" type="button">Print Recipe</button>
+      <button id="share-recipe" class="btn btn-sm btn-outline-secondary" type="button">Share Link</button>
+      <button id="copy-link" class="btn btn-sm btn-outline-secondary" type="button">Copy Link</button>
     </div>
     {% include yield.html recipe=page %}
     {% include timings.html recipe=page %}
@@ -196,6 +198,75 @@ layout: recipe_default
 
   (function () {
     var printButton = document.getElementById('print-recipe');
+    var shareButton = document.getElementById('share-recipe');
+    var copyButton = document.getElementById('copy-link');
+    var recipeUrl = '{{ page.url | absolute_url }}';
+
+    function setButtonText(button, text, restoreText) {
+      if (!button) return;
+      button.textContent = text;
+      window.setTimeout(function () {
+        button.textContent = restoreText;
+      }, 1800);
+    }
+
+    function copyToClipboard() {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        return navigator.clipboard.writeText(recipeUrl);
+      }
+
+      return new Promise(function (resolve, reject) {
+        var textarea = document.createElement('textarea');
+        textarea.value = recipeUrl;
+        textarea.setAttribute('readonly', 'readonly');
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+
+        try {
+          var successful = document.execCommand('copy');
+          document.body.removeChild(textarea);
+          successful ? resolve() : reject(new Error('Copy failed'));
+        } catch (err) {
+          document.body.removeChild(textarea);
+          reject(err);
+        }
+      });
+    }
+
+    if (shareButton) {
+      shareButton.addEventListener('click', function () {
+        if (navigator.share) {
+          navigator.share({
+            title: document.title,
+            url: recipeUrl
+          }).then(function () {
+            setButtonText(shareButton, 'Shared!', 'Share Link');
+          }).catch(function () {
+            setButtonText(shareButton, 'Share canceled', 'Share Link');
+          });
+          return;
+        }
+
+        copyToClipboard().then(function () {
+          setButtonText(shareButton, 'Copied!', 'Share Link');
+        }).catch(function () {
+          setButtonText(shareButton, 'Copy failed', 'Share Link');
+        });
+      });
+    }
+
+    if (copyButton) {
+      copyButton.addEventListener('click', function () {
+        copyToClipboard().then(function () {
+          setButtonText(copyButton, 'Copied!', 'Copy Link');
+        }).catch(function () {
+          setButtonText(copyButton, 'Copy failed', 'Copy Link');
+        });
+      });
+    }
+
     if (!printButton) return;
     printButton.addEventListener('click', function () {
       window.print();
@@ -207,6 +278,8 @@ layout: recipe_default
     nav,
     #favorite-toggle,
     #print-recipe,
+    #share-recipe,
+    #copy-link,
     .right,
     .components,
     .navbar,

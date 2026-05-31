@@ -17,6 +17,8 @@ Status key:
 
 ## Notes (Latest)
 
+- Recipes now include share/copy link controls with native share fallback and clipboard copy.
+- Inventory scanner now keeps older `upcProducts` data, pauses after scans, and supports inline row actions.
 - Converter now outputs `date_added` and `status` fields.
 - Public recipe views now hide `status: draft` and `status: planned`.
 - Stats now show both total recipe count and published recipe count.
@@ -40,13 +42,14 @@ Status key:
 
 ## Inventory and Utility
 
+- [x] Inventory scanner polish (compatibility + inline actions)
 - [x] Pantry-to-Recipe match from inventory
 - [x] Missing ingredients mode
 - [ ] Servings scaler (1x, 2x, 3x)
 
 ## Sharing and Reach
 
-- [ ] Share/copy link buttons on recipes
+- [x] Share/copy link buttons on recipes
 - [ ] Better offline cache for recipe pages and images
 - [~] Import helper for pasted recipe text/url
   - Note: converter is now more robust and includes feature metadata fields.
@@ -56,4 +59,4 @@ Status key:
 
 1. Planned vs Published workflow tied to idea list
 2. Servings scaler (1x, 2x, 3x)
-3. Share/copy link buttons on recipes
+3. Better offline cache for recipe pages and images
