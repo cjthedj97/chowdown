@@ -60,6 +60,22 @@ permalink: /inventory
         color: var(--muted);
     }
 
+    .scanner-decision {
+        margin-top: 12px;
+        padding: 12px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: color-mix(in srgb, var(--surface-soft) 75%, var(--surface));
+    }
+
+    .scanner-decision p {
+        margin-top: 0;
+    }
+
+    .scanner-decision.is-hidden {
+        display: none;
+    }
+
     #scanner-panel .tip {
         font-size: 0.95rem;
         color: var(--muted);
@@ -84,6 +100,35 @@ permalink: /inventory
         color: var(--success);
     }
 
+    .inventory-summary {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+        margin-bottom: 20px;
+    }
+
+    .summary-card {
+        padding: 14px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: var(--surface);
+        box-shadow: var(--shadow);
+    }
+
+    .summary-card .summary-value {
+        display: block;
+        font-size: 2rem;
+        line-height: 1;
+        font-weight: 700;
+        margin-bottom: 4px;
+        color: var(--accent);
+    }
+
+    .summary-card .summary-label {
+        color: var(--muted);
+        font-size: 0.95rem;
+    }
+
     @media screen and (max-width: 768px) {
         #scanner-reader {
             min-height: 200px;
@@ -99,21 +144,25 @@ permalink: /inventory
     </div>
     <label style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 10px;">
         <input type="checkbox" id="scan-continuous">
-        Keep scanning after successful add
+        Keep scanning after each action
     </label>
     <div id="scanner-reader"></div>
     <p id="scanner-status">Scanner idle.</p>
+    <div id="scanner-decision" class="scanner-decision is-hidden">
+        <p id="scanner-decision-text"></p>
+        <div class="controls">
+            <button id="scanner-add-item" type="button">Add to Inventory</button>
+            <button id="scanner-mark-used" type="button">Mark as Used</button>
+            <button id="scanner-scan-next" type="button">Scan Next</button>
+        </div>
+    </div>
     <p class="tip">Tip: Works best over HTTPS and good lighting. If scan fails, enter UPC manually below.</p>
 </div>
-<form id="upc-form" class="button-container">
-    <label for="upc">Enter UPC Code:</label>
-    <input type="text" id="upc" name="upc" required>
-    <button type="submit">Add Single UPC</button>
-</form>
-<form id="remove-upc-form" class="button-container">
-    <label for="remove-upc">Mark UPC as Used:</label>
-    <input type="text" id="remove-upc" name="remove-upc" required>
-    <button type="submit">Mark as Used</button>
+<form id="manual-upc-form" class="button-container">
+    <label for="manual-upc">Enter UPC Code:</label>
+    <input type="text" id="manual-upc" name="manual-upc" required>
+    <button type="submit">Add to Inventory</button>
+    <button type="button" id="manual-upc-remove">Mark as Used</button>
 </form>
 <div class="controls">
     <button onclick="shareList()">Share List</button>
@@ -121,6 +170,7 @@ permalink: /inventory
     <button onclick="clearUsedProducts()">Clear Used Products</button>
     <button onclick="refreshPantryMatches()">Find Matching Recipes</button>
 </div>
+<div id="inventory-summary" class="inventory-summary"></div>
 <div id="result"></div>
 <div id="lists"></div>
 <div id="pantry-matches"></div>
@@ -128,25 +178,98 @@ permalink: /inventory
 <script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script>
     const storageKey = 'upcProducts';
-    let products = JSON.parse(localStorage.getItem(storageKey)) || [];
+    function toInt(value, fallback) {
+        const parsed = parseInt(value, 10);
+        return Number.isFinite(parsed) ? parsed : fallback;
+    }
+
+    function normalizeStoredProduct(item) {
+        if (!item) return null;
+
+        if (typeof item === 'string') {
+            const code = item.trim();
+            if (!code) return null;
+            return {
+                code: code,
+                product_name: code,
+                count: 1,
+                used: 0
+            };
+        }
+
+        if (typeof item !== 'object') return null;
+
+        const code = String(item.code || item.upc || '').trim();
+        const productName = String(item.product_name || item.productName || item.name || code || 'Unknown Product').trim();
+        if (!code && !productName) return null;
+
+        let count = toInt(item.count, 1);
+        let used = toInt(item.used, 0);
+        if (count < 0) count = 0;
+        if (used < 0) used = 0;
+        if (count < used) count = used;
+
+        return {
+            code: code,
+            product_name: productName,
+            count: count,
+            used: used
+        };
+    }
+
+    function loadProducts() {
+        try {
+            const raw = localStorage.getItem(storageKey);
+            if (!raw) return [];
+
+            const parsed = JSON.parse(raw);
+            const source = Array.isArray(parsed)
+                ? parsed
+                : (parsed && Array.isArray(parsed.products) ? parsed.products : []);
+
+            return source.map(normalizeStoredProduct).filter(Boolean);
+        } catch (error) {
+            console.warn('Could not load stored inventory data:', error);
+            return [];
+        }
+    }
+
+    function saveProducts() {
+        localStorage.setItem(storageKey, JSON.stringify(products));
+    }
+
+    let products = loadProducts();
     let cachedRecipes = [];
     let barcodeScanner = null;
     let scannerActive = false;
+    let pendingScan = null;
 
-    document.getElementById('upc-form').addEventListener('submit', function(event) {
+    if (products.length) {
+        saveProducts();
+    }
+
+    document.getElementById('manual-upc-form').addEventListener('submit', function(event) {
         event.preventDefault();
-        const upc = document.getElementById('upc').value.trim();
+        const upc = document.getElementById('manual-upc').value.trim();
         lookupUPC(upc);
     });
 
-    document.getElementById('remove-upc-form').addEventListener('submit', function(event) {
-        event.preventDefault();
-        const upc = document.getElementById('remove-upc').value.trim();
+    document.getElementById('manual-upc-remove').addEventListener('click', function() {
+        const upc = document.getElementById('manual-upc').value.trim();
         markUPCAsUsed(upc);
     });
 
     document.getElementById('start-scan').addEventListener('click', startBarcodeScanner);
     document.getElementById('stop-scan').addEventListener('click', stopBarcodeScanner);
+    document.getElementById('scanner-add-item').addEventListener('click', handlePendingScanAdd);
+    document.getElementById('scanner-mark-used').addEventListener('click', handlePendingScanRemove);
+    document.getElementById('scanner-scan-next').addEventListener('click', handlePendingScanSkip);
+
+    window.addEventListener('beforeunload', function () {
+        if (scannerActive) {
+            stopBarcodeScanner();
+        }
+    });
 
     window.onload = generateLists;
 
@@ -161,16 +284,12 @@ permalink: /inventory
         });
     
     function lookupUPC(upc) {
-        // Ensure the UPC is treated as a string
         upc = String(upc).trim();
-    
-        const url = `https://world.openfoodfacts.org/api/v0/product/${upc}.json`;
-    
-        fetch(url)
-            .then(response => response.json())
-            .then(data => {
-                if (data.status === 1) {
-                    addProduct(upc, data.product);
+
+        fetchProduct(upc)
+            .then(product => {
+                if (product) {
+                    addProduct(upc, product);
                 } else {
                     displayError('Product not found. To add unknown product visit https://world.openfoodfacts.org/');
                 }
@@ -180,7 +299,21 @@ permalink: /inventory
                 displayError('Error fetching product information.');
             })
             .finally(() => {
-                document.getElementById('upc').value = ''; // Clear the add UPC text box
+                document.getElementById('manual-upc').value = '';
+            });
+    }
+
+    function fetchProduct(upc) {
+        const url = `https://world.openfoodfacts.org/api/v0/product/${upc}.json`;
+
+        return fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 1) {
+                    return data.product;
+                }
+
+                return null;
             });
     }
 
@@ -199,23 +332,131 @@ permalink: /inventory
         stopButton.disabled = !scannerActive;
     }
 
+    function updateInventorySummary() {
+        const summary = document.getElementById('inventory-summary');
+        if (!summary) return;
+
+        const distinctProducts = products.length;
+        const totalItems = products.reduce((sum, product) => sum + product.count, 0);
+        const usedItems = products.reduce((sum, product) => sum + product.used, 0);
+        const availableItems = products.reduce((sum, product) => sum + Math.max(0, product.count - product.used), 0);
+
+        summary.innerHTML = `
+            <div class="summary-card">
+                <span class="summary-value">${distinctProducts}</span>
+                <div class="summary-label">Distinct UPCs</div>
+            </div>
+            <div class="summary-card">
+                <span class="summary-value">${totalItems}</span>
+                <div class="summary-label">Total Items</div>
+            </div>
+            <div class="summary-card">
+                <span class="summary-value">${availableItems}</span>
+                <div class="summary-label">Available</div>
+            </div>
+            <div class="summary-card">
+                <span class="summary-value">${usedItems}</span>
+                <div class="summary-label">Used</div>
+            </div>
+        `;
+    }
+
     function normalizeUPC(rawCode) {
         return String(rawCode || '').replace(/[^0-9]/g, '').trim();
     }
 
     function onBarcodeScanned(decodedText) {
         const upc = normalizeUPC(decodedText);
+        if (pendingScan) {
+            return;
+        }
+
         if (!upc) {
             setScannerStatus('Scanned code was not a valid numeric UPC.', true);
             return;
         }
 
+        stopBarcodeScanner();
         setScannerStatus(`Scanned: ${upc}. Looking up product...`);
-        lookupUPC(upc);
 
-        var continuousScan = document.getElementById('scan-continuous');
-        if (!continuousScan || !continuousScan.checked) {
-            stopBarcodeScanner();
+        fetchProduct(upc)
+            .then(product => {
+                if (!product) {
+                    setScannerStatus('Open Food Facts did not have a product name for this UPC. Choose an action below.');
+                }
+
+                showPendingScan(upc, product || { product_name: 'Unknown Product' });
+            })
+            .catch(error => {
+                console.error('Error fetching product:', error);
+                displayError('Error fetching product information.');
+            });
+    }
+
+    function showPendingScan(upc, product) {
+        pendingScan = {
+            upc: upc,
+            product: product
+        };
+
+        const decision = document.getElementById('scanner-decision');
+        const decisionText = document.getElementById('scanner-decision-text');
+        if (decisionText) {
+            const productName = product.product_name || 'Unknown Product';
+            const quantity = product.quantity ? ` (${product.quantity})` : '';
+            decisionText.textContent = `Scanned ${upc}: ${productName}${quantity}. Add it to inventory or mark it as used?`;
+        }
+
+        if (decision) {
+            decision.classList.remove('is-hidden');
+        }
+
+        setScannerStatus('Choose what to do with this scan.');
+    }
+
+    function hidePendingScan() {
+        pendingScan = null;
+        const decision = document.getElementById('scanner-decision');
+        if (decision) {
+            decision.classList.add('is-hidden');
+        }
+    }
+
+    function resumeScannerIfRequested() {
+        const continuousScan = document.getElementById('scan-continuous');
+        if (continuousScan && continuousScan.checked) {
+            startBarcodeScanner();
+            return;
+        }
+
+        setScannerStatus('Scan complete. Start the camera when you are ready for another item.');
+    }
+
+    function handlePendingScanAdd() {
+        if (!pendingScan) return;
+
+        addProduct(pendingScan.upc, pendingScan.product);
+        hidePendingScan();
+        resumeScannerIfRequested();
+    }
+
+    function handlePendingScanRemove() {
+        if (!pendingScan) return;
+
+        markUPCAsUsed(pendingScan.upc);
+        hidePendingScan();
+        resumeScannerIfRequested();
+    }
+
+    function handlePendingScanSkip() {
+        if (!pendingScan) return;
+
+        hidePendingScan();
+        setScannerStatus('Scan skipped. Start the camera when you are ready for another item.');
+
+        const continuousScan = document.getElementById('scan-continuous');
+        if (continuousScan && continuousScan.checked) {
+            startBarcodeScanner();
         }
     }
 
@@ -297,13 +538,13 @@ permalink: /inventory
         }
     
         // Save the updated list to local storage
-        localStorage.setItem(storageKey, JSON.stringify(products));
+        saveProducts();
     
         // Regenerate the product list display
         generateLists();
     
         // Clear the UPC input field
-        document.getElementById('upc').value = '';
+        document.getElementById('manual-upc').value = '';
     }
 
     function markUPCAsUsed(upc) {
@@ -311,14 +552,14 @@ permalink: /inventory
     
         if (index !== -1 && products[index].count > products[index].used) {
             products[index].used += 1; // Increment the used count
-            localStorage.setItem(storageKey, JSON.stringify(products));
+            saveProducts();
             displaySuccess(`Marked one of "${products[index].product_name}" as used.`);
             generateLists();
         } else {
             displayError(`The product with UPC "${upc}" is not available in your local inventory or all have been marked as used.`);
         }
     
-        document.getElementById('remove-upc').value = ''; // Clear the remove UPC text box
+        document.getElementById('manual-upc').value = ''; // Clear the manual UPC text box
     }
     
     // Function to display success messages to the user
@@ -333,18 +574,9 @@ permalink: /inventory
         resultDiv.innerHTML = `<p class="status-error">${message}</p>`;
     }
 
-    function displaySuccess(message) {
-        const resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = `<p class="status-ok">${message}</p>`;
-    }
-
-    function displayError(message) {
-        const resultDiv = document.getElementById('result');
-        resultDiv.innerHTML = `<p class="status-error">${message}</p>`;
-    }
-
     function generateLists() {
         const listsDiv = document.getElementById('lists');
+        updateInventorySummary();
         const usedProducts = products.filter(p => p.used > 0);
         const unusedProducts = products.filter(p => p.count > p.used);
 
@@ -361,13 +593,21 @@ permalink: /inventory
     function clearData() {
         products = [];
         localStorage.removeItem(storageKey);
+        updateInventorySummary();
         document.getElementById('lists').innerHTML = '';
+        hidePendingScan();
+        if (scannerActive) {
+            stopBarcodeScanner();
+        }
+        setScannerStatus('Scanner idle.');
+        setScannerButtons();
         displaySuccess('All data cleared.');
     }
 
     function clearUsedProducts() {
         products.forEach(product => product.used = 0);
-        localStorage.setItem(storageKey, JSON.stringify(products));
+        saveProducts();
+        updateInventorySummary();
         generateLists();
         displaySuccess('Used products cleared.');
     }
