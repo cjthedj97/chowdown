@@ -129,6 +129,52 @@ permalink: /inventory
         font-size: 0.95rem;
     }
 
+    .inventory-row {
+        display: flex;
+        gap: 12px;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        background: var(--surface);
+    }
+
+    .inventory-row.used {
+        background: color-mix(in srgb, var(--surface-soft) 85%, var(--surface));
+    }
+
+    .inventory-row-main {
+        min-width: 0;
+        flex: 1 1 auto;
+    }
+
+    .inventory-row-title {
+        display: block;
+        font-weight: 700;
+        word-break: break-word;
+    }
+
+    .inventory-row-meta {
+        color: var(--muted);
+        font-size: 0.9rem;
+        margin-top: 2px;
+    }
+
+    .inventory-row-actions {
+        display: flex;
+        gap: 8px;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        flex: 0 0 auto;
+    }
+
+    .inventory-row-actions button {
+        padding: 8px 10px;
+        font-size: 0.95rem;
+    }
+
     @media screen and (max-width: 768px) {
         #scanner-reader {
             min-height: 200px;
@@ -259,6 +305,22 @@ permalink: /inventory
         markUPCAsUsed(upc);
     });
 
+    document.getElementById('lists').addEventListener('click', function(event) {
+        const button = event.target.closest('button[data-inventory-action]');
+        if (!button) return;
+
+        const action = button.getAttribute('data-inventory-action');
+        const upc = button.getAttribute('data-upc');
+
+        if (action === 'increment') {
+            adjustProductCount(upc, 1);
+        } else if (action === 'decrement') {
+            adjustProductCount(upc, -1);
+        } else if (action === 'use') {
+            markUPCAsUsed(upc);
+        }
+    });
+
     document.getElementById('start-scan').addEventListener('click', startBarcodeScanner);
     document.getElementById('stop-scan').addEventListener('click', stopBarcodeScanner);
     document.getElementById('scanner-add-item').addEventListener('click', handlePendingScanAdd);
@@ -363,6 +425,80 @@ permalink: /inventory
 
     function normalizeUPC(rawCode) {
         return String(rawCode || '').replace(/[^0-9]/g, '').trim();
+    }
+
+    function escapeHtml(value) {
+        return String(value || '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    function findProductIndex(upc) {
+        return products.findIndex(p => p.code === upc);
+    }
+
+    function renderProductRow(product, isUsedList) {
+        const available = Math.max(0, product.count - product.used);
+        const href = `https://world.openfoodfacts.org/product/${encodeURIComponent(product.code)}`;
+        const title = escapeHtml(product.product_name);
+        const code = escapeHtml(product.code);
+        const usedLabel = product.used === 1 ? 'used' : 'used';
+        const availableLabel = available === 1 ? 'available' : 'available';
+        const rowClass = isUsedList ? 'inventory-row used' : 'inventory-row';
+
+        return `
+            <div class="${rowClass}">
+                <div class="inventory-row-main">
+                    <a class="inventory-row-title" href="${href}" target="_blank" rel="noopener noreferrer">${title}</a>
+                    <div class="inventory-row-meta">UPC: ${code} | ${product.used} ${usedLabel} | ${available} ${availableLabel}</div>
+                </div>
+                <div class="inventory-row-actions">
+                    <button type="button" data-inventory-action="increment" data-upc="${code}">+1</button>
+                    <button type="button" data-inventory-action="decrement" data-upc="${code}">-1</button>
+                    <button type="button" data-inventory-action="use" data-upc="${code}">Use 1</button>
+                </div>
+            </div>
+        `;
+    }
+
+    function adjustProductCount(upc, delta) {
+        const index = findProductIndex(upc);
+        if (index === -1) {
+            displayError(`The product with UPC "${upc}" is not in your inventory.`);
+            return;
+        }
+
+        const product = products[index];
+        if (delta > 0) {
+            product.count += delta;
+            saveProducts();
+            displaySuccess(`Added one more of "${product.product_name}".`);
+            generateLists();
+            return;
+        }
+
+        if (product.count <= 0) {
+            displayError(`The product with UPC "${upc}" cannot be reduced further.`);
+            return;
+        }
+
+        product.count = Math.max(0, product.count + delta);
+        if (product.used > product.count) {
+            product.used = product.count;
+        }
+
+        if (product.count === 0 && product.used === 0) {
+            products.splice(index, 1);
+            displaySuccess(`Removed "${product.product_name}" from inventory.`);
+        } else {
+            displaySuccess(`Removed one of "${product.product_name}".`);
+        }
+
+        saveProducts();
+        generateLists();
     }
 
     function onBarcodeScanned(decodedText) {
@@ -582,9 +718,9 @@ permalink: /inventory
 
         listsDiv.innerHTML = `
             <h2>Used Products (${usedProducts.reduce((sum, p) => sum + p.used, 0)})</h2>
-            ${usedProducts.map(p => `<div class="product used">${p.used} | <a href="https://world.openfoodfacts.org/product/${p.code}" target="_blank">${p.product_name}</a></div>`).join('') || '<p>No products used yet.</p>'}
+            ${usedProducts.map(p => renderProductRow(p, true)).join('') || '<p>No products used yet.</p>'}
             <h2>Unused Products (${unusedProducts.reduce((sum, p) => sum + (p.count - p.used), 0)})</h2>
-            ${unusedProducts.map(p => `<div class="product">${p.count - p.used} | <a href="https://world.openfoodfacts.org/product/${p.code}" target="_blank">${p.product_name}</a></div>`).join('') || '<p>No products unused.</p>'}
+            ${unusedProducts.map(p => renderProductRow(p, false)).join('') || '<p>No products unused.</p>'}
         `;
 
         refreshPantryMatches();
