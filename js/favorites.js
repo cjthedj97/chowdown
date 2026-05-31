@@ -49,12 +49,10 @@
 
   function renderFavoriteCards(recipes) {
     return recipes.map(function (recipe) {
-      var reviewedBadge = recipe.reviewed ? '<span class="reviewed-badge reviewed card-badge">Reviewed</span>' : '';
       var tileClass = recipe.image ? 'has-image' : 'no-image';
       var imageStyle = recipe.image ? ' style="background-image:url(' + recipe.image + ');"' : '';
       return '<div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2">' +
         '<a class="block relative recipe-tile ' + tileClass + '" href="' + recipe.url + '">' +
-        reviewedBadge +
         '<div class="image ratio bg-cover"' + imageStyle + '></div>' +
         '<h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">' + recipe.title + '</h1>' +
         '</a>' +

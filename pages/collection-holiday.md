@@ -16,9 +16,6 @@ title: Holiday Favorites Collection
       {% for post in holiday %}
       <div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2">
         <a class="block relative recipe-tile {% if post.image %}has-image{% else %}no-image{% endif %}" href="{{ post.url }}">
-          {% if post.reviewed %}
-            <span class="reviewed-badge reviewed card-badge">Reviewed</span>
-          {% endif %}
           <div class="image ratio bg-cover"
                {% if post.image and post.image contains 'http' %}
                  style="background-image:url({{ post.image }});"

@@ -216,29 +216,6 @@ html[data-theme="dark"] li {
   text-shadow: none;
 }
 
-.reviewed-badge {
-  display: inline-block;
-  position: relative;
-  z-index: 1;
-  border-radius: 999px;
-  padding: 0.28rem 0.7rem;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.reviewed-badge.reviewed {
-  background: color-mix(in srgb, var(--success) 88%, #000 12%);
-  color: #fff;
-}
-
-.reviewed-badge.card-badge {
-  position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
-}
-
 .home-search-card {
   margin-top: 2rem;
   border-radius: 18px;
