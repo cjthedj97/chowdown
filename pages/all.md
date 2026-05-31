@@ -7,12 +7,12 @@ permalink: /all
   <h1 class="center mb2">All Recipes</h1>
   <p class="center mb3">Browse the full published recipe catalog.</p>
 
-  <div class="recipes xs-px1">
-    <div class="clearfix">
+  <div class="recipes xs-px1 recipe-grid">
+    <div>
       {% assign published_recipes = site.recipes | where_exp: "item", "item.status != 'draft' and item.status != 'planned'" %}
       {% assign sorted = published_recipes | sort:"date" %}
       {% for post in sorted %}
-      <div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2">
+      <div class="recipe-grid-item">
         <a class="block relative recipe-tile {% if post.image %}has-image{% else %}no-image{% endif %}" href="{{ post.url }}">
           <div class="image ratio bg-cover"
                {% if post.image and post.image contains 'http' %}
