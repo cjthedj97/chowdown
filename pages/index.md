@@ -114,8 +114,6 @@ SimpleJekyllSearch({
 		});
 
     $('#search-input').on('input', function() {
-     	currentHeight = $('#search-container').outerHeight();
-      $('.search').addClass('used').css('height', currentHeight);
 			setTimeout(applyTagFilter, 50);
 	});
 
