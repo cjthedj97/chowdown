@@ -4,6 +4,7 @@ title:  "Pace Pork"
 image: pace-pork.jpg
 tags: mains crock pot
 
+date_added: 2020-01-29
 ingredients:
 - pork shoulder (or loin)
 - 1 jar of Pace Picante 

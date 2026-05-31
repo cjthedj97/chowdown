@@ -4,94 +4,174 @@ title:  "Frequently Asked Questions"
 permalink: /FAQ
 ---
 
-<head>
 <style>
-.collapsible {
-  background-color: #fff;
-  color: black;
-  cursor: pointer;
-  width: 100%;
-  padding: 18px;
-  border: none;
-  text-align: left;
-  font-size: 1.5rem;
+.faq-wrap {
+  max-width: 900px;
+  margin: 0 auto;
 }
 
-.collapsible:hover {
-  background-color: #007bffcc;
+.faq-intro {
+  margin-bottom: 1rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: linear-gradient(120deg, var(--surface), color-mix(in srgb, var(--accent) 8%, var(--surface)));
 }
 
-.collapsible:focus {
-  outline: none;
+.faq-list {
+  display: grid;
+  gap: 0.75rem;
 }
 
-.content {
-  padding: 0 18px;
-  max-height: 0;
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--surface);
   overflow: hidden;
-  transition: max-height 0.2s ease-out;
-  background-color: #f8f9fa;
-  border-color: #007bff;
-  border-left-style: solid;
-  border-width: 3px;
 }
+
+.faq-item summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 0.9rem 1rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.faq-item summary::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item summary::after {
+  content: "+";
+  float: right;
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.faq-item[open] summary::after {
+  content: "-";
+}
+
+.faq-answer {
+  padding: 0 1rem 1rem;
+  color: var(--text);
+}
+
+.faq-answer p {
+  margin: 0;
 }
 </style>
-</head>
-<body>
 
-<button class="collapsible">What is this site for?</button>
-<div class="content">
-  <p>It is a online recipe book of curated recipes used by members and relatives of the of the Saathoff Family.</p>
+<div class="faq-wrap">
+  <div class="faq-intro">
+    <p><strong>Need help using Chowdown?</strong> Start here for quick answers on submitting recipes, finding features, and reporting issues.</p>
+  </div>
+
+  <div class="faq-list">
+    <details class="faq-item" open>
+      <summary>What is this site for?</summary>
+      <div class="faq-answer">
+        <p>This is an online recipe book with curated recipes used by the Saathoff family and friends.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I navigate the website?</summary>
+      <div class="faq-answer">
+        <p>Use the top navigation bar. On mobile, open the hamburger menu in the top-right corner to access all pages.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I submit recipes?</summary>
+      <div class="faq-answer">
+        <p>Yes. You can use <a href="/convert">Convert and Submit</a>, send recipes by <a href="mailto:recipes@saathoff.us?subject=Recipe Submission">email</a>, or open a pull request on GitHub.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is the Convert page and how do I use it?</summary>
+      <div class="faq-answer">
+        <p>The Convert page helps turn a plain recipe into site-ready markdown frontmatter. It now supports tags, prep/cook/total time, servings, <code>date_added</code>, and <code>status</code> fields.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What does recipe status mean?</summary>
+      <div class="faq-answer">
+        <p><code>published</code> is ready to show publicly, <code>planned</code> is queued, and <code>draft</code> is still in progress.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is date_added used for?</summary>
+      <div class="faq-answer">
+        <p>The home page Recently Added section uses <code>date_added</code> to sort and show the newest recipes.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Why did my browser ask to install the site?</summary>
+      <div class="faq-answer">
+        <p>The site is a Progressive Web App (PWA). Installing it creates a home screen shortcut and can improve load/offline behavior on supported devices.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I save favorites?</summary>
+      <div class="faq-answer">
+        <p>Yes. Use the favorite button on recipe pages, then view saved recipes at <a href="/favorites">/favorites</a>. Favorites are stored in your browser (localStorage).</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Can I search by category or tag?</summary>
+      <div class="faq-answer">
+        <p>Yes. The home/search page includes tag chips (like Copycat, Dessert, Meal Prep, and more) to narrow results quickly.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What are Collections pages?</summary>
+      <div class="faq-answer">
+        <p>Collections are curated dynamic lists for common use cases like meal prep, holiday recipes, and game day food.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>What is Inventory matching?</summary>
+      <div class="faq-answer">
+        <p>The Inventory page can match your pantry items to likely recipes and show likely missing ingredients to help plan shopping.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Is there an RSS feed?</summary>
+      <div class="faq-answer">
+        <p>Yes. The feed is available at <a href="/feed.xml">/feed.xml</a>.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How many recipes are on the site?</summary>
+      <div class="faq-answer">
+        <p>Check the stats page at <a href="/stats">/stats</a> for both total recipes and published recipes, plus other breakdowns.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>Where is the source code?</summary>
+      <div class="faq-answer">
+        <p>The code is on GitHub: <a href="https://github.com/cjthedj97/chowdown">cjthedj97/chowdown</a>.</p>
+      </div>
+    </details>
+
+    <details class="faq-item">
+      <summary>How do I report bugs or share feedback?</summary>
+      <div class="faq-answer">
+        <p>Send feedback via <a href="mailto:recipes@saathoff.us?subject=Site Feedback">email</a> or open an issue on <a href="https://github.com/cjthedj97/chowdown/issues/new/choose">GitHub</a>.</p>
+      </div>
+    </details>
+  </div>
 </div>
-<button class="collapsible">How do I Navigate the website?</button>
-<div class="content">
-  <p>Everything is linked in the header bar at the top of of the website or on mobile click on the hamburger menu (the button on the top right that looks like three lines on top of each other).</p>
-</div>
-
-<button class="collapsible">When I went to the site it asked me to install something?</button>
-<div class="content">
-<p>This prompt is part of our site’s Progressive Web App (PWA) feature. A PWA combines the best of web and mobile apps, offering offline capabilities, fast loading, and a device-friendly layout. When you ‘install’ the site, it adds a shortcut to your device for easy access, just like a regular app, but it doesn’t take up as much space.</p>
-</div>
-
-<button class="collapsible">Can I submit recipes?</button>
-<div class="content">
-<p>Yes you can either use the <a href="/convert">Convert and submit</a>, <a href="mailto:recipes@saathoff.us?subject=Recipe Submission">email</a>,or submit a pull request from the github repo.</p>
-</div>
-
-<button class="collapsible">Is there RSS Feed?</button>
-<div class="content">
-<p>Yes there is an xml feed located at <a href="/feed.xml">/feed.xml</a>.</p>
-</div>
-
-<button class="collapsible">Where is the source code?</button>
-<div class="content">
-<p>The source can be found at <a href="https://github.com/cjthedj97/chowdown">https://github.com/cjthedj97/chowdown</a>.</p>
-</div>
-
-<button class="collapsible">I think I found a bug or I have feedback where do I report it?</button>
-<div class="content">
-<p>Feel free to get ahold of me though the <a href="mailto:recipes@saathoff.us?subject=Site Feedback">email</a> or open a github issue <a href="https://github.com/cjthedj97/chowdown/issues/new/choose">Github</a>.</p>
-</div>
-
-<button class="collapsible">How many Recipe are on the site?</button>
-<div class="content">
-<p>Check out <a href="/stats">https://recipes.saathoff.us/stats</a> for an answer to that.</p>
-</div>
-
-<script>
-var coll = document.getElementsByClassName("collapsible");
-var i;
-
-for (i = 0; i < coll.length; i++) {
-  coll[i].addEventListener("click", function() {
-    this.classList.toggle("active");
-    var content = this.nextElementSibling;
-    if (content.style.maxHeight){
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
-    } 
-  });
-}
-</script>

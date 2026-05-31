@@ -24,8 +24,17 @@ layout: recipe_default
 <!-- call up the main recipe title and content -->
   <header class="post-header">
     <h1 class="post-title center m1 sm-mt3" itemprop="name">{{ page.title }}</h1>
+    <div class="center mt2">
+      <button id="favorite-toggle" class="btn btn-sm btn-outline-primary" type="button">Save Favorite</button>
+      <button id="print-recipe" class="btn btn-sm btn-outline-secondary" type="button">Print Recipe</button>
+    </div>
     {% include yield.html recipe=page %}
     {% include timings.html recipe=page %}
+    {% if page.notes %}
+      <div class="mt2 px2 py1" style="border-left: 3px solid var(--accent); background: var(--surface);">
+        <strong>Notes:</strong> {{ page.notes | markdownify }}
+      </div>
+    {% endif %}
   </header>
 
   <div class="px2 mt3 clearfix">
@@ -171,4 +180,49 @@ layout: recipe_default
   </article>
 
 </div>
+<script src="{{site.baseurl}}/js/favorites.js" type="text/javascript"></script>
+<script>
+  window.ChowdownFavorites.initRecipeFavoriteButton({
+    buttonId: 'favorite-toggle',
+    recipeUrl: '{{site.baseurl}}{{page.url}}'
+  });
+
+  (function () {
+    var printButton = document.getElementById('print-recipe');
+    if (!printButton) return;
+    printButton.addEventListener('click', function () {
+      window.print();
+    });
+  })();
+</script>
+<style>
+  @media print {
+    nav,
+    #favorite-toggle,
+    #print-recipe,
+    .right,
+    .components,
+    .navbar,
+    script {
+      display: none !important;
+    }
+
+    body,
+    .page-content,
+    .container,
+    .post-content {
+      margin: 0 !important;
+      padding: 0 !important;
+      max-width: 100% !important;
+    }
+
+    h1, h2, h3, h4, h5, h6, p, li {
+      color: #000 !important;
+    }
+
+    input[type="checkbox"] {
+      display: inline-block !important;
+    }
+  }
+</style>
 <script src="/js/duration.js" charset="utf-8"></script>

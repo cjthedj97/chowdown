@@ -9,6 +9,7 @@ prep_time: "5 mins"
 cook_time: "15 mins"
 total_time: "20 mins"
 
+date_added: 2024-11-24
 ingredients:
 - 4 cups heavy cream
 - 8 ounces butter
@@ -26,6 +27,5 @@ directions:
 - Season with salt and pepper to taste.
 - In a large bowl, combine the cooked pasta with the Alfredo sauce, stirring to coat the pasta evenly.
 - Serve immediately, garnished with chopped parsley if desired.
-
 ---
 For a thicker sauce, consider adding 2 tablespoons of cream cheese. For a touch of spice, include ground white pepper. Although not used in the original Olive Garden sauce, a pinch of nutmeg can be added for extra flavor. Store any leftover sauce separately from the pasta and reheat gently over low heat, adding a splash of cream if needed to adjust the consistency.

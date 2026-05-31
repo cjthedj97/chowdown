@@ -4,6 +4,7 @@ title: "Cookie Dough Dip"
 image: Cookie-Dough-Dip.jpg
 imagecredit: https://www.thatskinnychickcanbake.com/cookie-dough-dip/
 
+date_added: 2022-12-23
 ingredients:
 - 8 ounces cream cheese, at room temperature
 - 1 stick (½ cup) butter, at room temperature

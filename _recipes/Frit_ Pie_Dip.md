@@ -7,6 +7,7 @@ yield: 8 Servings
 preptime: PT5m
 cooktime: PT25m
 
+date_added: 2021-07-16
 ingredients:
 - 8 ounces of cream cheese
 - 16 ounces of sour cream
@@ -22,5 +23,4 @@ directions:
 - Cover with cheese
 - Bake at 375F for 25 minutes or until bubbly and the cheese is melted
 - Serve hot with corn chips
-
 ---

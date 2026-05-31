@@ -2,6 +2,7 @@
 layout: recipe
 title: "Orange Breakfast drink"
 
+date_added: 2021-07-11
 ingredients:
 - 2 cups orange juice
 - ½ cup water

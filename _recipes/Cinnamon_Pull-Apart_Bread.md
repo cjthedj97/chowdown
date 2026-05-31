@@ -6,6 +6,7 @@ imagecredit: https://www.pillsbury.com/recipes/grands-cinnamon-pull-apart-bread/
 yield: 12 Servings
 preptime: PT25m
 
+date_added: 2021-07-26
 ingredients:
 - ½ cup granulated sugar
 - 1 teaspoon ground cinnamon

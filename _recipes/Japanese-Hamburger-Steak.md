@@ -5,6 +5,7 @@ tags: dinner lunch Japanese Korean
 image: japanese-hamburger-steak.jpg
 imagecredit: https://drivemehungry.com/japanese-hamburger-steak-hambagu/
 
+date_added: 2024-01-01
 ingredients:
 - Hamburger Steak:
   - 1 ⅓ lb ground beef See Note 1

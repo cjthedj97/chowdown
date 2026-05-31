@@ -7,6 +7,7 @@ preptime: PT30m
 cooktime: PT25m
 yield: 8 servings (2 quarts)
 
+date_added: 2022-12-23
 ingredients:
 - 1/2 pound ground beef
 - 4 tablespoons butter, divided

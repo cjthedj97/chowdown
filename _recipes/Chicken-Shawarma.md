@@ -5,6 +5,7 @@ tags: zaytoon
 tag: Diners, Drive-Ins and Dives
 imagecredit: https://www.foodnetwork.com/recipes/chicken-shawarma-3877358
 
+date_added: 2023-04-25
 ingredients:
 - 1 cup tomato paste
 - 1 cup white distilled vinegar

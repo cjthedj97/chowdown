@@ -4,6 +4,7 @@ title: "Sheet Pan Dinner with Bratwurst and Roasted Vegetables"
 image: Sheet_Pan_Dinner_with_Bratwurst_and_Roasted_Vegetables.webp
 imagecredit: https://lisasdinnertimedish.com/sheet-pan-dinner-with-bratwurst-and-roasted-vegetables/
 
+date_added: 2021-07-26
 ingredients:
 - 1 red bell peppers, sliced into 1 inch strips
 - 1 onion, cut into wedges (I used a sweet onion)

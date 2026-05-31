@@ -4,6 +4,7 @@ title: "CopyKat Chick Fil A Sauce"
 image: Chick-Fil-A-Sauce.jpg
 imagecredit: https://copykat.com/chick-fil-a-sauce/
 
+date_added: 2024-01-06
 ingredients:
 - 2 tablespoons honey
 - 1 tablespoon yellow prepared mustard

@@ -8,6 +8,7 @@ preptime: PT1h50m
 cooktime: PT20m
 
 
+date_added: 2024-01-07
 ingredients:
 - ½ cup warm water ~100° to 110°F
 - 2 ½ teaspoons instant yeast 1 package

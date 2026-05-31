@@ -5,6 +5,7 @@ image: Hashbrown-Breakfast-Casserole.jpg
 imagecredit: https://www.spendwithpennies.com/hashbrown-breakfast-casserole/
 tags: potato eggs cheese breakfast
 
+date_added: 2021-07-26
 ingredients:
 - 20 ounces shredded hash browns thawed
 - 1 pound sausage cooked, crumbled and drained

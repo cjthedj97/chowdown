@@ -5,6 +5,7 @@ image: salt-vinegar-potatoes.jpg
 imagecredit: https://www.nigella.com/recipes/salt-and-vinegar-potatoes
 tags: sides veg
 
+date_added: 2020-11-21
 ingredients:
 - small potatoes
 - splash of oil/butter

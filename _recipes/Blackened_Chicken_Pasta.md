@@ -6,6 +6,7 @@ imagecredit: https://www.foodnetwork.com/recipes/blackened-chicken-pasta-8556476
 yield: 4 to 6 servings
 cooktime: PT40m
 
+date_added: 2021-06-30
 ingredients:
 - 1 pound penne
 - 1 tablespoon olive oil

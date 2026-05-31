@@ -91,6 +91,20 @@ permalink: /convert
       </div>
 
       <div>
+        <label for="recipe-date-added">Date Added (for Recently Added)</label>
+        <input type="date" id="recipe-date-added">
+      </div>
+
+      <div>
+        <label for="recipe-status">Recipe Status</label>
+        <select id="recipe-status">
+          <option value="published" selected>published</option>
+          <option value="planned">planned</option>
+          <option value="draft">draft</option>
+        </select>
+      </div>
+
+      <div>
         <input type="number" id="recipe-prep-hours" placeholder="Prep Time: Hours" min="0" max="24">
         <input type="number" id="recipe-prep-minutes" placeholder="Prep Time: Minutes" min="0" max="60">
       </div>
@@ -109,7 +123,7 @@ permalink: /convert
       </div>
 
       <div>
-        <textarea placeholder="Notes" id="recipe-notes"></textarea>
+        <textarea placeholder="Recipe notes (optional)" id="recipe-notes"></textarea>
       </div>
 
       <button type="submit">Convert</button>
@@ -121,134 +135,168 @@ permalink: /convert
 </div>
 
 <div class="bottom-column" id="bottom-column"></div>
+<div id="convert-status" style="padding: 10px 20px;"></div>
 
 <script>
   const form = document.querySelector('#recipe-form');
   const output = document.querySelector('.bottom-column');
   const copyButton = document.querySelector('#copy-button');
+  const statusBox = document.querySelector('#convert-status');
+  document.querySelector('#recipe-date-added').value = new Date().toISOString().slice(0, 10);
+
+  function setStatus(message, type = 'ok') {
+    const color = type === 'error' ? '#b91c1c' : '#166534';
+    statusBox.innerHTML = `<p style="color:${color};margin:0;">${message}</p>`;
+  }
+
+  function yamlSafe(value) {
+    return (value || '').replace(/"/g, '\\"');
+  }
+
+  function cleanListLine(line) {
+    return line
+      .replace(/^\s*[-*]\s+/, '')
+      .replace(/^\s*\d+[\.)]\s+/, '')
+      .trim();
+  }
+
+  function normalizeUnitsAndFractions(value) {
+    return (value || '')
+      .replace(/\bounces?\b/gi, 'oz')
+      .replace(/\bpounds?\b/gi, 'lb')
+      .replace(/1\/16/g, '1/16')
+      .replace(/1\/8/g, '⅛')
+      .replace(/1\/4/g, '¼')
+      .replace(/1\/3/g, '⅓')
+      .replace(/1\/2/g, '½')
+      .replace(/2\/3/g, '⅔')
+      .replace(/3\/4/g, '¾');
+  }
+
+  function parseList(text) {
+    return text
+      .split('\n')
+      .map(cleanListLine)
+      .filter(Boolean)
+      .map(normalizeUnitsAndFractions);
+  }
+
+  function formatDuration(hoursRaw, minutesRaw) {
+    const h = Number(hoursRaw || 0);
+    const m = Number(minutesRaw || 0);
+    const parts = [];
+    if (h > 0) parts.push(`${h} hr${h > 1 ? 's' : ''}`);
+    if (m > 0) parts.push(`${m} min${m > 1 ? 's' : ''}`);
+    return parts.join(' ');
+  }
+
+  function totalMinutes(hoursRaw, minutesRaw) {
+    const h = Number(hoursRaw || 0);
+    const m = Number(minutesRaw || 0);
+    return (h * 60) + m;
+  }
+
+  function formatTotalMinutes(mins) {
+    if (!mins) return '';
+    const h = Math.floor(mins / 60);
+    const m = mins % 60;
+    return formatDuration(h, m);
+  }
+
+  function yamlBlock(value) {
+    return (value || '')
+      .split('\n')
+      .map(line => `  ${line.replace(/\t/g, '    ')}`)
+      .join('\n');
+  }
 
   form.addEventListener('submit', (event) => {
-    event.preventDefault(); // prevent the form from submitting normally
+    event.preventDefault();
 
     const name = document.querySelector('#recipe-name').value.trim();
-    const tags = document.querySelector('#recipe-tags').value.trim();
+    const tagsRaw = document.querySelector('#recipe-tags').value.trim();
     const imgCredit = document.querySelector('#recipe-img-credit').value.trim();
     const imageLink = document.querySelector('#recipe-image-link').value.trim();
-    const tag = document.querySelector('#recipe-tag').value.trim();
-    const ingredients = document.querySelector('#recipe-ingredients').value.trim();
-    const directions = document.querySelector('#recipe-directions').value.trim();
+    const longTag = document.querySelector('#recipe-tag').value.trim();
+    const ingredientsRaw = document.querySelector('#recipe-ingredients').value.trim();
+    const directionsRaw = document.querySelector('#recipe-directions').value.trim();
     const yieldValue = document.querySelector('#recipe-yield').value.trim();
+    const dateAdded = document.querySelector('#recipe-date-added').value.trim();
+    const recipeStatus = document.querySelector('#recipe-status').value.trim();
     const prepHours = document.querySelector('#recipe-prep-hours').value.trim();
     const prepMinutes = document.querySelector('#recipe-prep-minutes').value.trim();
     const cookHours = document.querySelector('#recipe-cook-hours').value.trim();
     const cookMinutes = document.querySelector('#recipe-cook-minutes').value.trim();
-
-    // ingredients Formatting Find and Replace
-    const ingredientsWithLB = ingredients.replace(/ounce/gi, 'oz');
-    const ingredientsWithOz = ingredientsWithLB.replace(/pound/gi, 'lb');
-    const ingredientsFraction14 = ingredientsWithOz.replace(/1\/4/g, '¼');
-    const ingredientsFraction12 = ingredientsFraction14.replace(/1\/2/g, '½');
-    const ingredientsFraction34 = ingredientsFraction12.replace(/3\/4/g, '¾');
-    const ingredientsFraction13 = ingredientsFraction34.replace(/1\/3/g, '⅓');
-    const ingredientsFraction23 = ingredientsFraction13.replace(/2\/3/g, '⅔');
-    const ingredientsFraction18 = ingredientsFraction23.replace(/1\/8/g, '⅛');
-    const ingredientsFraction116 = ingredientsFraction18.replace(/1\/16/g, '⅛');
-
-    // directions Formatting Find and Replace
-    const directionsWithLB = directions.replace(/ounce/gi, 'oz');
-    const directionsWithOz = directionsWithLB.replace(/pound/gi, 'lb');
-    const directionsFraction14 = directionsWithOz.replace(/1\/4/g, '¼');
-    const directionsFraction12 = directionsFraction14.replace(/1\/2/g, '½');
-    const directionsFraction34 = directionsFraction12.replace(/3\/4/g, '¾');
-    const directionsFraction13 = directionsFraction34.replace(/1\/3/g, '⅓');
-    const directionsFraction23 = directionsFraction13.replace(/2\/3/g, '⅔');
-    const directionsFraction18 = directionsFraction23.replace(/1\/8/g, '⅛');
-    const directionsFraction116 = directionsFraction18.replace(/1\/16/g, '⅛');
-
     const notes = document.querySelector('#recipe-notes').value.trim();
 
-    const ingredientsMarkdown = ingredientsFraction116.split('\n')
-      .map(ingredient => `- ${ingredient.trim()}`)
-      .filter(ingredient => !/^-[\s]*$/.test(ingredient))
-      .join('\n');
+    const ingredients = parseList(ingredientsRaw);
+    const directions = parseList(directionsRaw);
 
-    const directionsMarkdown = directionsFraction116.split('\n')
-      .map(instruction => `- ${instruction.trim()}`)
-      .filter(instruction => !/^-[\s]*$/.test(instruction))
-      .join('\n');
-    
-    let markdown = `---
-layout: recipe
-title: "${name}"
-`
+    if (!name) {
+      setStatus('Recipe name is required.', 'error');
+      return;
+    }
+    if (!ingredients.length) {
+      setStatus('Add at least one ingredient line.', 'error');
+      return;
+    }
+    if (!directions.length) {
+      setStatus('Add at least one direction step.', 'error');
+      return;
+    }
 
-if (tags !== '') {
-  markdown += `tags:${tags.split(' ').map(tag => tag.trim()).join(', ')}
-`;
-}
+    const tags = [];
+    tagsRaw.split(/[\s,]+/).map(t => t.trim()).filter(Boolean).forEach(t => tags.push(t));
+    if (longTag) tags.push(longTag);
 
-if (imgCredit !== '') {
-  markdown += `imagecredit: ${imgCredit}
-`;
-}
+    const prepTime = formatDuration(prepHours, prepMinutes);
+    const cookTime = formatDuration(cookHours, cookMinutes);
+    const totalTime = formatTotalMinutes(totalMinutes(prepHours, prepMinutes) + totalMinutes(cookHours, cookMinutes));
 
-if (imageLink !== '') {
-  markdown += `imagelink: ${imageLink}
-`;
-}
+    let markdown = `---\nlayout: recipe\ntitle: "${yamlSafe(name)}"\n`;
 
-if (tag !== '') {
-  markdown += `tag: ${tag}
-`;
-}
+    if (imageLink) markdown += `image: ${imageLink}\n`;
+    if (imgCredit) markdown += `imagecredit: ${imgCredit}\n`;
+    if (tags.length) markdown += `tags: ${tags.join(' ')}\n`;
+    if (dateAdded) markdown += `date_added: ${dateAdded}\n`;
+    if (recipeStatus) markdown += `status: ${recipeStatus}\n`;
+    if (yieldValue) markdown += `servings: ${yamlSafe(yieldValue)}\n`;
+    if (prepTime) markdown += `prep_time: "${prepTime}"\n`;
+    if (cookTime) markdown += `cook_time: "${cookTime}"\n`;
+    if (totalTime) markdown += `total_time: "${totalTime}"\n`;
+    if (notes) markdown += `notes: |\n${yamlBlock(notes)}\n`;
 
-if (prepHours !== '' || prepMinutes !== '') {
-  const prepTimeFormatted = `PT${prepHours !== '' ? prepHours + 'H' : ''}${prepMinutes !== '' ? prepMinutes + 'M' : ''}`;
-  markdown += `preptime: ${prepTimeFormatted}
-`;
-}
+    markdown += `\ningredients:\n${ingredients.map(item => `- ${item}`).join('\n')}\n\n`;
+    markdown += `directions:\n${directions.map(item => `- ${item}`).join('\n')}\n---`;
 
-if (cookHours !== '' || cookMinutes !== '') {
-  const cookTimeFormatted = `PT${cookHours !== '' ? cookHours + 'H' : ''}${cookMinutes !== '' ? cookMinutes + 'M' : ''}`;
-  markdown += `cooktime: ${cookTimeFormatted}
-`;
-}
-
-markdown += `ingredients:
-${ingredientsMarkdown}
-
-directions:
-${directionsMarkdown}
----`
-
-if (notes !== '') {
-  markdown += `
-${notes}`;
-}
-
-markdown += `
-
-`;
-
-    output.innerHTML = `<pre><code>${markdown}</code></pre>`;
+    output.textContent = markdown;
+    setStatus('Conversion complete. Review output, then copy or email.');
   });
 
-  copyButton.addEventListener('click', () => {
-    const range = document.createRange();
-    range.selectNode(output);
-    window.getSelection().removeAllRanges();
-    window.getSelection().addRange(range);
-    document.execCommand('copy');
-    window.getSelection().removeAllRanges();
+  copyButton.addEventListener('click', async () => {
+    const content = output.textContent.trim();
+    if (!content) {
+      setStatus('Nothing to copy yet. Convert a recipe first.', 'error');
+      return;
+    }
+    try {
+      await navigator.clipboard.writeText(content);
+      setStatus('Converted recipe copied to clipboard.');
+    } catch (error) {
+      setStatus('Clipboard copy failed. Try selecting and copying manually.', 'error');
+    }
   });
 
   function sendEmail() {
-    const outputContent = document.querySelector('.bottom-column').innerText;
+    const outputContent = document.querySelector('.bottom-column').textContent.trim();
+    if (!outputContent) {
+      setStatus('Nothing to email yet. Convert a recipe first.', 'error');
+      return;
+    }
     location.href = `mailto:recipes@saathoff.us?subject=Recipe Submission&body=${encodeURIComponent(outputContent)}`;
   }
 
   function clearForm() {
-    // Reset all input fields
     document.querySelector('#recipe-name').value = '';
     document.querySelector('#recipe-tags').value = '';
     document.querySelector('#recipe-img-credit').value = '';
@@ -262,9 +310,11 @@ markdown += `
     document.querySelector('#recipe-cook-hours').value = '';
     document.querySelector('#recipe-cook-minutes').value = '';
     document.querySelector('#recipe-yield').value = '';
+    document.querySelector('#recipe-date-added').value = '';
+    document.querySelector('#recipe-status').value = 'published';
 
-    // Clear the output
-    document.querySelector('.bottom-column').innerHTML = '';
+    document.querySelector('.bottom-column').textContent = '';
+    statusBox.innerHTML = '';
   }
 </script>
 </body>

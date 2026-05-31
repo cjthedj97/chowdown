@@ -4,6 +4,7 @@ title:  "New York Strip"
 image: new-york-strip.jpg
 tags: mains meat
 
+date_added: 2018-08-22
 ingredients:
 - NY Strip Steak(s)
 - salt to taste

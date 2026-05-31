@@ -7,6 +7,7 @@ tag: "Side Dish"
 preptime: PT5m
 cooktime: PT3h
 
+date_added: 2024-06-18
 ingredients:
 - 4 cups Rice
 - 8 cups Water

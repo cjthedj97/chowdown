@@ -7,7 +7,8 @@ permalink: /all
 
   <div class="recipes xs-px1 xs-mt2">
     <div class="clearfix">
-    {% assign sorted = site.recipes | sort:"date" %}
+    {% assign published_recipes = site.recipes | where_exp: "item", "item.status != 'draft' and item.status != 'planned'" %}
+    {% assign sorted = published_recipes | sort:"date" %}
     {% for post in sorted %}
 
       <div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2">

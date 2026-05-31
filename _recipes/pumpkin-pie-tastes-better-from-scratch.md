@@ -9,6 +9,7 @@ prep_time: "20 mins"
 cook_time: "50-60 mins"
 total_time: "1 hr 10 mins"
 
+date_added: 2025-10-21
 ingredients:
 - 1 (9-inch) unbaked pie crust (homemade or store-bought)
 - 3/4 cup (150 g) granulated sugar
@@ -33,7 +34,6 @@ directions:
 - Bake at 425°F (220°C) for 15 minutes. Reduce the oven temperature to 350°F (175°C) and bake another 35–45 minutes, or until a knife inserted near the center comes out clean and the filling is set.
 - Remove pie from the oven and cool on a wire rack for at least 2 hours. Chill before serving to finish setting (recommended).
 - Serve with whipped cream.
-
 ---
 Adapted from "Pumpkin Pie" on Tastes Better From Scratch. Original/printable recipe: https://tastesbetterfromscratch.com/wprm_print/pumpkin-pie-recipe
 

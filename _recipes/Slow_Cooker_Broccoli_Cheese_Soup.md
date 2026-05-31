@@ -4,6 +4,7 @@ title: "Slow Cooker Broccoli Cheese Soup"
 image: Slow_Cooker_Broccoli_Cheese_Soup.jpg
 imagecredit: https://www.cookingclassy.com/slow-cooker-broccoli-cheese-soup/
 
+date_added: 2021-12-20
 ingredients:
 - ⅓ cup of butter, Sliced
 - 1½ cups chopped yellow onion

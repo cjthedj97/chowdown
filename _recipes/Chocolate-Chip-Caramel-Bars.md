@@ -6,6 +6,7 @@ tags: dessert american
 preptime: PT10m
 cooktime: PT25m
 
+date_added: 2024-01-09
 ingredients:
 - Chocolate Chip Cookie Bars:
 - 1 cup (2 sticks or 226g) butter, room temperature

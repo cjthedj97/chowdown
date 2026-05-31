@@ -5,6 +5,7 @@ image: mongolian-beef.jpg
 imagecredit: https://flic.kr/p/8ANQTc
 tags: mains meat
 
+date_added: 2018-08-22
 ingredients:
 - vegetable oil
 - 1⁄2 teaspoon ginger

@@ -3,6 +3,7 @@ layout: recipe
 title:  "CopyCat Applebee's Garlic Mashed Potatoes"
 imagecredit: https://www.budgetsavvydiva.com/2012/05/copy-cat-recipe-applebees-garlic-mashed-potatoes/
 
+date_added: 2021-07-16
 ingredients:
 - 2 lbs red potatoes
 - 1/2 cup milk
@@ -17,7 +18,6 @@ directions:
 - During this time boil potatoes. Take garlic cloves ( peel them and mash them into the potatoes)
 - Combine all the rest of the ingredients together. All seasoning is to taste.
 - Enjoy
-
 ---
 
 [Source](https://www.budgetsavvydiva.com/2012/05/copy-cat-recipe-applebees-garlic-mashed-potatoes/)

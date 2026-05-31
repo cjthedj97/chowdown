@@ -3,11 +3,14 @@ layout: null
 ---
 {% assign recipeCounter = 1 %}
 {% assign totalRecipes = site.recipes | size %}
+{% assign publishedRecipes = site.recipes | where_exp: "r", "r.status != 'draft' and r.status != 'planned'" %}
+{% assign publishedRecipeCount = publishedRecipes | size %}
 {% assign buildDateTime = site.time | date_to_xmlschema %}
 
 {
   "buildDateTime": "{{ buildDateTime }}",
   "recipeCount": {{ totalRecipes }},
+  "publishedRecipeCount": {{ publishedRecipeCount }},
   "recipes": [
     {% for post in site.recipes %}
       {

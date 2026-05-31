@@ -7,6 +7,7 @@ preptime: PT30m
 cooktime: PT10m
 yield: 4 Servings
 
+date_added: 2024-01-07
 ingredients:
 - ⅓ cup cornstarch
 - 2 teaspoons minced garlic

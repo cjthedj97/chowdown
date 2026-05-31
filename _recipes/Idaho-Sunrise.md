@@ -5,6 +5,7 @@ image: "https://i2.wp.com/lmld.org/wp-content/uploads/2012/08/016-1024x678.jpg"
 imagecredit: https://lmld.org/idaho-sunrise-baked-egg-in-a-baked-potato/
 tags: potato eggs cheese chives breakfast
 
+date_added: 2021-04-11
 ingredients:
 - 1 baked potato
 - 1 large egg

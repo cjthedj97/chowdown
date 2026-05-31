@@ -9,6 +9,7 @@ prep_time: "15 mins"
 cook_time: "45 mins"
 total_time: "1 hour"
 
+date_added: 2024-11-24
 ingredients:
 - 1 pound sweet or hot Italian sausage links
 - 1 pound russet potatoes, peeled, cut in half lengthwise, then sliced 1/4-inch thick
@@ -32,6 +33,5 @@ directions:
 - Turn the heat to low. Add kale and cream, and stir to combine.
 - Add more water if necessary for desired consistency.
 - Heat thoroughly and serve.
-
 ---
 Store any leftover soup in an airtight container in your refrigerator for 3 to 5 days, or freeze for up to 3 months. Reheat soup on the stovetop over low to medium heat for best results. Serve with warm slices of Tuscan bread.

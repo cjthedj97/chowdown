@@ -34,7 +34,50 @@ permalink: /inventory
     button:hover {
         background-color: #e0e0e0;
     }
+
+    #scanner-panel {
+        border: 1px solid #d1d5db;
+        border-radius: 8px;
+        padding: 12px;
+        margin-bottom: 20px;
+        background: #fff;
+    }
+
+    #scanner-reader {
+        width: 100%;
+        max-width: 420px;
+        min-height: 240px;
+        border-radius: 8px;
+        overflow: hidden;
+        background: #000;
+    }
+
+    #scanner-status {
+        margin-top: 8px;
+        color: #374151;
+    }
+
+    @media screen and (max-width: 768px) {
+        #scanner-reader {
+            min-height: 200px;
+        }
+    }
 </style>
+<div id="scanner-panel">
+    <h2 style="margin-top: 0;">Scan Barcode</h2>
+    <p style="margin-top: 0;">Use your camera to scan a product barcode, then it will auto-add to inventory.</p>
+    <div class="controls">
+        <button id="start-scan" type="button">Start Camera Scan</button>
+        <button id="stop-scan" type="button" disabled>Stop Camera</button>
+    </div>
+    <label style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 10px;">
+        <input type="checkbox" id="scan-continuous">
+        Keep scanning after successful add
+    </label>
+    <div id="scanner-reader"></div>
+    <p id="scanner-status">Scanner idle.</p>
+    <p style="font-size: 0.95rem; color: #6b7280; margin-bottom: 0;">Tip: Works best over HTTPS and good lighting. If scan fails, enter UPC manually below.</p>
+</div>
 <form id="upc-form" class="button-container">
     <label for="upc">Enter UPC Code:</label>
     <input type="text" id="upc" name="upc" required>
@@ -49,13 +92,19 @@ permalink: /inventory
     <button onclick="shareList()">Share List</button>
     <button onclick="clearData()">Clear Data</button>
     <button onclick="clearUsedProducts()">Clear Used Products</button>
+    <button onclick="refreshPantryMatches()">Find Matching Recipes</button>
 </div>
 <div id="result"></div>
 <div id="lists"></div>
+<div id="pantry-matches"></div>
 
+<script src="https://unpkg.com/html5-qrcode" type="text/javascript"></script>
 <script>
     const storageKey = 'upcProducts';
     let products = JSON.parse(localStorage.getItem(storageKey)) || [];
+    let cachedRecipes = [];
+    let barcodeScanner = null;
+    let scannerActive = false;
 
     document.getElementById('upc-form').addEventListener('submit', function(event) {
         event.preventDefault();
@@ -69,7 +118,20 @@ permalink: /inventory
         markUPCAsUsed(upc);
     });
 
+    document.getElementById('start-scan').addEventListener('click', startBarcodeScanner);
+    document.getElementById('stop-scan').addEventListener('click', stopBarcodeScanner);
+
     window.onload = generateLists;
+
+    fetch('{{site.baseurl}}/search.json')
+        .then(response => response.json())
+        .then(data => {
+            cachedRecipes = Array.isArray(data) ? data : [];
+            refreshPantryMatches();
+        })
+        .catch(error => {
+            console.error('Error loading recipe search data:', error);
+        });
     
     function lookupUPC(upc) {
         // Ensure the UPC is treated as a string
@@ -93,6 +155,88 @@ permalink: /inventory
             .finally(() => {
                 document.getElementById('upc').value = ''; // Clear the add UPC text box
             });
+    }
+
+    function setScannerStatus(message, isError) {
+        const statusEl = document.getElementById('scanner-status');
+        if (!statusEl) return;
+        statusEl.textContent = message;
+        statusEl.style.color = isError ? '#b91c1c' : '#374151';
+    }
+
+    function setScannerButtons() {
+        const startButton = document.getElementById('start-scan');
+        const stopButton = document.getElementById('stop-scan');
+        if (!startButton || !stopButton) return;
+        startButton.disabled = scannerActive;
+        stopButton.disabled = !scannerActive;
+    }
+
+    function normalizeUPC(rawCode) {
+        return String(rawCode || '').replace(/[^0-9]/g, '').trim();
+    }
+
+    function onBarcodeScanned(decodedText) {
+        const upc = normalizeUPC(decodedText);
+        if (!upc) {
+            setScannerStatus('Scanned code was not a valid numeric UPC.', true);
+            return;
+        }
+
+        setScannerStatus(`Scanned: ${upc}. Looking up product...`);
+        lookupUPC(upc);
+
+        var continuousScan = document.getElementById('scan-continuous');
+        if (!continuousScan || !continuousScan.checked) {
+            stopBarcodeScanner();
+        }
+    }
+
+    async function startBarcodeScanner() {
+        if (scannerActive) return;
+
+        if (typeof Html5Qrcode === 'undefined') {
+            setScannerStatus('Scanner library failed to load. Use manual UPC entry.', true);
+            return;
+        }
+
+        try {
+            barcodeScanner = new Html5Qrcode('scanner-reader');
+            await barcodeScanner.start(
+                { facingMode: 'environment' },
+                { fps: 10, qrbox: { width: 280, height: 160 } },
+                onBarcodeScanned,
+                function () {}
+            );
+            scannerActive = true;
+            setScannerButtons();
+            setScannerStatus('Camera active. Point at a barcode.');
+        } catch (error) {
+            console.error('Unable to start barcode scanner:', error);
+            setScannerStatus('Could not start camera scanner. Check camera permission and HTTPS.', true);
+            scannerActive = false;
+            setScannerButtons();
+        }
+    }
+
+    async function stopBarcodeScanner() {
+        if (!barcodeScanner || !scannerActive) {
+            scannerActive = false;
+            setScannerButtons();
+            return;
+        }
+
+        try {
+            await barcodeScanner.stop();
+            await barcodeScanner.clear();
+        } catch (error) {
+            console.error('Error stopping scanner:', error);
+        }
+
+        scannerActive = false;
+        barcodeScanner = null;
+        setScannerButtons();
+        setScannerStatus('Scanner stopped.');
     }
 
     function addProduct(upc, product) {
@@ -183,6 +327,8 @@ permalink: /inventory
             <h2>Unused Products (${unusedProducts.reduce((sum, p) => sum + (p.count - p.used), 0)})</h2>
             ${unusedProducts.map(p => `<div class="product">${p.count - p.used} | <a href="https://world.openfoodfacts.org/product/${p.code}" target="_blank">${p.product_name}</a></div>`).join('') || '<p>No products unused.</p>'}
         `;
+
+        refreshPantryMatches();
     }
 
     function clearData() {
@@ -219,4 +365,109 @@ permalink: /inventory
             console.error('Could not copy text: ', err);
         });
     }
+
+    function normalizeText(value) {
+        return (value || '')
+            .toLowerCase()
+            .replace(/[^a-z0-9\s]/g, ' ')
+            .replace(/\s+/g, ' ')
+            .trim();
+    }
+
+    function tokenize(value) {
+        const stop = new Set(['and', 'with', 'from', 'for', 'the', 'a', 'an', 'of', 'to', 'in', 'on']);
+        return normalizeText(value)
+            .split(' ')
+            .filter(token => token.length >= 3 && !stop.has(token));
+    }
+
+    function buildPantryTokens() {
+        const unusedProducts = products.filter(p => p.count > p.used);
+        const tokenSet = new Set();
+
+        unusedProducts.forEach(product => {
+            tokenize(product.product_name).forEach(token => tokenSet.add(token));
+        });
+
+        return tokenSet;
+    }
+
+    function scoreRecipeAgainstPantry(recipe, pantryTokens) {
+        const haystack = [recipe.title || '', recipe.ingredients || '', recipe.tags || ''].join(' ');
+        const recipeTokens = new Set(tokenize(haystack));
+        let matches = 0;
+
+        pantryTokens.forEach(token => {
+            if (recipeTokens.has(token)) {
+                matches += 1;
+            }
+        });
+
+        return matches;
+    }
+
+    function getLikelyMissingIngredients(recipe, pantryTokens) {
+        const rawIngredients = (recipe.ingredients || '').split(',').map(item => item.trim()).filter(Boolean);
+        const missing = [];
+
+        for (let i = 0; i < rawIngredients.length; i++) {
+            const ingredient = rawIngredients[i];
+            const tokens = tokenize(ingredient);
+            if (!tokens.length) continue;
+
+            const hasMatch = tokens.some(token => pantryTokens.has(token));
+            if (!hasMatch) {
+                missing.push(ingredient);
+            }
+
+            if (missing.length >= 4) break;
+        }
+
+        return missing;
+    }
+
+    function refreshPantryMatches() {
+        const container = document.getElementById('pantry-matches');
+        if (!container) return;
+
+        if (!cachedRecipes.length) {
+            container.innerHTML = '<h2>Pantry Recipe Matches</h2><p>Loading recipe data...</p>';
+            return;
+        }
+
+        const pantryTokens = buildPantryTokens();
+        if (!pantryTokens.size) {
+            container.innerHTML = '<h2>Pantry Recipe Matches</h2><p>Add unused products to see recipe matches.</p>';
+            return;
+        }
+
+        const scored = cachedRecipes
+            .map(recipe => {
+                const score = scoreRecipeAgainstPantry(recipe, pantryTokens);
+                const missing = getLikelyMissingIngredients(recipe, pantryTokens);
+                return { recipe, score, missing };
+            })
+            .filter(item => item.score > 0)
+            .sort((a, b) => b.score - a.score)
+            .slice(0, 12);
+
+        if (!scored.length) {
+            container.innerHTML = '<h2>Pantry Recipe Matches</h2><p>No strong matches yet. Add more items or try broader ingredients.</p>';
+            return;
+        }
+
+        container.innerHTML = `
+            <h2>Pantry Recipe Matches</h2>
+            <p>Best matches based on your unused inventory items.</p>
+            ${scored.map(item => `
+                <div class="product">
+                    <strong>${item.score} match${item.score === 1 ? '' : 'es'}</strong> |
+                    <a href="${item.recipe.url}">${item.recipe.title}</a>
+                    ${item.missing.length ? `<div style="margin-top: 4px; color: #b45309;"><em>Likely missing:</em> ${item.missing.join(', ')}</div>` : '<div style="margin-top: 4px; color: #15803d;"><em>Likely have most core ingredients.</em></div>'}
+                </div>
+            `).join('')}
+        `;
+    }
+
+    setScannerButtons();
 </script>

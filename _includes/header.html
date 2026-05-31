@@ -29,6 +29,12 @@
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="/inventory">Food Inventory</a>
+            <a class="dropdown-item" href="/collections/meal-prep">Meal Prep Collection</a>
+            <a class="dropdown-item" href="/collections/holiday">Holiday Collection</a>
+            <a class="dropdown-item" href="/collections/game-day">Game Day Collection</a>
+            <a class="dropdown-item" href="/favorites">My Favorites</a>
+            <a class="dropdown-item" href="/ideas">Recipe Idea Backlog</a>
+            <a class="dropdown-item" href="/features">Feature Roadmap</a>
             <a class="dropdown-item" href="/feed.xml">Subscribe via RSS</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/stats">Recipe Statistics</a>
@@ -38,6 +44,9 @@
         <li class="nav-item">
           <a class="nav-link" href="/random">🎲</a>
         </li>
+        <li class="nav-item">
+          <button id="theme-toggle" class="btn btn-sm theme-toggle" type="button">Dark Mode</button>
+        </li>
       </ul>
     </div>
   </nav>
@@ -45,3 +54,8 @@
 <!-- Bootstrap JS and dependencies (Popper.js and jQuery) -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ <script>
+   if (window.ChowdownTheme && typeof window.ChowdownTheme.initTheme === 'function') {
+     window.ChowdownTheme.initTheme();
+   }
+ </script>

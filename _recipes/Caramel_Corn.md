@@ -3,6 +3,7 @@ layout: recipe
 title: "Caramel Corn"
 tags: dessert
 
+date_added: 2021-07-11
 ingredients:
 - 2 cups brown sugar
 - 1 cup butter (margarine)

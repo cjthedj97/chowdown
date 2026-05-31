@@ -5,6 +5,7 @@ imagecredit: https://thecozycook.com/wp-content/uploads/2020/02/French-Fry-Seaso
 tag: Side Dish
 preptime: PT10m
 
+date_added: 2024-05-02
 ingredients:
 - 2 teaspoons onion salt
 - 2 teaspoons paprika

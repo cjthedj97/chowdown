@@ -5,6 +5,7 @@ image: Mexican_Brownies.jpeg
 imagecredit: https://www.foodnetwork.com/recipes/aaron-sanchez/aaron-sanchezs-mexican-brownies-recipe-1972919
 tags: dessert
 
+date_added: 2021-07-26
 ingredients:
 - 2 sticks unsalted butter, plus more for greasing
 - 2 cups sugar

@@ -5,6 +5,7 @@ image: banana-bread.jpg
 imagecredit: https://flic.kr/p/7HZmzn
 tags: breakfast baking
 
+date_added: 2018-09-09
 ingredients:
 - 4 bananas
 - 1/2 cup butter

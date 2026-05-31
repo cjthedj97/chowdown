@@ -4,6 +4,7 @@ title:  "Zaytoon Garlic Sauce"
 imagecredit: https://www.foodnetwork.com/recipes/zaytoon-garlic-sauce-3877355
 yield: 15 serving(s)
 
+date_added: 2021-07-02
 ingredients:
 - One 10-pound can cooked diced potatoes
 - 3 cups heavy-duty mayonnaise

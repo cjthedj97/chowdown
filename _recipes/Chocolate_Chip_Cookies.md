@@ -3,6 +3,7 @@ layout: recipe
 title: "Chocolate Chip Cookies"
 tags: dessert
 
+date_added: 2021-07-10
 ingredients:
 - 1 cup butter or marg (2 sticks)
 - 3/4 cups sugar

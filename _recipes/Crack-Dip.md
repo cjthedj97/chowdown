@@ -7,6 +7,7 @@ imagecredit: https://www.julieseatsandtreats.com/crack-dip/
 preptime: PT10m
 cooktime: PT10m
 
+date_added: 2024-01-09
 ingredients:
 - 16 ozs sour cream
 - 1 ozs packet ranch dressing mix

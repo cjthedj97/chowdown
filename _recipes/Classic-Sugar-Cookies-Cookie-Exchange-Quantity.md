@@ -5,6 +5,7 @@ image: Classic-Sugar-Cookies-Cookie-Exchange-Quantity.jpeg
 imagecredit: https://www.bettycrocker.com/recipes/classic-sugar-cookies-cookie-exchange-quantity/959da0a0-0190-455f-b1e3-fa05032848c0
 preptime: PT2h
 
+date_added: 2024-01-08
 ingredients:
 - 3 cups powdered sugar
 - 2 cups butter or margarine, softened

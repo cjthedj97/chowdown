@@ -4,6 +4,7 @@ title: "Sweet potato cakes with poached eggs"
 image: sweet-potato-cakes-with-poached-eggs.jpg
 tags: fancy vegetarian
 
+date_added: 2020-06-07
 ingredients:
 - 4 eggs + 4 egg whites
 - 100g harissa

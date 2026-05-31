@@ -8,6 +8,7 @@ preptime: PT10m
 cooktime: PT10m
 yield: 8 Servings
 
+date_added: 2024-01-09
 ingredients:
 - 2 cups Bisquick baking mix
 - ½ cup cold water

@@ -1,0 +1,99 @@
+:root {
+  --bg: #f6f8fb;
+  --surface: #ffffff;
+  --text: #1f2937;
+  --muted: #6b7280;
+  --border: #d1d5db;
+  --accent: #007fff;
+  --accent-strong: #005fcc;
+}
+
+html[data-theme="dark"] {
+  --bg: #0f172a;
+  --surface: #111827;
+  --text: #e5e7eb;
+  --muted: #9ca3af;
+  --border: #374151;
+  --accent: #4da3ff;
+  --accent-strong: #79b8ff;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+.page-content,
+.container,
+.post-content,
+.recipes,
+.search {
+  color: var(--text);
+}
+
+a,
+.blue {
+  color: var(--accent);
+}
+
+.navbar {
+  background-color: var(--surface) !important;
+  border-bottom: 1px solid var(--border);
+}
+
+.navbar .nav-link,
+.navbar .dropdown-item,
+.navbar .navbar-brand,
+.navbar .dropdown-toggle {
+  color: var(--text) !important;
+}
+
+.dropdown-menu {
+  background-color: var(--surface);
+  border-color: var(--border);
+}
+
+.dropdown-divider {
+  border-top-color: var(--border);
+}
+
+input,
+textarea,
+select {
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+#search-input {
+  width: 100%;
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+}
+
+.theme-toggle {
+  margin-left: 0.5rem;
+}
+
+.theme-toggle.btn {
+  border-color: var(--border);
+  color: var(--text);
+}
+
+.theme-toggle.btn:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+html[data-theme="dark"] .title,
+html[data-theme="dark"] h1,
+html[data-theme="dark"] h2,
+html[data-theme="dark"] h3,
+html[data-theme="dark"] h4,
+html[data-theme="dark"] h5,
+html[data-theme="dark"] h6,
+html[data-theme="dark"] p,
+html[data-theme="dark"] li {
+  color: var(--text);
+}

@@ -6,6 +6,7 @@ imagecredit: https://copykat.com/better-than-kfc-cole-slaw/
 yield: 10 Servings
 preptime: PT15m
 
+date_added: 2024-01-06
 ingredients:
 - 13 cups chopped cabbage This is about 1 large head of cabbage or 2 medium heads of cabbage
 - 1 green bell pepper (optional, there is no bell pepper in the KFC recipe)

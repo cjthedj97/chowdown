@@ -4,6 +4,7 @@ title:  "Jalapeno Cornbread"
 image: jalapeno-cornbread.jpg
 tags: sides bread spicy
 
+date_added: 2020-01-17
 ingredients:
 - 1 box "fiesta" corn bread mix
 - 1 can of sweet corn
