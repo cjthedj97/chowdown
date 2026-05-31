@@ -188,6 +188,25 @@ html[data-theme="dark"] li {
   background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 14%, var(--surface-soft)), var(--surface));
 }
 
+.recipe-tile.no-image .image::before {
+  content: "No image";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+html[data-theme="dark"] .recipe-tile.no-image .image::before {
+  color: color-mix(in srgb, var(--muted) 75%, #fff 25%);
+}
+
 .ratio {
   position: relative;
   display: block;
