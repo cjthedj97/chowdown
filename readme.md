@@ -57,6 +57,7 @@ image: image-name.jpg or https://url.tld/image.jpg  # Replace with the image fil
 imagecredit: URL to image credit  # Optional: link to source of the image
 tags: tag1 tag2 tag3  # List of tags or keywords related to the recipe
 date_added: 2026-05-31  # Optional: Used by the "Recently Added" section
+reviewed: true  # Optional: Marks a recipe as tested/reviewed
 servings: 4  # Optional: Number of servings
 prep_time: "10 mins"  # Optional: Preparation time
 cook_time: "30 mins"  # Optional: Cooking time

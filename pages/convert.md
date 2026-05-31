@@ -136,6 +136,11 @@ permalink: /convert
         </select>
       </div>
 
+      <label style="display:flex;align-items:center;gap:8px;margin:10px 0;">
+        <input type="checkbox" id="recipe-reviewed">
+        Reviewed / tested recipe
+      </label>
+
       <div>
         <input type="number" id="recipe-prep-hours" placeholder="Prep Time: Hours" min="0" max="24">
         <input type="number" id="recipe-prep-minutes" placeholder="Prep Time: Minutes" min="0" max="60">
@@ -254,6 +259,7 @@ permalink: /convert
     const yieldValue = document.querySelector('#recipe-yield').value.trim();
     const dateAdded = document.querySelector('#recipe-date-added').value.trim();
     const recipeStatus = document.querySelector('#recipe-status').value.trim();
+    const reviewed = document.querySelector('#recipe-reviewed').checked;
     const prepHours = document.querySelector('#recipe-prep-hours').value.trim();
     const prepMinutes = document.querySelector('#recipe-prep-minutes').value.trim();
     const cookHours = document.querySelector('#recipe-cook-hours').value.trim();
@@ -291,6 +297,7 @@ permalink: /convert
     if (tags.length) markdown += `tags: ${tags.join(' ')}\n`;
     if (dateAdded) markdown += `date_added: ${dateAdded}\n`;
     if (recipeStatus) markdown += `status: ${recipeStatus}\n`;
+    if (reviewed) markdown += `reviewed: true\n`;
     if (yieldValue) markdown += `servings: ${yamlSafe(yieldValue)}\n`;
     if (prepTime) markdown += `prep_time: "${prepTime}"\n`;
     if (cookTime) markdown += `cook_time: "${cookTime}"\n`;
@@ -343,6 +350,7 @@ permalink: /convert
     document.querySelector('#recipe-yield').value = '';
     document.querySelector('#recipe-date-added').value = '';
     document.querySelector('#recipe-status').value = 'published';
+    document.querySelector('#recipe-reviewed').checked = false;
 
     document.querySelector('.bottom-column').textContent = '';
     statusBox.innerHTML = '';

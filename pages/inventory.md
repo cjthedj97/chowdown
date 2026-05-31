@@ -51,7 +51,8 @@ permalink: /inventory
         min-height: 240px;
         border-radius: 8px;
         overflow: hidden;
-        background: #000;
+        background: var(--surface-soft);
+        border: 1px solid var(--border);
     }
 
     #scanner-status {

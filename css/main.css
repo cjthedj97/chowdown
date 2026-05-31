@@ -152,17 +152,26 @@ html[data-theme="dark"] li {
 }
 
 .recipe-tile {
+  background: var(--surface);
   border-radius: 14px;
   overflow: hidden;
   box-shadow: var(--shadow);
   transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
-.recipe-tile .image {
+.recipe-tile.has-image .image {
   filter: saturate(1.05);
   background-repeat: no-repeat;
   background-position: center center;
   background-size: cover;
+}
+
+.recipe-tile.no-image {
+  border: 1px solid var(--border);
+}
+
+.recipe-tile.no-image .image {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 14%, var(--surface-soft)), var(--surface));
 }
 
 .ratio {
@@ -179,11 +188,15 @@ html[data-theme="dark"] li {
   }
 }
 
-.recipe-tile::after {
+.recipe-tile.has-image::after {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 10%, rgba(0, 0, 0, 0.08) 70%);
+}
+
+.recipe-tile.no-image::after {
+  display: none;
 }
 
 .recipe-tile:hover {
@@ -196,6 +209,34 @@ html[data-theme="dark"] li {
   line-height: 1.06;
   text-wrap: balance;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.recipe-tile.no-image .recipe-tile-title {
+  color: var(--text);
+  text-shadow: none;
+}
+
+.reviewed-badge {
+  display: inline-block;
+  position: relative;
+  z-index: 1;
+  border-radius: 999px;
+  padding: 0.28rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.reviewed-badge.reviewed {
+  background: color-mix(in srgb, var(--success) 88%, #000 12%);
+  color: #fff;
+}
+
+.reviewed-badge.card-badge {
+  position: absolute;
+  top: 0.75rem;
+  left: 0.75rem;
 }
 
 .home-search-card {
@@ -229,6 +270,14 @@ html[data-theme="dark"] li {
 .tag-filter.btn.is-active {
   background: var(--accent);
   border-color: var(--accent);
+  color: #fff;
+}
+
+.tag-filter.btn.btn-primary:hover,
+.tag-filter.btn.is-active:hover,
+.tag-filter.btn.btn-primary:focus,
+.tag-filter.btn.is-active:focus {
+  color: #fff;
 }
 
 .home-results-wrap {

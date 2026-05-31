@@ -35,11 +35,14 @@ permalink: /
         {% assign dated_recipes = published_recipes | where_exp: "item", "item.date_added" | sort: "date_added" | reverse %}
         {% for post in dated_recipes limit:6 %}
           <div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2">
-            <a class="block relative recipe-tile" href="{{ post.url }}">
+            <a class="block relative recipe-tile {% if post.image %}has-image{% else %}no-image{% endif %}" href="{{ post.url }}">
+              {% if post.reviewed %}
+                <span class="reviewed-badge reviewed card-badge">Reviewed</span>
+              {% endif %}
               <div class="image ratio bg-cover"
                   {% if post.image and post.image contains 'http' %}
                      style="background-image:url({{ post.image }});"
-                   {% else %}
+                   {% elsif post.image %}
                       style="background-image:url({{ '/images/' | append: post.image | relative_url }});"
                    {% endif %}>
               </div>
@@ -63,7 +66,7 @@ SimpleJekyllSearch({
   searchInput: document.getElementById('search-input'),
   resultsContainer: document.getElementById('results-container'),
   json: '/search.json',
-  searchResultTemplate: '<div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2 left-align result-card" data-tags="{tags}"><a class="block relative recipe-tile" href="{url}"><div class="image ratio bg-cover" style="background-image:url({image});"></div><h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">{title}</h1></a></div>'
+  searchResultTemplate: '<div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2 left-align result-card" data-tags="{tags}"><a class="block relative recipe-tile {tile_class}" href="{url}">{reviewed_badge}<div class="image ratio bg-cover" style="background-image:url({image});"></div><h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">{title}</h1></a></div>'
 })
 </script>
 
