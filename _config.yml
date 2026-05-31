@@ -2,7 +2,8 @@
 title: Recipes
 email: admin@saathoff.us
 description: The Saathoff Family Recipe Database
-baseurl: "https://recipes.saathoff.us"
+url: "https://recipes.saathoff.us"
+baseurl: ""
 language: "en"
 lang_direction: "ltr"
 color: "#007FFF"

@@ -16,7 +16,7 @@ title: My Favorite Recipes
   <p id="favorite-empty" class="center" style="display:none;">No favorites yet. Open a recipe and tap "Save Favorite".</p>
 </div>
 
-<script src="{{site.baseurl}}/js/favorites.js" type="text/javascript"></script>
+<script src="{{ "/js/favorites.js" | relative_url }}" type="text/javascript"></script>
 <script>
   window.ChowdownFavorites.renderFavoritesPage({
     resultsContainerId: 'favorite-results',
