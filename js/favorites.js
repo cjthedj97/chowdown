@@ -50,9 +50,9 @@
   function renderFavoriteCards(recipes) {
     return recipes.map(function (recipe) {
       return '<div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2">' +
-        '<a class="block relative bg-blue" href="' + recipe.url + '">' +
+        '<a class="block relative recipe-tile" href="' + recipe.url + '">' +
         '<div class="image ratio bg-cover" style="background-image:url(' + recipe.image + ');"></div>' +
-        '<h1 class="title p2 m0 absolute bold white bottom-0 left-0">' + recipe.title + '</h1>' +
+        '<h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">' + recipe.title + '</h1>' +
         '</a>' +
       '</div>';
     }).join('');

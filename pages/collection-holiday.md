@@ -15,15 +15,15 @@ title: Holiday Favorites Collection
     <div class="clearfix">
       {% for post in holiday %}
       <div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2">
-        <a class="block relative bg-blue" href="{{ post.url }}">
+        <a class="block relative recipe-tile" href="{{ post.url }}">
           <div class="image ratio bg-cover"
                {% if post.image and post.image contains 'http' %}
                style="background-image:url({{ post.image }});"
                {% else %}
-                style="background-image:url(/images/{{ post.image }});"
+                 style="background-image:url({{ '/images/' | append: post.image | relative_url }});"
                {% endif %}>
           </div>
-          <h1 class="title p2 m0 absolute bold white bottom-0 left-0">{{ post.title }}</h1>
+          <h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">{{ post.title }}</h1>
         </a>
       </div>
       {% endfor %}
