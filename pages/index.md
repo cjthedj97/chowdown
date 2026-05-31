@@ -5,12 +5,6 @@ permalink: /
 ---
 
 <div class="container max-width-4 xs-px1 xs-mt3 home-shell">
-  <section class="home-hero center mb3">
-    <p class="home-kicker">Cook smarter, eat better</p>
-    <h1 class="home-title">Find your next favorite recipe</h1>
-    <p class="home-subtitle">Fresh additions, quick filters, and family-tested meals all in one place.</p>
-  </section>
-
   <section class="search container max-width-3 home-search-card">
 		<div id="search-container">
 			<h3 class="center mb2 blue section-title">Recipe Search</h3>
