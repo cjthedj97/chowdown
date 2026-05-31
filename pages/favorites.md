@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 permalink: /favorites
 title: My Favorite Recipes
 ---

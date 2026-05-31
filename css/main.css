@@ -160,6 +160,9 @@ html[data-theme="dark"] li {
 
 .recipe-tile .image {
   filter: saturate(1.05);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
 }
 
 .ratio {
@@ -230,6 +233,10 @@ html[data-theme="dark"] li {
 
 .home-results-wrap {
   margin-top: 1rem;
+}
+
+.is-hidden {
+  display: none !important;
 }
 
 @media (max-width: 768px) {

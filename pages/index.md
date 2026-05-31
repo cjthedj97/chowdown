@@ -11,33 +11,6 @@ permalink: /
     <p class="home-subtitle">Fresh additions, quick filters, and family-tested meals all in one place.</p>
   </section>
 
-  <section class="home-section">
-  <h3 class="center mb2 blue section-title">Recently Added</h3>
-  <div class="recipes xs-px1">
-    <div class="clearfix">
-      {% assign published_recipes = site.recipes | where_exp: "item", "item.status != 'draft' and item.status != 'planned'" %}
-      {% assign dated_recipes = published_recipes | where_exp: "item", "item.date_added" | sort: "date_added" | reverse %}
-      {% for post in dated_recipes limit:6 %}
-        <div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2">
-          <a class="block relative recipe-tile" href="{{ post.url }}">
-            <div class="image ratio bg-cover"
-                {% if post.image and post.image contains 'http' %}
-                   style="background-image:url({{ post.image }});"
-                 {% else %}
-                    style="background-image:url({{ '/images/' | append: post.image | relative_url }});"
-                 {% endif %}>
-            </div>
-            <h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">{{ post.title }}</h1>
-          </a>
-        </div>
-      {% endfor %}
-    </div>
-    {% if dated_recipes.size == 0 %}
-      <p class="center">No recipes tagged with <code>date_added</code> yet.</p>
-    {% endif %}
-  </div>
-  </section>
-
   <section class="search container max-width-3 home-search-card">
 		<div id="search-container">
 			<h3 class="center mb2 blue section-title">Recipe Search</h3>
@@ -55,11 +28,37 @@ permalink: /
 		</div>
   </section>
 
-<div class="clearfix home-results-wrap">
-<div class="recipes xs-px1 xs-mt2 center" id="results-container">
+  <div class="clearfix home-results-wrap is-hidden" id="search-results-wrap">
+    <h3 class="center mb2 blue section-title">Search Results</h3>
+    <div class="recipes xs-px1 xs-mt2 center" id="results-container"></div>
+  </div>
 
-</div>
-</div>
+  <section class="home-section" id="recently-added-section">
+    <h3 class="center mb2 blue section-title">Recently Added</h3>
+    <div class="recipes xs-px1">
+      <div class="clearfix">
+        {% assign published_recipes = site.recipes | where_exp: "item", "item.status != 'draft' and item.status != 'planned'" %}
+        {% assign dated_recipes = published_recipes | where_exp: "item", "item.date_added" | sort: "date_added" | reverse %}
+        {% for post in dated_recipes limit:6 %}
+          <div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2">
+            <a class="block relative recipe-tile" href="{{ post.url }}">
+              <div class="image ratio bg-cover"
+                  {% if post.image and post.image contains 'http' %}
+                     style="background-image:url({{ post.image }});"
+                   {% else %}
+                      style="background-image:url({{ '/images/' | append: post.image | relative_url }});"
+                   {% endif %}>
+              </div>
+              <h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">{{ post.title }}</h1>
+            </a>
+          </div>
+        {% endfor %}
+      </div>
+      {% if dated_recipes.size == 0 %}
+        <p class="center">No recipes tagged with <code>date_added</code> yet.</p>
+      {% endif %}
+    </div>
+  </section>
 
 <!-- Script pointing to search-script.js -->
 <script src="{{ "/js/simple-jekyll-search.min.js" | relative_url }}" type="text/javascript"></script>
@@ -96,7 +95,7 @@ SimpleJekyllSearch({
 		}
 	}
 
-	function setActiveChip(chip) {
+  function setActiveChip(chip) {
 		var chips = document.querySelectorAll('.tag-filter');
 		for (var i = 0; i < chips.length; i++) {
 			chips[i].classList.remove('is-active', 'btn-primary');
@@ -104,6 +103,22 @@ SimpleJekyllSearch({
 		}
 		chip.classList.add('is-active', 'btn-primary');
 		chip.classList.remove('btn-outline-primary');
+	}
+
+	function updateHomepageSections() {
+		var query = ($('#search-input').val() || '').toString().trim();
+		var recentSection = document.getElementById('recently-added-section');
+		var resultsWrap = document.getElementById('search-results-wrap');
+
+		if (!recentSection || !resultsWrap) return;
+
+		if (query.length > 0) {
+			recentSection.classList.add('is-hidden');
+			resultsWrap.classList.remove('is-hidden');
+		} else {
+			recentSection.classList.remove('is-hidden');
+			resultsWrap.classList.add('is-hidden');
+		}
 	}
 
 	$( document ).ready(function() {
@@ -114,9 +129,11 @@ SimpleJekyllSearch({
 		});
 
     $('#search-input').on('input', function() {
+			updateHomepageSections();
 			setTimeout(applyTagFilter, 50);
-	});
+		});
 
+		updateHomepageSections();
 		setTimeout(applyTagFilter, 150);
 	});
 	
