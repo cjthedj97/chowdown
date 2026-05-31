@@ -64,7 +64,7 @@ layout: recipe_default
       <ul>
         <!-- list components that make up recipe -->
         {% for component in page.components %}
-        <li class="recipe-check-item"><span class="recipe-check-text">{{ component | markdownify | strip_html | strip_newlines }}</span><input type="checkbox" class="recipe-check-box"></li>
+        <li>{{ component | markdownify }}</li>
         {% endfor %}
       </ul>
       {% endif %}
@@ -78,11 +78,11 @@ layout: recipe_default
           <h5>{{ ingredient.first[0] }}</h5>
           <ul itemprop="recipeIngredientGroup">
             {% for i in ingredient.first[1] %}
-            <li class="recipe-check-item" itemprop="recipeIngredient"><span class="recipe-check-text">{{ i | markdownify | strip_html | strip_newlines }}</span><input type="checkbox" class="recipe-check-box"></li>
+            <li itemprop="recipeIngredient">{{ i | markdownify }}</li>
             {% endfor %}
           </ul>
           {% else %}
-          <li class="recipe-check-item" itemprop="recipeIngredient"><span class="recipe-check-text">{{ ingredient | markdownify | strip_html | strip_newlines }}</span><input type="checkbox" class="recipe-check-box"></li>
+          <li itemprop="recipeIngredient">{{ ingredient | markdownify }}</li>
           {% endif %}
         {% endfor %}
       </ul>
@@ -97,11 +97,11 @@ layout: recipe_default
           <h5>{{ direction.first[0] }}</h5>
           <ul itemprop="instructionGroup">
             {% for d in direction.first[1] %}
-            <li class="recipe-check-item" itemprop="instruction"><span class="recipe-check-text">{{ d | markdownify | strip_html | strip_newlines }}</span><input type="checkbox" class="recipe-check-box"></li>
+            <li itemprop="instruction">{{ d | markdownify }}</li>
             {% endfor %}
           </ul>
           {% else %}
-          <li class="recipe-check-item" itemprop="instruction"><span class="recipe-check-text">{{ direction | markdownify | strip_html | strip_newlines }}</span><input type="checkbox" class="recipe-check-box"></li>
+          <li itemprop="instruction">{{ direction | markdownify }}</li>
           {% endif %}
         {% endfor %}
       </ul>
@@ -146,11 +146,11 @@ layout: recipe_default
             <h6>{{ ingredient.first[0] }}</h6>
             <ul itemprop="recipeIngredientGroup">
               {% for i in ingredient.first[1] %}
-              <li class="recipe-check-item" itemprop="recipeIngredient"><span class="recipe-check-text">{{ i | markdownify | strip_html | strip_newlines }}</span><input type="checkbox" class="recipe-check-box"></li>
+              <li itemprop="recipeIngredient">{{ i | markdownify }}</li>
               {% endfor %}
             </ul>
             {% else %}
-            <li class="recipe-check-item" itemprop="recipeIngredient"><span class="recipe-check-text">{{ ingredient | markdownify | strip_html | strip_newlines }}</span><input type="checkbox" class="recipe-check-box"></li>
+            <li itemprop="recipeIngredient">{{ ingredient | markdownify }}</li>
             {% endif %}
           {% endfor %}
       </ul>
@@ -162,11 +162,11 @@ layout: recipe_default
           <h6>{{ direction.first[0] }}</h6>
           <ul itemprop="instructionGroup">
             {% for d in direction.first[1] %}
-            <li class="recipe-check-item" itemprop="instruction"><span class="recipe-check-text">{{ d | markdownify | strip_html | strip_newlines }}</span><input type="checkbox" class="recipe-check-box"></li>
+            <li itemprop="instruction">{{ d | markdownify }}</li>
             {% endfor %}
           </ul>
           {% else %}
-          <li class="recipe-check-item" itemprop="instruction"><span class="recipe-check-text">{{ direction | markdownify | strip_html | strip_newlines }}</span><input type="checkbox" class="recipe-check-box"></li>
+          <li itemprop="instruction">{{ direction | markdownify }}</li>
           {% endif %}
         {% endfor %}
       </ul>
