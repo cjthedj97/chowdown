@@ -245,6 +245,19 @@ html[data-theme="dark"] li {
   text-shadow: none;
 }
 
+.recipe-hero-image {
+  max-height: 420px;
+  overflow: hidden;
+}
+
+.recipe-hero-image img[itemprop="image"] {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  object-position: center;
+}
+
 .home-search-card {
   margin-top: 2rem;
   border-radius: 18px;
