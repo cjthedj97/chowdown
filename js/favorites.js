@@ -18,7 +18,12 @@
 
   function normalizeUrl(url) {
     if (!url) return '';
-    return url.replace(/\/$/, '');
+    try {
+      var parsed = new URL(url, window.location.origin);
+      return (parsed.pathname || '').replace(/\/$/, '');
+    } catch (err) {
+      return String(url).replace(/\/$/, '');
+    }
   }
 
   function isFavorite(url) {

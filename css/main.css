@@ -1,25 +1,32 @@
 :root {
   --bg: #f6f8fb;
   --surface: #ffffff;
+  --surface-soft: #eef3fb;
   --text: #1f2937;
   --muted: #6b7280;
   --border: #d1d5db;
   --accent: #007fff;
   --accent-strong: #005fcc;
+  --shadow: 0 10px 30px rgba(20, 31, 56, 0.08);
 }
 
 html[data-theme="dark"] {
   --bg: #0f172a;
   --surface: #111827;
+  --surface-soft: #172136;
   --text: #e5e7eb;
   --muted: #9ca3af;
   --border: #374151;
   --accent: #4da3ff;
   --accent-strong: #79b8ff;
+  --shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
 }
 
 body {
-  background: var(--bg);
+  background:
+    radial-gradient(circle at 12% 8%, color-mix(in srgb, var(--accent) 12%, transparent), transparent 28%),
+    radial-gradient(circle at 88% 24%, color-mix(in srgb, var(--accent) 10%, transparent), transparent 24%),
+    var(--bg);
   color: var(--text);
 }
 
@@ -67,8 +74,10 @@ select {
 
 #search-input {
   width: 100%;
-  border-radius: 8px;
-  padding: 0.65rem 0.75rem;
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  border: 1px solid color-mix(in srgb, var(--accent) 20%, var(--border));
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.04);
 }
 
 .theme-toggle {
@@ -96,4 +105,130 @@ html[data-theme="dark"] h6,
 html[data-theme="dark"] p,
 html[data-theme="dark"] li {
   color: var(--text);
+}
+
+.home-shell {
+  padding-bottom: 2.5rem;
+}
+
+.home-hero {
+  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 16%, var(--surface)), var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, var(--border));
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  padding: 2rem 1.25rem;
+}
+
+.home-kicker {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.home-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+}
+
+.home-subtitle {
+  color: var(--muted);
+  max-width: 58ch;
+  margin: 0.75rem auto 0;
+}
+
+.home-section {
+  margin-top: 1.5rem;
+}
+
+.section-title {
+  font-size: 2rem;
+  letter-spacing: -0.02em;
+}
+
+.recipe-tile {
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+}
+
+.recipe-tile .image {
+  filter: saturate(1.05);
+}
+
+.recipe-tile::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6) 10%, rgba(0, 0, 0, 0.08) 70%);
+}
+
+.recipe-tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 34px rgba(20, 31, 56, 0.2);
+}
+
+.recipe-tile-title {
+  z-index: 1;
+  line-height: 1.06;
+  text-wrap: balance;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+.home-search-card {
+  margin-top: 2rem;
+  border-radius: 18px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+  padding: 1.25rem;
+}
+
+.search-subtitle {
+  color: var(--muted);
+}
+
+.chip-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.35rem;
+}
+
+.tag-filter.btn {
+  border-radius: 999px;
+  border-width: 1px;
+  font-weight: 600;
+  padding: 0.42rem 0.95rem;
+}
+
+.tag-filter.btn.btn-primary,
+.tag-filter.btn.is-active {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.home-results-wrap {
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) {
+  .home-hero {
+    border-radius: 16px;
+    padding: 1.5rem 1rem;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+  }
+
+  .home-search-card {
+    padding: 1rem 0.75rem;
+  }
+
+  .recipe-tile-title {
+    font-size: 1.9rem;
+  }
 }

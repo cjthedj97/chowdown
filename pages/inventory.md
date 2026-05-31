@@ -123,7 +123,7 @@ permalink: /inventory
 
     window.onload = generateLists;
 
-    fetch('{{site.baseurl}}/search.json')
+    fetch('/search.json')
         .then(response => response.json())
         .then(data => {
             cachedRecipes = Array.isArray(data) ? data : [];

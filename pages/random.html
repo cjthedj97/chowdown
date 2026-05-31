@@ -72,7 +72,7 @@ permalink: /random
     buttonEl.addEventListener('click', function () {
       updateStatus('Finding a recipe...');
 
-      fetch('{{site.baseurl}}/search.json')
+      fetch('/search.json')
         .then(function (response) {
           if (!response.ok) throw new Error('Could not load recipes.');
           return response.json();

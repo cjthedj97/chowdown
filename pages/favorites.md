@@ -22,6 +22,6 @@ title: My Favorite Recipes
     resultsContainerId: 'favorite-results',
     emptyStateId: 'favorite-empty',
     clearButtonId: 'clear-favorites',
-    searchJsonUrl: '{{site.baseurl}}/search.json'
+    searchJsonUrl: '/search.json'
   });
 </script>

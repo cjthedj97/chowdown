@@ -4,23 +4,30 @@ permalink: /
 
 ---
 
-<div class="container max-width-3 xs-px1 xs-mt2">
-  <h3 class="center mb3 blue">Recently Added</h3>
+<div class="container max-width-4 xs-px1 xs-mt3 home-shell">
+  <section class="home-hero center mb3">
+    <p class="home-kicker">Cook smarter, eat better</p>
+    <h1 class="home-title">Find your next favorite recipe</h1>
+    <p class="home-subtitle">Fresh additions, quick filters, and family-tested meals all in one place.</p>
+  </section>
+
+  <section class="home-section">
+  <h3 class="center mb2 blue section-title">Recently Added</h3>
   <div class="recipes xs-px1">
     <div class="clearfix">
       {% assign published_recipes = site.recipes | where_exp: "item", "item.status != 'draft' and item.status != 'planned'" %}
       {% assign dated_recipes = published_recipes | where_exp: "item", "item.date_added" | sort: "date_added" | reverse %}
       {% for post in dated_recipes limit:6 %}
         <div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2">
-          <a class="block relative bg-blue" href="{{ post.url | prepend: site.baseurl }}">
+          <a class="block relative recipe-tile" href="{{ post.url }}">
             <div class="image ratio bg-cover"
                  {% if post.image and post.image contains 'http' %}
                    style="background-image:url({{ post.image }});"
                  {% else %}
-                   style="background-image:url({{ site.baseurl }}/images/{{ post.image }});"
+                   style="background-image:url(/images/{{ post.image }});"
                  {% endif %}>
             </div>
-            <h1 class="title p2 m0 absolute bold white bottom-0 left-0">{{ post.title }}</h1>
+            <h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">{{ post.title }}</h1>
           </a>
         </div>
       {% endfor %}
@@ -29,13 +36,14 @@ permalink: /
       <p class="center">No recipes tagged with <code>date_added</code> yet.</p>
     {% endif %}
   </div>
-</div>
+  </section>
 
-  <div class="search container max-width-2">
+  <section class="search container max-width-3 home-search-card">
 		<div id="search-container">
-			<h3 class="center mb3 blue">Recipe Search</h3>
-		<input type="text" id="search-input" placeholder="search titles or ingredients...">
-		<div id="tag-filters" class="center mt2">
+			<h3 class="center mb2 blue section-title">Recipe Search</h3>
+		  <p class="center search-subtitle">Search by title, ingredient, or use a tag filter.</p>
+		<input type="text" id="search-input" placeholder="Search titles or ingredients...">
+		<div id="tag-filters" class="center mt2 chip-wrap">
 		  <button class="btn btn-sm btn-outline-primary m1 tag-filter is-active" data-tag="all" type="button">All</button>
 		  <button class="btn btn-sm btn-outline-primary m1 tag-filter" data-tag="copycat" type="button">Copycat</button>
 		  <button class="btn btn-sm btn-outline-primary m1 tag-filter" data-tag="mains" type="button">Mains</button>
@@ -45,9 +53,9 @@ permalink: /
 		  <button class="btn btn-sm btn-outline-primary m1 tag-filter" data-tag="sauce" type="button">Sauce</button>
 		</div>
 		</div>
-</div>
+  </section>
 
-<div class="clearfix">
+<div class="clearfix home-results-wrap">
 <div class="recipes xs-px1 xs-mt2 center" id="results-container">
 
 </div>
@@ -61,8 +69,8 @@ permalink: /
 SimpleJekyllSearch({
   searchInput: document.getElementById('search-input'),
   resultsContainer: document.getElementById('results-container'),
-  json: '{{site.baseurl}}/search.json',
-  searchResultTemplate: '<div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2 left-align result-card" data-tags="{tags}"><a class="block relative bg-blue" href="{url}"><div class="image ratio bg-cover" style="background-image:url({image});"></div><h1 class="title p2 m0 absolute bold white bottom-0 left-0">{title}</h1></a></div>'
+  json: '/search.json',
+  searchResultTemplate: '<div class="sm-col sm-col-6 md-col-6 lg-col-4 xs-px1 xs-mb2 left-align result-card" data-tags="{tags}"><a class="block relative recipe-tile" href="{url}"><div class="image ratio bg-cover" style="background-image:url({image});"></div><h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">{title}</h1></a></div>'
 })
 </script>
 
