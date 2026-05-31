@@ -245,6 +245,22 @@ html[data-theme="dark"] li {
   text-shadow: none;
 }
 
+.recipe-check-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.recipe-check-text {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.recipe-check-box {
+  flex: 0 0 auto;
+  margin-top: 0.25rem;
+}
+
 .home-search-card {
   margin-top: 2rem;
   border-radius: 18px;
