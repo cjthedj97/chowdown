@@ -2,6 +2,7 @@
 layout: default
 permalink: /favorites
 title: My Favorite Recipes
+show_title: false
 ---
 
 <div class="container max-width-3 py3">

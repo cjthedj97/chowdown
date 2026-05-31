@@ -2,6 +2,7 @@
 layout: page
 permalink: /collections/holiday
 title: Holiday Favorites Collection
+show_title: false
 ---
 
 <div class="container max-width-3 py3">

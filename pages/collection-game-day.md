@@ -2,6 +2,7 @@
 layout: page
 permalink: /collections/game-day
 title: Game Day Collection
+show_title: false
 ---
 
 <div class="container max-width-3 py3">

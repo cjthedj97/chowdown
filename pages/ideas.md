@@ -2,6 +2,7 @@
 layout: page
 permalink: /ideas
 title: Recipe Idea Backlog
+show_title: false
 ---
 
 # Recipe Idea Backlog

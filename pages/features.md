@@ -2,6 +2,7 @@
 layout: page
 permalink: /features
 title: Static Feature Roadmap
+show_title: false
 ---
 
 # Static Feature Roadmap

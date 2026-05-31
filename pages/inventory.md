@@ -90,16 +90,6 @@ permalink: /inventory
         color: var(--danger);
     }
 
-    .missing-warning {
-        margin-top: 4px;
-        color: color-mix(in srgb, var(--accent) 65%, var(--danger));
-    }
-
-    .missing-good {
-        margin-top: 4px;
-        color: var(--success);
-    }
-
     .inventory-summary {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
@@ -809,26 +799,6 @@ permalink: /inventory
         return matches;
     }
 
-    function getLikelyMissingIngredients(recipe, pantryTokens) {
-        const rawIngredients = (recipe.ingredients || '').split(',').map(item => item.trim()).filter(Boolean);
-        const missing = [];
-
-        for (let i = 0; i < rawIngredients.length; i++) {
-            const ingredient = rawIngredients[i];
-            const tokens = tokenize(ingredient);
-            if (!tokens.length) continue;
-
-            const hasMatch = tokens.some(token => pantryTokens.has(token));
-            if (!hasMatch) {
-                missing.push(ingredient);
-            }
-
-            if (missing.length >= 4) break;
-        }
-
-        return missing;
-    }
-
     function refreshPantryMatches() {
         const container = document.getElementById('pantry-matches');
         if (!container) return;
@@ -847,8 +817,7 @@ permalink: /inventory
         const scored = cachedRecipes
             .map(recipe => {
                 const score = scoreRecipeAgainstPantry(recipe, pantryTokens);
-                const missing = getLikelyMissingIngredients(recipe, pantryTokens);
-                return { recipe, score, missing };
+                return { recipe, score };
             })
             .filter(item => item.score > 0)
             .sort((a, b) => b.score - a.score)
@@ -866,7 +835,6 @@ permalink: /inventory
                 <div class="product">
                     <strong>${item.score} match${item.score === 1 ? '' : 'es'}</strong> |
                     <a href="${item.recipe.url}">${item.recipe.title}</a>
-                    ${item.missing.length ? `<div class="missing-warning"><em>Likely missing:</em> ${item.missing.join(', ')}</div>` : '<div class="missing-good"><em>Likely have most core ingredients.</em></div>'}
                 </div>
             `).join('')}
         `;

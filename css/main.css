@@ -43,6 +43,10 @@ body {
   color: var(--text);
 }
 
+body.recipe-page {
+  background: var(--bg);
+}
+
 .page-content,
 .container,
 .post-content,
