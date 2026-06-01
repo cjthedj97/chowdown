@@ -7,6 +7,7 @@ preptime: PT15m
 cooktime: PT30m
 yield: 4 Servings
 
+date_added: 2022-12-23
 ingredients:
 - 3-4 large russet potatoes sliced into wedges
 - 4 tablespoons olive oil

@@ -7,6 +7,7 @@ yield: 4 Servings
 preptime: PT10m
 cooktime: PT15m
 
+date_added: 2024-01-06
 ingredients:
 - 2 lbs Spanish onions sliced, and rings separated
 - 24 ozs water

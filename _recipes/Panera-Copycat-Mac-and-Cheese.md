@@ -7,6 +7,7 @@ imagecredit: https://foodfolksandfun.net/paneras-mac-cheese/
 preptime: PT10m
 cooktime: PT20m
 
+date_added: 2024-01-09
 ingredients:
 - 1 lb Lumaconi pasta or medium shells
 - 4 Tablespoons unsalted butter

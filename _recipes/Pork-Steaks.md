@@ -4,6 +4,7 @@ title:  "Pork Steaks"
 image: pork-steaks.jpg
 tags: mains meat
 
+date_added: 2018-08-22
 ingredients:
 - pork shoulder (or other cheap cut)
 - immerison circulator (we like the [Anova](http://www.amazon.com/gp/product/B00UKPBXM4/ref=as_li_tl?ie=UTF8&camp=1789&creative=390957&creativeASIN=B00UKPBXM4&linkCode=as2&tag=repl-20&linkId=XMRXWQ35OJNCZVGE))

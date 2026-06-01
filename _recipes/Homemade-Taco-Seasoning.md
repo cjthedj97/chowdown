@@ -2,6 +2,7 @@
 layout: recipe
 title: "Homemade Taco Seasoning"
 
+date_added: 2022-12-23
 ingredients:
 - 5 teaspoons Paprika
 - 1 ¼ teaspoons Garlic Powder

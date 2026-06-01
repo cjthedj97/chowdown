@@ -9,6 +9,7 @@ prep_time: "20 mins"
 cook_time: "1 hour"
 total_time: "1 hour 20 mins"
 
+date_added: 2024-11-24
 ingredients:
 - 2 pounds ground beef
 - 1 tablespoon vegetable oil
@@ -33,6 +34,5 @@ directions:
 - Add the pasta and simmer until it is cooked.
 - Stir in the parsley before serving.
 - To serve, sprinkle more fresh parsley on top if desired.
-
 ---
 This recipe makes about 9 quarts of soup, perfect for a large gathering. If you plan on freezing the soup, do not add the pasta, as it does not freeze well. Instead, cook fresh pasta to add when reheating. The soup can be refrigerated for 3-5 days or frozen for up to 3 months. Reheat gently on the stovetop or in the microwave.

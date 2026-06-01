@@ -3,40 +3,107 @@ layout: default
 permalink: /random
 ---
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Redirecting to a Random Recipe...</title>
-</head>
-<body>
-  <p>Redirecting to a random recipe...</p>
-  <script>
-    async function redirectToRandomRecipe() {
-      try {
-        const response = await fetch('/feed.xml');
-        if (!response.ok) throw new Error('Failed to fetch feed.');
-        const text = await response.text();
+<div class="container max-width-2 py3">
+  <h1 class="center mb2">Random Recipe Picker</h1>
+  <p class="center" id="random-status">Pick a category, then jump to a random recipe.</p>
 
-        const parser = new DOMParser();
-        const xmlDoc = parser.parseFromString(text, 'application/xml');
-        const items = xmlDoc.querySelectorAll('item');
-        if (!items.length) throw new Error('No recipes found.');
+  <div class="center mb2" id="random-tag-buttons">
+    <button class="btn btn-sm btn-outline-primary m1 random-tag" data-tag="all" type="button">Any</button>
+    <button class="btn btn-sm btn-outline-primary m1 random-tag" data-tag="dessert" type="button">Dessert</button>
+    <button class="btn btn-sm btn-outline-primary m1 random-tag" data-tag="mains" type="button">Mains</button>
+    <button class="btn btn-sm btn-outline-primary m1 random-tag" data-tag="meal-prep" type="button">Meal Prep</button>
+    <button class="btn btn-sm btn-outline-primary m1 random-tag" data-tag="breakfast" type="button">Breakfast</button>
+    <button class="btn btn-sm btn-outline-primary m1 random-tag" data-tag="copycat" type="button">Copycat</button>
+  </div>
 
-        const randomIndex = Math.floor(Math.random() * items.length);
-        const randomItem = items[randomIndex];
-        let link = randomItem.querySelector('link').textContent.trim();
-        link = link.replace(/\s+/g, '');
+  <div class="center">
+    <button class="btn btn-primary" id="pick-random" type="button">Pick Random Recipe</button>
+  </div>
+</div>
 
-        // Redirect the browser to the random recipe page
-        window.location.href = link;
-      } catch (error) {
-        console.error(error);
-        document.body.innerHTML = '<p>Sorry, unable to redirect to a random recipe at this time.</p>';
+<script>
+  (function () {
+    var selectedTag = 'all';
+    var statusEl = document.getElementById('random-status');
+    var buttonEl = document.getElementById('pick-random');
+    var chips = document.querySelectorAll('.random-tag');
+
+    function normalize(value) {
+      return (value || '').toString().toLowerCase().trim();
+    }
+
+    function pickRandom(items) {
+      var index = Math.floor(Math.random() * items.length);
+      return items[index];
+    }
+
+    function setActiveChip(tag) {
+      for (var i = 0; i < chips.length; i++) {
+        var chip = chips[i];
+        var chipTag = normalize(chip.getAttribute('data-tag'));
+        if (chipTag === tag) {
+          chip.classList.add('btn-primary');
+          chip.classList.remove('btn-outline-primary');
+        } else {
+          chip.classList.remove('btn-primary');
+          chip.classList.add('btn-outline-primary');
+        }
       }
     }
 
-    redirectToRandomRecipe();
-  </script>
-</body>
-</html>
+    function matchesTag(recipe, tag) {
+      if (tag === 'all') return true;
+      var tags = normalize(recipe.tags || '');
+      return tags.indexOf(tag) !== -1;
+    }
+
+    function updateStatus(text) {
+      statusEl.textContent = text;
+    }
+
+    for (var i = 0; i < chips.length; i++) {
+      chips[i].addEventListener('click', function () {
+        selectedTag = normalize(this.getAttribute('data-tag'));
+        setActiveChip(selectedTag);
+        updateStatus('Selected: ' + (selectedTag === 'all' ? 'Any category' : selectedTag));
+      });
+    }
+
+    buttonEl.addEventListener('click', function () {
+      updateStatus('Finding a recipe...');
+
+      fetch('/search.json')
+        .then(function (response) {
+          if (!response.ok) throw new Error('Could not load recipes.');
+          return response.json();
+        })
+        .then(function (recipes) {
+          var filtered = recipes.filter(function (recipe) {
+            return matchesTag(recipe, selectedTag);
+          });
+
+          if (!filtered.length) {
+            updateStatus('No recipes found for "' + selectedTag + '". Try another category.');
+            return;
+          }
+
+          var chosen = pickRandom(filtered);
+          updateStatus('Sending you to: ' + chosen.title);
+          window.location.href = chosen.url;
+        })
+        .catch(function () {
+          updateStatus('Sorry, unable to pick a random recipe right now.');
+        });
+    });
+
+    setActiveChip(selectedTag);
+
+    var params = new URLSearchParams(window.location.search);
+    var presetTag = normalize(params.get('tag'));
+    if (presetTag) {
+      selectedTag = presetTag;
+      setActiveChip(selectedTag);
+      buttonEl.click();
+    }
+  })();
+</script>

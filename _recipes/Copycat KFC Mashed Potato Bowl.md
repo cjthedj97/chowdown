@@ -8,6 +8,7 @@ prep_time: "15 mins"
 cook_time: "30 mins"
 total_time: "45 mins"
 
+date_added: 2024-11-24
 ingredients:
 - 3 pounds medium potatoes, peeled
 - 2 teaspoons salt, divided

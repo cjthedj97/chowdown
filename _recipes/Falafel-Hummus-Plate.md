@@ -4,6 +4,7 @@ title: "Falafel-Hummus Plate"
 image: falafel-hummus-plate.jpg
 tags: vegetarian fast chickpeas
 
+date_added: 2020-06-07
 ingredients:
 - falafel
 - olives
@@ -28,7 +29,6 @@ directions:
 - form Falafel balls, touch into sesame seeds and fry until golden brown using some olive oil
 - serve Falafel ontop of hummus aside olives, parsley salad, eggplant-carrot-mixture
 - decorate using chili flakes and tahini
-
 ---
 
 I first ate this 2019 at a restaurant in Brussels where I was together with my sister.

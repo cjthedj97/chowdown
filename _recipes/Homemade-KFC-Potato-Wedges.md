@@ -4,6 +4,7 @@ title: "CopyKat Homemade KFC Potato Wedges"
 image: kfc-potato-wedges.jpg
 imagecredit: https://copykat.com/wp-content/uploads/2018/03/kfc-potato-wedges-copycat-recipe.jpg
 
+date_added: 2024-01-06
 ingredients:
 - 3 lbs Russet potatoes
 - 2 cups all-purpose flour

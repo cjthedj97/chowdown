@@ -9,6 +9,7 @@ yield: 12 Servings
 preptime: PT10m
 cooktime: PT50m
 
+date_added: 2024-01-08
 ingredients:
 - 30 ozs frozen hash browns , diced or shredded will work, THAWED*
 - 2 cups sour cream
@@ -29,7 +30,6 @@ directions:
 - Add remaining 4 tablespoons of melted butter to the crushed cornflakes and combine well. Sprinkle mixture over potatoes.
 - Bake uncovered at 350 F for 40-50 minutes.
 - Serve these with baked ham, oven roasted turkey, or flank steak.
-
 ---
 
 *Or substitute 10 small potatoes, parboiled and diced

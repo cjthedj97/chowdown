@@ -2,6 +2,7 @@
 layout: recipe
 title: "CopyKat McDonald’s Big Mac Sauce"
 
+date_added: 2024-01-06
 ingredients:
 - 1 cup Mayonnaise
 - 2 tablespoons India relish, drained Heinz makes India relish

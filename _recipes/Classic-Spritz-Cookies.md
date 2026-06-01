@@ -5,6 +5,7 @@ image: Classic-Spritz-Cookies.jpg
 imagecredit: https://www.pamperedchef.com/recipe/Desserts/Classic+Spritz+Cookies+Recipe+%26+Tips/87807
 yield:  6-7 dozen
 
+date_added: 2024-01-08
 ingredients:
 - 1½ cups (375 mL) butter (3 sticks), softened
 - 1 cup (250 mL) sugar

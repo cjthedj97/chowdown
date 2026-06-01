@@ -5,6 +5,7 @@ image: OREO-Cookie-Balls.jpg
 imagecredit: https://www.oreo.com/recipe/cookieballs
 tag: Dessert
 
+date_added: 2024-01-08
 ingredients:
 - 1 pkg. (8 oz/250 g) brick cream cheese, softened
 - 36 OREO Cookies, finely crushed​

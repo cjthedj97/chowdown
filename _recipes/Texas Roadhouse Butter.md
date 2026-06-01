@@ -8,6 +8,7 @@ servings: 16
 prep_time: "5 mins"
 total_time: "5 mins"
 
+date_added: 2024-11-24
 ingredients:
 - 1 cup salted butter, softened
 - 1 teaspoon ground cinnamon
@@ -18,6 +19,5 @@ directions:
 - In a mixing bowl, combine softened butter, ground cinnamon, honey, and powdered sugar.
 - Use an electric mixer to whip the mixture until it becomes light and airy.
 - Transfer the whipped butter to a serving dish or storage container.
-
 ---
 This creamy whipped cinnamon honey butter is perfect for rolls, fresh bread, toast, muffins, and more. For best results, ensure the butter is softened before mixing. Store any leftovers in the refrigerator and bring to room temperature before serving.

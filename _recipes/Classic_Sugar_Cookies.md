@@ -5,6 +5,7 @@ tags: dessert
 image: Classic_Sugar_Cookies.jpg
 imagecredit: https://www.yellowblissroad.com/the-best-sugar-recipe-ever/
 
+date_added: 2021-12-20
 ingredients:
 - 1 ½ cups powdered sugar
 - 1 cup butter or margarine room temperature

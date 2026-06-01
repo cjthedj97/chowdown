@@ -9,6 +9,7 @@ prep_time: "30 mins"
 cook_time: "20 mins"
 total_time: "50 mins"
 
+date_added: 2024-11-24
 ingredients:
 - 2 boneless, skinless chicken breasts
 - 1/3 cup Italian salad dressing
@@ -27,6 +28,5 @@ directions:
 - Heat 2 tablespoons of olive oil in a skillet over medium heat. Add the marinated chicken pieces and cook until fully cooked, about 5-7 minutes.
 - Warm the Alfredo sauce in a large saucepan over low heat. Add the cooked penne pasta and stir to coat evenly.
 - Serve by layering Alfredo-coated penne, cooked chicken, bruschetta topping, and shredded Italian cheese.
-
 ---
 For added flavor, you can grill the chicken instead of pan-frying it. If desired, assemble the dish in a baking dish, top with cheese, and bake at 350°F (175°C) for 15-20 minutes until bubbly.

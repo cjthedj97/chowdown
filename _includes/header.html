@@ -1,6 +1,9 @@
   <!-- Navbar -->
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    {% include chowdown-logo-blue.svg %}
+    <a class="navbar-brand chowdown-brand" href="/" aria-label="Chowdown home">
+      <span class="chowdown-logo chowdown-logo-light">{% include chowdown-logo-light.svg %}</span>
+      <span class="chowdown-logo chowdown-logo-dark">{% include chowdown-logo-dark.svg %}</span>
+    </a>
 
     <!-- Rest of the Navbar -->
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -13,22 +16,36 @@
           <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item">
+          <a class="nav-link" href="/all">Display all recipes</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="collectionsDropdown" role="button" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Collections
+          </a>
+          <div class="dropdown-menu" aria-labelledby="collectionsDropdown">
+            <a class="dropdown-item" href="/collections/meal-prep">Meal Prep Collection</a>
+            <a class="dropdown-item" href="/collections/holiday">Holiday Collection</a>
+            <a class="dropdown-item" href="/collections/game-day">Game Day Collection</a>
+          </div>
+        </li>
+        <li class="nav-item">
           <a class="nav-link" href="/convert">Convert and submit a recipe</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/all">Display all recipes</a>
+          <a class="nav-link" href="/favorites">My Favorites</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/FAQ">FAQ</a>
-        </li>
-        <!-- Dropdown Menu -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
             aria-haspopup="true" aria-expanded="false">
             More
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/FAQ">FAQ</a>
+            <a class="dropdown-item" href="/random">Random Recipe</a>
             <a class="dropdown-item" href="/inventory">Food Inventory</a>
+            <a class="dropdown-item" href="/ideas">Recipe Idea Backlog</a>
+            <a class="dropdown-item" href="/features">Feature Roadmap</a>
             <a class="dropdown-item" href="/feed.xml">Subscribe via RSS</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="/stats">Recipe Statistics</a>
@@ -36,7 +53,7 @@
           </div>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/random">🎲</a>
+          <button id="theme-toggle" class="btn btn-sm theme-toggle" type="button">Dark Mode</button>
         </li>
       </ul>
     </div>
@@ -45,3 +62,8 @@
 <!-- Bootstrap JS and dependencies (Popper.js and jQuery) -->
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+ <script>
+   if (window.ChowdownTheme && typeof window.ChowdownTheme.initTheme === 'function') {
+     window.ChowdownTheme.initTheme();
+   }
+ </script>

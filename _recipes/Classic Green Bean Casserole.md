@@ -9,6 +9,7 @@ prep_time: "10 mins"
 cook_time: "30 mins"
 total_time: "40 mins"
 
+date_added: 2024-11-24
 ingredients:
 - 1 can (10.5 ounces) Campbell’s® Condensed Cream of Mushroom Soup (or Unsalted Cream of Mushroom Soup, or Cream of Celery Soup)
 - 1/2 cup 2% milk
@@ -23,6 +24,5 @@ directions:
 - Stir the bean mixture and then sprinkle the remaining 2/3 cup of French fried onions on top.
 - Bake for an additional 5 minutes or until the onions are golden brown.
 - Let the casserole rest for a few minutes before serving to allow the flavors to meld.
-
 ---
 For a festive touch, consider adding 1/4 cup of chopped red pepper with the green beans. For a crunchy variation, try adding 1/4 cup of toasted sliced almonds to the onion topping. If using Unsalted Cream of Mushroom Soup, you may add salt to taste, about 1/4 teaspoon. This dish can be stored in an oven-safe dish for easy reheating.

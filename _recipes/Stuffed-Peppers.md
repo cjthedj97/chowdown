@@ -4,6 +4,7 @@ title:  "Stuffed Peppers"
 image: stuffed-peppers.jpg
 tags: side party
 
+date_added: 2018-08-22
 ingredients:
 - 1 jar Peppedew Peppers (or piquante pepper)
 - 4oz goat cheese (any flavor)

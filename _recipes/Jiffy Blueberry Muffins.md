@@ -9,6 +9,7 @@ prep_time: "10 mins"
 cook_time: "15-20 mins"
 total_time: "25-30 mins"
 
+date_added: 2024-11-24
 ingredients:
 - 1 package “JIFFY” Blueberry Muffin Mix
 - 1/4 cup water
@@ -22,5 +23,4 @@ directions:
 - Divide the batter evenly among the prepared muffin cups.
 - Bake for 15-20 minutes or until a toothpick inserted into the center of a muffin comes out clean.
 - Allow the muffins to cool slightly before removing them from the tin.
-
 ---

@@ -2,6 +2,7 @@
 layout: recipe
 title: "Breakfast Bake"
 
+date_added: 2021-07-11
 ingredients:
 - 1 lb. sausage
 - 1 pkg. Crescent rolls

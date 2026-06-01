@@ -6,6 +6,7 @@ imagecredit: https://images.anovaculinary.com/sous-vide-self-buttering-corn-on-t
 preptime: PT5m
 cooktime: PT35m
 
+date_added: 2024-01-07
 ingredients:
 - corn shucked
 - cold butter, depending on your preference.

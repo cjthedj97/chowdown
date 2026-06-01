@@ -4,7 +4,9 @@ layout: default
 <div class="post">
 
   <header class="post-header">
+    {% unless page.show_title == false %}
     <h1 class="post-title">{{ page.title }}</h1>
+    {% endunless %}
   </header>
 
   <article class="post-content">

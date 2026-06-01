@@ -9,6 +9,7 @@ prep_time: "10 mins"
 cook_time: "20-25 mins"
 total_time: "30-35 mins"
 
+date_added: 2025-10-21
 ingredients:
 - 1 tbsp olive oil or 1 tbsp butter
 - 1 medium onion, finely chopped
@@ -30,7 +31,6 @@ directions:
 - Remove from heat and purée the soup until smooth using an immersion blender. (Alternatively, blend in batches in a stand blender — be careful with hot liquids.)
 - Return to low heat. Stir in the cream or coconut milk if using. Season with salt, pepper, nutmeg and a little brown sugar or maple syrup if desired. Warm gently — do not boil if using dairy.
 - Taste and adjust seasoning. Serve hot, drizzled with a little olive oil or cream and sprinkled with roasted pumpkin seeds and chopped chives.
-
 ---
 This recipe is adapted from "Pumpkin Soup – Classic and Easy" on RecipeTin Eats (Nagi).
 Original/printable recipe: https://www.recipetineats.com/wprm_print/pumpkin-soup-classic-and-easy

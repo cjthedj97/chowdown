@@ -6,6 +6,7 @@ permalink: /stats
 <p>Welcome to our recipe statistics page. Here, you'll find valuable insights into our collection of delicious recipes.</p>
 <hr>
 <h2>Total Recipes: <span id="total-recipes"></span></h2>
+<h2>Published Recipes: <span id="published-recipes"></span></h2>
 <h2>Recipes with Images (Local): <span id="local-image-recipe-count"></span></h2>
 <h2>Recipes with Images (Remote): <span id="remote-image-recipe-count"></span></h2>
 <p>This page was last updated on: <span id="build-time"></span></p>
@@ -26,12 +27,14 @@ permalink: /stats
   function displayStats(data) {
     const buildTimeElement = document.getElementById('build-time');
     const totalRecipesElement = document.getElementById('total-recipes');
+    const publishedRecipesElement = document.getElementById('published-recipes');
     const localImageCountElement = document.getElementById('local-image-recipe-count');
     const remoteImageCountElement = document.getElementById('remote-image-recipe-count');
     const tagCountsElement = document.getElementById('tag-counts');
 
     buildTimeElement.textContent = data.buildDateTime;
     totalRecipesElement.textContent = data.recipeCount;
+    publishedRecipesElement.textContent = data.publishedRecipeCount;
 
     let localImageCount = 0;
     let remoteImageCount = 0;

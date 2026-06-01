@@ -4,6 +4,7 @@ title:  "Green Spaghetti"
 image: green-spaghetti.jpg
 tags: mains pasta veg
 
+date_added: 2020-01-22
 ingredients:
 - dried spaghetti
 - giant bunch of dark greens (see notes)
@@ -18,7 +19,6 @@ directions:
 - Drain pasta, reserving a cup or so of the water
 - Toss pasta in sauce, adding a splash of water to make everything happy
 - Plate and top with freshly crumbled cheese and more cracked black pepper
-
 ---
 
 We saw this on Jamie Oliver's TV show and made it that night. He calls for **cavolo nero** as the greens, but dinosaur kale or spinach or any dark leafy green will do. The bigger the green, the easier it is to fish out of the boiling water, so keep that in mind.

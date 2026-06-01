@@ -4,6 +4,7 @@ title:  "Mushroom Risotto"
 image: mushroom-risotto.jpg
 tags: mains veg
 
+date_added: 2020-05-27
 ingredients:
 - 10oz shitake mushrooms (we usually buy two 5oz grocery packages)
 - 1 cup arborio rice

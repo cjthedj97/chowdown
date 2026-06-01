@@ -7,6 +7,7 @@ preptime: PT10m
 cooktime: PT1h
 yield: 10 Servings
 
+date_added: 2024-01-07
 ingredients:
 - Meatloaf Ingredients:
     - 1 ½ lbs ground chuck

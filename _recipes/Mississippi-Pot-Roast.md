@@ -5,6 +5,7 @@ image: mississippi-pot-roast.jpg
 imagecredit: https://www.today.com/today/amp/tdna199419
 tags: mains crock pot
 
+date_added: 2020-11-21
 ingredients:
 - 3-4 lbs chuck roast
 - 1 packet ranch mix

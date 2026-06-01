@@ -7,6 +7,7 @@ imagecredit: https://copykat.com/chilis-baked-potato-soup/
 preptime: PT10m
 cooktime: PT40m
 
+date_added: 2024-01-09
 ingredients:
 - 2 ½ lbs russet potatoes washed and peeled
 - 4 ozs butter

@@ -5,6 +5,7 @@ image: Disney-Churro-Bites.jpg
 imagecredit: https://www.wdwinfo.com/disneylandcalifornia/disney-shares-recipe-for-disney-parks-churro-bites/
 tag: Disney Parks
 
+date_added: 2023-09-15
 ingredients:
 
 - 1 cup water

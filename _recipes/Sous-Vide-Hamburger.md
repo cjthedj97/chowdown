@@ -5,6 +5,7 @@ image: sous-vide-hamburger.jpg
 imagecredit: https://recipes.anovaculinary.com/recipe/sous-vide-hamburger
 
 
+date_added: 2024-01-07
 ingredients:
 - 1 lb / 454 g of freshly ground beef (6 to 8 oz / 168 to 224 g per burger)
 - Kosher salt and freshly ground black pepper

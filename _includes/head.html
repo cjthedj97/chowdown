@@ -2,42 +2,55 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('chowdown:theme');
+        var theme = saved;
+        if (theme !== 'dark' && theme !== 'light') {
+          theme = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        }
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
 
   <title>{% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}</title>
   <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 
-  <link href="{{ "/css/bass.css" | prepend: site.baseurl }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{ "/css/main.css" | prepend: site.baseurl }}">
-  <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl }}">
-  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl }}" />
+  <link href="{{ "/css/bass.css" | relative_url }}" rel="stylesheet">
+  <link rel="canonical" href="{{ page.url | replace:'index.html','' | absolute_url }}">
+  <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | absolute_url }}" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.4/hammer.min.js"></script>
+  <link rel="stylesheet" href="{{ "/css/main.css" | relative_url }}">
+  <script src="{{ "/js/theme.js" | relative_url }}" type="text/javascript"></script>
+  <script src="{{ "/js/recipe-card-images.js" | relative_url }}" type="text/javascript" defer></script>
+  <script src="{{ "/js/search.min.js" | relative_url }}" type="text/javascript"></script>
+  <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.4/hammer.min.js" defer></script>
   
-  <link rel="apple-touch-icon" sizes="180x180" href="{{ site.baseurl }}/icons/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="{{ site.baseurl }}/icons/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="{{ site.baseurl }}/icons/favicon-16x16.png">
-  <link rel="manifest" href="{{ site.baseurl }}/manifest.json">
-  <link rel="shortcut icon" href="{{ site.baseurl }}/icons/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="{{ "/icons/apple-touch-icon.png" | relative_url }}">
+  <link rel="icon" type="image/svg+xml" href="{{ "/icons/favicon-light.svg" | relative_url }}" media="(prefers-color-scheme: light)">
+  <link rel="icon" type="image/svg+xml" href="{{ "/icons/favicon-dark.svg" | relative_url }}" media="(prefers-color-scheme: dark)">
+  <link rel="icon" type="image/png" sizes="32x32" href="{{ "/icons/favicon-32x32.png" | relative_url }}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{{ "/icons/favicon-16x16.png" | relative_url }}">
+  <link rel="manifest" href="{{ "/manifest.json" | relative_url }}">
+  <link rel="shortcut icon" href="{{ "/icons/favicon.ico" | relative_url }}">
   <meta name="msapplication-TileColor" content="#007fff">
-  <meta name="msapplication-config" content="{{ site.baseurl }}/icons/browserconfig.xml">
+  <meta name="msapplication-config" content="{{ "/icons/browserconfig.xml" | relative_url }}">
   <meta name="theme-color" content="#007fff">
 
-<script>
-    if ("serviceWorker" in navigator) {
-    if (navigator.serviceWorker.controller) {
-      console.log("An active service worker found, no need to register");
-    } else {
-      // Register the service worker
-      navigator.serviceWorker
-        .register("{{ site.baseurl }}/serviceworker.js", {
-          scope: "./"
-        })
-        .then(function (reg) {
-          console.log("Service worker has been registered for scope: " + reg.scope);
-        });
-    }
-  }
+  <script>
+    window.addEventListener('load', function () {
+      if (!('serviceWorker' in navigator)) return;
+      if (navigator.serviceWorker.controller) return;
+
+      navigator.serviceWorker.register("{{ "/serviceworker.js" | relative_url }}", {
+        scope: "./"
+      }).catch(function () {
+      });
+    });
   </script>
   
   <!-- Twitter Cards -->
@@ -45,7 +58,7 @@
   <meta name="twitter:site" content="@chowdownapp">
   <meta name="twitter:creator" content="@cjthedj97">
   {% if page.title %}<meta name="twitter:title" content="{{ page.title }}">{% else %}<meta name="twitter:title" content="Chowdown">{% endif %}
-  {% if page.url %}<meta name="twitter:url" content="{{ site.baseurl }}{{ page.url }}">{% endif %}
+  {% if page.url %}<meta name="twitter:url" content="{{ page.url | absolute_url }}">{% endif %}
   {% if page.directions %}<meta name="twitter:description" content="{{ page.content | strip_html }}">{% else %}<meta name="twitter:description" content="Chowdown">{% endif %}
 
 </head>

@@ -4,6 +4,7 @@ title:  "Broccoli Beer Cheese Soup"
 image: broccoli-beer-cheese-soup.jpg
 tags: sides soups
 
+date_added: 2018-08-22
 ingredients:
 - 4 tablespoons butter
 - 1 cup diced onion

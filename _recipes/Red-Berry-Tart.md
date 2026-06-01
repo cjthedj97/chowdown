@@ -13,6 +13,7 @@ components:
 - Graham Cracker Crust
 - Vanilla Custard Filling
 - Red Berry Dessert Topping
+date_added: 2018-08-22
 ---
 
 A favorite when I go to BBQs (parties, hackathons, your folks' place), this red berry tart is fairly easy to make and packs a huge wow factor.

@@ -2,6 +2,7 @@
 layout: recipe
 title: "Buckeyes"
 
+date_added: 2022-12-23
 ingredients:
 - 1 ½ cup peanut butter
 - 1 LB of powdered sugar

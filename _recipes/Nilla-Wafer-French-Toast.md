@@ -4,6 +4,7 @@ title:  "Nilla Wafer French Toast"
 image: nilla-wafer.jpg
 tags: breakfast baking
 
+date_added: 2018-09-17
 ingredients:
 - 4 eggs
 - 1/4 cup heavy cream

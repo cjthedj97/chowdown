@@ -9,6 +9,7 @@ prep_time: "5 mins"
 cook_time: "10 mins"
 total_time: "15 mins"
 
+date_added: 2024-11-24
 ingredients:
   pancakes:
   - 1 package “JIFFY” Blueberry Muffin Mix
@@ -19,7 +20,6 @@ directions:
 - Preheat your griddle to medium heat (350°F to 375°F) and lightly grease it.
 - In a bowl, combine the ingredients for either pancakes until large lumps disappear.
 - Pour 1/4 cup of batter onto the griddle. Flip when bubbles form across the surface and cook until the bottom is lightly browned.
-
 ---
 Milk can be substituted for water for a richer flavor.
 For thicker pancakes, use less water; for thinner pancakes, use more water.

@@ -1,0 +1,29 @@
+---
+layout: page
+permalink: /collections/meal-prep
+title: Meal Prep Collection
+show_title: false
+---
+
+<div class="container max-width-3 py3">
+  <h1 class="center">Meal Prep Collection</h1>
+  <p class="center">Batch-friendly recipes that reheat well for the week.</p>
+
+  {% assign published_recipes = site.recipes | where_exp: "r", "r.status != 'draft' and r.status != 'planned'" %}
+  {% assign prep = published_recipes | where_exp: "r", "r.tags contains 'mains' or r.tags contains 'crock' or r.tags contains 'breakfast' or r.tags contains 'soups' or r.tags contains 'soup'" %}
+
+  <div class="recipes xs-px1 xs-mt2 recipe-grid">
+    {% for post in prep %}
+    <a class="block relative recipe-tile {% if post.image %}has-image{% else %}no-image{% endif %}" href="{{ post.url }}" {% if post.image %}data-image-url="{% if post.image and post.image contains 'http' %}{{ post.image | escape }}{% else %}{{ '/images/' | append: post.image | relative_url | escape }}{% endif %}"{% endif %}>
+      <div class="image ratio bg-cover"
+           {% if post.image and post.image contains 'http' %}
+              style="--tile-image:url(&quot;{{ post.image | escape }}&quot;);"
+            {% elsif post.image %}
+              style="--tile-image:url(&quot;{{ '/images/' | append: post.image | relative_url | escape }}&quot;);"
+            {% endif %}>
+      </div>
+      <h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">{{ post.title }}</h1>
+    </a>
+    {% endfor %}
+  </div>
+</div>
