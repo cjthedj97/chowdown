@@ -4,8 +4,8 @@
   --surface-soft: #eef3fb;
   --tile-surface: #ffffff;
   --tile-surface-soft: #eef3fb;
-  --tile-placeholder-start: #2f3b4e;
-  --tile-placeholder-end: #495564;
+  --tile-placeholder-start: #d8e3f1;
+  --tile-placeholder-end: #b7c5d8;
   --text: #1f2937;
   --muted: #6b7280;
   --border: #d1d5db;
@@ -252,6 +252,11 @@ html[data-theme="dark"] li {
 }
 
 .recipe-tile.no-image .recipe-tile-title {
+  color: var(--text);
+  text-shadow: none;
+}
+
+html[data-theme="dark"] .recipe-tile.no-image .recipe-tile-title {
   color: #fff;
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
 }
