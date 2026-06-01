@@ -34,6 +34,7 @@ layout: recipe_default
     <div class="center mt2">
       <button id="favorite-toggle" class="btn btn-sm btn-outline-primary" type="button">Save Favorite</button>
       <button id="print-recipe" class="btn btn-sm btn-outline-secondary" type="button">Print Recipe</button>
+      <button id="recipe-timer-open" class="btn btn-sm btn-outline-secondary" type="button">Timer</button>
       <button id="share-recipe" class="btn btn-sm btn-outline-secondary d-inline-block d-md-none" type="button">Share Link</button>
       <button id="copy-link" class="btn btn-sm btn-outline-secondary d-none d-md-inline-block" type="button">Copy Link</button>
     </div>
@@ -186,10 +187,66 @@ layout: recipe_default
     <p class="clearfix">{{ site.translation[site.language].category }}: <span itemprop="recipeCategory">{{ category }}</span></p>
   {% endfor %}
 
+  <div id="recipe-timer-modal" class="recipe-timer-modal is-hidden" aria-hidden="true">
+    <div class="recipe-timer-backdrop" data-timer-close></div>
+    <div class="recipe-timer-panel" role="dialog" aria-modal="true" aria-labelledby="recipe-timer-title">
+      <div class="recipe-timer-panel-head">
+        <div>
+          <h2 id="recipe-timer-title">Cooking Timer</h2>
+          <p id="recipe-timer-status" class="recipe-timer-status">Set a time and start the countdown.</p>
+        </div>
+        <div class="recipe-timer-panel-head-actions">
+          <button id="recipe-timer-settings-toggle" type="button" class="btn btn-sm btn-outline-secondary">Settings</button>
+          <button type="button" class="btn btn-sm btn-outline-secondary" data-timer-close>Close</button>
+        </div>
+      </div>
+
+      <div class="recipe-timer-display" aria-live="polite">
+        <span id="recipe-timer-hours">00</span>:<span id="recipe-timer-minutes">00</span>:<span id="recipe-timer-seconds">00</span>
+      </div>
+
+      <div class="recipe-timer-inputs">
+        <label>
+          <span>Hours</span>
+          <input type="number" id="recipe-timer-hours-input" min="0" max="99" inputmode="numeric" placeholder="0">
+        </label>
+        <label>
+          <span>Minutes</span>
+          <input type="number" id="recipe-timer-minutes-input" min="0" max="59" inputmode="numeric" placeholder="0">
+        </label>
+        <label>
+          <span>Seconds</span>
+          <input type="number" id="recipe-timer-seconds-input" min="0" max="59" inputmode="numeric" placeholder="0">
+        </label>
+      </div>
+
+      <div class="recipe-timer-actions">
+        <button id="recipe-timer-start" class="btn btn-sm btn-primary" type="button">Start</button>
+        <button id="recipe-timer-pause" class="btn btn-sm btn-outline-secondary" type="button">Pause</button>
+        <button id="recipe-timer-reset" class="btn btn-sm btn-outline-secondary" type="button">Reset</button>
+      </div>
+
+      <div id="recipe-timer-settings" class="recipe-timer-settings is-hidden">
+        <div class="recipe-timer-settings-row">
+          <label for="recipe-timer-sound-select">Alert sound</label>
+          <select id="recipe-timer-sound-select"></select>
+        </div>
+        <p class="recipe-timer-settings-help">Add audio files to <code>/sounds/timer/</code> to load them automatically.</p>
+      </div>
+    </div>
+  </div>
+
   </article>
 
 </div>
 <script src="{{ "/js/favorites.js" | relative_url }}" type="text/javascript"></script>
+<script type="application/json" id="recipe-timer-sounds">[
+  {% assign timer_sounds = site.static_files | where_exp: "item", "item.path contains '/sounds/timer/'" | sort: "basename" %}
+  {% for sound in timer_sounds %}
+    {"id":"{{ sound.basename | slugify }}","url":"{{ sound.path | relative_url }}"}{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]</script>
+<script src="{{ "/js/recipe-timer.js" | relative_url }}" type="text/javascript"></script>
 <script>
   window.ChowdownFavorites.initRecipeFavoriteButton({
     buttonId: 'favorite-toggle',
@@ -278,8 +335,10 @@ layout: recipe_default
     nav,
     #favorite-toggle,
     #print-recipe,
+    #recipe-timer-open,
     #share-recipe,
     #copy-link,
+    #recipe-timer-modal,
     .right,
     .components,
     .navbar,
