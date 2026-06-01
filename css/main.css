@@ -4,6 +4,8 @@
   --surface-soft: #eef3fb;
   --tile-surface: #ffffff;
   --tile-surface-soft: #eef3fb;
+  --tile-placeholder-start: #2f3b4e;
+  --tile-placeholder-end: #495564;
   --text: #1f2937;
   --muted: #6b7280;
   --border: #d1d5db;
@@ -24,6 +26,8 @@ html[data-theme="dark"] {
   --surface-soft: #172136;
   --tile-surface: #0b1220;
   --tile-surface-soft: #111b30;
+  --tile-placeholder-start: #111827;
+  --tile-placeholder-end: #334155;
   --text: #e5e7eb;
   --muted: #9ca3af;
   --border: #374151;
@@ -215,7 +219,7 @@ html[data-theme="dark"] li {
 }
 
 .recipe-tile .image {
-  background-image: var(--tile-image), linear-gradient(135deg, color-mix(in srgb, var(--accent) 14%, var(--surface-soft)), var(--surface));
+  background-image: var(--tile-image), linear-gradient(135deg, var(--tile-placeholder-start), var(--tile-placeholder-end));
   background-repeat: no-repeat, no-repeat;
   background-position: center center, center center;
   background-size: cover, cover;
@@ -245,6 +249,11 @@ html[data-theme="dark"] li {
 
 .recipe-tile.no-image::after {
   display: none;
+}
+
+.recipe-tile.no-image .recipe-tile-title {
+  color: #fff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.55);
 }
 
 .recipe-tile:hover {
