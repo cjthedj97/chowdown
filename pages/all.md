@@ -11,7 +11,7 @@ permalink: /all
     {% assign published_recipes = site.recipes | where_exp: "item", "item.status != 'draft' and item.status != 'planned'" %}
     {% assign sorted = published_recipes | sort:"date" %}
     {% for post in sorted %}
-    <a class="block relative recipe-tile {% if post.image %}has-image{% else %}no-image{% endif %}" href="{{ post.url }}">
+    <a class="block relative recipe-tile {% if post.image %}has-image{% else %}no-image{% endif %}" href="{{ post.url }}" {% if post.image %}data-image-url="{% if post.image and post.image contains 'http' %}{{ post.image | escape }}{% else %}{{ '/images/' | append: post.image | relative_url | escape }}{% endif %}"{% endif %}>
       <div class="image ratio bg-cover"
            {% if post.image and post.image contains 'http' %}
              style="--tile-image:url({{ post.image }});"

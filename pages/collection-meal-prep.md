@@ -14,7 +14,7 @@ show_title: false
 
   <div class="recipes xs-px1 xs-mt2 recipe-grid">
     {% for post in prep %}
-    <a class="block relative recipe-tile {% if post.image %}has-image{% else %}no-image{% endif %}" href="{{ post.url }}">
+    <a class="block relative recipe-tile {% if post.image %}has-image{% else %}no-image{% endif %}" href="{{ post.url }}" {% if post.image %}data-image-url="{% if post.image and post.image contains 'http' %}{{ post.image | escape }}{% else %}{{ '/images/' | append: post.image | relative_url | escape }}{% endif %}"{% endif %}>
       <div class="image ratio bg-cover"
            {% if post.image and post.image contains 'http' %}
              style="--tile-image:url({{ post.image }});"
