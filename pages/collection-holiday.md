@@ -17,9 +17,9 @@ show_title: false
     <a class="block relative recipe-tile {% if post.image %}has-image{% else %}no-image{% endif %}" href="{{ post.url }}">
       <div class="image ratio bg-cover"
            {% if post.image and post.image contains 'http' %}
-             style="background-image:url({{ post.image }});"
+             style="--tile-image:url({{ post.image }});"
            {% elsif post.image %}
-             style="background-image:url({{ '/images/' | append: post.image | relative_url }});"
+             style="--tile-image:url({{ '/images/' | append: post.image | relative_url }});"
            {% endif %}>
       </div>
       <h1 class="title p2 m0 absolute bold white bottom-0 left-0 recipe-tile-title">{{ post.title }}</h1>

@@ -205,6 +205,7 @@ html[data-theme="dark"] li {
 }
 
 .recipe-tile {
+  --tile-image: none;
   background: var(--tile-surface);
   border-radius: 14px;
   border: 1px solid color-mix(in srgb, var(--border) 86%, var(--accent) 14%);
@@ -213,24 +214,12 @@ html[data-theme="dark"] li {
   transition: transform 0.22s ease, box-shadow 0.22s ease;
 }
 
-.recipe-tile.has-image .image {
+.recipe-tile .image {
+  background-image: var(--tile-image), linear-gradient(135deg, color-mix(in srgb, var(--accent) 14%, var(--surface-soft)), var(--surface));
+  background-repeat: no-repeat, no-repeat;
+  background-position: center center, center center;
+  background-size: cover, cover;
   filter: saturate(1.05);
-  background-repeat: no-repeat;
-  background-position: center center;
-  background-size: cover;
-}
-
-.recipe-tile.no-image {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--tile-surface-soft) 72%, var(--accent) 28%), color-mix(in srgb, var(--tile-surface) 88%, var(--accent) 12%));
-}
-
-.recipe-tile.has-image .image,
-.recipe-tile.no-image .image {
-  background-color: var(--tile-surface);
-}
-
-.recipe-tile.no-image .image {
-  background: linear-gradient(135deg, color-mix(in srgb, var(--accent) 14%, var(--surface-soft)), var(--surface));
 }
 
 .ratio {
