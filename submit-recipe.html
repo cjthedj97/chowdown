@@ -35,6 +35,16 @@ permalink: /submit-recipe/
     </div>
 
     <label>
+      Difficulty
+      <select name="difficulty">
+        <option value="">Not specified</option>
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
+      </select>
+    </label>
+
+    <label>
       Categories, comma separated
       <input name="categories" type="text" placeholder="Breakfast, Meal Prep">
     </label>
@@ -69,7 +79,6 @@ permalink: /submit-recipe/
       <textarea name="directions" rows="12" required placeholder="Potato Crust:\n- Preheat oven to 425°F.\n- Smash thawed tater tots into an even layer.\n\nBake:\n- Bake until eggs are set."></textarea>
     </label>
 
-    <!-- Honeypot: leave empty. Hidden from people, attractive to simple bots. -->
     <label class="recipe-submit-hp" aria-hidden="true" tabindex="-1">
       Company Website
       <input name="website" type="text" autocomplete="off" tabindex="-1">
@@ -104,6 +113,7 @@ permalink: /submit-recipe/
   }
 
   .recipe-submit-form input,
+  .recipe-submit-form select,
   .recipe-submit-form textarea {
     display: block;
     width: 100%;
@@ -217,6 +227,7 @@ permalink: /submit-recipe/
       preptime: data.get("preptime"),
       cooktime: data.get("cooktime"),
       totaltime: data.get("totaltime"),
+      difficulty: data.get("difficulty"),
       categories: splitCsv(data.get("categories")),
       tags: splitCsv(data.get("tags")),
       image: data.get("image"),
