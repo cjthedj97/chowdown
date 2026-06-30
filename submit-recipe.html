@@ -1,0 +1,268 @@
+---
+layout: default
+title: Submit a Recipe
+permalink: /submit-recipe/
+---
+
+<div class="container px2 py3">
+  <h1 class="center">Submit a Recipe</h1>
+  <p class="center">Preview your recipe first, then submit it as a pull request for review.</p>
+
+  <form id="recipe-submit-form" class="recipe-submit-form">
+    <label>
+      Title
+      <input name="title" type="text" required maxlength="120" placeholder="Smashed Tater Tot Breakfast Meal Prep Bake">
+    </label>
+
+    <label>
+      Yield
+      <input name="yield" type="text" maxlength="40" placeholder="6 servings">
+    </label>
+
+    <div class="recipe-submit-grid">
+      <label>
+        Prep Time
+        <input name="preptime" type="text" placeholder="PT20M">
+      </label>
+      <label>
+        Cook Time
+        <input name="cooktime" type="text" placeholder="PT45M">
+      </label>
+      <label>
+        Total Time
+        <input name="totaltime" type="text" placeholder="PT1H5M">
+      </label>
+    </div>
+
+    <label>
+      Categories, comma separated
+      <input name="categories" type="text" placeholder="Breakfast, Meal Prep">
+    </label>
+
+    <label>
+      Tags, comma separated
+      <input name="tags" type="text" placeholder="breakfast, meal-prep, casserole">
+    </label>
+
+    <label>
+      Image URL or image filename
+      <input name="image" type="text" maxlength="400">
+    </label>
+
+    <label>
+      Image credit URL
+      <input name="imagecredit" type="text" maxlength="400">
+    </label>
+
+    <label>
+      Notes
+      <textarea name="notes" rows="4" maxlength="600" placeholder="Short note shown near the top of the recipe page."></textarea>
+    </label>
+
+    <label>
+      Ingredients
+      <textarea name="ingredients" rows="10" required placeholder="Potato Crust:\n- 2 lb frozen tater tots, thawed\n- 2 tbsp melted butter, optional\n\nFilling:\n- 1 lb breakfast sausage, cooked and drained"></textarea>
+    </label>
+
+    <label>
+      Directions
+      <textarea name="directions" rows="12" required placeholder="Potato Crust:\n- Preheat oven to 425°F.\n- Smash thawed tater tots into an even layer.\n\nBake:\n- Bake until eggs are set."></textarea>
+    </label>
+
+    <!-- Honeypot: leave empty. Hidden from people, attractive to simple bots. -->
+    <label class="recipe-submit-hp" aria-hidden="true" tabindex="-1">
+      Company Website
+      <input name="website" type="text" autocomplete="off" tabindex="-1">
+    </label>
+
+    <div class="cf-turnstile" data-sitekey="REPLACE_WITH_TURNSTILE_SITE_KEY"></div>
+
+    <div class="recipe-submit-actions">
+      <button type="button" id="recipe-preview-button">Preview</button>
+      <button type="submit">Submit PR</button>
+    </div>
+  </form>
+
+  <div id="recipe-submit-status" class="recipe-submit-status" role="status"></div>
+
+  <section id="recipe-preview" class="recipe-preview" hidden>
+    <h2>Generated Markdown Preview</h2>
+    <pre><code id="recipe-preview-code"></code></pre>
+  </section>
+</div>
+
+<style>
+  .recipe-submit-form {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .recipe-submit-form label {
+    display: block;
+    margin: 1rem 0;
+    font-weight: 700;
+  }
+
+  .recipe-submit-form input,
+  .recipe-submit-form textarea {
+    display: block;
+    width: 100%;
+    margin-top: 0.35rem;
+    padding: 0.7rem;
+    border: 1px solid var(--border, #ccc);
+    border-radius: 6px;
+    background: var(--surface, #fff);
+    color: inherit;
+    font: inherit;
+  }
+
+  .recipe-submit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+  }
+
+  .recipe-submit-hp {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  .recipe-submit-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-top: 1.5rem;
+  }
+
+  .recipe-submit-status {
+    max-width: 900px;
+    margin: 1.5rem auto;
+    white-space: pre-wrap;
+  }
+
+  .recipe-preview {
+    max-width: 900px;
+    margin: 2rem auto;
+  }
+
+  .recipe-preview pre {
+    overflow: auto;
+    padding: 1rem;
+    border-radius: 8px;
+    background: var(--surface-soft, #f5f5f5);
+  }
+</style>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+  const WORKER_BASE_URL = "REPLACE_WITH_WORKER_URL";
+  const form = document.getElementById("recipe-submit-form");
+  const previewButton = document.getElementById("recipe-preview-button");
+  const statusBox = document.getElementById("recipe-submit-status");
+  const preview = document.getElementById("recipe-preview");
+  const previewCode = document.getElementById("recipe-preview-code");
+
+  previewButton.addEventListener("click", async () => {
+    await sendRecipe("preview");
+  });
+
+  form.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    await sendRecipe("submit");
+  });
+
+  async function sendRecipe(mode) {
+    statusBox.textContent = mode === "preview" ? "Generating preview..." : "Submitting recipe PR...";
+
+    const payload = buildPayload(new FormData(form));
+    if (mode === "submit") {
+      payload.turnstileToken = getTurnstileToken();
+    }
+
+    const endpoint = mode === "preview" ? "/api/recipes/preview" : "/api/recipes/submit";
+    const response = await fetch(`${WORKER_BASE_URL}${endpoint}`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(payload)
+    });
+
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      statusBox.textContent = formatMessages("Submission needs attention", result.errors, result.warnings);
+      return;
+    }
+
+    if (mode === "preview") {
+      preview.hidden = false;
+      previewCode.textContent = result.preview;
+      statusBox.textContent = formatMessages("Preview generated", [], result.warnings);
+      return;
+    }
+
+    statusBox.textContent = formatMessages(
+      `Pull request opened: ${result.pullRequest.url}`,
+      [],
+      result.warnings
+    );
+  }
+
+  function buildPayload(data) {
+    return {
+      title: data.get("title"),
+      yield: data.get("yield"),
+      preptime: data.get("preptime"),
+      cooktime: data.get("cooktime"),
+      totaltime: data.get("totaltime"),
+      categories: splitCsv(data.get("categories")),
+      tags: splitCsv(data.get("tags")),
+      image: data.get("image"),
+      imagecredit: data.get("imagecredit"),
+      notes: data.get("notes"),
+      ingredients: parseGroupedList(data.get("ingredients")),
+      directions: parseGroupedList(data.get("directions")),
+      website: data.get("website")
+    };
+  }
+
+  function splitCsv(value) {
+    return String(value || "").split(",").map((item) => item.trim()).filter(Boolean);
+  }
+
+  function parseGroupedList(value) {
+    const groups = [];
+    let current = { name: "", items: [] };
+
+    for (const rawLine of String(value || "").split(/\r?\n/)) {
+      const line = rawLine.trim();
+      if (!line) continue;
+
+      if (line.endsWith(":") && !line.startsWith("-")) {
+        if (current.items.length) groups.push(current);
+        current = { name: line.slice(0, -1).trim(), items: [] };
+        continue;
+      }
+
+      const item = line.replace(/^[-*]\s+/, "").trim();
+      if (item) current.items.push(item);
+    }
+
+    if (current.items.length) groups.push(current);
+    return groups;
+  }
+
+  function getTurnstileToken() {
+    const token = document.querySelector("[name='cf-turnstile-response']");
+    return token ? token.value : "";
+  }
+
+  function formatMessages(title, errors, warnings) {
+    const parts = [title];
+    if (errors && errors.length) parts.push("\nErrors:\n- " + errors.join("\n- "));
+    if (warnings && warnings.length) parts.push("\nWarnings:\n- " + warnings.join("\n- "));
+    return parts.join("\n");
+  }
+</script>
