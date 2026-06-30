@@ -1,6 +1,8 @@
 const DEFAULT_BASE_BRANCH = "main";
 const RECIPE_DIR = "_recipes";
 const BRANCH_PREFIX = "recipe-submissions";
+const RECIPE_SCHEMA_VERSION = 1;
+const ALLOWED_DIFFICULTIES = new Set(["Easy", "Medium", "Hard"]);
 
 export default {
   async fetch(request, env) {
@@ -34,7 +36,7 @@ export default {
           return json({ ok: false, errors: ["Turnstile verification failed."], warnings: validation.warnings }, 403, env);
         }
 
-        const pr = await createRecipePullRequest(validation.recipe, env);
+        const pr = await createRecipePullRequest(validation.recipe, validation.warnings, env);
         return json({ ok: true, pullRequest: pr, warnings: validation.warnings }, 201, env);
       }
 
@@ -72,11 +74,12 @@ function buildRecipe(input, options = {}) {
   const preptime = normalizeDuration(input.preptime || input.prepTime);
   const cooktime = normalizeDuration(input.cooktime || input.cookTime);
   const totaltime = normalizeDuration(input.totaltime || input.totalTime);
+  const difficulty = normalizeDifficulty(input.difficulty);
   const notes = cleanText(input.notes, 600);
   const image = cleanText(input.image, 400);
   const imagecredit = cleanText(input.imagecredit || input.imageCredit, 400);
   const categories = cleanList(input.categories, 8, 40);
-  const tags = cleanList(input.tags, 16, 40).map(slugifyTag);
+  const tags = cleanList(input.tags, 16, 40).map(slugifyTag).filter(Boolean);
   const ingredients = cleanGroups(input.ingredients, 12, 50, 180);
   const directions = cleanGroups(input.directions, 12, 60, 320);
 
@@ -85,6 +88,9 @@ function buildRecipe(input, options = {}) {
   if (!preptime) warnings.push("Prep time is missing or not an ISO-8601 duration like PT20M.");
   if (!cooktime) warnings.push("Cook time is missing or not an ISO-8601 duration like PT45M.");
   if (!totaltime) warnings.push("Total time is missing or not an ISO-8601 duration like PT1H5M.");
+  if (input.difficulty && !difficulty) warnings.push("Difficulty must be Easy, Medium, or Hard.");
+  if (!categories.length) warnings.push("Categories are missing.");
+  if (!tags.length) warnings.push("Tags are missing.");
   if (!image) warnings.push("No image provided.");
   if (image && !imagecredit) warnings.push("Image provided without image credit.");
   if (!ingredients.length) errors.push("At least one ingredient is required.");
@@ -94,6 +100,8 @@ function buildRecipe(input, options = {}) {
   if (!slug) errors.push("Title must produce a valid filename slug.");
 
   const markdown = renderRecipeMarkdown({
+    layout: "recipe",
+    recipe_schema: RECIPE_SCHEMA_VERSION,
     title,
     image,
     imagecredit,
@@ -103,6 +111,7 @@ function buildRecipe(input, options = {}) {
     preptime,
     cooktime,
     totaltime,
+    difficulty,
     notes,
     ingredients,
     directions
@@ -126,29 +135,29 @@ function renderRecipeMarkdown(recipe) {
   const lines = [
     "---",
     "layout: recipe",
-    `title: ${yamlString(recipe.title)}`,
-    `image: ${recipe.image ? yamlString(recipe.image) : ""}`,
-    `imagecredit: ${recipe.imagecredit ? yamlString(recipe.imagecredit) : ""}`
+    `recipe_schema: ${RECIPE_SCHEMA_VERSION}`,
+    `title: ${yamlString(recipe.title)}`
   ];
 
-  lines.push("categories:");
+  if (recipe.image) lines.push(`image: ${yamlString(recipe.image)}`);
+  if (recipe.imagecredit) lines.push(`imagecredit: ${yamlString(recipe.imagecredit)}`);
+
   if (recipe.categories.length) {
+    lines.push("categories:");
     recipe.categories.forEach((category) => lines.push(`  - ${yamlString(category)}`));
-  } else {
-    lines.push("  - Uncategorized");
   }
 
-  lines.push("tags:");
   if (recipe.tags.length) {
+    lines.push("tags:");
     recipe.tags.forEach((tag) => lines.push(`  - ${yamlString(tag)}`));
-  } else {
-    lines.push("  - recipe");
   }
 
-  lines.push(`yield: ${yamlString(recipe.yield || "")}`);
+  if (recipe.yield) lines.push(`yield: ${yamlString(recipe.yield)}`);
   if (recipe.preptime) lines.push(`preptime: ${yamlString(recipe.preptime)}`);
   if (recipe.cooktime) lines.push(`cooktime: ${yamlString(recipe.cooktime)}`);
   if (recipe.totaltime) lines.push(`totaltime: ${yamlString(recipe.totaltime)}`);
+  if (recipe.difficulty) lines.push(`difficulty: ${yamlString(recipe.difficulty)}`);
+
   if (recipe.notes) {
     lines.push("notes: >");
     wrapText(recipe.notes, 76).forEach((line) => lines.push(`  ${line}`));
@@ -193,7 +202,7 @@ async function verifyTurnstile(token, request, env) {
   return { ok: Boolean(result.success), result };
 }
 
-async function createRecipePullRequest(recipe, env) {
+async function createRecipePullRequest(recipe, warnings, env) {
   const owner = env.GITHUB_OWNER || "cjthedj97";
   const repo = env.GITHUB_REPO || "chowdown";
   const base = env.GITHUB_BASE_BRANCH || DEFAULT_BASE_BRANCH;
@@ -236,6 +245,18 @@ async function createRecipePullRequest(recipe, env) {
     }
   });
 
+  const validationLines = [
+    "✅ Generated recipe Markdown from structured form data",
+    "✅ Required fields validated before commit",
+    "✅ Honeypot field checked before GitHub write",
+    "✅ Turnstile checked before GitHub write",
+    "✅ Duplicate filename checked against the base branch"
+  ];
+
+  if (warnings && warnings.length) {
+    validationLines.push("", "### Warnings", "", ...warnings.map((warning) => `- ${warning}`));
+  }
+
   const prBody = [
     "## Recipe submission",
     "",
@@ -243,15 +264,13 @@ async function createRecipePullRequest(recipe, env) {
     "",
     "## Validation",
     "",
-    "✅ Generated recipe Markdown from structured form data",
-    "✅ Required fields validated before commit",
-    "✅ Honeypot field checked before GitHub write",
-    "✅ Turnstile checked before GitHub write",
-    "✅ Duplicate filename checked against the base branch",
+    ...validationLines,
     "",
     "## Notes",
     "",
-    "This PR was opened by the recipe submission Worker draft. Review the generated Markdown and Cloudflare Pages preview before merging."
+    "This PR was opened by the recipe submission Worker draft. Review the generated Markdown and Cloudflare Pages preview before merging.",
+    "",
+    "Related roadmap issues: #69, #71, #81, #83"
   ].join("\n");
 
   const pr = await github(`${repoPath}/pulls`, {
@@ -337,6 +356,14 @@ function cleanGroups(value, maxGroups, maxItems, maxLength) {
 function normalizeDuration(value) {
   const duration = cleanText(value, 20).toUpperCase();
   return /^PT(?=\d)(?:(\d+)H)?(?:(\d+)M)?$/.test(duration) ? duration : "";
+}
+
+function normalizeDifficulty(value) {
+  const difficulty = cleanText(value, 20);
+  if (!difficulty) return "";
+
+  const normalized = difficulty.charAt(0).toUpperCase() + difficulty.slice(1).toLowerCase();
+  return ALLOWED_DIFFICULTIES.has(normalized) ? normalized : "";
 }
 
 function slugify(value) {
