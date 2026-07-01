@@ -9,6 +9,8 @@ lang_direction: "ltr"
 color: "#007FFF"
 twitter_username: 
 github_username:  cjthedj97
+github_repository: cjthedj97/chowdown
+github_branch: main
 
 # Build settings
 markdown: kramdown
