@@ -1,0 +1,28 @@
+:root {
+  --recipe-placeholder-light: url("/images/placeholders/no-image-light.svg");
+  --recipe-placeholder-dark: url("/images/placeholders/no-image-dark.svg");
+  --recipe-placeholder-image: var(--recipe-placeholder-light);
+}
+
+:root[data-theme="dark"] {
+  --recipe-placeholder-image: var(--recipe-placeholder-dark);
+}
+
+.recipe-tile.no-image,
+.result-card.no-image {
+  --tile-image: var(--recipe-placeholder-image);
+}
+
+.recipe-tile.no-image .image,
+.result-card.no-image .image {
+  background-image: var(--recipe-placeholder-image) !important;
+  background-color: var(--surface-soft) !important;
+  background-repeat: no-repeat !important;
+  background-position: center center !important;
+  background-size: cover !important;
+}
+
+.recipe-tile.no-image,
+.result-card.no-image {
+  background-image: none !important;
+}

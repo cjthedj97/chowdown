@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">No Image Available</title>
+  <desc id="desc">Dark mode placeholder image for recipes without a photo.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%">
+      <stop offset="0" stop-color="#172136"/>
+      <stop offset="1" stop-color="#0b1220"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="18" stdDeviation="28" flood-color="#000000" flood-opacity="0.38"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <path d="M0 0h286c-10 76-50 132-119 167C97 203 44 270 8 369L0 389zM1600 0v213c-92-12-152-54-181-126-12-29-16-58-12-87zM0 1000V788c74-44 155-42 242 7 90 51 120 119 91 205zM1600 1000h-340c-5-96 31-168 108-215 81-49 158-66 232-50z" fill="#243149" opacity="0.62"/>
+  <g fill="none" stroke="#53627d" stroke-width="10" stroke-linecap="round" opacity="0.95">
+    <path d="M260 338h60"/><path d="M270 260l52 32"/><path d="M273 416l53-32"/>
+    <path d="M1280 338h60"/><path d="M1270 292l52-32"/><path d="M1272 384l53 32"/>
+  </g>
+  <g fill="#53627d" opacity="0.85">
+    <circle cx="128" cy="492" r="8"/><circle cx="1370" cy="690" r="8"/><circle cx="1458" cy="238" r="8"/>
+    <path d="M222 650h-28v-28h-16v28h-28v16h28v28h16v-28h28zM1448 548h-24v-24h-16v24h-24v16h24v24h16v-24h24z"/>
+  </g>
+  <g filter="url(#shadow)" transform="translate(0 -36)">
+    <rect x="470" y="150" width="660" height="450" rx="42" fill="#111b30" stroke="#64748b" stroke-width="20"/>
+    <path d="M502 520 655 337c13-15 36-15 49 0l95 112 78-88c13-14 35-14 48 0l173 196H502z" fill="#334155"/>
+    <circle cx="982" cy="284" r="51" fill="#334155"/>
+    <circle cx="800" cy="560" r="94" fill="#64748b" stroke="#111b30" stroke-width="16"/>
+    <rect x="789" y="506" width="22" height="70" rx="11" fill="#e5e7eb"/>
+    <circle cx="800" cy="598" r="12" fill="#e5e7eb"/>
+  </g>
+  <text x="800" y="780" text-anchor="middle" font-family="Inter, Arial, Helvetica, sans-serif" font-size="120" font-weight="800" fill="#f8fafc">No Image Available</text>
+</svg>
