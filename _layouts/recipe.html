@@ -35,12 +35,14 @@ layout: recipe_default
       <button id="favorite-toggle" class="btn btn-sm btn-outline-primary" type="button">Save Favorite</button>
       <button id="print-recipe" class="btn btn-sm btn-outline-secondary" type="button">Print Recipe</button>
       <button id="recipe-timer-open" class="btn btn-sm btn-outline-secondary" type="button">Timer</button>
+      <button id="edit-recipe" class="btn btn-sm btn-outline-secondary" type="button">Edit Recipe</button>
       {% if site.github_repository %}
         <button id="recipe-history-toggle" class="btn btn-sm btn-outline-secondary" type="button" aria-expanded="false" aria-controls="recipe-history-panel">View History</button>
       {% endif %}
       <button id="share-recipe" class="btn btn-sm btn-outline-secondary d-inline-block d-md-none" type="button">Share Link</button>
       <button id="copy-link" class="btn btn-sm btn-outline-secondary d-none d-md-inline-block" type="button">Copy Link</button>
     </div>
+    {% include recipe-edit.html %}
     {% include recipe-history.html %}
     {% include yield.html recipe=page %}
     {% include timings.html recipe=page %}
@@ -251,11 +253,20 @@ layout: recipe_default
 ]</script>
 <script src="{{ "/js/recipe-timer.js" | relative_url }}" type="text/javascript"></script>
 <script src="{{ "/js/recipe-history.js" | relative_url }}" type="text/javascript"></script>
+<script src="{{ "/js/edit-recipe.js" | relative_url }}" type="text/javascript"></script>
 <script>
   window.ChowdownFavorites.initRecipeFavoriteButton({
     buttonId: 'favorite-toggle',
     recipeUrl: '{{page.url}}'
   });
+
+  if (window.ChowdownRecipeEdit) {
+    window.ChowdownRecipeEdit.initRecipePage({
+      buttonId: 'edit-recipe',
+      dataId: 'recipe-edit-data',
+      submitUrl: '{{ "/submit-recipe.html?edit=1" | relative_url }}'
+    });
+  }
 
   if (window.ChowdownRecipeHistory) {
     window.ChowdownRecipeHistory.init({
@@ -347,9 +358,12 @@ layout: recipe_default
     #favorite-toggle,
     #print-recipe,
     #recipe-timer-open,
+    #edit-recipe,
+    #recipe-history-toggle,
     #share-recipe,
     #copy-link,
     #recipe-timer-modal,
+    .recipe-history-panel,
     .right,
     .components,
     .navbar,
