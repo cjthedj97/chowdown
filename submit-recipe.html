@@ -66,7 +66,7 @@ permalink: /submit-recipe.html
     <div class="cf-turnstile" data-sitekey="0x4AAAAAADtqCBO4JL4z-yfi"></div>
 
     <div class="recipe-submit-actions">
-      <button type="button" id="recipe-preview-button">Preview</button>
+      <button type="button" id="recipe-preview-button">Preview Markdown</button>
       <button type="submit">Submit PR</button>
       <button type="button" id="recipe-copy-button">Copy Markdown</button>
       <button type="button" id="recipe-clear-button">Clear</button>
@@ -74,6 +74,17 @@ permalink: /submit-recipe.html
   </form>
 
   <div id="recipe-submit-status" class="recipe-submit-status" role="status"></div>
+
+  <section id="recipe-rendered-preview" class="recipe-rendered-preview" aria-live="polite">
+    <div class="recipe-rendered-preview-head">
+      <div>
+        <h2>Rendered Recipe Preview</h2>
+        <p>Updates as you type. Validation uses the preview endpoint only.</p>
+      </div>
+      <div id="recipe-preview-feedback" class="recipe-preview-feedback">Start typing to see a rendered recipe preview.</div>
+    </div>
+    <article id="recipe-rendered-card" class="recipe-rendered-card"></article>
+  </section>
 
   <section id="recipe-preview" class="recipe-preview" hidden>
     <h2>Generated Markdown Preview</h2>
@@ -95,6 +106,30 @@ permalink: /submit-recipe.html
   .recipe-submit-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .recipe-submit-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.5rem; }
   .recipe-submit-status { max-width: 900px; margin: 1.5rem auto; white-space: pre-wrap; }
+  .recipe-rendered-preview { max-width: 900px; margin: 2rem auto; }
+  .recipe-rendered-preview-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; margin-bottom: 1rem; }
+  .recipe-rendered-preview-head h2 { margin-bottom: 0.25rem; }
+  .recipe-rendered-preview-head p { margin: 0; opacity: 0.8; }
+  .recipe-preview-feedback { padding: 0.85rem; border: 1px solid var(--border, #d1d5db); border-radius: 8px; background: var(--surface, #fff); white-space: pre-wrap; }
+  .recipe-preview-feedback p { margin: 0.5rem 0 0.25rem; font-weight: 700; }
+  .recipe-preview-feedback ul { margin: 0.25rem 0 0; padding-left: 1.25rem; }
+  .recipe-preview-errors { color: #991b1b; }
+  .recipe-preview-warnings { color: #92400e; }
+  .recipe-rendered-card { padding: 1.25rem; border: 1px solid var(--border, #d1d5db); border-radius: 12px; background: var(--surface, #fff); box-shadow: 0 1px 6px rgba(0, 0, 0, 0.06); }
+  .recipe-rendered-title { text-align: center; margin-top: 0; }
+  .recipe-rendered-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1rem; padding: 0; margin: 0 0 1rem; list-style: none; font-weight: 700; }
+  .recipe-rendered-image { margin: 1rem 0; text-align: center; }
+  .recipe-rendered-image img { max-width: 100%; max-height: 320px; border-radius: 10px; object-fit: cover; }
+  .recipe-rendered-image.has-image-error::after { content: "Image could not be loaded in preview."; display: block; margin-top: 0.5rem; opacity: 0.8; }
+  .recipe-rendered-image.has-image-error img { display: none; }
+  .recipe-rendered-image a { display: inline-block; margin-top: 0.5rem; }
+  .recipe-rendered-notes { margin: 1rem 0; padding: 0.85rem; border-left: 3px solid var(--accent, #007FFF); background: var(--surface-soft, #f7f7f7); }
+  .recipe-rendered-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; margin-top: 1.25rem; }
+  .recipe-rendered-grid h4 { margin-top: 0; color: var(--accent, #007FFF); }
+  .recipe-rendered-grid h5 { margin-bottom: 0.25rem; }
+  .recipe-rendered-empty { opacity: 0.75; }
+  .recipe-rendered-taxonomy { margin-top: 1rem; font-size: 0.95rem; }
+  .recipe-rendered-taxonomy p { margin: 0.25rem 0; }
   .recipe-preview { max-width: 900px; margin: 2rem auto; }
   .recipe-preview pre { overflow: auto; padding: 1rem; border-radius: 8px; background: #f7f7f7; color: #1f2937; border: 1px solid #d1d5db; }
   .recipe-preview code { color: inherit; background: transparent; }
@@ -105,6 +140,7 @@ permalink: /submit-recipe.html
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script src="{{ "/js/edit-recipe.js" | relative_url }}" type="text/javascript"></script>
+<script src="{{ "/js/rendered-recipe-preview.js" | relative_url }}" type="text/javascript"></script>
 <script>
   const API_BASE_URL = "";
   const form = document.getElementById("recipe-submit-form");
@@ -121,6 +157,13 @@ permalink: /submit-recipe.html
     window.ChowdownRecipeEdit.populateSubmitForm({ form, statusBox });
   }
   updateTimeSummary();
+
+  const renderedPreview = window.ChowdownRenderedRecipePreview ? window.ChowdownRenderedRecipePreview.init({
+    form,
+    buildPayload,
+    endpoint: `${API_BASE_URL}/api/recipes/preview`
+  }) : null;
+  if (renderedPreview) renderedPreview.schedule(0);
 
   ["prep_hours", "prep_minutes", "cook_hours", "cook_minutes"].forEach((name) => {
     form.elements[name].addEventListener("input", updateTimeSummary);
@@ -149,7 +192,8 @@ permalink: /submit-recipe.html
       preview.hidden = false;
       previewCode.dataset.markdown = result.preview;
       previewCode.innerHTML = highlightYaml(result.preview);
-      statusBox.textContent = formatMessages("Preview generated", [], result.warnings);
+      statusBox.textContent = formatMessages("Markdown preview generated", [], result.warnings);
+      if (renderedPreview) renderedPreview.update();
       return;
     }
 
@@ -263,7 +307,7 @@ permalink: /submit-recipe.html
   async function copyMarkdown() {
     const content = (previewCode.dataset.markdown || previewCode.textContent || "").trim();
     if (!content) {
-      statusBox.textContent = "Nothing to copy yet. Generate a preview first.";
+      statusBox.textContent = "Nothing to copy yet. Generate a Markdown preview first.";
       return;
     }
     await navigator.clipboard.writeText(content);
@@ -285,6 +329,7 @@ permalink: /submit-recipe.html
     previewCode.textContent = "";
     previewCode.dataset.markdown = "";
     statusBox.textContent = "";
+    if (renderedPreview) renderedPreview.clear();
   }
 
   function todayDate() {
