@@ -167,6 +167,38 @@ input[type="submit"]:hover {
   color: var(--accent) !important;
 }
 
+.button:active,
+.button.is-active,
+.button-outline:active,
+.button-outline.is-active,
+.button-transparent:active,
+.button-transparent.is-active {
+  box-shadow: none !important;
+}
+
+.button-outline:before,
+.button-transparent:before {
+  display: none !important;
+  background: transparent !important;
+  opacity: 0 !important;
+}
+
+.button-outline:hover:before,
+.button-outline:focus:before,
+.button-transparent:hover:before,
+.button-transparent:focus:before,
+.button-transparent:active:before,
+.button-transparent.is-active:before {
+  opacity: 0 !important;
+}
+
+.bg-darken-1,
+.bg-darken-2,
+.bg-darken-3,
+.bg-darken-4 {
+  background-color: transparent !important;
+}
+
 .page-content {
   position: relative;
   z-index: 1;
@@ -239,11 +271,11 @@ input[type="submit"]:hover {
   border-color: var(--line) !important;
 }
 
-@media all and (min-width: 40em) {
-  .bg-blue-tile:after {
-    display: none;
-    content: none;
-  }
+.bg-blue-tile:after {
+  display: none !important;
+  content: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
 }
 
 .search {
