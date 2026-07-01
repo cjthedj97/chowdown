@@ -6,6 +6,16 @@ html[data-theme="dark"] {
   --recipe-placeholder-image: url("../images/placeholders/no-image-dark.svg");
 }
 
+.recipe-tile {
+  background-image:
+    var(--tile-image),
+    var(--recipe-placeholder-image),
+    linear-gradient(135deg, var(--tile-placeholder-start), var(--tile-placeholder-end));
+  background-repeat: no-repeat, no-repeat, no-repeat;
+  background-position: center center, center center, center center;
+  background-size: cover, cover, cover;
+}
+
 .recipe-tile .image {
   background-image:
     var(--tile-image),
@@ -16,6 +26,7 @@ html[data-theme="dark"] {
   background-size: cover, cover, cover;
 }
 
+.recipe-tile.no-image,
 .recipe-tile.no-image .image {
   background-image:
     var(--recipe-placeholder-image),
