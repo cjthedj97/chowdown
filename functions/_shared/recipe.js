@@ -21,7 +21,9 @@ export function buildRecipe(input, options = {}) {
   const cooktime = normalizeDuration(input.cooktime || input.cookTime);
   const totaltime = normalizeDuration(input.totaltime || input.totalTime);
   const difficulty = normalizeDifficulty(input.difficulty);
-  const date_added = normalizeDate(input.date_added || input.dateAdded);
+  const submittedDate = input.date_added || input.dateAdded;
+  const normalizedDate = normalizeDate(submittedDate);
+  const date_added = normalizedDate || todayDate();
   const status = normalizeStatus(input.status);
   const reviewed = Boolean(input.reviewed);
   const notes = cleanText(input.notes, 600);
@@ -39,7 +41,7 @@ export function buildRecipe(input, options = {}) {
   if (!totaltime) warnings.push("Total time is missing or not an ISO-8601 duration like PT1H5M.");
   if (input.difficulty && !difficulty) warnings.push("Difficulty must be Easy, Medium, or Hard.");
   if (input.status && !status) warnings.push("Status must be published, planned, or draft.");
-  if (input.date_added && !date_added) warnings.push("Date added must use YYYY-MM-DD format.");
+  if (submittedDate && !normalizedDate) warnings.push("Date added must use YYYY-MM-DD format. Using today's date instead.");
   if (!categories.length) warnings.push("Categories are missing.");
   if (!tags.length) warnings.push("Tags are missing.");
   if (!image) warnings.push("No image provided.");
@@ -196,6 +198,10 @@ function normalizeStatus(value) {
 function normalizeDate(value) {
   const date = cleanText(value, 20);
   return /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : "";
+}
+
+function todayDate() {
+  return new Date().toISOString().slice(0, 10);
 }
 
 function normalizeUnitsAndFractions(value) {
