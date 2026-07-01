@@ -5,8 +5,8 @@ permalink: /submit-recipe.html
 ---
 
 <div class="container px2 py3">
-  <h1 class="center">Submit a Recipe</h1>
-  <p class="center">Preview your recipe first, then submit it as a pull request for review.</p>
+  <h1 class="center recipe-submit-heading">Submit a Recipe</h1>
+  <p class="center recipe-submit-intro">Preview your recipe first, then submit it as a pull request for review.</p>
 
   <form id="recipe-submit-form" class="recipe-submit-form">
     <label>Title <input name="title" type="text" required maxlength="120" placeholder="Recipe Title"></label>
@@ -104,6 +104,7 @@ permalink: /submit-recipe.html
 </style>
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="{{ "/js/edit-recipe.js" | relative_url }}" type="text/javascript"></script>
 <script>
   const API_BASE_URL = "";
   const form = document.getElementById("recipe-submit-form");
@@ -116,6 +117,9 @@ permalink: /submit-recipe.html
   const timeSummary = document.getElementById("recipe-time-summary");
 
   setDateAddedIfBlank();
+  if (window.ChowdownRecipeEdit) {
+    window.ChowdownRecipeEdit.populateSubmitForm({ form, statusBox });
+  }
   updateTimeSummary();
 
   ["prep_hours", "prep_minutes", "cook_hours", "cook_minutes"].forEach((name) => {
@@ -128,15 +132,16 @@ permalink: /submit-recipe.html
   clearButton.addEventListener("click", clearForm);
 
   async function sendRecipe(mode) {
-    statusBox.textContent = mode === "preview" ? "Generating preview..." : "Submitting recipe PR...";
+    const editDraft = getEditDraft();
+    statusBox.textContent = mode === "preview" ? "Generating preview..." : (editDraft ? "Submitting recipe edit PR..." : "Submitting recipe PR...");
     const payload = buildPayload(new FormData(form));
     if (mode === "submit") payload.turnstileToken = getTurnstileToken();
-    const endpoint = mode === "preview" ? "/api/recipes/preview" : "/api/recipes/submit";
+    const endpoint = mode === "preview" ? "/api/recipes/preview" : (editDraft ? "/api/recipes/edit" : "/api/recipes/submit");
     const response = await fetch(`${API_BASE_URL}${endpoint}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) });
     const result = await response.json();
 
     if (!response.ok || !result.ok) {
-      statusBox.textContent = formatMessages("Submission needs attention", result.errors, result.warnings);
+      statusBox.textContent = formatMessages("Submission needs attention", result.errors, result.warnings || [result.error].filter(Boolean));
       return;
     }
 
@@ -155,8 +160,9 @@ permalink: /submit-recipe.html
     const prep = durationFromParts(data.get("prep_hours"), data.get("prep_minutes"));
     const cook = durationFromParts(data.get("cook_hours"), data.get("cook_minutes"));
     const total = durationFromMinutes(totalMinutes(data.get("prep_hours"), data.get("prep_minutes")) + totalMinutes(data.get("cook_hours"), data.get("cook_minutes")));
+    const editDraft = getEditDraft();
 
-    return {
+    const payload = {
       title: data.get("title"),
       yield: data.get("yield"),
       preptime: prep,
@@ -175,6 +181,18 @@ permalink: /submit-recipe.html
       directions: parseGroupedList(data.get("directions")),
       website: data.get("website")
     };
+
+    if (editDraft) {
+      payload.mode = "edit";
+      payload.original_path = editDraft.path;
+      payload.original_title = editDraft.title;
+    }
+
+    return payload;
+  }
+
+  function getEditDraft() {
+    return window.ChowdownRecipeEdit ? window.ChowdownRecipeEdit.getActiveDraft() : null;
   }
 
   function splitCsv(value) { return String(value || "").split(",").map((item) => item.trim()).filter(Boolean); }
@@ -254,6 +272,13 @@ permalink: /submit-recipe.html
 
   function clearForm() {
     form.reset();
+    if (window.ChowdownRecipeEdit) window.ChowdownRecipeEdit.clearActiveDraft();
+    const heading = document.querySelector('.recipe-submit-heading');
+    const intro = document.querySelector('.recipe-submit-intro');
+    const submitButton = form.querySelector('button[type="submit"]');
+    if (heading) heading.textContent = 'Submit a Recipe';
+    if (intro) intro.textContent = 'Preview your recipe first, then submit it as a pull request for review.';
+    if (submitButton) submitButton.textContent = 'Submit PR';
     setDateAddedIfBlank();
     updateTimeSummary();
     preview.hidden = true;
