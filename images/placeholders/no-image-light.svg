@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title desc">
+  <title id="title">No Image Available</title>
+  <desc id="desc">Placeholder image for recipes without a photo.</desc>
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="45%" r="75%">
+      <stop offset="0" stop-color="#fffdf8"/>
+      <stop offset="1" stop-color="#f3eee5"/>
+    </radialGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="24" flood-color="#8b8174" flood-opacity="0.16"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="1000" fill="url(#bg)"/>
+  <path d="M0 0h286c-10 76-50 132-119 167C97 203 44 270 8 369L0 389zM1600 0v213c-92-12-152-54-181-126-12-29-16-58-12-87zM0 1000V788c74-44 155-42 242 7 90 51 120 119 91 205zM1600 1000h-340c-5-96 31-168 108-215 81-49 158-66 232-50z" fill="#e5ded4" opacity="0.42"/>
+  <g fill="none" stroke="#d8d0c5" stroke-width="8" stroke-linecap="round" opacity="0.9">
+    <path d="M260 338h60"/><path d="M270 260l52 32"/><path d="M273 416l53-32"/>
+    <path d="M1280 338h60"/><path d="M1270 292l52-32"/><path d="M1272 384l53 32"/>
+  </g>
+  <g fill="#d8d0c5" opacity="0.75">
+    <circle cx="128" cy="492" r="8"/><circle cx="1370" cy="690" r="8"/><circle cx="1458" cy="238" r="8"/>
+    <path d="M222 650h-28v-28h-16v28h-28v16h28v28h16v-28h28zM1448 548h-24v-24h-16v24h-24v16h24v24h16v-24h24z"/>
+  </g>
+  <g filter="url(#shadow)" transform="translate(0 2)">
+    <rect x="470" y="150" width="660" height="450" rx="42" fill="#fbfaf6" stroke="#c9c1b7" stroke-width="18"/>
+    <path d="M502 520 655 337c13-15 36-15 49 0l95 112 78-88c13-14 35-14 48 0l173 196H502z" fill="#d5cec4"/>
+    <circle cx="982" cy="284" r="51" fill="#d5cec4"/>
+    <circle cx="800" cy="560" r="94" fill="#c9c1b7" stroke="#fbfaf6" stroke-width="16"/>
+    <rect x="789" y="506" width="22" height="70" rx="11" fill="#fbfaf6"/>
+    <circle cx="800" cy="598" r="12" fill="#fbfaf6"/>
+  </g>
+  <text x="800" y="742" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="78" fill="#6f6a63">No Image Available</text>
+  <path d="M460 802h280M860 802h280" stroke="#d8d0c5" stroke-width="6" stroke-linecap="round"/>
+  <text x="800" y="824" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="40" fill="#d8d0c5">♥</text>
+  <text x="800" y="880" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#6f6a63">No image was added or cannot be loaded.</text>
+  <text x="800" y="930" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#6f6a63">Add a photo to make this recipe come to life!</text>
+</svg>
