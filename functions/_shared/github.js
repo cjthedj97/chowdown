@@ -49,7 +49,8 @@ export async function createRecipePullRequest(recipe, warnings, env) {
     "✅ Required fields validated before commit",
     "✅ Spam-check field checked before GitHub write",
     "✅ Turnstile checked before GitHub write",
-    "✅ Duplicate filename checked against the base branch"
+    "✅ Duplicate filename checked against the base branch",
+    "✅ Similar recipe title warnings checked against the base branch"
   ];
 
   if (warnings && warnings.length) {
@@ -69,7 +70,7 @@ export async function createRecipePullRequest(recipe, warnings, env) {
     "",
     "This PR was opened by the recipe submission Pages Function. Review the generated Markdown and Cloudflare Pages preview before merging.",
     "",
-    "Related roadmap issues: #69, #71, #81, #83"
+    "Related roadmap issues: #69, #71, #81, #83, #87"
   ].join("\n");
 
   const pr = await github(`${repoPath}/pulls`, {
