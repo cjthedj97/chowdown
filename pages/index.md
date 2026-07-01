@@ -32,7 +32,7 @@ permalink: /
     <div class="recipes xs-px1 recipe-grid">
       {% assign published_recipes = site.recipes | where_exp: "item", "item.status != 'draft' and item.status != 'planned'" %}
       {% assign dated_recipes = published_recipes | where_exp: "item", "item.date_added" | sort: "date_added" | reverse %}
-      {% for post in dated_recipes limit:6 %}
+      {% for post in dated_recipes limit:8 %}
         <a class="block relative recipe-tile {% if post.image %}has-image{% else %}no-image{% endif %}" href="{{ post.url }}" {% if post.image %}data-image-url="{% if post.image and post.image contains 'http' %}{{ post.image | escape }}{% else %}{{ '/images/' | append: post.image | relative_url | escape }}{% endif %}"{% endif %}>
           <div class="image ratio bg-cover"
               {% if post.image and post.image contains 'http' %}
@@ -64,67 +64,67 @@ SimpleJekyllSearch({
 </script>
 
 <script>
-	var activeTagFilter = 'all';
+ 	var activeTagFilter = 'all';
 
-	function normalizeTagText(value) {
-		return (value || '').toString().toLowerCase().trim();
-	}
+ 	function normalizeTagText(value) {
+ 		return (value || '').toString().toLowerCase().trim();
+ 	}
 
-	function applyTagFilter() {
-		var cards = document.querySelectorAll('#results-container .result-card');
-		for (var i = 0; i < cards.length; i++) {
-			var card = cards[i];
-			var tagBlob = normalizeTagText(card.getAttribute('data-tags'));
-			if (activeTagFilter === 'all') {
-				card.style.display = '';
-			} else if (tagBlob.indexOf(activeTagFilter) !== -1) {
-				card.style.display = '';
-			} else {
-				card.style.display = 'none';
-			}
-		}
-	}
+ 	function applyTagFilter() {
+ 		var cards = document.querySelectorAll('#results-container .result-card');
+ 		for (var i = 0; i < cards.length; i++) {
+ 			var card = cards[i];
+ 			var tagBlob = normalizeTagText(card.getAttribute('data-tags'));
+ 			if (activeTagFilter === 'all') {
+ 				card.style.display = '';
+ 			} else if (tagBlob.indexOf(activeTagFilter) !== -1) {
+ 				card.style.display = '';
+ 			} else {
+ 				card.style.display = 'none';
+ 			}
+ 		}
+ 	}
 
   function setActiveChip(chip) {
-		var chips = document.querySelectorAll('.tag-filter');
-		for (var i = 0; i < chips.length; i++) {
-			chips[i].classList.remove('is-active', 'btn-primary');
-			chips[i].classList.add('btn-outline-primary');
-		}
-		chip.classList.add('is-active', 'btn-primary');
-		chip.classList.remove('btn-outline-primary');
-	}
+ 		var chips = document.querySelectorAll('.tag-filter');
+ 		for (var i = 0; i < chips.length; i++) {
+ 			chips[i].classList.remove('is-active', 'btn-primary');
+ 			chips[i].classList.add('btn-outline-primary');
+ 		}
+ 		chip.classList.add('is-active', 'btn-primary');
+ 		chip.classList.remove('btn-outline-primary');
+ 	}
 
-	function updateHomepageSections() {
-		var query = ($('#search-input').val() || '').toString().trim();
-		var recentSection = document.getElementById('recently-added-section');
-		var resultsWrap = document.getElementById('search-results-wrap');
+ 	function updateHomepageSections() {
+ 		var query = ($('#search-input').val() || '').toString().trim();
+ 		var recentSection = document.getElementById('recently-added-section');
+ 		var resultsWrap = document.getElementById('search-results-wrap');
 
-		if (!recentSection || !resultsWrap) return;
+ 		if (!recentSection || !resultsWrap) return;
 
-		if (query.length > 0) {
-			recentSection.classList.add('is-hidden');
-			resultsWrap.classList.remove('is-hidden');
-		} else {
-			recentSection.classList.remove('is-hidden');
-			resultsWrap.classList.add('is-hidden');
-		}
-	}
+ 		if (query.length > 0) {
+ 			recentSection.classList.add('is-hidden');
+ 			resultsWrap.classList.remove('is-hidden');
+ 		} else {
+ 			recentSection.classList.remove('is-hidden');
+ 			resultsWrap.classList.add('is-hidden');
+ 		}
+ 	}
 
-	$( document ).ready(function() {
-		$('.tag-filter').on('click', function() {
-			activeTagFilter = normalizeTagText($(this).data('tag'));
-			setActiveChip(this);
-			setTimeout(applyTagFilter, 50);
-		});
+ 	$( document ).ready(function() {
+ 		$('.tag-filter').on('click', function() {
+ 			activeTagFilter = normalizeTagText($(this).data('tag'));
+ 			setActiveChip(this);
+ 			setTimeout(applyTagFilter, 50);
+ 		});
 
     $('#search-input').on('input', function() {
-			updateHomepageSections();
-			setTimeout(applyTagFilter, 50);
-		});
+ 			updateHomepageSections();
+ 			setTimeout(applyTagFilter, 50);
+ 		});
 
-		updateHomepageSections();
-		setTimeout(applyTagFilter, 150);
-	});
-	
+ 		updateHomepageSections();
+ 		setTimeout(applyTagFilter, 150);
+ 	});
+ 	
 </script>
