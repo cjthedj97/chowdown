@@ -115,7 +115,7 @@ permalink: /submit-recipe.html
   const previewCode = document.getElementById("recipe-preview-code");
   const timeSummary = document.getElementById("recipe-time-summary");
 
-  form.elements.date_added.value = new Date().toISOString().slice(0, 10);
+  setDateAddedIfBlank();
   updateTimeSummary();
 
   ["prep_hours", "prep_minutes", "cook_hours", "cook_minutes"].forEach((name) => {
@@ -162,7 +162,7 @@ permalink: /submit-recipe.html
       preptime: prep,
       cooktime: cook,
       totaltime: total,
-      date_added: data.get("date_added"),
+      date_added: data.get("date_added") || todayDate(),
       status: data.get("status"),
       reviewed: data.get("reviewed") === "on",
       difficulty: data.get("difficulty"),
@@ -254,12 +254,27 @@ permalink: /submit-recipe.html
 
   function clearForm() {
     form.reset();
-    form.elements.date_added.value = new Date().toISOString().slice(0, 10);
+    setDateAddedIfBlank();
     updateTimeSummary();
     preview.hidden = true;
     previewCode.textContent = "";
     previewCode.dataset.markdown = "";
     statusBox.textContent = "";
+  }
+
+  function todayDate() {
+    const today = new Date();
+    return [today.getFullYear(), padDatePart(today.getMonth() + 1), padDatePart(today.getDate())].join("-");
+  }
+
+  function padDatePart(value) {
+    return String(value).padStart(2, "0");
+  }
+
+  function setDateAddedIfBlank() {
+    if (!form.elements.date_added.value) {
+      form.elements.date_added.value = todayDate();
+    }
   }
 
   function highlightYaml(markdown) {
