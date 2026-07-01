@@ -13,11 +13,12 @@ permalink: /submit-recipe.html
     <label>Yield <input name="yield" type="text" maxlength="40" placeholder="4 servings"></label>
 
     <div class="recipe-submit-grid">
-      <label>Prep Hours <input name="prep_hours" type="number" min="0" max="24" placeholder="0"></label>
-      <label>Prep Minutes <input name="prep_minutes" type="number" min="0" max="59" placeholder="15"></label>
-      <label>Cook Hours <input name="cook_hours" type="number" min="0" max="24" placeholder="0"></label>
-      <label>Cook Minutes <input name="cook_minutes" type="number" min="0" max="59" placeholder="30"></label>
+      <label>Prep Hours <input name="prep_hours" type="number" min="0" max="24" value="0"></label>
+      <label>Prep Minutes <input name="prep_minutes" type="number" min="0" max="59" value="0"></label>
+      <label>Cook Hours <input name="cook_hours" type="number" min="0" max="24" value="0"></label>
+      <label>Cook Minutes <input name="cook_minutes" type="number" min="0" max="59" value="0"></label>
     </div>
+    <p class="recipe-time-summary" id="recipe-time-summary">Total time: not set</p>
 
     <div class="recipe-submit-grid">
       <label>Date Added <input name="date_added" type="date"></label>
@@ -90,12 +91,16 @@ permalink: /submit-recipe.html
   .recipe-submit-inline input { width: auto; margin: 0; }
   .recipe-submit-help { display: block; margin-top: 0.25rem; font-weight: 400; opacity: 0.85; }
   .recipe-submit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+  .recipe-time-summary { max-width: 900px; margin: -0.25rem auto 1rem; font-weight: 700; opacity: 0.9; }
   .recipe-submit-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .recipe-submit-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.5rem; }
   .recipe-submit-status { max-width: 900px; margin: 1.5rem auto; white-space: pre-wrap; }
   .recipe-preview { max-width: 900px; margin: 2rem auto; }
   .recipe-preview pre { overflow: auto; padding: 1rem; border-radius: 8px; background: #f7f7f7; color: #1f2937; border: 1px solid #d1d5db; }
   .recipe-preview code { color: inherit; background: transparent; }
+  .recipe-preview .yaml-key { color: #7c2d12; font-weight: 700; }
+  .recipe-preview .yaml-string { color: #166534; }
+  .recipe-preview .yaml-marker { color: #1d4ed8; font-weight: 700; }
 </style>
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
@@ -108,8 +113,15 @@ permalink: /submit-recipe.html
   const statusBox = document.getElementById("recipe-submit-status");
   const preview = document.getElementById("recipe-preview");
   const previewCode = document.getElementById("recipe-preview-code");
+  const timeSummary = document.getElementById("recipe-time-summary");
 
   form.elements.date_added.value = new Date().toISOString().slice(0, 10);
+  updateTimeSummary();
+
+  ["prep_hours", "prep_minutes", "cook_hours", "cook_minutes"].forEach((name) => {
+    form.elements[name].addEventListener("input", updateTimeSummary);
+  });
+
   previewButton.addEventListener("click", async () => sendRecipe("preview"));
   form.addEventListener("submit", async (event) => { event.preventDefault(); await sendRecipe("submit"); });
   copyButton.addEventListener("click", copyMarkdown);
@@ -130,7 +142,8 @@ permalink: /submit-recipe.html
 
     if (mode === "preview") {
       preview.hidden = false;
-      previewCode.textContent = result.preview;
+      previewCode.dataset.markdown = result.preview;
+      previewCode.innerHTML = highlightYaml(result.preview);
       statusBox.textContent = formatMessages("Preview generated", [], result.warnings);
       return;
     }
@@ -211,13 +224,26 @@ permalink: /submit-recipe.html
     return `PT${h ? `${h}H` : ""}${m ? `${m}M` : ""}`;
   }
 
+  function friendlyDuration(minutes) {
+    if (!minutes) return "not set";
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    return [h ? `${h} hr${h > 1 ? "s" : ""}` : "", m ? `${m} min${m > 1 ? "s" : ""}` : ""].filter(Boolean).join(" ");
+  }
+
+  function updateTimeSummary() {
+    const prep = totalMinutes(form.elements.prep_hours.value, form.elements.prep_minutes.value);
+    const cook = totalMinutes(form.elements.cook_hours.value, form.elements.cook_minutes.value);
+    timeSummary.textContent = `Prep: ${friendlyDuration(prep)} · Cook: ${friendlyDuration(cook)} · Total: ${friendlyDuration(prep + cook)}`;
+  }
+
   function getTurnstileToken() {
     const token = document.querySelector("[name='cf-turnstile-response']");
     return token ? token.value : "";
   }
 
   async function copyMarkdown() {
-    const content = previewCode.textContent.trim();
+    const content = (previewCode.dataset.markdown || previewCode.textContent || "").trim();
     if (!content) {
       statusBox.textContent = "Nothing to copy yet. Generate a preview first.";
       return;
@@ -229,9 +255,22 @@ permalink: /submit-recipe.html
   function clearForm() {
     form.reset();
     form.elements.date_added.value = new Date().toISOString().slice(0, 10);
+    updateTimeSummary();
     preview.hidden = true;
     previewCode.textContent = "";
+    previewCode.dataset.markdown = "";
     statusBox.textContent = "";
+  }
+
+  function highlightYaml(markdown) {
+    return escapeHtml(markdown)
+      .replace(/^(---)$/gm, '<span class="yaml-marker">$1</span>')
+      .replace(/^([A-Za-z_][A-Za-z0-9_]*):/gm, '<span class="yaml-key">$1</span>:')
+      .replace(/(&quot;[^\n]*?&quot;)/g, '<span class="yaml-string">$1</span>');
+  }
+
+  function escapeHtml(value) {
+    return String(value || "").replace(/[&<>\"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[char]));
   }
 
   function formatMessages(title, errors, warnings) {
