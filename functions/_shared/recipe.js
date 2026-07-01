@@ -1,6 +1,7 @@
 const RECIPE_DIR = "_recipes";
 const RECIPE_SCHEMA_VERSION = 1;
 const ALLOWED_DIFFICULTIES = new Set(["Easy", "Medium", "Hard"]);
+const ALLOWED_STATUSES = new Set(["published", "planned", "draft"]);
 
 export function buildRecipe(input, options = {}) {
   const errors = [];
@@ -20,6 +21,9 @@ export function buildRecipe(input, options = {}) {
   const cooktime = normalizeDuration(input.cooktime || input.cookTime);
   const totaltime = normalizeDuration(input.totaltime || input.totalTime);
   const difficulty = normalizeDifficulty(input.difficulty);
+  const date_added = normalizeDate(input.date_added || input.dateAdded);
+  const status = normalizeStatus(input.status);
+  const reviewed = Boolean(input.reviewed);
   const notes = cleanText(input.notes, 600);
   const image = cleanText(input.image, 400);
   const imagecredit = cleanText(input.imagecredit || input.imageCredit, 400);
@@ -34,6 +38,8 @@ export function buildRecipe(input, options = {}) {
   if (!cooktime) warnings.push("Cook time is missing or not an ISO-8601 duration like PT45M.");
   if (!totaltime) warnings.push("Total time is missing or not an ISO-8601 duration like PT1H5M.");
   if (input.difficulty && !difficulty) warnings.push("Difficulty must be Easy, Medium, or Hard.");
+  if (input.status && !status) warnings.push("Status must be published, planned, or draft.");
+  if (input.date_added && !date_added) warnings.push("Date added must use YYYY-MM-DD format.");
   if (!categories.length) warnings.push("Categories are missing.");
   if (!tags.length) warnings.push("Tags are missing.");
   if (!image) warnings.push("No image provided.");
@@ -52,6 +58,9 @@ export function buildRecipe(input, options = {}) {
     imagecredit,
     categories,
     tags,
+    date_added,
+    status,
+    reviewed,
     yield: yieldValue,
     preptime,
     cooktime,
@@ -92,6 +101,9 @@ export function formatRecipeMarkdown(recipe) {
   appendList(lines, "categories", recipe.categories);
   appendList(lines, "tags", recipe.tags);
 
+  appendOptionalString(lines, "date_added", recipe.date_added);
+  appendOptionalString(lines, "status", recipe.status);
+  if (recipe.reviewed) lines.push("reviewed: true");
   appendOptionalString(lines, "yield", recipe.yield);
   appendOptionalString(lines, "preptime", recipe.preptime);
   appendOptionalString(lines, "cooktime", recipe.cooktime);
@@ -149,14 +161,14 @@ function cleanGroups(value, maxGroups, maxItems, maxLength) {
   const groups = [];
   for (const entry of value.slice(0, maxGroups)) {
     if (typeof entry === "string") {
-      const item = cleanText(entry, maxLength);
+      const item = normalizeUnitsAndFractions(cleanText(entry, maxLength));
       if (item) groups.push({ name: "", items: [item] });
       continue;
     }
 
     if (entry && typeof entry === "object") {
       const name = cleanText(entry.name, 60);
-      const items = cleanList(entry.items, maxItems, maxLength);
+      const items = cleanList(entry.items, maxItems, maxLength).map(normalizeUnitsAndFractions);
       if (items.length) groups.push({ name, items });
     }
   }
@@ -172,9 +184,30 @@ function normalizeDuration(value) {
 function normalizeDifficulty(value) {
   const difficulty = cleanText(value, 20);
   if (!difficulty) return "";
-
   const normalized = difficulty.charAt(0).toUpperCase() + difficulty.slice(1).toLowerCase();
   return ALLOWED_DIFFICULTIES.has(normalized) ? normalized : "";
+}
+
+function normalizeStatus(value) {
+  const status = cleanText(value, 20).toLowerCase();
+  return ALLOWED_STATUSES.has(status) ? status : "";
+}
+
+function normalizeDate(value) {
+  const date = cleanText(value, 20);
+  return /^\d{4}-\d{2}-\d{2}$/.test(date) ? date : "";
+}
+
+function normalizeUnitsAndFractions(value) {
+  return String(value || "")
+    .replace(/\bounces?\b/gi, "oz")
+    .replace(/\bpounds?\b/gi, "lb")
+    .replace(/1\/8/g, "⅛")
+    .replace(/1\/4/g, "¼")
+    .replace(/1\/3/g, "⅓")
+    .replace(/1\/2/g, "½")
+    .replace(/2\/3/g, "⅔")
+    .replace(/3\/4/g, "¾");
 }
 
 function slugify(value) {
