@@ -9,8 +9,8 @@
     if (!button || !data || !data.path) return;
 
     button.addEventListener('click', function () {
-      data.ingredients = data.ingredients || collectTextItems('[itemprop="recipeIngredient"]');
-      data.directions = data.directions || collectTextItems('[itemprop="instruction"]');
+      data.ingredients = data.ingredients || collectTextItemsFromFirst('ul[itemprop="ingredients"]', '[itemprop="recipeIngredient"]');
+      data.directions = data.directions || collectTextItemsFromFirst('ul[itemprop="recipeInstructions"]', '[itemprop="instruction"]');
 
       try {
         window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
@@ -153,8 +153,11 @@
     return lines.join('\n');
   }
 
-  function collectTextItems(selector) {
-    return Array.prototype.slice.call(document.querySelectorAll(selector))
+  function collectTextItemsFromFirst(containerSelector, itemSelector) {
+    var container = document.querySelector(containerSelector);
+    if (!container) return [];
+
+    return Array.prototype.slice.call(container.querySelectorAll(itemSelector))
       .map(function (item) { return item.textContent.replace(/\s+/g, ' ').trim(); })
       .filter(Boolean);
   }
