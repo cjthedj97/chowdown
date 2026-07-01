@@ -46,6 +46,11 @@ layout: recipe_default
     {% include recipe-history.html %}
     {% include yield.html recipe=page %}
     {% include timings.html recipe=page %}
+    {% if page.difficulty %}
+      <div class="center mt1 recipe-difficulty-meta" aria-label="Recipe difficulty">
+        <span class="recipe-difficulty-badge">Difficulty: {{ page.difficulty }}</span>
+      </div>
+    {% endif %}
     {% if page.notes %}
       <div class="mt2 px2 py1" style="border-left: 3px solid var(--accent); background: var(--surface);">
         <strong>Notes:</strong> {{ page.notes | markdownify }}
@@ -353,6 +358,19 @@ layout: recipe_default
   })();
 </script>
 <style>
+  .recipe-difficulty-meta {
+    color: var(--text);
+  }
+
+  .recipe-difficulty-badge {
+    display: inline-block;
+    padding: 0.25rem 0.65rem;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--surface-soft);
+    font-weight: 700;
+  }
+
   @media print {
     nav,
     #favorite-toggle,
