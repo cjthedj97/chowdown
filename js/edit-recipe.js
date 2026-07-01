@@ -3,6 +3,7 @@
   var activeDraft = null;
 
   function initRecipePage(options) {
+    shortenRecipeActionLabels();
     initRecipeActionMenu();
 
     var button = document.getElementById(options.buttonId);
@@ -164,6 +165,22 @@
       .filter(Boolean);
   }
 
+  function shortenRecipeActionLabels() {
+    var labels = {
+      'favorite-toggle': 'Save',
+      'print-recipe': 'Print',
+      'edit-recipe': 'Edit',
+      'recipe-history-toggle': 'History',
+      'share-recipe': 'Share',
+      'copy-link': 'Copy'
+    };
+
+    Object.keys(labels).forEach(function (id) {
+      var button = document.getElementById(id);
+      if (button) button.textContent = labels[id];
+    });
+  }
+
   function initRecipeActionMenu() {
     var actions = document.querySelector('.post-header .center.mt2');
     if (!actions || actions.classList.contains('recipe-actions')) return;
@@ -181,7 +198,7 @@
     toggle.className = 'btn btn-sm btn-outline-secondary recipe-actions-toggle';
     toggle.type = 'button';
     toggle.setAttribute('aria-expanded', 'false');
-    toggle.textContent = 'Recipe Actions';
+    toggle.textContent = 'Actions';
 
     actions.insertBefore(toggle, actions.firstChild);
 
