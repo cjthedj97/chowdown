@@ -1,0 +1,64 @@
+:root {
+  --accent: #2563eb;
+  --accent-soft: #eff6ff;
+  --accent-contrast: #ffffff;
+  --sidebar-active-bg: #eff6ff;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1420;
+  --panel: #161c2c;
+  --surface: #161c2c;
+  --surface-soft: #20283a;
+  --text: #f5f7fb;
+  --muted: #c8d0df;
+  --line: #343d52;
+  --border: #343d52;
+  --accent: #93c5fd;
+  --accent-soft: #1d3557;
+  --accent-contrast: #0f1420;
+  --sidebar-bg: #151b29;
+  --sidebar-hover-bg: #20283a;
+  --sidebar-active-bg: #1d3557;
+}
+
+.chowdown-logo-light { display: block; }
+.chowdown-logo-dark { display: none; }
+:root[data-theme="dark"] .chowdown-logo-light { display: none; }
+:root[data-theme="dark"] .chowdown-logo-dark { display: block; }
+
+.recipe-timer-modal.is-hidden {
+  display: none !important;
+}
+
+.recipe-timer-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1050;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.recipe-timer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 20, 32, 0.72);
+}
+
+.recipe-timer-panel {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 32rem);
+  border-radius: 20px;
+  border: 1px solid var(--line);
+  background: var(--panel);
+  color: var(--text);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.3);
+  padding: 1.25rem;
+}
+
+body.recipe-timer-open {
+  overflow: hidden;
+}
