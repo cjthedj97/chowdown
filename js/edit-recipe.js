@@ -3,6 +3,9 @@
   var activeDraft = null;
 
   function initRecipePage(options) {
+    shortenRecipeActionLabels();
+    initRecipeActionMenu();
+
     var button = document.getElementById(options.buttonId);
     var data = readJson(options.dataId);
 
@@ -160,6 +163,76 @@
     return Array.prototype.slice.call(container.querySelectorAll(itemSelector))
       .map(function (item) { return item.textContent.replace(/\s+/g, ' ').trim(); })
       .filter(Boolean);
+  }
+
+  function shortenRecipeActionLabels() {
+    var labels = {
+      'favorite-toggle': 'Favorite',
+      'print-recipe': 'Print',
+      'edit-recipe': 'Edit',
+      'recipe-history-toggle': 'History',
+      'share-recipe': 'Share',
+      'copy-link': 'Copy'
+    };
+
+    Object.keys(labels).forEach(function (id) {
+      var button = document.getElementById(id);
+      if (button) button.textContent = labels[id];
+    });
+  }
+
+  function initRecipeActionMenu() {
+    var actions = document.querySelector('.post-header .center.mt2');
+    if (!actions || actions.classList.contains('recipe-actions')) return;
+
+    var actionButtons = actions.querySelectorAll('button');
+    if (actionButtons.length < 4) return;
+
+    injectActionMenuStyles();
+
+    actions.classList.add('recipe-actions');
+    actions.setAttribute('data-action-count', String(actionButtons.length));
+
+    var toggle = document.createElement('button');
+    toggle.id = 'recipe-actions-toggle';
+    toggle.className = 'btn btn-sm btn-outline-secondary recipe-actions-toggle';
+    toggle.type = 'button';
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.textContent = 'Actions';
+
+    actions.insertBefore(toggle, actions.firstChild);
+
+    toggle.addEventListener('click', function () {
+      var open = actions.classList.toggle('is-open');
+      toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    actions.addEventListener('click', function (event) {
+      if (event.target === toggle || !event.target.closest('button')) return;
+      if (window.matchMedia && window.matchMedia('(max-width: 640px)').matches) {
+        actions.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  function injectActionMenuStyles() {
+    if (document.getElementById('recipe-actions-menu-styles')) return;
+
+    var style = document.createElement('style');
+    style.id = 'recipe-actions-menu-styles';
+    style.textContent = [
+      '.recipe-actions-toggle { display: none !important; }',
+      '@media (max-width: 640px) {',
+      '  .recipe-actions { max-width: 18rem; margin-left: auto; margin-right: auto; }',
+      '  .recipe-actions-toggle { display: block !important; width: 100%; margin: 0 auto 0.5rem; }',
+      '  .recipe-actions:not(.is-open) > button:not(.recipe-actions-toggle) { display: none !important; }',
+      '  .recipe-actions.is-open > button:not(.recipe-actions-toggle) { display: block !important; width: 100%; margin: 0.35rem auto; }',
+      '}',
+      '@media print { #recipe-actions-toggle { display: none !important; } }'
+    ].join('\n');
+
+    document.head.appendChild(style);
   }
 
   window.ChowdownRecipeEdit = {
