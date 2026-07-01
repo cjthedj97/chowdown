@@ -1,0 +1,20 @@
+{% if site.github_repository %}
+  {% assign recipe_history_branch = site.github_branch | default: "main" %}
+  {% assign recipe_history_url = "https://github.com/" | append: site.github_repository | append: "/commits/" | append: recipe_history_branch | append: "/" | append: page.path %}
+  <section
+    id="recipe-history-panel"
+    class="recipe-history-panel mt2 px2 py2 is-hidden"
+    data-repo="{{ site.github_repository | escape }}"
+    data-branch="{{ recipe_history_branch | escape }}"
+    data-path="{{ page.path | escape }}"
+    data-history-url="{{ recipe_history_url | escape }}"
+    data-limit="5"
+    hidden>
+    <div class="recipe-history-heading">
+      <h2 class="m0">Recipe History</h2>
+      <a id="recipe-history-github" href="{{ recipe_history_url | escape }}" target="_blank" rel="noopener">View full history on GitHub</a>
+    </div>
+    <p id="recipe-history-status" class="recipe-history-status">Loading history from GitHub…</p>
+    <ol id="recipe-history-list" class="recipe-history-list"></ol>
+  </section>
+{% endif %}
