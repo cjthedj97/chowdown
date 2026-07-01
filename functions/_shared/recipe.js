@@ -6,13 +6,18 @@ const ALLOWED_STATUSES = new Set(["published", "planned", "draft"]);
 export function buildRecipe(input, options = {}) {
   const errors = [];
   const warnings = [];
+  const validation_report = createValidationReport();
 
   if (input.website || input.company || input.url) {
-    errors.push("Spam check failed.");
+    addValidationCheck(validation_report, errors, warnings, "error", "spam_check", "spam_check_failed", "Spam check failed.");
+  } else {
+    addValidationCheck(validation_report, errors, warnings, "pass", "spam_check", "spam_check_passed", "Spam check passed.");
   }
 
   if (options.verifyTurnstile && !input.turnstileToken) {
-    errors.push("Turnstile token is required.");
+    addValidationCheck(validation_report, errors, warnings, "error", "turnstile", "turnstile_required", "Turnstile token is required.");
+  } else if (options.verifyTurnstile) {
+    addValidationCheck(validation_report, errors, warnings, "pass", "turnstile", "turnstile_present", "Turnstile token is present.");
   }
 
   const title = cleanText(input.title, 120);
@@ -34,23 +39,72 @@ export function buildRecipe(input, options = {}) {
   const ingredients = cleanGroups(input.ingredients, 12, 50, 180);
   const directions = cleanGroups(input.directions, 12, 60, 320);
 
-  if (!title) errors.push("Title is required.");
-  if (!yieldValue) warnings.push("Yield is missing.");
-  if (!preptime) warnings.push("Prep time is missing or not an ISO-8601 duration like PT20M.");
-  if (!cooktime) warnings.push("Cook time is missing or not an ISO-8601 duration like PT45M.");
-  if (!totaltime) warnings.push("Total time is missing or not an ISO-8601 duration like PT1H5M.");
-  if (input.difficulty && !difficulty) warnings.push("Difficulty must be Easy, Medium, or Hard.");
-  if (input.status && !status) warnings.push("Status must be published, planned, or draft.");
-  if (submittedDate && !normalizedDate) warnings.push("Date added must use YYYY-MM-DD format. Using today's date instead.");
-  if (!categories.length) warnings.push("Categories are missing.");
-  if (!tags.length) warnings.push("Tags are missing.");
-  if (!image) warnings.push("No image provided.");
-  if (image && !imagecredit) warnings.push("Image provided without image credit.");
-  if (!ingredients.length) errors.push("At least one ingredient is required.");
-  if (!directions.length) errors.push("At least one direction is required.");
+  if (title) {
+    addValidationCheck(validation_report, errors, warnings, "pass", "title", "title_present", "Title is present.");
+  } else {
+    addValidationCheck(validation_report, errors, warnings, "error", "title", "title_required", "Title is required.");
+  }
+
+  if (yieldValue) {
+    addValidationCheck(validation_report, errors, warnings, "pass", "yield", "yield_present", "Yield is present.");
+  } else {
+    addValidationCheck(validation_report, errors, warnings, "warning", "yield", "yield_missing", "Yield is missing.");
+  }
+
+  validateDuration(validation_report, errors, warnings, "preptime", input.preptime || input.prepTime, preptime, "Prep time is missing or not an ISO-8601 duration like PT20M.");
+  validateDuration(validation_report, errors, warnings, "cooktime", input.cooktime || input.cookTime, cooktime, "Cook time is missing or not an ISO-8601 duration like PT45M.");
+  validateDuration(validation_report, errors, warnings, "totaltime", input.totaltime || input.totalTime, totaltime, "Total time is missing or not an ISO-8601 duration like PT1H5M.");
+
+  if (input.difficulty && !difficulty) {
+    addValidationCheck(validation_report, errors, warnings, "warning", "difficulty", "difficulty_invalid", "Difficulty must be Easy, Medium, or Hard.");
+  } else if (difficulty) {
+    addValidationCheck(validation_report, errors, warnings, "pass", "difficulty", "difficulty_valid", "Difficulty is valid.");
+  }
+
+  if (input.status && !status) {
+    addValidationCheck(validation_report, errors, warnings, "warning", "status", "status_invalid", "Status must be published, planned, or draft.");
+  } else if (status) {
+    addValidationCheck(validation_report, errors, warnings, "pass", "status", "status_valid", "Status is valid.");
+  }
+
+  if (submittedDate && !normalizedDate) {
+    addValidationCheck(validation_report, errors, warnings, "warning", "date_added", "date_added_invalid", "Date added must use YYYY-MM-DD format. Using today's date instead.");
+  } else if (date_added) {
+    addValidationCheck(validation_report, errors, warnings, "pass", "date_added", "date_added_valid", "Date added is valid.");
+  }
+
+  if (categories.length) {
+    addValidationCheck(validation_report, errors, warnings, "pass", "categories", "categories_present", "Categories are present.");
+  } else {
+    addValidationCheck(validation_report, errors, warnings, "warning", "categories", "categories_missing", "Categories are missing.");
+  }
+
+  if (tags.length) {
+    addValidationCheck(validation_report, errors, warnings, "pass", "tags", "tags_present", "Tags are present.");
+  } else {
+    addValidationCheck(validation_report, errors, warnings, "warning", "tags", "tags_missing", "Tags are missing.");
+  }
+
+  if (!image) {
+    addValidationCheck(validation_report, errors, warnings, "warning", "image", "image_missing", "No image provided.");
+  } else if (!imagecredit) {
+    addValidationCheck(validation_report, errors, warnings, "warning", "imagecredit", "image_credit_missing", "Image provided without image credit.");
+  } else {
+    addValidationCheck(validation_report, errors, warnings, "pass", "image", "image_and_credit_present", "Image and image credit are present.");
+  }
+
+  validateGroups(validation_report, errors, warnings, "ingredients", input.ingredients, ingredients, "At least one ingredient is required.");
+  validateGroups(validation_report, errors, warnings, "directions", input.directions, directions, "At least one direction is required.");
 
   const slug = slugify(title);
-  if (!slug) errors.push("Title must produce a valid filename slug.");
+  if (slug) {
+    addValidationCheck(validation_report, errors, warnings, "pass", "slug", "slug_valid", `Recipe filename will be ${RECIPE_DIR}/${slug}.md.`);
+  } else {
+    addValidationCheck(validation_report, errors, warnings, "error", "slug", "slug_invalid", "Title must produce a valid filename slug.");
+  }
+
+  addValidationCheck(validation_report, errors, warnings, "pass", "layout", "layout_valid", "Generated layout field is valid.");
+  addValidationCheck(validation_report, errors, warnings, "pass", "recipe_schema", "recipe_schema_valid", `Generated recipe_schema is ${RECIPE_SCHEMA_VERSION}.`);
 
   const recipeData = {
     layout: "recipe",
@@ -74,11 +128,13 @@ export function buildRecipe(input, options = {}) {
   };
 
   const markdown = formatRecipeMarkdown(recipeData);
+  finalizeValidationReport(validation_report);
 
   return {
     ok: errors.length === 0,
     errors,
     warnings,
+    validation_report,
     recipe: {
       title,
       slug,
@@ -87,6 +143,27 @@ export function buildRecipe(input, options = {}) {
     },
     preview: markdown
   };
+}
+
+export function addValidationCheck(report, errors, warnings, status, field, code, message) {
+  const check = { status, field, code, message };
+  report.checks.push(check);
+
+  if (status === "error") errors.push(message);
+  if (status === "warning") warnings.push(message);
+
+  return check;
+}
+
+export function finalizeValidationReport(report) {
+  report.ok = !report.checks.some((check) => check.status === "error");
+  report.summary = report.checks.reduce((summary, check) => {
+    if (check.status === "error") summary.errors += 1;
+    if (check.status === "warning") summary.warnings += 1;
+    if (check.status === "pass") summary.passes += 1;
+    return summary;
+  }, { errors: 0, warnings: 0, passes: 0 });
+  return report;
 }
 
 export function formatRecipeMarkdown(recipe) {
@@ -124,6 +201,37 @@ export function formatRecipeMarkdown(recipe) {
   lines.push("---");
 
   return `${lines.join("\n")}\n`;
+}
+
+function createValidationReport() {
+  return {
+    ok: false,
+    summary: { errors: 0, warnings: 0, passes: 0 },
+    checks: []
+  };
+}
+
+function validateDuration(report, errors, warnings, field, rawValue, normalizedValue, message) {
+  if (normalizedValue) {
+    addValidationCheck(report, errors, warnings, "pass", field, `${field}_valid`, `${field} is a valid ISO-8601 duration.`);
+    return;
+  }
+
+  addValidationCheck(report, errors, warnings, "warning", field, `${field}_missing_or_invalid`, message);
+}
+
+function validateGroups(report, errors, warnings, field, rawGroups, groups, requiredMessage) {
+  if (!groups.length) {
+    addValidationCheck(report, errors, warnings, "error", field, `${field}_required`, requiredMessage);
+    return;
+  }
+
+  if (hasEmptyGroups(rawGroups)) {
+    addValidationCheck(report, errors, warnings, "error", field, `${field}_empty_group`, `${field} cannot include empty groups.`);
+    return;
+  }
+
+  addValidationCheck(report, errors, warnings, "pass", field, `${field}_valid`, `${field} are present and groups are non-empty.`);
 }
 
 function appendOptionalString(lines, key, value) {
@@ -170,12 +278,21 @@ function cleanGroups(value, maxGroups, maxItems, maxLength) {
 
     if (entry && typeof entry === "object") {
       const name = cleanText(entry.name, 60);
-      const items = cleanList(entry.items, maxItems, maxLength).map(normalizeUnitsAndFractions);
+      const items = cleanList(entry.items, maxItems, maxLength).map(normalizeUnitsAndFractions).filter(Boolean);
       if (items.length) groups.push({ name, items });
     }
   }
 
   return groups;
+}
+
+function hasEmptyGroups(value) {
+  if (!Array.isArray(value)) return false;
+
+  return value.some((entry) => {
+    if (!entry || typeof entry !== "object" || typeof entry === "string") return false;
+    return Array.isArray(entry.items) && entry.items.length === 0;
+  });
 }
 
 function normalizeDuration(value) {
