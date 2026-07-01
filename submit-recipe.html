@@ -13,9 +13,23 @@ permalink: /submit-recipe.html
     <label>Yield <input name="yield" type="text" maxlength="40" placeholder="4 servings"></label>
 
     <div class="recipe-submit-grid">
-      <label>Prep Time <input name="preptime" type="text" placeholder="PT15M"></label>
-      <label>Cook Time <input name="cooktime" type="text" placeholder="PT30M"></label>
-      <label>Total Time <input name="totaltime" type="text" placeholder="PT45M"></label>
+      <label>Prep Hours <input name="prep_hours" type="number" min="0" max="24" placeholder="0"></label>
+      <label>Prep Minutes <input name="prep_minutes" type="number" min="0" max="59" placeholder="15"></label>
+      <label>Cook Hours <input name="cook_hours" type="number" min="0" max="24" placeholder="0"></label>
+      <label>Cook Minutes <input name="cook_minutes" type="number" min="0" max="59" placeholder="30"></label>
+    </div>
+
+    <div class="recipe-submit-grid">
+      <label>Date Added <input name="date_added" type="date"></label>
+      <label>
+        Status
+        <select name="status">
+          <option value="published" selected>published</option>
+          <option value="planned">planned</option>
+          <option value="draft">draft</option>
+        </select>
+      </label>
+      <label class="recipe-submit-inline"><input name="reviewed" type="checkbox"> Reviewed / tested</label>
     </div>
 
     <label>
@@ -53,6 +67,8 @@ permalink: /submit-recipe.html
     <div class="recipe-submit-actions">
       <button type="button" id="recipe-preview-button">Preview</button>
       <button type="submit">Submit PR</button>
+      <button type="button" id="recipe-copy-button">Copy Markdown</button>
+      <button type="button" id="recipe-clear-button">Clear</button>
     </div>
   </form>
 
@@ -70,10 +86,12 @@ permalink: /submit-recipe.html
   .recipe-submit-form input,
   .recipe-submit-form select,
   .recipe-submit-form textarea { display: block; width: 100%; margin-top: 0.35rem; padding: 0.7rem; border: 1px solid var(--border, #ccc); border-radius: 6px; background: var(--surface, #fff); color: inherit; font: inherit; }
+  .recipe-submit-inline { display: flex !important; align-items: center; gap: 0.5rem; }
+  .recipe-submit-inline input { width: auto; margin: 0; }
   .recipe-submit-help { display: block; margin-top: 0.25rem; font-weight: 400; opacity: 0.85; }
-  .recipe-submit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; }
+  .recipe-submit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
   .recipe-submit-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
-  .recipe-submit-actions { display: flex; gap: 1rem; align-items: center; margin-top: 1.5rem; }
+  .recipe-submit-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.5rem; }
   .recipe-submit-status { max-width: 900px; margin: 1.5rem auto; white-space: pre-wrap; }
   .recipe-preview { max-width: 900px; margin: 2rem auto; }
   .recipe-preview pre { overflow: auto; padding: 1rem; border-radius: 8px; background: #f7f7f7; color: #1f2937; border: 1px solid #d1d5db; }
@@ -85,12 +103,17 @@ permalink: /submit-recipe.html
   const API_BASE_URL = "";
   const form = document.getElementById("recipe-submit-form");
   const previewButton = document.getElementById("recipe-preview-button");
+  const copyButton = document.getElementById("recipe-copy-button");
+  const clearButton = document.getElementById("recipe-clear-button");
   const statusBox = document.getElementById("recipe-submit-status");
   const preview = document.getElementById("recipe-preview");
   const previewCode = document.getElementById("recipe-preview-code");
 
+  form.elements.date_added.value = new Date().toISOString().slice(0, 10);
   previewButton.addEventListener("click", async () => sendRecipe("preview"));
   form.addEventListener("submit", async (event) => { event.preventDefault(); await sendRecipe("submit"); });
+  copyButton.addEventListener("click", copyMarkdown);
+  clearButton.addEventListener("click", clearForm);
 
   async function sendRecipe(mode) {
     statusBox.textContent = mode === "preview" ? "Generating preview..." : "Submitting recipe PR...";
@@ -116,12 +139,19 @@ permalink: /submit-recipe.html
   }
 
   function buildPayload(data) {
+    const prep = durationFromParts(data.get("prep_hours"), data.get("prep_minutes"));
+    const cook = durationFromParts(data.get("cook_hours"), data.get("cook_minutes"));
+    const total = durationFromMinutes(totalMinutes(data.get("prep_hours"), data.get("prep_minutes")) + totalMinutes(data.get("cook_hours"), data.get("cook_minutes")));
+
     return {
       title: data.get("title"),
       yield: data.get("yield"),
-      preptime: data.get("preptime"),
-      cooktime: data.get("cooktime"),
-      totaltime: data.get("totaltime"),
+      preptime: prep,
+      cooktime: cook,
+      totaltime: total,
+      date_added: data.get("date_added"),
+      status: data.get("status"),
+      reviewed: data.get("reviewed") === "on",
       difficulty: data.get("difficulty"),
       categories: splitCsv(data.get("categories")),
       tags: splitCsv(data.get("tags")),
@@ -147,16 +177,61 @@ permalink: /submit-recipe.html
         current = { name: line.slice(0, -1).trim(), items: [] };
         continue;
       }
-      const item = line.replace(/^[-*]\s+/, "").trim();
+      const item = normalizeUnitsAndFractions(line.replace(/^[-*]\s+/, "").replace(/^\d+[.)]\s+/, "").trim());
       if (item) current.items.push(item);
     }
     if (current.items.length) groups.push(current);
     return groups;
   }
 
+  function normalizeUnitsAndFractions(value) {
+    return String(value || "")
+      .replace(/\bounces?\b/gi, "oz")
+      .replace(/\bpounds?\b/gi, "lb")
+      .replace(/1\/8/g, "⅛")
+      .replace(/1\/4/g, "¼")
+      .replace(/1\/3/g, "⅓")
+      .replace(/1\/2/g, "½")
+      .replace(/2\/3/g, "⅔")
+      .replace(/3\/4/g, "¾");
+  }
+
+  function totalMinutes(hoursRaw, minutesRaw) {
+    return (Number(hoursRaw || 0) * 60) + Number(minutesRaw || 0);
+  }
+
+  function durationFromParts(hoursRaw, minutesRaw) {
+    return durationFromMinutes(totalMinutes(hoursRaw, minutesRaw));
+  }
+
+  function durationFromMinutes(minutes) {
+    if (!minutes) return "";
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    return `PT${h ? `${h}H` : ""}${m ? `${m}M` : ""}`;
+  }
+
   function getTurnstileToken() {
     const token = document.querySelector("[name='cf-turnstile-response']");
     return token ? token.value : "";
+  }
+
+  async function copyMarkdown() {
+    const content = previewCode.textContent.trim();
+    if (!content) {
+      statusBox.textContent = "Nothing to copy yet. Generate a preview first.";
+      return;
+    }
+    await navigator.clipboard.writeText(content);
+    statusBox.textContent = "Generated Markdown copied to clipboard.";
+  }
+
+  function clearForm() {
+    form.reset();
+    form.elements.date_added.value = new Date().toISOString().slice(0, 10);
+    preview.hidden = true;
+    previewCode.textContent = "";
+    statusBox.textContent = "";
   }
 
   function formatMessages(title, errors, warnings) {
