@@ -25,7 +25,7 @@
 
       panel.hidden = false;
       renderRecipe(payload);
-      setFeedback('Checking preview…', [], []);
+      setFeedback('Checking preview…', null, [], []);
 
       try {
         var response = await window.fetch(endpoint, {
@@ -38,14 +38,14 @@
         if (currentRequestId !== requestId) return;
 
         if (!response.ok || !result.ok) {
-          setFeedback('Preview needs attention', result.errors || [result.error].filter(Boolean), result.warnings || []);
+          setFeedback('Preview needs attention', result.validation_report, result.errors || [result.error].filter(Boolean), result.warnings || []);
           return;
         }
 
-        setFeedback('Preview looks ready', [], result.warnings || []);
+        setFeedback('Preview looks ready', result.validation_report, [], result.warnings || []);
       } catch (error) {
         if (currentRequestId !== requestId) return;
-        setFeedback('Could not refresh preview validation', [error.message || 'Preview validation failed.'], []);
+        setFeedback('Could not refresh preview validation', null, [error.message || 'Preview validation failed.'], []);
       }
     }
 
@@ -54,7 +54,7 @@
       window.clearTimeout(timer);
       panel.hidden = false;
       card.innerHTML = '';
-      setFeedback('Start typing to see a rendered recipe preview.', [], []);
+      setFeedback('Start typing to see a rendered recipe preview.', null, [], []);
       schedule(0);
     }
 
@@ -171,14 +171,47 @@
       return section;
     }
 
-    function setFeedback(title, errors, warnings) {
+    function setFeedback(title, report, errors, warnings) {
       feedback.innerHTML = '';
       var heading = document.createElement('strong');
       heading.textContent = title;
       feedback.appendChild(heading);
 
+      if (report && report.summary) {
+        var summary = document.createElement('p');
+        summary.className = 'recipe-validation-summary';
+        summary.textContent = report.summary.errors + ' errors · ' + report.summary.warnings + ' warnings · ' + report.summary.passes + ' passed checks';
+        feedback.appendChild(summary);
+      }
+
+      if (report && report.checks && report.checks.length) {
+        appendValidationChecks(report.checks);
+        return;
+      }
+
       appendMessages('Errors', errors, 'recipe-preview-errors');
       appendMessages('Warnings', warnings, 'recipe-preview-warnings');
+    }
+
+    function appendValidationChecks(checks) {
+      var list = document.createElement('ul');
+      list.className = 'recipe-validation-checks';
+
+      checks.forEach(function (check) {
+        var item = document.createElement('li');
+        item.className = 'recipe-validation-check recipe-validation-check-' + check.status;
+        item.textContent = statusLabel(check.status) + ' ' + check.message;
+        list.appendChild(item);
+      });
+
+      feedback.appendChild(list);
+    }
+
+    function statusLabel(status) {
+      if (status === 'error') return 'Error:';
+      if (status === 'warning') return 'Warning:';
+      if (status === 'pass') return 'Pass:';
+      return 'Check:';
     }
 
     function appendMessages(title, messages, className) {
