@@ -352,7 +352,7 @@ h3 {
 }
 
 a .image { transition: .2s ease all; opacity: 1; }
-a:hover .image { opacity: 0.82; }
+a:hover .image { opacity: 1; }
 
 .sell .sm-col a {
   text-decoration: none;
@@ -365,6 +365,101 @@ a:hover .image { opacity: 0.82; }
 .border-1:active { border-width: 1px; }
 .capitalize { text-transform: capitalize; }
 .align-middle { vertical-align: middle; }
+
+.home-shell {
+  display: grid;
+  gap: 1.5rem;
+}
+
+.home-search-card {
+  min-height: auto;
+}
+
+.search-subtitle {
+  color: var(--muted);
+}
+
+.chip-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  justify-content: center;
+}
+
+.chip-wrap .btn,
+.tag-filter {
+  margin: 0 !important;
+}
+
+.home-results-wrap,
+.home-section {
+  background: var(--panel);
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  padding: 1rem;
+}
+
+.home-results-wrap.is-hidden,
+.home-section.is-hidden {
+  display: none;
+}
+
+.recipe-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+
+.recipe-tile {
+  display: block;
+  position: relative;
+  overflow: hidden;
+  min-height: 180px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-soft);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  text-decoration: none;
+}
+
+.recipe-tile:hover {
+  text-decoration: none;
+  opacity: 1;
+}
+
+.recipe-tile .image {
+  background-image: var(--tile-image);
+  background-color: var(--surface-soft);
+  opacity: 1;
+}
+
+.recipe-tile:before,
+.recipe-tile:after,
+.recipe-tile .image:before,
+.recipe-tile .image:after {
+  display: none !important;
+  content: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  opacity: 0 !important;
+}
+
+.recipe-tile-title {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  margin: 0;
+  background: rgba(16, 17, 20, 0.88);
+  color: #ffffff !important;
+  font-size: 1.05rem;
+  line-height: 1.15;
+  text-shadow: none !important;
+}
 
 .recipe-submit-heading { letter-spacing: -0.03em; }
 .recipe-submit-intro { color: var(--muted); }
