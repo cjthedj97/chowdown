@@ -11,8 +11,17 @@ export async function createRecipePullRequest(recipe, warnings, env) {
     throw new Error("GITHUB_TOKEN is not configured.");
   }
 
-  const branch = `${BRANCH_PREFIX}/${recipe.slug}-${Date.now()}`;
   const repoPath = `/repos/${owner}/${repo}`;
+  const existing = await github(`${repoPath}/contents/${encodeURIComponentPath(recipe.path)}?ref=${encodeURIComponent(base)}`, {
+    token,
+    allow404: true
+  });
+
+  if (existing && !existing.notFound) {
+    throw new Error(`A recipe already exists at ${recipe.path}.`);
+  }
+
+  const branch = `${BRANCH_PREFIX}/${recipe.slug}-${Date.now()}`;
   const baseRef = await github(`${repoPath}/git/ref/heads/${base}`, { token });
   const baseSha = baseRef.object.sha;
 
@@ -24,15 +33,6 @@ export async function createRecipePullRequest(recipe, warnings, env) {
       sha: baseSha
     }
   });
-
-  const existing = await github(`${repoPath}/contents/${encodeURIComponentPath(recipe.path)}?ref=${encodeURIComponent(base)}`, {
-    token,
-    allow404: true
-  });
-
-  if (existing && !existing.notFound) {
-    throw new Error(`A recipe already exists at ${recipe.path}.`);
-  }
 
   await github(`${repoPath}/contents/${encodeURIComponentPath(recipe.path)}`, {
     token,
