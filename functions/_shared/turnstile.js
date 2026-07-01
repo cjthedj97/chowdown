@@ -1,6 +1,10 @@
 export async function verifyTurnstile(token, request, env) {
   if (!env.TURNSTILE_SECRET_KEY) {
-    return { ok: false };
+    return { ok: false, error: "Turnstile secret is not configured." };
+  }
+
+  if (!token) {
+    return { ok: false, error: "Turnstile token is missing. Complete the Turnstile check and try again." };
   }
 
   const ip = request.headers.get("CF-Connecting-IP") || undefined;
@@ -15,5 +19,10 @@ export async function verifyTurnstile(token, request, env) {
   });
 
   const result = await response.json();
-  return { ok: Boolean(result.success), result };
+  if (result.success) {
+    return { ok: true, result };
+  }
+
+  const codes = Array.isArray(result["error-codes"]) ? result["error-codes"].join(", ") : "unknown-error";
+  return { ok: false, error: `Turnstile verification failed: ${codes}` };
 }
