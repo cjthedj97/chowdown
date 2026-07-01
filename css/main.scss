@@ -64,7 +64,9 @@ ul { margin: 0; padding: 0; list-style: none; }
 ul li { padding: 0 0 0 25px; position: relative; }
 ul li input { position: absolute; top: 5px; left: 0; opacity: 0.5; }
 
-.navbar {
+.navbar,
+.site-navbar,
+.navbar.bg-light {
   background: var(--sidebar-bg) !important;
   border-bottom: 1px solid var(--line);
   box-shadow: var(--shadow);
@@ -73,7 +75,7 @@ ul li input { position: absolute; top: 5px; left: 0; opacity: 0.5; }
 .navbar-light .navbar-nav .nav-link,
 .navbar-light .navbar-brand,
 .dropdown-item {
-  color: var(--text);
+  color: var(--text) !important;
 }
 
 .navbar-light .navbar-nav .nav-link {
@@ -84,12 +86,13 @@ ul li input { position: absolute; top: 5px; left: 0; opacity: 0.5; }
 .navbar-light .navbar-nav .nav-link:hover,
 .navbar-light .navbar-nav .active > .nav-link,
 .dropdown-item:hover {
-  color: var(--accent);
+  color: var(--accent) !important;
   background: var(--sidebar-hover-bg);
 }
 
 .navbar-light .navbar-toggler {
   border-color: var(--line);
+  background: var(--surface-soft);
 }
 
 .dropdown-menu {
@@ -100,10 +103,22 @@ ul li input { position: absolute; top: 5px; left: 0; opacity: 0.5; }
   overflow: hidden;
 }
 
+.dropdown-divider {
+  border-top-color: var(--line);
+}
+
 .chowdown-brand {
   display: inline-flex;
   align-items: center;
   gap: 0.55rem;
+}
+
+.chowdown-logo {
+  color: var(--accent) !important;
+}
+
+.chowdown-logo svg {
+  display: block;
 }
 
 .theme-toggle,
@@ -131,7 +146,9 @@ input[type="submit"]:hover {
 .btn-outline-primary:active,
 .btn-outline-primary:hover,
 .nav-pills .nav-link.active,
-.nav-pills .show > .nav-link {
+.nav-pills .show > .nav-link,
+.tag-filter.is-active,
+.tag-filter.btn-primary {
   background: var(--accent) !important;
   border-color: var(--accent) !important;
   color: var(--accent-contrast) !important;
@@ -146,7 +163,8 @@ input[type="submit"]:hover {
 .filters a,
 .filters button,
 .category-filter a,
-.category-filter button {
+.category-filter button,
+.tag-filter.btn-outline-primary {
   border-radius: 999px;
   border-color: var(--accent) !important;
   color: var(--accent) !important;
@@ -162,7 +180,8 @@ input[type="submit"]:hover {
 .filters a:hover,
 .filters button:hover,
 .category-filter a:hover,
-.category-filter button:hover {
+.category-filter button:hover,
+.tag-filter.btn-outline-primary:hover {
   background: var(--accent-soft) !important;
   color: var(--accent) !important;
 }
@@ -412,34 +431,51 @@ a:hover .image { opacity: 1; }
   gap: 1rem;
 }
 
-.recipe-tile {
-  display: block;
+.recipe-tile,
+.result-card {
+  display: flex !important;
+  flex-direction: column;
   position: relative;
   overflow: hidden;
-  min-height: 180px;
+  min-height: 0 !important;
+  height: auto !important;
   border: 1px solid var(--line);
   border-radius: 12px;
-  background: var(--surface-soft);
+  background: var(--panel);
   color: var(--text);
   box-shadow: var(--shadow);
   text-decoration: none;
+  transform: none !important;
 }
 
-.recipe-tile:hover {
+.recipe-tile:hover,
+.result-card:hover {
   text-decoration: none;
   opacity: 1;
+  transform: none !important;
 }
 
-.recipe-tile .image {
-  background-image: var(--tile-image);
+.recipe-tile .image,
+.result-card .image {
+  flex: 0 0 auto;
+  width: 100%;
+  min-height: 150px;
+  background-image: var(--tile-image) !important;
   background-color: var(--surface-soft);
+  background-size: cover !important;
+  background-position: center !important;
   opacity: 1;
+  filter: none !important;
 }
 
 .recipe-tile:before,
 .recipe-tile:after,
 .recipe-tile .image:before,
-.recipe-tile .image:after {
+.recipe-tile .image:after,
+.result-card:before,
+.result-card:after,
+.result-card .image:before,
+.result-card .image:after {
   display: none !important;
   content: none !important;
   background: transparent !important;
@@ -447,17 +483,20 @@ a:hover .image { opacity: 1; }
   opacity: 0 !important;
 }
 
-.recipe-tile-title {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.recipe-tile-title,
+.recipe-tile .recipe-tile-title,
+.result-card .recipe-tile-title {
+  position: static !important;
+  inset: auto !important;
+  display: block;
   width: 100%;
-  margin: 0;
-  background: rgba(16, 17, 20, 0.88);
-  color: #ffffff !important;
-  font-size: 1.05rem;
-  line-height: 1.15;
+  margin: 0 !important;
+  padding: 0.85rem 1rem !important;
+  background: var(--panel) !important;
+  color: var(--text) !important;
+  font-size: 1.05rem !important;
+  line-height: 1.2 !important;
+  text-align: left;
   text-shadow: none !important;
 }
 
@@ -482,7 +521,7 @@ a:hover .image { opacity: 1; }
 .recipe-preview .yaml-string { color: var(--success) !important; }
 
 :root[data-theme="dark"] .navbar-light .navbar-toggler-icon {
-  filter: invert(1);
+  filter: invert(1) grayscale(1) contrast(2);
 }
 
 :root[data-theme="dark"] .text-muted,
