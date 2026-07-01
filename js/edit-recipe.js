@@ -167,7 +167,7 @@
 
   function shortenRecipeActionLabels() {
     var labels = {
-      'favorite-toggle': 'Save',
+      'favorite-toggle': 'Favorite',
       'print-recipe': 'Print',
       'edit-recipe': 'Edit',
       'recipe-history-toggle': 'History',
