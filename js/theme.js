@@ -17,8 +17,18 @@
     }
   }
 
+  function syncHiddenTimer() {
+    var modal = document.querySelector('.recipe-timer-modal');
+    if (!modal) return;
+
+    if (modal.classList.contains('is-hidden')) {
+      modal.style.display = 'none';
+    }
+  }
+
   function initTheme() {
     setTheme(getPreferredTheme());
+    syncHiddenTimer();
 
     var toggle = document.getElementById('theme-toggle');
     if (!toggle) return;
