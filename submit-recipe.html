@@ -1,0 +1,282 @@
+---
+layout: default
+title: Submit a Recipe
+permalink: /submit-recipe.html
+---
+
+<div class="container px2 py3">
+  <h1 class="center">Submit a Recipe</h1>
+  <p class="center">Preview your recipe first, then submit it as a pull request for review.</p>
+
+  <form id="recipe-submit-form" class="recipe-submit-form">
+    <label>Title <input name="title" type="text" required maxlength="120" placeholder="Recipe Title"></label>
+    <label>Yield <input name="yield" type="text" maxlength="40" placeholder="4 servings"></label>
+
+    <div class="recipe-submit-grid">
+      <label>Prep Hours <input name="prep_hours" type="number" min="0" max="24" value="0"></label>
+      <label>Prep Minutes <input name="prep_minutes" type="number" min="0" max="59" value="0"></label>
+      <label>Cook Hours <input name="cook_hours" type="number" min="0" max="24" value="0"></label>
+      <label>Cook Minutes <input name="cook_minutes" type="number" min="0" max="59" value="0"></label>
+    </div>
+    <p class="recipe-time-summary" id="recipe-time-summary">Total time: not set</p>
+
+    <div class="recipe-submit-grid">
+      <label>Date Added <input name="date_added" type="date"></label>
+      <label>
+        Status
+        <select name="status">
+          <option value="published" selected>published</option>
+          <option value="planned">planned</option>
+          <option value="draft">draft</option>
+        </select>
+      </label>
+      <label class="recipe-submit-inline"><input name="reviewed" type="checkbox"> Reviewed / tested</label>
+    </div>
+
+    <label>
+      Difficulty
+      <select name="difficulty">
+        <option value="">Not specified</option>
+        <option value="Easy">Easy</option>
+        <option value="Medium">Medium</option>
+        <option value="Hard">Hard</option>
+      </select>
+    </label>
+
+    <label>Categories, comma separated <input name="categories" type="text" placeholder="Dinner, Meal Prep"></label>
+    <label>Tags, comma separated <input name="tags" type="text" placeholder="dinner, easy, make-ahead"></label>
+    <label>Image URL or image filename <input name="image" type="text" maxlength="400"></label>
+    <label>Image credit URL <input name="imagecredit" type="text" maxlength="400"></label>
+    <label>Notes <textarea name="notes" rows="4" maxlength="600" placeholder="Optional notes shown near the top of the recipe page."></textarea></label>
+
+    <label>
+      Ingredients
+      <small class="recipe-submit-help">Use one ingredient per line. Optional section headings can end with a colon.</small>
+      <textarea name="ingredients" rows="10" required placeholder="Example: 1 cup ingredient, prepared"></textarea>
+    </label>
+
+    <label>
+      Directions
+      <small class="recipe-submit-help">Use one step per line. Optional section headings can end with a colon.</small>
+      <textarea name="directions" rows="12" required placeholder="Example: Combine ingredients and cook until done."></textarea>
+    </label>
+
+    <label class="recipe-submit-hp" aria-hidden="true" tabindex="-1">Company Website <input name="website" type="text" autocomplete="off" tabindex="-1"></label>
+
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAADtqCBO4JL4z-yfi"></div>
+
+    <div class="recipe-submit-actions">
+      <button type="button" id="recipe-preview-button">Preview</button>
+      <button type="submit">Submit PR</button>
+      <button type="button" id="recipe-copy-button">Copy Markdown</button>
+      <button type="button" id="recipe-clear-button">Clear</button>
+    </div>
+  </form>
+
+  <div id="recipe-submit-status" class="recipe-submit-status" role="status"></div>
+
+  <section id="recipe-preview" class="recipe-preview" hidden>
+    <h2>Generated Markdown Preview</h2>
+    <pre><code id="recipe-preview-code"></code></pre>
+  </section>
+</div>
+
+<style>
+  .recipe-submit-form { max-width: 900px; margin: 0 auto; }
+  .recipe-submit-form label { display: block; margin: 1rem 0; font-weight: 700; }
+  .recipe-submit-form input,
+  .recipe-submit-form select,
+  .recipe-submit-form textarea { display: block; width: 100%; margin-top: 0.35rem; padding: 0.7rem; border: 1px solid var(--border, #ccc); border-radius: 6px; background: var(--surface, #fff); color: inherit; font: inherit; }
+  .recipe-submit-inline { display: flex !important; align-items: center; gap: 0.5rem; }
+  .recipe-submit-inline input { width: auto; margin: 0; }
+  .recipe-submit-help { display: block; margin-top: 0.25rem; font-weight: 400; opacity: 0.85; }
+  .recipe-submit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+  .recipe-time-summary { max-width: 900px; margin: -0.25rem auto 1rem; font-weight: 700; opacity: 0.9; }
+  .recipe-submit-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+  .recipe-submit-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.5rem; }
+  .recipe-submit-status { max-width: 900px; margin: 1.5rem auto; white-space: pre-wrap; }
+  .recipe-preview { max-width: 900px; margin: 2rem auto; }
+  .recipe-preview pre { overflow: auto; padding: 1rem; border-radius: 8px; background: #f7f7f7; color: #1f2937; border: 1px solid #d1d5db; }
+  .recipe-preview code { color: inherit; background: transparent; }
+  .recipe-preview .yaml-key { color: #7c2d12; font-weight: 700; }
+  .recipe-preview .yaml-string { color: #166534; }
+  .recipe-preview .yaml-marker { color: #1d4ed8; font-weight: 700; }
+</style>
+
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script>
+  const API_BASE_URL = "";
+  const form = document.getElementById("recipe-submit-form");
+  const previewButton = document.getElementById("recipe-preview-button");
+  const copyButton = document.getElementById("recipe-copy-button");
+  const clearButton = document.getElementById("recipe-clear-button");
+  const statusBox = document.getElementById("recipe-submit-status");
+  const preview = document.getElementById("recipe-preview");
+  const previewCode = document.getElementById("recipe-preview-code");
+  const timeSummary = document.getElementById("recipe-time-summary");
+
+  form.elements.date_added.value = new Date().toISOString().slice(0, 10);
+  updateTimeSummary();
+
+  ["prep_hours", "prep_minutes", "cook_hours", "cook_minutes"].forEach((name) => {
+    form.elements[name].addEventListener("input", updateTimeSummary);
+  });
+
+  previewButton.addEventListener("click", async () => sendRecipe("preview"));
+  form.addEventListener("submit", async (event) => { event.preventDefault(); await sendRecipe("submit"); });
+  copyButton.addEventListener("click", copyMarkdown);
+  clearButton.addEventListener("click", clearForm);
+
+  async function sendRecipe(mode) {
+    statusBox.textContent = mode === "preview" ? "Generating preview..." : "Submitting recipe PR...";
+    const payload = buildPayload(new FormData(form));
+    if (mode === "submit") payload.turnstileToken = getTurnstileToken();
+    const endpoint = mode === "preview" ? "/api/recipes/preview" : "/api/recipes/submit";
+    const response = await fetch(`${API_BASE_URL}${endpoint}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) });
+    const result = await response.json();
+
+    if (!response.ok || !result.ok) {
+      statusBox.textContent = formatMessages("Submission needs attention", result.errors, result.warnings);
+      return;
+    }
+
+    if (mode === "preview") {
+      preview.hidden = false;
+      previewCode.dataset.markdown = result.preview;
+      previewCode.innerHTML = highlightYaml(result.preview);
+      statusBox.textContent = formatMessages("Preview generated", [], result.warnings);
+      return;
+    }
+
+    statusBox.textContent = formatMessages(`Pull request opened: ${result.pullRequest.url}`, [], result.warnings);
+  }
+
+  function buildPayload(data) {
+    const prep = durationFromParts(data.get("prep_hours"), data.get("prep_minutes"));
+    const cook = durationFromParts(data.get("cook_hours"), data.get("cook_minutes"));
+    const total = durationFromMinutes(totalMinutes(data.get("prep_hours"), data.get("prep_minutes")) + totalMinutes(data.get("cook_hours"), data.get("cook_minutes")));
+
+    return {
+      title: data.get("title"),
+      yield: data.get("yield"),
+      preptime: prep,
+      cooktime: cook,
+      totaltime: total,
+      date_added: data.get("date_added"),
+      status: data.get("status"),
+      reviewed: data.get("reviewed") === "on",
+      difficulty: data.get("difficulty"),
+      categories: splitCsv(data.get("categories")),
+      tags: splitCsv(data.get("tags")),
+      image: data.get("image"),
+      imagecredit: data.get("imagecredit"),
+      notes: data.get("notes"),
+      ingredients: parseGroupedList(data.get("ingredients")),
+      directions: parseGroupedList(data.get("directions")),
+      website: data.get("website")
+    };
+  }
+
+  function splitCsv(value) { return String(value || "").split(",").map((item) => item.trim()).filter(Boolean); }
+
+  function parseGroupedList(value) {
+    const groups = [];
+    let current = { name: "", items: [] };
+    for (const rawLine of String(value || "").split(/\r?\n/)) {
+      const line = rawLine.trim();
+      if (!line) continue;
+      if (line.endsWith(":") && !line.startsWith("-")) {
+        if (current.items.length) groups.push(current);
+        current = { name: line.slice(0, -1).trim(), items: [] };
+        continue;
+      }
+      const item = normalizeUnitsAndFractions(line.replace(/^[-*]\s+/, "").replace(/^\d+[.)]\s+/, "").trim());
+      if (item) current.items.push(item);
+    }
+    if (current.items.length) groups.push(current);
+    return groups;
+  }
+
+  function normalizeUnitsAndFractions(value) {
+    return String(value || "")
+      .replace(/\bounces?\b/gi, "oz")
+      .replace(/\bpounds?\b/gi, "lb")
+      .replace(/1\/8/g, "⅛")
+      .replace(/1\/4/g, "¼")
+      .replace(/1\/3/g, "⅓")
+      .replace(/1\/2/g, "½")
+      .replace(/2\/3/g, "⅔")
+      .replace(/3\/4/g, "¾");
+  }
+
+  function totalMinutes(hoursRaw, minutesRaw) {
+    return (Number(hoursRaw || 0) * 60) + Number(minutesRaw || 0);
+  }
+
+  function durationFromParts(hoursRaw, minutesRaw) {
+    return durationFromMinutes(totalMinutes(hoursRaw, minutesRaw));
+  }
+
+  function durationFromMinutes(minutes) {
+    if (!minutes) return "";
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    return `PT${h ? `${h}H` : ""}${m ? `${m}M` : ""}`;
+  }
+
+  function friendlyDuration(minutes) {
+    if (!minutes) return "not set";
+    const h = Math.floor(minutes / 60);
+    const m = minutes % 60;
+    return [h ? `${h} hr${h > 1 ? "s" : ""}` : "", m ? `${m} min${m > 1 ? "s" : ""}` : ""].filter(Boolean).join(" ");
+  }
+
+  function updateTimeSummary() {
+    const prep = totalMinutes(form.elements.prep_hours.value, form.elements.prep_minutes.value);
+    const cook = totalMinutes(form.elements.cook_hours.value, form.elements.cook_minutes.value);
+    timeSummary.textContent = `Prep: ${friendlyDuration(prep)} · Cook: ${friendlyDuration(cook)} · Total: ${friendlyDuration(prep + cook)}`;
+  }
+
+  function getTurnstileToken() {
+    const token = document.querySelector("[name='cf-turnstile-response']");
+    return token ? token.value : "";
+  }
+
+  async function copyMarkdown() {
+    const content = (previewCode.dataset.markdown || previewCode.textContent || "").trim();
+    if (!content) {
+      statusBox.textContent = "Nothing to copy yet. Generate a preview first.";
+      return;
+    }
+    await navigator.clipboard.writeText(content);
+    statusBox.textContent = "Generated Markdown copied to clipboard.";
+  }
+
+  function clearForm() {
+    form.reset();
+    form.elements.date_added.value = new Date().toISOString().slice(0, 10);
+    updateTimeSummary();
+    preview.hidden = true;
+    previewCode.textContent = "";
+    previewCode.dataset.markdown = "";
+    statusBox.textContent = "";
+  }
+
+  function highlightYaml(markdown) {
+    return escapeHtml(markdown)
+      .replace(/^(---)$/gm, '<span class="yaml-marker">$1</span>')
+      .replace(/^([A-Za-z_][A-Za-z0-9_]*):/gm, '<span class="yaml-key">$1</span>:')
+      .replace(/(&quot;[^\n]*?&quot;)/g, '<span class="yaml-string">$1</span>');
+  }
+
+  function escapeHtml(value) {
+    return String(value || "").replace(/[&<>\"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[char]));
+  }
+
+  function formatMessages(title, errors, warnings) {
+    const parts = [title];
+    if (errors && errors.length) parts.push("\nErrors:\n- " + errors.join("\n- "));
+    if (warnings && warnings.length) parts.push("\nWarnings:\n- " + warnings.join("\n- "));
+    return parts.join("\n");
+  }
+</script>
