@@ -11,7 +11,9 @@ export async function onRequestPost({ request, env }) {
     const submission = await readSubmission(request);
     const result = buildRecipe(submission, { verifyTurnstile: false });
 
-    if (result.recipe && result.recipe.path && result.recipe.slug) {
+    if (isEditSubmission(submission)) {
+      addEditPathCheck(result, submission);
+    } else if (result.recipe && result.recipe.path && result.recipe.slug) {
       await addDuplicatePathCheck(result, env);
     }
 
@@ -27,6 +29,17 @@ export async function onRequestPost({ request, env }) {
 
 export async function onRequest() {
   return methodNotAllowed();
+}
+
+function isEditSubmission(submission) {
+  return submission.mode === "edit" || Boolean(submission.original_path || submission.originalPath);
+}
+
+function addEditPathCheck(result, submission) {
+  const originalPath = submission.original_path || submission.originalPath || "the original recipe file";
+  addValidationCheck(result.validation_report, result.errors, result.warnings, "pass", "slug", "edit_recipe_path", `Edit mode will update ${originalPath}; duplicate filename checks are skipped for the existing recipe.`);
+  finalizeValidationReport(result.validation_report);
+  result.ok = result.errors.length === 0;
 }
 
 async function addDuplicatePathCheck(result, env) {
