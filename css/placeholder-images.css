@@ -21,25 +21,3 @@ html[data-theme="dark"] {
     var(--recipe-placeholder-image),
     linear-gradient(135deg, var(--tile-placeholder-start), var(--tile-placeholder-end));
 }
-
-.recipe-hero-image.recipe-placeholder {
-  aspect-ratio: 16 / 10;
-  background-image:
-    var(--recipe-placeholder-image),
-    linear-gradient(135deg, var(--tile-placeholder-start), var(--tile-placeholder-end));
-  background-repeat: no-repeat, no-repeat;
-  background-position: center center, center center;
-  background-size: cover, cover;
-  border-radius: 14px;
-  overflow: hidden;
-}
-
-.recipe-hero-image.recipe-placeholder img {
-  display: none;
-}
-
-@supports not (aspect-ratio: 1) {
-  .recipe-hero-image.recipe-placeholder {
-    min-height: 24rem;
-  }
-}
