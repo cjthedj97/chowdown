@@ -31,6 +31,6 @@
   <text x="800" y="742" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="78" fill="#e5e7eb">No Image Available</text>
   <path d="M460 802h280M860 802h280" stroke="#46556f" stroke-width="6" stroke-linecap="round"/>
   <text x="800" y="824" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="40" fill="#718096">♥</text>
-  <text x="800" y="880" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#cbd5e1">No image was added or cannot be loaded.</text>
-  <text x="800" y="930" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="34" fill="#cbd5e1">Add a photo to make this recipe come to life!</text>
+  <text x="800" y="888" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="600" fill="#cbd5e1">No image was added or cannot be loaded.</text>
+  <text x="800" y="944" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="44" font-weight="600" fill="#cbd5e1">Add a photo to make this recipe come to life!</text>
 </svg>
