@@ -1,4 +1,4 @@
-import { checkRecipeFileExists } from "../../_shared/github-validation.js";
+import { checkRecipeFileExists, findSimilarRecipeMatches } from "../../_shared/github-validation.js";
 import { addValidationCheck, buildRecipe, finalizeValidationReport } from "../../_shared/recipe.js";
 import { json, methodNotAllowed, optionsResponse, readSubmission } from "../../_shared/http.js";
 
@@ -15,6 +15,7 @@ export async function onRequestPost({ request, env }) {
       addEditPathCheck(result, submission);
     } else if (result.recipe && result.recipe.path && result.recipe.slug) {
       await addDuplicatePathCheck(result, env);
+      await addSimilarRecipeChecks(result, env);
     }
 
     if (!result.ok) {
@@ -51,6 +52,24 @@ async function addDuplicatePathCheck(result, env) {
     addValidationCheck(result.validation_report, result.errors, result.warnings, "pass", "slug", "duplicate_recipe_path_clear", `No recipe file exists yet at ${duplicate.path}.`);
   } else {
     addValidationCheck(result.validation_report, result.errors, result.warnings, "warning", "slug", "duplicate_recipe_path_unchecked", duplicate.error || "Could not check for a duplicate recipe filename.");
+  }
+
+  finalizeValidationReport(result.validation_report);
+  result.ok = result.errors.length === 0;
+}
+
+async function addSimilarRecipeChecks(result, env) {
+  const similar = await findSimilarRecipeMatches(result.recipe, env);
+
+  if (!similar.checked) {
+    addValidationCheck(result.validation_report, result.errors, result.warnings, "warning", "title", "similar_recipe_unchecked", similar.error || "Could not check for similar recipe titles.");
+  } else if (similar.matches.length) {
+    const matches = similar.matches
+      .map((match) => `${match.title} (${match.path})`)
+      .join("; ");
+    addValidationCheck(result.validation_report, result.errors, result.warnings, "warning", "title", "similar_recipe_found", `Possible duplicate recipe found: ${matches}. You can still submit if this is intentionally different.`);
+  } else {
+    addValidationCheck(result.validation_report, result.errors, result.warnings, "pass", "title", "similar_recipe_clear", "No similar recipe titles were found.");
   }
 
   finalizeValidationReport(result.validation_report);
