@@ -9,6 +9,9 @@
     if (!button || !data || !data.path) return;
 
     button.addEventListener('click', function () {
+      data.ingredients = data.ingredients || collectTextItems('[itemprop="recipeIngredient"]');
+      data.directions = data.directions || collectTextItems('[itemprop="instruction"]');
+
       try {
         window.sessionStorage.setItem(STORAGE_KEY, JSON.stringify(data));
       } catch (error) {
@@ -148,6 +151,12 @@
     });
 
     return lines.join('\n');
+  }
+
+  function collectTextItems(selector) {
+    return Array.prototype.slice.call(document.querySelectorAll(selector))
+      .map(function (item) { return item.textContent.replace(/\s+/g, ' ').trim(); })
+      .filter(Boolean);
   }
 
   window.ChowdownRecipeEdit = {
