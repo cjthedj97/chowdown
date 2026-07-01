@@ -18,7 +18,7 @@ export async function onRequestPost({ request, env }) {
 
     const turnstile = await verifyTurnstile(submission.turnstileToken, request, env);
     if (!turnstile.ok) {
-      return json({ ok: false, errors: ["Turnstile verification failed."], warnings: validation.warnings }, 403);
+      return json({ ok: false, errors: [turnstile.error || "Turnstile verification failed."], warnings: validation.warnings }, 403);
     }
 
     const pr = await createRecipePullRequest(validation.recipe, validation.warnings, env);
