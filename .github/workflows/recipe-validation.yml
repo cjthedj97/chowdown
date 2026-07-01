@@ -27,15 +27,15 @@ jobs:
         shell: bash
         run: |
           if [[ "${{ github.event_name }}" == "pull_request" ]]; then
-            git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" -- '_recipes/*.md' > changed-recipes.txt
+            git diff --name-only -z --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" -- '_recipes/*.md' > changed-recipes.txt
           else
-            find _recipes -type f -name '*.md' | sort > changed-recipes.txt
+            find _recipes -type f -name '*.md' -print0 | sort -z > changed-recipes.txt
           fi
 
           if [[ -s changed-recipes.txt ]]; then
             echo "has_changes=true" >> "$GITHUB_OUTPUT"
             echo "Recipe files to validate:"
-            cat changed-recipes.txt
+            tr '\0' '\n' < changed-recipes.txt
           else
             echo "has_changes=false" >> "$GITHUB_OUTPUT"
             echo "No changed recipe files to validate."
@@ -43,4 +43,4 @@ jobs:
 
       - name: Validate recipe format
         if: steps.changed-recipes.outputs.has_changes == 'true'
-        run: xargs ruby scripts/validate-recipes.rb < changed-recipes.txt
+        run: xargs -0 ruby scripts/validate-recipes.rb < changed-recipes.txt
