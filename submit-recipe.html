@@ -5,12 +5,30 @@ permalink: /submit-recipe.html
 ---
 
 <div class="container px2 py3">
-  <h1 class="center recipe-submit-heading">Submit a Recipe</h1>
-  <p class="center recipe-submit-intro">Preview your recipe first, then submit it as a pull request for review.</p>
+  <h1 class="center recipe-submit-heading">Submit a Family Recipe</h1>
+  <p class="center recipe-submit-intro">Share a recipe without needing a GitHub account. You can preview it first, then send it for family review before it is published.</p>
 
   <form id="recipe-submit-form" class="recipe-submit-form">
-    <label>Title <input name="title" type="text" required maxlength="120" placeholder="Recipe Title"></label>
-    <label>Yield <input name="yield" type="text" maxlength="40" placeholder="4 servings"></label>
+    <div class="recipe-submit-callout">
+      <strong>How this works:</strong>
+      <ol>
+        <li>Fill in the recipe details below.</li>
+        <li>Use the live preview to check formatting.</li>
+        <li>Submit it for review. A maintainer will check it before it appears on the site.</li>
+      </ol>
+    </div>
+
+    <label>
+      Recipe title
+      <small class="recipe-submit-help">Use the name family members will recognize.</small>
+      <input name="title" type="text" required maxlength="120" placeholder="Grandma's Chocolate Chip Cookies">
+    </label>
+
+    <label>
+      Yield
+      <small class="recipe-submit-help">How much does this make?</small>
+      <input name="yield" type="text" maxlength="40" placeholder="4 servings, 1 casserole, or 24 cookies">
+    </label>
 
     <div class="recipe-submit-grid">
       <label>Prep Hours <input name="prep_hours" type="number" min="0" max="24" value="0"></label>
@@ -21,9 +39,14 @@ permalink: /submit-recipe.html
     <p class="recipe-time-summary" id="recipe-time-summary">Total time: not set</p>
 
     <div class="recipe-submit-grid">
-      <label>Date Added <input name="date_added" type="date"></label>
+      <label>
+        Date Added
+        <small class="recipe-submit-help">Defaults to today.</small>
+        <input name="date_added" type="date">
+      </label>
       <label>
         Status
+        <small class="recipe-submit-help">Use published for ready recipes, draft for recipes that need cleanup, or planned for ideas.</small>
         <select name="status">
           <option value="published" selected>published</option>
           <option value="planned">planned</option>
@@ -35,6 +58,7 @@ permalink: /submit-recipe.html
 
     <label>
       Difficulty
+      <small class="recipe-submit-help">Optional. Pick the closest match.</small>
       <select name="difficulty">
         <option value="">Not specified</option>
         <option value="Easy">Easy</option>
@@ -43,31 +67,52 @@ permalink: /submit-recipe.html
       </select>
     </label>
 
-    <label>Categories, comma separated <input name="categories" type="text" placeholder="Dinner, Meal Prep"></label>
-    <label>Tags, comma separated <input name="tags" type="text" placeholder="dinner, easy, make-ahead"></label>
-    <label>Image URL or image filename <input name="image" type="text" maxlength="400"></label>
-    <label>Image credit URL <input name="imagecredit" type="text" maxlength="400"></label>
-    <label>Notes <textarea name="notes" rows="4" maxlength="600" placeholder="Optional notes shown near the top of the recipe page."></textarea></label>
+    <label>
+      Categories, comma separated
+      <small class="recipe-submit-help">Broad groups such as Dinner, Dessert, Breakfast, Sauce, or Meal Prep.</small>
+      <input name="categories" type="text" placeholder="Dinner, Meal Prep">
+    </label>
+    <label>
+      Tags, comma separated
+      <small class="recipe-submit-help">Helpful search words such as easy, make-ahead, copycat, holiday, or freezer-friendly.</small>
+      <input name="tags" type="text" placeholder="dinner, easy, make-ahead">
+    </label>
+    <label>
+      Image URL or image filename
+      <small class="recipe-submit-help">Optional. Paste a web image URL, enter an existing filename, or leave blank. Images can be added during review.</small>
+      <input name="image" type="text" maxlength="400" placeholder="https://example.com/photo.jpg or family-recipe.jpg">
+    </label>
+    <label>
+      Image credit URL
+      <small class="recipe-submit-help">Optional. Add a source link when the photo came from another website.</small>
+      <input name="imagecredit" type="text" maxlength="400" placeholder="https://example.com/original-recipe">
+    </label>
+    <label>
+      Notes
+      <small class="recipe-submit-help">Optional family notes, substitutions, storage tips, or where the recipe came from.</small>
+      <textarea name="notes" rows="4" maxlength="600" placeholder="Aunt Linda usually doubles the sauce. Freezes well."></textarea>
+    </label>
 
     <label>
       Ingredients
-      <small class="recipe-submit-help">Use one ingredient per line. Optional section headings can end with a colon.</small>
-      <textarea name="ingredients" rows="10" required placeholder="Example: 1 cup ingredient, prepared"></textarea>
+      <small class="recipe-submit-help">Use one ingredient per line. Add a section heading with a colon for grouped ingredients.</small>
+      <textarea name="ingredients" rows="10" required placeholder="Cake:&#10;2 cups flour&#10;1 cup sugar&#10;&#10;Frosting:&#10;1 cup powdered sugar&#10;2 tablespoons milk"></textarea>
     </label>
 
     <label>
       Directions
-      <small class="recipe-submit-help">Use one step per line. Optional section headings can end with a colon.</small>
-      <textarea name="directions" rows="12" required placeholder="Example: Combine ingredients and cook until done."></textarea>
+      <small class="recipe-submit-help">Use one step per line. Section headings work here too.</small>
+      <textarea name="directions" rows="12" required placeholder="Prep:&#10;Preheat oven to 350°F.&#10;Grease a 9x13 pan.&#10;&#10;Bake:&#10;Mix ingredients until combined.&#10;Bake for 30 minutes."></textarea>
     </label>
 
     <label class="recipe-submit-hp" aria-hidden="true" tabindex="-1">Company Website <input name="website" type="text" autocomplete="off" tabindex="-1"></label>
 
+    <div class="recipe-submit-turnstile-help">This quick check helps prevent spam. It does not require a GitHub account.</div>
     <div class="cf-turnstile" data-sitekey="0x4AAAAAADtqCBO4JL4z-yfi"></div>
 
     <div class="recipe-submit-actions">
       <button type="button" id="recipe-preview-button">Preview Markdown</button>
-      <button type="submit">Submit PR</button>
+      <button type="submit">Submit for Review</button>
       <button type="button" id="recipe-copy-button">Copy Markdown</button>
       <button type="button" id="recipe-clear-button">Clear</button>
     </div>
@@ -79,7 +124,7 @@ permalink: /submit-recipe.html
     <div class="recipe-rendered-preview-head">
       <div>
         <h2>Rendered Recipe Preview</h2>
-        <p>Updates as you type. Validation uses the preview endpoint only.</p>
+        <p>Updates as you type. Use this to catch missing ingredients, formatting issues, or unclear steps before submitting.</p>
       </div>
       <div id="recipe-preview-feedback" class="recipe-preview-feedback">Start typing to see a rendered recipe preview.</div>
     </div>
@@ -98,14 +143,25 @@ permalink: /submit-recipe.html
   .recipe-submit-form input,
   .recipe-submit-form select,
   .recipe-submit-form textarea { display: block; width: 100%; margin-top: 0.35rem; padding: 0.7rem; border: 1px solid var(--border, #ccc); border-radius: 6px; background: var(--surface, #fff); color: inherit; font: inherit; }
+  .recipe-submit-callout { margin: 1.5rem 0; padding: 1rem; border: 1px solid var(--border, #d1d5db); border-left: 4px solid var(--accent, #007FFF); border-radius: 10px; background: var(--surface-soft, #f7f7f7); }
+  .recipe-submit-callout ol { margin: 0.5rem 0 0; padding-left: 1.25rem; }
+  .recipe-submit-callout li { margin: 0.25rem 0; }
   .recipe-submit-inline { display: flex !important; align-items: center; gap: 0.5rem; }
   .recipe-submit-inline input { width: auto; margin: 0; }
-  .recipe-submit-help { display: block; margin-top: 0.25rem; font-weight: 400; opacity: 0.85; }
+  .recipe-submit-help,
+  .recipe-submit-turnstile-help { display: block; margin-top: 0.25rem; font-weight: 400; opacity: 0.85; }
+  .recipe-submit-turnstile-help { max-width: 900px; margin: 1rem auto 0.5rem; }
   .recipe-submit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
   .recipe-time-summary { max-width: 900px; margin: -0.25rem auto 1rem; font-weight: 700; opacity: 0.9; }
   .recipe-submit-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .recipe-submit-actions { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; margin-top: 1.5rem; }
-  .recipe-submit-status { max-width: 900px; margin: 1.5rem auto; white-space: pre-wrap; }
+  .recipe-submit-status { max-width: 900px; margin: 1.5rem auto; padding: 1rem; border-radius: 10px; white-space: pre-wrap; }
+  .recipe-submit-status:empty { display: none; }
+  .recipe-submit-status.is-info { border: 1px solid var(--border, #d1d5db); background: var(--surface-soft, #f7f7f7); }
+  .recipe-submit-status.is-success { border: 1px solid #86efac; background: #ecfdf5; color: #14532d; }
+  .recipe-submit-status.is-error { border: 1px solid #fca5a5; background: #fef2f2; color: #7f1d1d; }
+  .recipe-submit-status.is-warning { border: 1px solid #fcd34d; background: #fffbeb; color: #78350f; }
+  .recipe-submit-status a { font-weight: 700; }
   .recipe-rendered-preview { max-width: 900px; margin: 2rem auto; }
   .recipe-rendered-preview-head { display: grid; grid-template-columns: minmax(0, 1fr); gap: 1rem; margin-bottom: 1rem; }
   .recipe-rendered-preview-head h2 { margin-bottom: 0.25rem; }
@@ -120,7 +176,7 @@ permalink: /submit-recipe.html
   .recipe-rendered-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem 1rem; padding: 0; margin: 0 0 1rem; list-style: none; font-weight: 700; }
   .recipe-rendered-image { margin: 1rem 0; text-align: center; }
   .recipe-rendered-image img { max-width: 100%; max-height: 320px; border-radius: 10px; object-fit: cover; }
-  .recipe-rendered-image.has-image-error::after { content: "Image could not be loaded in preview."; display: block; margin-top: 0.5rem; opacity: 0.8; }
+  .recipe-rendered-image.has-image-error::after { content: "Image could not be loaded in preview. You can still submit; the photo can be fixed during review."; display: block; margin-top: 0.5rem; opacity: 0.8; }
   .recipe-rendered-image.has-image-error img { display: none; }
   .recipe-rendered-image a { display: inline-block; margin-top: 0.5rem; }
   .recipe-rendered-notes { margin: 1rem 0; padding: 0.85rem; border-left: 3px solid var(--accent, #007FFF); background: var(--surface-soft, #f7f7f7); }
@@ -176,28 +232,56 @@ permalink: /submit-recipe.html
 
   async function sendRecipe(mode) {
     const editDraft = getEditDraft();
-    statusBox.textContent = mode === "preview" ? "Generating preview..." : (editDraft ? "Submitting recipe edit PR..." : "Submitting recipe PR...");
-    const payload = buildPayload(new FormData(form));
-    if (mode === "submit") payload.turnstileToken = getTurnstileToken();
-    const endpoint = mode === "preview" ? "/api/recipes/preview" : (editDraft ? "/api/recipes/edit" : "/api/recipes/submit");
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) });
-    const result = await response.json();
+    setStatus(mode === "preview" ? "Generating preview..." : (editDraft ? "Submitting recipe edit for review..." : "Submitting recipe for review..."), "info");
 
-    if (!response.ok || !result.ok) {
-      statusBox.textContent = formatMessages("Submission needs attention", result.errors, result.warnings || [result.error].filter(Boolean));
-      return;
+    try {
+      const payload = buildPayload(new FormData(form));
+      if (mode === "submit") payload.turnstileToken = getTurnstileToken();
+      const endpoint = mode === "preview" ? "/api/recipes/preview" : (editDraft ? "/api/recipes/edit" : "/api/recipes/submit");
+      const response = await fetch(`${API_BASE_URL}${endpoint}`, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) });
+      const result = await parseJsonResponse(response);
+
+      if (!response.ok || !result.ok) {
+        setStatus(formatMessages(friendlyFailureTitle(response, result), result.errors, result.warnings || [result.error].filter(Boolean)), "error");
+        return;
+      }
+
+      if (mode === "preview") {
+        preview.hidden = false;
+        previewCode.dataset.markdown = result.preview;
+        previewCode.innerHTML = highlightYaml(result.preview);
+        setStatus(formatMessages("Preview generated. Review the formatted recipe below before submitting.", [], result.warnings), result.warnings && result.warnings.length ? "warning" : "success");
+        if (renderedPreview) renderedPreview.update();
+        return;
+      }
+
+      showSuccess(result, editDraft);
+    } catch (error) {
+      setStatus(`We could not reach the recipe submission service. Please try again in a minute.\n\nDetails: ${error.message}`, "error");
     }
+  }
 
-    if (mode === "preview") {
-      preview.hidden = false;
-      previewCode.dataset.markdown = result.preview;
-      previewCode.innerHTML = highlightYaml(result.preview);
-      statusBox.textContent = formatMessages("Markdown preview generated", [], result.warnings);
-      if (renderedPreview) renderedPreview.update();
-      return;
+  async function parseJsonResponse(response) {
+    try {
+      return await response.json();
+    } catch (error) {
+      return { ok: false, error: "The server returned an unexpected response. Please try again." };
     }
+  }
 
-    statusBox.textContent = formatMessages(`Pull request opened: ${result.pullRequest.url}`, [], result.warnings);
+  function friendlyFailureTitle(response, result) {
+    const text = [result && result.error, ...(result && result.errors ? result.errors : [])].join(" ").toLowerCase();
+    if (text.includes("turnstile") || text.includes("captcha")) return "Spam check failed. Please refresh the page and try again.";
+    if (text.includes("github") || response.status >= 500) return "GitHub could not create the review request. Please try again later.";
+    return "Please fix the items below and try again.";
+  }
+
+  function showSuccess(result, editDraft) {
+    const url = result.pullRequest && result.pullRequest.url;
+    const title = editDraft ? "Recipe edit submitted for review." : "Recipe submitted for review.";
+    const link = url ? `<p><a href="${escapeHtml(url)}">Open the review request</a></p>` : "";
+    statusBox.className = "recipe-submit-status is-success";
+    statusBox.innerHTML = `<strong>${title}</strong>\n<p>Thanks! A maintainer will review it before it appears on the recipe site.</p>${link}`;
   }
 
   function buildPayload(data) {
@@ -307,11 +391,11 @@ permalink: /submit-recipe.html
   async function copyMarkdown() {
     const content = (previewCode.dataset.markdown || previewCode.textContent || "").trim();
     if (!content) {
-      statusBox.textContent = "Nothing to copy yet. Generate a Markdown preview first.";
+      setStatus("Nothing to copy yet. Generate a Markdown preview first.", "warning");
       return;
     }
     await navigator.clipboard.writeText(content);
-    statusBox.textContent = "Generated Markdown copied to clipboard.";
+    setStatus("Generated Markdown copied to clipboard.", "success");
   }
 
   function clearForm() {
@@ -320,14 +404,15 @@ permalink: /submit-recipe.html
     const heading = document.querySelector('.recipe-submit-heading');
     const intro = document.querySelector('.recipe-submit-intro');
     const submitButton = form.querySelector('button[type="submit"]');
-    if (heading) heading.textContent = 'Submit a Recipe';
-    if (intro) intro.textContent = 'Preview your recipe first, then submit it as a pull request for review.';
-    if (submitButton) submitButton.textContent = 'Submit PR';
+    if (heading) heading.textContent = 'Submit a Family Recipe';
+    if (intro) intro.textContent = 'Share a recipe without needing a GitHub account. You can preview it first, then send it for family review before it is published.';
+    if (submitButton) submitButton.textContent = 'Submit for Review';
     setDateAddedIfBlank();
     updateTimeSummary();
     preview.hidden = true;
     previewCode.textContent = "";
     previewCode.dataset.markdown = "";
+    statusBox.className = "recipe-submit-status";
     statusBox.textContent = "";
     if (renderedPreview) renderedPreview.clear();
   }
@@ -355,13 +440,18 @@ permalink: /submit-recipe.html
   }
 
   function escapeHtml(value) {
-    return String(value || "").replace(/[&<>\"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[char]));
+    return String(value || "").replace(/[&<>"]/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", "\"": "&quot;" }[char]));
+  }
+
+  function setStatus(message, tone) {
+    statusBox.className = `recipe-submit-status is-${tone || "info"}`;
+    statusBox.textContent = message;
   }
 
   function formatMessages(title, errors, warnings) {
     const parts = [title];
-    if (errors && errors.length) parts.push("\nErrors:\n- " + errors.join("\n- "));
-    if (warnings && warnings.length) parts.push("\nWarnings:\n- " + warnings.join("\n- "));
+    if (errors && errors.length) parts.push("\nWhat to fix:\n- " + errors.join("\n- "));
+    if (warnings && warnings.length) parts.push("\nGood to know:\n- " + warnings.join("\n- "));
     return parts.join("\n");
   }
 </script>
